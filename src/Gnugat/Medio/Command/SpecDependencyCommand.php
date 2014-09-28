@@ -5,7 +5,7 @@ namespace Gnugat\Medio\Command;
 use Gnugat\Medio\Convertor;
 use Gnugat\Medio\Editor;
 
-class InjectDependencyCommand implements Command
+class SpecDependencyCommand implements Command
 {
     /**
      * @var Convertor
@@ -28,20 +28,21 @@ class InjectDependencyCommand implements Command
     }
 
     /**
-     * @param string $fullyQualifiedClassname
+     * @param string $fullyQualifiedlassname
      * @param string $filename
      *
      * @return int
      */
-    public function run($fullyQualifiedClassname, $filename)
+    public function run($fullyQualifiedlassname, $filename)
     {
-        $className = $this->convertor->toClassName($fullyQualifiedClassname);
+        $className = $this->convertor->toClassName($fullyQualifiedlassname);
         $variableName = $this->convertor->toVariableName($className);
 
         $file = $this->editor->open($filename);
-        $this->editor->addUse($file, $fullyQualifiedClassname);
-        $this->editor->addProperty($file, $className, $variableName);
-        $this->editor->addDependency($file, $className, $variableName);
+
+        $this->editor->addUse($file, $fullyQualifiedlassname);
+        $this->editor->addDependencyMock($file, $className, $variableName);
+
         $this->editor->save($file);
 
         return Command::EXIT_SUCCESS;
