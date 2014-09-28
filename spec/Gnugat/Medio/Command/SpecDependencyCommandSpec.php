@@ -9,7 +9,7 @@ use Gnugat\Medio\File;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class InjectDependencyCommandSpec extends ObjectBehavior
+class SpecDependencyCommandSpec extends ObjectBehavior
 {
     const FULLY_QUALIFIED_CLASSNAME = 'fixture\Gnugat\Medio\Dependency';
     const CLASS_NAME = 'Dependency';
@@ -27,15 +27,14 @@ class InjectDependencyCommandSpec extends ObjectBehavior
         $this->shouldImplement('Gnugat\Medio\Command\Command');
     }
 
-    function it_injects_a_dependency_in_a_class(Convertor $convertor, Editor $editor, File $file)
+    function it_specifies_a_dependency(Convertor $convertor, Editor $editor, File $file)
     {
         $convertor->toClassName(self::FULLY_QUALIFIED_CLASSNAME)->willReturn(self::CLASS_NAME);
         $convertor->toVariableName(self::CLASS_NAME)->willReturn(self::VARIABLE_NAME);
 
         $editor->open(self::FILENAME)->willReturn($file);
         $editor->addUse($file, self::FULLY_QUALIFIED_CLASSNAME)->shouldBeCalled();
-        $editor->addProperty($file, self::CLASS_NAME, self::VARIABLE_NAME)->shouldBeCalled();
-        $editor->addDependency($file, self::CLASS_NAME, self::VARIABLE_NAME)->shouldBeCalled();
+        $editor->addDependencyMock($file, self::CLASS_NAME, self::VARIABLE_NAME)->shouldBeCalled();
         $editor->save($file)->shouldBeCalled();
 
         $this->run(self::FULLY_QUALIFIED_CLASSNAME, self::FILENAME)->shouldBe(Command::EXIT_SUCCESS);
