@@ -3,7 +3,7 @@
 namespace Gnugat\Medio\Command;
 
 use Gnugat\Medio\Convertor;
-use Gnugat\Medio\Editor;
+use Gnugat\Medio\PhpEditor;
 
 class SpecDependencyCommand implements Command
 {
@@ -13,18 +13,18 @@ class SpecDependencyCommand implements Command
     private $convertor;
 
     /**
-     * @var Editor
+     * @var PhpEditor
      */
-    private $editor;
+    private $phpPhpEditor;
 
     /**
      * @param Convertor $convertor
-     * @param Editor    $editor
+     * @param PhpEditor $phpPhpEditor
      */
-    public function __construct(Convertor $convertor, Editor $editor)
+    public function __construct(Convertor $convertor, PhpEditor $phpPhpEditor)
     {
         $this->convertor = $convertor;
-        $this->editor = $editor;
+        $this->phpPhpEditor = $phpPhpEditor;
     }
 
     /**
@@ -38,12 +38,12 @@ class SpecDependencyCommand implements Command
         $className = $this->convertor->toClassName($fullyQualifiedlassname);
         $variableName = $this->convertor->toVariableName($className);
 
-        $file = $this->editor->open($filename);
+        $file = $this->phpPhpEditor->open($filename);
 
-        $this->editor->addUse($file, $fullyQualifiedlassname);
-        $this->editor->addDependencyMock($file, $className, $variableName);
+        $this->phpPhpEditor->addUse($file, $fullyQualifiedlassname);
+        $this->phpPhpEditor->addDependencyMock($file, $className, $variableName);
 
-        $this->editor->save($file);
+        $this->phpPhpEditor->save($file);
 
         return Command::EXIT_SUCCESS;
     }

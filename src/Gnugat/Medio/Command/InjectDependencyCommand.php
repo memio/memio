@@ -3,7 +3,7 @@
 namespace Gnugat\Medio\Command;
 
 use Gnugat\Medio\Convertor;
-use Gnugat\Medio\Editor;
+use Gnugat\Medio\PhpEditor;
 
 class InjectDependencyCommand implements Command
 {
@@ -13,18 +13,18 @@ class InjectDependencyCommand implements Command
     private $convertor;
 
     /**
-     * @var Editor
+     * @var PhpEditor
      */
-    private $editor;
+    private $phpEditor;
 
     /**
      * @param Convertor $convertor
-     * @param Editor    $editor
+     * @param PhpEditor $phpEditor
      */
-    public function __construct(Convertor $convertor, Editor $editor)
+    public function __construct(Convertor $convertor, PhpEditor $phpEditor)
     {
         $this->convertor = $convertor;
-        $this->editor = $editor;
+        $this->phpEditor = $phpEditor;
     }
 
     /**
@@ -38,11 +38,11 @@ class InjectDependencyCommand implements Command
         $className = $this->convertor->toClassName($fullyQualifiedClassname);
         $variableName = $this->convertor->toVariableName($className);
 
-        $file = $this->editor->open($filename);
-        $this->editor->addUse($file, $fullyQualifiedClassname);
-        $this->editor->addProperty($file, $className, $variableName);
-        $this->editor->addDependency($file, $className, $variableName);
-        $this->editor->save($file);
+        $file = $this->phpEditor->open($filename);
+        $this->phpEditor->addUse($file, $fullyQualifiedClassname);
+        $this->phpEditor->addProperty($file, $className, $variableName);
+        $this->phpEditor->addDependency($file, $className, $variableName);
+        $this->phpEditor->save($file);
 
         return Command::EXIT_SUCCESS;
     }
