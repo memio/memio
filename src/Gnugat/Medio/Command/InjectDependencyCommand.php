@@ -35,11 +35,14 @@ class InjectDependencyCommand implements Command
      */
     public function run($fullyQualifiedClassname, $filename)
     {
+        $namespace = $this->convertor->toNamespace($fullyQualifiedClassname);
         $className = $this->convertor->toClassName($fullyQualifiedClassname);
         $variableName = $this->convertor->toVariableName($className);
 
         $file = $this->phpEditor->open($filename);
-        $this->phpEditor->addUse($file, $fullyQualifiedClassname);
+        if ($this->phpEditor->isUseNeeded($file, $namespace)) {
+            $this->phpEditor->addUse($file, $fullyQualifiedClassname);
+        }
         $this->phpEditor->addProperty($file, $className, $variableName);
         $this->phpEditor->addDependency($file, $className, $variableName);
         $this->phpEditor->save($file);

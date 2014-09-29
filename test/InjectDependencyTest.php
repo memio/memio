@@ -2,24 +2,27 @@
 
 namespace test\Gnugat\Medio;
 
-use Gnugat\Medio\Application;
+use test\Gnugat\Medio\Helper\Input;
 
 class InjectDependencyTest extends EditionTestCase
 {
     public function testEmptyService()
     {
-        $filename = $this->getFixture('EmptyService');
+        $input = new Input();
+        $input->fixtureName = 'EmptyService';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
 
-        $argv = array(
-            'medio',
-            'd:i',
-            'fixture\Gnugat\Medio\SubDir\Dependency',
-            $filename,
-        );
+        $this->runFor($input);
+    }
 
-        $application = new Application();
-        $application->run(count($argv), $argv);
+    public function testSameNamespace()
+    {
+        $input = new Input();
+        $input->fixtureName = 'SameNamespaceService';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\Dependency';
 
-        $this->assertCorrectlyEdited('EmptyService');
+        $this->runFor($input);
     }
 }

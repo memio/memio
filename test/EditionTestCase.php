@@ -2,8 +2,28 @@
 
 namespace test\Gnugat\Medio;
 
+use Gnugat\Medio\Application;
+use test\Gnugat\Medio\Helper\Input;
+
 class EditionTestCase extends \PHPUnit_Framework_TestCase
 {
+    protected function runFor(Input $input)
+    {
+        $filename = $this->getFixture($input->fixtureName);
+
+        $argv = array(
+            'medio',
+            $input->commandName,
+            $input->fullyQualifiedClassname,
+            $filename,
+        );
+
+        $application = new Application();
+        $application->run(count($argv), $argv);
+
+        $this->assertCorrectlyEdited($input->fixtureName);
+    }
+
     /**
      * Prepares a new copy of fixture and returns its filename.
      *

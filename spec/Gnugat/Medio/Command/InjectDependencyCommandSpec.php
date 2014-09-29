@@ -11,6 +11,7 @@ use PhpSpec\ObjectBehavior;
 class InjectDependencyCommandSpec extends ObjectBehavior
 {
     const FULLY_QUALIFIED_CLASSNAME = 'fixture\Gnugat\Medio\Dependency';
+    const NAMESPACE_T = 'fixture\Gnugat\Medio';
     const CLASS_NAME = 'Dependency';
     const VARIABLE_NAME = 'dependency';
 
@@ -28,10 +29,12 @@ class InjectDependencyCommandSpec extends ObjectBehavior
 
     function it_injects_a_dependency_in_a_class(Convertor $convertor, PhpEditor $phpEditor, File $file)
     {
+        $convertor->toNamespace(self::FULLY_QUALIFIED_CLASSNAME)->willReturn(self::NAMESPACE_T);
         $convertor->toClassName(self::FULLY_QUALIFIED_CLASSNAME)->willReturn(self::CLASS_NAME);
         $convertor->toVariableName(self::CLASS_NAME)->willReturn(self::VARIABLE_NAME);
 
         $phpEditor->open(self::FILENAME)->willReturn($file);
+        $phpEditor->isUseNeeded($file, self::NAMESPACE_T)->willReturn(true);
         $phpEditor->addUse($file, self::FULLY_QUALIFIED_CLASSNAME)->shouldBeCalled();
         $phpEditor->addProperty($file, self::CLASS_NAME, self::VARIABLE_NAME)->shouldBeCalled();
         $phpEditor->addDependency($file, self::CLASS_NAME, self::VARIABLE_NAME)->shouldBeCalled();

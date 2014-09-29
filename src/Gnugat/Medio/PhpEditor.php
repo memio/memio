@@ -38,6 +38,19 @@ class PhpEditor
 
     /**
      * @param Text   $text
+     * @param string $namespace
+     *
+     * @return bool
+     */
+    public function isUseNeeded(Text $text, $namespace)
+    {
+        $namespaceStatement = sprintf('namespace %s;', $namespace);
+
+        return !$this->editor->has($text, $namespaceStatement);
+    }
+
+    /**
+     * @param Text   $text
      * @param string $fullyQualifiedClassname
      */
     public function addUse(Text $text, $fullyQualifiedClassname)
