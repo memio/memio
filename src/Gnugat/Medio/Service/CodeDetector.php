@@ -8,15 +8,22 @@ use Gnugat\Redaktilo\Text;
 class CodeDetector
 {
     /**
+     * @var CodeNavigator
+     */
+    private $codeNavigator;
+
+    /**
      * @var Editor
      */
     private $editor;
 
     /**
-     * @param Editor $editor
+     * @param CodeNavigator $codeNavigator
+     * @param Editor        $editor
      */
-    public function __construct(Editor $editor)
+    public function __construct(CodeNavigator $codeNavigator, Editor $editor)
     {
+        $this->codeNavigator = $codeNavigator;
         $this->editor = $editor;
     }
     /**
@@ -30,5 +37,24 @@ class CodeDetector
         $namespaceStatement = sprintf('namespace %s;', $namespace);
 
         return !$this->editor->has($text, $namespaceStatement);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasAnyDependency(Text $text)
+    {
+        $this->codeNavigator->goToConstructor($text);
+        $lines = $text->getLines();
+        $lineNumber = $text->getCurrentLineNumber();
+        $firstLine = str_replace('    public function __construct(', '', $lines[$lineNumber]);
+        if (!empty($firstLine)) {
+            return $firstLine !== ')';
+        }
+        $secondLine = trim($lines[$lineNumber + 1]);
+
+        return !empty($secondLine) && $secondLine[0] !== ')';
     }
 }
