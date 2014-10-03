@@ -54,4 +54,10 @@ class CodeNavigator
     {
         $this->editor->jumpBelow($text, self::NAMESPACE_PATTERN, 0);
     }
+
+    public function goOneLineBelow(Text $text)
+    {
+        $lineNumber = $text->getCurrentLineNumber();
+        $text->setCurrentLineNumber($lineNumber + 1);
+    }
 }
