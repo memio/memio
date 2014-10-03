@@ -3,6 +3,7 @@
 namespace Gnugat\Medio\Service;
 
 use Gnugat\Redaktilo\Editor;
+use Gnugat\Redaktilo\Search\PatternNotFoundException;
 use Gnugat\Redaktilo\Text;
 
 class CodeNavigator
@@ -25,6 +26,8 @@ class CodeNavigator
 
     /**
      * @param Text $text
+     *
+     * @throws PatternNotFoundException If the constructor is missing
      */
     public function goToConstructor(Text $text)
     {
