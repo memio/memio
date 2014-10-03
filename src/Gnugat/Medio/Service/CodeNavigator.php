@@ -8,6 +8,7 @@ use Gnugat\Redaktilo\Text;
 class CodeNavigator
 {
     const CONSTRUCTOR_PATTERN = '/^    public function __construct\(/';
+    const PROPERTY_PATTERN = '/^    private \$/';
 
     /**
      * @var Editor
@@ -28,5 +29,13 @@ class CodeNavigator
     public function goToConstructor(Text $text)
     {
         $this->editor->jumpBelow($text, self::CONSTRUCTOR_PATTERN, 0);
+    }
+
+    /**
+     * @param Text $text
+     */
+    public function goOnePropertyBelow(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::PROPERTY_PATTERN);
     }
 }
