@@ -7,6 +7,8 @@ use Gnugat\Redaktilo\Text;
 
 class CodeDetector
 {
+    const USE_PATTERN = '/^use /';
+
     /**
      * @var CodeNavigator
      */
@@ -56,5 +58,17 @@ class CodeDetector
         $secondLine = trim($lines[$lineNumber + 1]);
 
         return !empty($secondLine) && $secondLine[0] !== ')';
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasOneUseBelow(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::USE_PATTERN);
+
+        return true;
     }
 }

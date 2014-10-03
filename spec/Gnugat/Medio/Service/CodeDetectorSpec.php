@@ -2,6 +2,7 @@
 
 namespace spec\Gnugat\Medio\Service;
 
+use Gnugat\Medio\Service\CodeDetector;
 use Gnugat\Medio\Service\CodeNavigator;
 use Gnugat\Redaktilo\Editor;
 use Gnugat\Redaktilo\Text;
@@ -86,5 +87,12 @@ class CodeDetectorSpec extends ObjectBehavior
         $text->getCurrentLineNumber()->willReturn($currentLineNumber);
 
         $this->hasAnyDependency($text)->shouldBe(false);
+    }
+
+    function it_detects_presence_of_next_use(Editor $editor, Text $text)
+    {
+        $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->shouldBeCalled();
+
+        $this->hasOneUseBelow($text)->shouldBe(true);
     }
 }
