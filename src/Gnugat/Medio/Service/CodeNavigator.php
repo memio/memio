@@ -10,6 +10,7 @@ class CodeNavigator
 {
     const CONSTRUCTOR_PATTERN = '/^    public function __construct\(/';
     const PROPERTY_PATTERN = '/^    private \$/';
+    const NAMESPACE_PATTERN = '/^namespace /';
 
     /**
      * @var Editor
@@ -42,5 +43,13 @@ class CodeNavigator
     public function goOnePropertyBelow(Text $text)
     {
         $this->editor->jumpBelow($text, self::PROPERTY_PATTERN);
+    }
+
+    /**
+     * @param Text $text
+     */
+    public function goToNamespace(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::NAMESPACE_PATTERN, 0);
     }
 }

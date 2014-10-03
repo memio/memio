@@ -50,4 +50,11 @@ class CodeNavigatorSpec extends ObjectBehavior
 
         $this->shouldThrow($patternNotFoundException)->duringGoOnePropertyBelow($text);
     }
+
+    function it_selects_the_namespace(Editor $editor, Text $text)
+    {
+        $editor->jumpBelow($text, CodeNavigator::NAMESPACE_PATTERN, 0)->shouldBeCalled();
+
+        $this->goToNamespace($text);
+    }
 }
