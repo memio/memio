@@ -90,6 +90,22 @@ class CodeDetectorSpec extends ObjectBehavior
         $this->hasAnyDependency($text)->shouldBe(false);
     }
 
+    function it_detects_no_dependency_with_missing_constructor(
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            CodeNavigator::CONSTRUCTOR_PATTERN
+        );
+        $codeNavigator->goToConstructor($text)->willThrow($patternNotFoundException);
+
+        $this->hasAnyDependency($text)->shouldBe(false);
+    }
+
+
     function it_detects_presence_of_next_use(Editor $editor, Text $text)
     {
         $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->shouldBeCalled();

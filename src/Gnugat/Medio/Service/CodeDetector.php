@@ -49,7 +49,11 @@ class CodeDetector
      */
     public function hasAnyDependency(Text $text)
     {
-        $this->codeNavigator->goToConstructor($text);
+        try {
+            $this->codeNavigator->goToConstructor($text);
+        } catch (PatternNotFoundException $e) {
+            return false;
+        }
         $lines = $text->getLines();
         $lineNumber = $text->getCurrentLineNumber();
         $firstLine = str_replace('    public function __construct(', '', $lines[$lineNumber]);
