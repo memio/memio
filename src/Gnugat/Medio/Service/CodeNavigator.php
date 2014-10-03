@@ -11,6 +11,7 @@ class CodeNavigator
     const CONSTRUCTOR_PATTERN = '/^    public function __construct\(/';
     const PROPERTY_PATTERN = '/^    private \$/';
     const NAMESPACE_PATTERN = '/^namespace /';
+    const CLASS_OPENING_PATTERN = '/^{$/';
 
     /**
      * @var Editor
@@ -64,5 +65,13 @@ class CodeNavigator
     {
         $lineNumber = $text->getCurrentLineNumber();
         $text->setCurrentLineNumber($lineNumber + 1);
+    }
+
+    /**
+     * @param Text $text
+     */
+    public function goToClassOpening(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::CLASS_OPENING_PATTERN, 0);
     }
 }

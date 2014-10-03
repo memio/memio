@@ -87,4 +87,22 @@ class CodeNavigatorSpec extends ObjectBehavior
 
         $this->shouldThrow($invalidArgumentException)->duringGoOneLineBelow($text);
     }
+
+    function it_selects_the_class_opening(Editor $editor, Text $text)
+    {
+        $editor->jumpBelow($text, CodeNavigator::CLASS_OPENING_PATTERN, 0)->shouldBeCalled();
+
+        $this->goToClassOpening($text);
+    }
+
+    function it_cannot_select_missing_class_opening(Editor $editor, Text $text)
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            CodeNavigator::CLASS_OPENING_PATTERN
+        );
+        $editor->jumpBelow($text, CodeNavigator::CLASS_OPENING_PATTERN, 0)->willThrow($patternNotFoundException);
+
+        $this->shouldThrow($patternNotFoundException)->duringGoToClassOpening($text);
+    }
 }
