@@ -71,11 +71,20 @@ class CodeNavigatorSpec extends ObjectBehavior
         $this->shouldThrow($patternNotFoundException)->duringGoToNamespace($text);
     }
 
-    function it_selects_the_next_line(Editor $editor, Text $text)
+    function it_selects_the_next_line(Text $text)
     {
         $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
         $text->setCurrentLineNumber(self::LINE_NUMBER + 1)->shouldBeCalled();
 
         $this->goOneLineBelow($text);
+    }
+
+    function it_cannot_select_next_line_after_end_of_file(Text $text)
+    {
+        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
+        $invalidArgumentException = '\InvalidArgumentException';
+        $text->setCurrentLineNumber(self::LINE_NUMBER + 1)->willThrow($invalidArgumentException);
+
+        $this->shouldThrow($invalidArgumentException)->duringGoOneLineBelow($text);
     }
 }

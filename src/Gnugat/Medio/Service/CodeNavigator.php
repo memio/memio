@@ -55,6 +55,11 @@ class CodeNavigator
         $this->editor->jumpBelow($text, self::NAMESPACE_PATTERN, 0);
     }
 
+    /**
+     * @param Text $text
+     *
+     * @throws \InvalidArgumentException If the bottom of the file has been reached
+     */
     public function goOneLineBelow(Text $text)
     {
         $lineNumber = $text->getCurrentLineNumber();
