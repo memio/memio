@@ -5,6 +5,7 @@ namespace spec\Gnugat\Medio\Service;
 use Gnugat\Medio\Service\CodeDetector;
 use Gnugat\Medio\Service\CodeNavigator;
 use Gnugat\Redaktilo\Editor;
+use Gnugat\Redaktilo\Search\PatternNotFoundException;
 use Gnugat\Redaktilo\Text;
 use PhpSpec\ObjectBehavior;
 
@@ -95,4 +96,16 @@ class CodeDetectorSpec extends ObjectBehavior
 
         $this->hasOneUseBelow($text)->shouldBe(true);
     }
+
+    function it_detects_absence_of_next_use(Editor $editor, Text $text)
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            CodeDetector::USE_PATTERN
+        );
+        $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->willThrow($patternNotFoundException);
+
+        $this->hasOneUseBelow($text)->shouldBe(false);
+    }
+
 }

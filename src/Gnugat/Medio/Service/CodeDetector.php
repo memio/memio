@@ -3,6 +3,7 @@
 namespace Gnugat\Medio\Service;
 
 use Gnugat\Redaktilo\Editor;
+use Gnugat\Redaktilo\Search\PatternNotFoundException;
 use Gnugat\Redaktilo\Text;
 
 class CodeDetector
@@ -67,7 +68,11 @@ class CodeDetector
      */
     public function hasOneUseBelow(Text $text)
     {
-        $this->editor->jumpBelow($text, self::USE_PATTERN);
+        try {
+            $this->editor->jumpBelow($text, self::USE_PATTERN);
+        } catch (PatternNotFoundException $e) {
+            return false;
+        }
 
         return true;
     }
