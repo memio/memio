@@ -66,4 +66,21 @@ class CodeEditor
             $this->editor->insertBelow($text, self::EMPTY_LINE);
         }
     }
+
+    /**
+     * @param Text   $text
+     * @param string $variableName
+     */
+    public function addProperty(Text $text, $variableName)
+    {
+        $property = sprintf('    private $%s;', $variableName);
+        $emptyLine = '';
+
+        $this->codeNavigator->goToClassOpening($text);
+        while ($this->codeDetector->hasOneUseBelow($text)) {
+            $this->codeNavigator->goOneUseBelow($text);
+        }
+        $this->editor->insertBelow($text, $property);
+        $this->editor->insertBelow($text, self::EMPTY_LINE);
+    }
 }

@@ -17,6 +17,8 @@ class CodeEditorSpec extends ObjectBehavior
     const FULLY_QUALIFIED_CLASSNAME = 'fixture\Gnugat\Medio\Dependency';
 
     const USE_STATEMENT = 'use fixture\Gnugat\Medio\Dependency;';
+    const PROPERTY = '    private $dependency;';
+    const VARIABLE_NAME = 'dependency';
 
     function let(CodeDetector $codeDetector, CodeNavigator $codeNavigator, Editor $editor)
     {
@@ -66,5 +68,20 @@ class CodeEditorSpec extends ObjectBehavior
         $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
         $this->addUse($text, self::FULLY_QUALIFIED_CLASSNAME);
+    }
+
+    function it_inserts_first_property(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $codeNavigator->goToClassOpening($text)->shouldBeCalled();
+        $codeDetector->hasOneUseBelow($text)->willReturn(false);
+        $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
+        $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
+
+        $this->addProperty($text, self::VARIABLE_NAME);
     }
 }
