@@ -47,6 +47,8 @@ class CodeNavigator
 
     /**
      * @param Text $text
+     *
+     * @throws PatternNotFoundException If the namespace is missing
      */
     public function goToNamespace(Text $text)
     {
