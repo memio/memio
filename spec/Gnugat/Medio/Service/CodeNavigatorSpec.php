@@ -39,4 +39,15 @@ class CodeNavigatorSpec extends ObjectBehavior
 
         $this->goOnePropertyBelow($text);
     }
+
+    function it_cannot_select_missing_property(Editor $editor, Text $text)
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            CodeNavigator::PROPERTY_PATTERN
+        );
+        $editor->jumpBelow($text, CodeNavigator::PROPERTY_PATTERN)->willThrow($patternNotFoundException);
+
+        $this->shouldThrow($patternNotFoundException)->duringGoOnePropertyBelow($text);
+    }
 }

@@ -36,6 +36,8 @@ class CodeNavigator
 
     /**
      * @param Text $text
+     *
+     * @throws PatternNotFoundException If there's no property below
      */
     public function goOnePropertyBelow(Text $text)
     {
