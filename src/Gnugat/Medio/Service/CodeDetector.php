@@ -43,20 +43,22 @@ class CodeDetector
     }
 
     /**
-     * @param Text $text
+     * @param Text   $text
+     * @param string $methodName
      *
      * @return bool
      */
-    public function hasAnyDependency(Text $text)
+    public function hasAnyArguments(Text $text, $methodName)
     {
         try {
-            $this->codeNavigator->goToConstructor($text);
+            $this->codeNavigator->goToMethod($text, $methodName);
         } catch (PatternNotFoundException $e) {
             return false;
         }
         $lines = $text->getLines();
         $lineNumber = $text->getCurrentLineNumber();
-        $firstLine = str_replace('    public function __construct(', '', $lines[$lineNumber]);
+        $toReplace = sprintf('    public function %s(', $methodName);
+        $firstLine = str_replace($toReplace, '', $lines[$lineNumber]);
         if (!empty($firstLine)) {
             return $firstLine !== ')';
         }

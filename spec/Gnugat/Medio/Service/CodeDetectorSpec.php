@@ -16,8 +16,10 @@ class CodeDetectorSpec extends ObjectBehavior
     const CONSTRUCTOR_BEGINING = '    public function __construct(';
     const MULTI_LINE_DEPENDENCY = '        Dependency $dependency';
     const CONSTRUCTOR_END = '    )';
+    const METHOD_NAME = '__construct';
     const INLINE_CONSTRUCTOR = '    public function __construct(Dependency $dependency)';
     const EMPTY_CONSTRUCTOR = '    public function __construct()';
+    const METHOD_PATTERN = '/^    public function __construct\(/';
 
     function let(CodeNavigator $codeNavigator, Editor $editor)
     {
@@ -38,7 +40,7 @@ class CodeDetectorSpec extends ObjectBehavior
         $this->isUseNeeded($text, self::NAME_SPACE)->shouldBe(true);
     }
 
-    function it_detects_dependencies_of_multiline_constructor(
+    function it_detects_arguments_of_multiline_method(
         CodeNavigator $codeNavigator,
         Editor $editor,
         Text $text
@@ -51,14 +53,14 @@ class CodeDetectorSpec extends ObjectBehavior
             self::CONSTRUCTOR_END,
         );
 
-        $codeNavigator->goToConstructor($text)->shouldBeCalled();
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
         $text->getLines()->willReturn($lines);
         $text->getCurrentLineNumber()->willReturn($currentLineNumber);
 
-        $this->hasAnyDependency($text)->shouldBe(true);
+        $this->hasAnyArguments($text, self::METHOD_NAME)->shouldBe(true);
     }
 
-    function it_detects_dependencies_of_inline_constructor(
+    function it_detects_arguments_of_inline_method(
         CodeNavigator $codeNavigator,
         Editor $editor,
         Text $text
@@ -67,14 +69,14 @@ class CodeDetectorSpec extends ObjectBehavior
         $currentLineNumber = 0;
         $lines = array(self::INLINE_CONSTRUCTOR);
 
-        $codeNavigator->goToConstructor($text)->shouldBeCalled();
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
         $text->getLines()->willReturn($lines);
         $text->getCurrentLineNumber()->willReturn($currentLineNumber);
 
-        $this->hasAnyDependency($text)->shouldBe(true);
+        $this->hasAnyArguments($text, self::METHOD_NAME)->shouldBe(true);
     }
 
-    function it_detects_no_dependency_with_empty_constructor(
+    function it_detects_no_arguments_with_empty_method(
         CodeNavigator $codeNavigator,
         Editor $editor,
         Text $text
@@ -83,14 +85,14 @@ class CodeDetectorSpec extends ObjectBehavior
         $currentLineNumber = 0;
         $lines = array(self::EMPTY_CONSTRUCTOR);
 
-        $codeNavigator->goToConstructor($text)->shouldBeCalled();
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
         $text->getLines()->willReturn($lines);
         $text->getCurrentLineNumber()->willReturn($currentLineNumber);
 
-        $this->hasAnyDependency($text)->shouldBe(false);
+        $this->hasAnyArguments($text, self::METHOD_NAME)->shouldBe(false);
     }
 
-    function it_detects_no_dependency_with_missing_constructor(
+    function it_detects_no_arguments_with_missing_method(
         CodeNavigator $codeNavigator,
         Editor $editor,
         Text $text
@@ -98,13 +100,12 @@ class CodeDetectorSpec extends ObjectBehavior
     {
         $patternNotFoundException = new PatternNotFoundException(
             $text->getWrappedObject(),
-            CodeNavigator::CONSTRUCTOR_PATTERN
+            self::METHOD_PATTERN
         );
-        $codeNavigator->goToConstructor($text)->willThrow($patternNotFoundException);
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->willThrow($patternNotFoundException);
 
-        $this->hasAnyDependency($text)->shouldBe(false);
+        $this->hasAnyArguments($text, self::METHOD_NAME)->shouldBe(false);
     }
-
 
     function it_detects_presence_of_next_use(Editor $editor, Text $text)
     {
@@ -123,5 +124,4 @@ class CodeDetectorSpec extends ObjectBehavior
 
         $this->hasOneUseBelow($text)->shouldBe(false);
     }
-
 }
