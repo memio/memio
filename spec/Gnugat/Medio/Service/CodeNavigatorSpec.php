@@ -10,6 +10,8 @@ use PhpSpec\ObjectBehavior;
 
 class CodeNavigatorSpec extends ObjectBehavior
 {
+    const METHOD_NAME = '__construct';
+    const METHOD_PATTERN = '/^    public function __construct\(/';
     const LINE_NUMBER = 23;
 
     function let(Editor $editor)
@@ -17,22 +19,22 @@ class CodeNavigatorSpec extends ObjectBehavior
         $this->beConstructedWith($editor);
     }
 
-    function it_selects_the_constructor(Editor $editor, Text $text)
+    function it_selects_a_method(Editor $editor, Text $text)
     {
-        $editor->jumpBelow($text, CodeNavigator::CONSTRUCTOR_PATTERN, 0)->shouldBeCalled();
+        $editor->jumpBelow($text, self::METHOD_PATTERN, 0)->shouldBeCalled();
 
-        $this->goToConstructor($text);
+        $this->goToMethod($text, self::METHOD_NAME);
     }
 
-    function it_cannot_select_missing_constructor(Editor $editor, Text $text)
+    function it_cannot_select_missing_method(Editor $editor, Text $text)
     {
         $patternNotFoundException = new PatternNotFoundException(
             $text->getWrappedObject(),
-            CodeNavigator::CONSTRUCTOR_PATTERN
+            self::METHOD_PATTERN
         );
-        $editor->jumpBelow($text, CodeNavigator::CONSTRUCTOR_PATTERN, 0)->willThrow($patternNotFoundException);
+        $editor->jumpBelow($text, self::METHOD_PATTERN, 0)->willThrow($patternNotFoundException);
 
-        $this->shouldThrow($patternNotFoundException)->duringGoToConstructor($text);
+        $this->shouldThrow($patternNotFoundException)->duringGoToMethod($text, self::METHOD_NAME);
     }
 
     function it_selects_the_next_property(Editor $editor, Text $text)

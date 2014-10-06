@@ -27,13 +27,15 @@ class CodeNavigator
     }
 
     /**
-     * @param Text $text
+     * @param Text   $text
+     * @param string $methodName
      *
      * @throws PatternNotFoundException If the constructor is missing
      */
-    public function goToConstructor(Text $text)
+    public function goToMethod(Text $text, $methodName)
     {
-        $this->editor->jumpBelow($text, self::CONSTRUCTOR_PATTERN, 0);
+        $methodPattern = sprintf('/^    public function %s\(/', $methodName);
+        $this->editor->jumpBelow($text, $methodPattern, 0);
     }
 
     /**
