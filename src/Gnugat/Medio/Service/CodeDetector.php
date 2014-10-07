@@ -96,4 +96,18 @@ class CodeDetector
 
         return ($line !== '    )');
     }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     *
+     * @return bool
+     */
+    public function hasMultilineArguments(Text $text, $methodName)
+    {
+        $inlineArgumentsPattern = sprintf('/^    public function %s\((.*)\)$/', $methodName);
+        $hasInlineArguments = $this->editor->hasBelow($text, $inlineArgumentsPattern, 0);
+
+        return !$hasInlineArguments;
+    }
 }

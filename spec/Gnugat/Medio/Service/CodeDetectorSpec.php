@@ -23,6 +23,7 @@ class CodeDetectorSpec extends ObjectBehavior
     const LINE_NUMBER = 42;
     const ARGUMENT_BELOW = '        OtherDependency $otherDependency';
     const NO_ARGUMENT_BELOW = '    )';
+    const INLINE_ARGUMENTS_PATTERN = '/^    public function __construct\((.*)\)$/';
 
     function let(CodeNavigator $codeNavigator, Editor $editor)
     {
@@ -142,5 +143,19 @@ class CodeDetectorSpec extends ObjectBehavior
         $text->getLine(self::LINE_NUMBER + 1)->willReturn(self::NO_ARGUMENT_BELOW);
 
         $this->hasOneArgumentBelow($text)->shouldBe(false);
+    }
+
+    function it_detects_multiline_arguments(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, self::INLINE_ARGUMENTS_PATTERN, 0)->willReturn(false);
+
+        $this->hasMultilineArguments($text, self::METHOD_NAME)->shouldBe(true);
+    }
+
+    function it_detects_inline_arguments(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, self::INLINE_ARGUMENTS_PATTERN, 0)->willReturn(true);
+
+        $this->hasMultilineArguments($text, self::METHOD_NAME)->shouldBe(false);
     }
 }
