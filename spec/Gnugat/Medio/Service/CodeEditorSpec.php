@@ -21,18 +21,12 @@ class CodeEditorSpec extends ObjectBehavior
     const PROPERTY = '    private $dependency;';
     const VARIABLE_NAME = 'dependency';
     const EMPTY_CONSTRUCTOR = '    public function __construct()';
-    const LINE_NUMBER = 0;
     const CONSTRUCTOR_ONE_ARGUMENT = '    public function __construct(Dependency $dependency)';
     const METHOD_NAME = '__construct';
     const ARGUMENT_TYPE = 'Dependency';
     const ARGUMENT_NAME = 'dependency';
     const INLINE_CONSTRUCTOR = '    public function __construct(OtherDependency $otherDependency)';
     const INLINE_CONSTRUCTOR_ARGUMENTS = '    public function __construct(OtherDependency $otherDependency, Dependency $dependency)';
-    const FIRST_LINE_CONSTRUCTOR = '    public function __construct(';
-    const SECOND_LINE_CONSTRUCTOR = '        OtherDependency $otherDependency';
-    const THIRD_LINE_CONSTRUCTOR = '    )';
-    const SECOND_LINE_CONSTRUCTOR_COMMA = '        OtherDependency $otherDependency,';
-    const NEW_LINE_CONSTRUCTOR = '        Dependency $dependency';
 
     function let(
         CodeDetector $codeDetector,
