@@ -20,6 +20,9 @@ class CodeDetectorSpec extends ObjectBehavior
     const INLINE_CONSTRUCTOR = '    public function __construct(Dependency $dependency)';
     const EMPTY_CONSTRUCTOR = '    public function __construct()';
     const METHOD_PATTERN = '/^    public function __construct\(/';
+    const LINE_NUMBER = 42;
+    const ARGUMENT_BELOW = '        OtherDependency $otherDependency';
+    const NO_ARGUMENT_BELOW = '    )';
 
     function let(CodeNavigator $codeNavigator, Editor $editor)
     {
@@ -123,5 +126,21 @@ class CodeDetectorSpec extends ObjectBehavior
         $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->willThrow($patternNotFoundException);
 
         $this->hasOneUseBelow($text)->shouldBe(false);
+    }
+
+    function it_detects_presence_of_next_argument(Text $text)
+    {
+        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
+        $text->getLine(self::LINE_NUMBER + 1)->willReturn(self::ARGUMENT_BELOW);
+
+        $this->hasOneArgumentBelow($text)->shouldBe(true);
+    }
+
+    function it_detects_absence_of_next_argument(Text $text)
+    {
+        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
+        $text->getLine(self::LINE_NUMBER + 1)->willReturn(self::NO_ARGUMENT_BELOW);
+
+        $this->hasOneArgumentBelow($text)->shouldBe(false);
     }
 }

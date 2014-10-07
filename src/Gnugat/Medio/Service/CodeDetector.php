@@ -29,6 +29,7 @@ class CodeDetector
         $this->codeNavigator = $codeNavigator;
         $this->editor = $editor;
     }
+
     /**
      * @param Text   $text
      * @param string $namespace
@@ -81,5 +82,18 @@ class CodeDetector
         }
 
         return true;
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasOneArgumentBelow(Text $text)
+    {
+        $lineNumber = $text->getCurrentLineNumber();
+        $line = $text->getLine($lineNumber + 1);
+
+        return ($line !== '    )');
     }
 }
