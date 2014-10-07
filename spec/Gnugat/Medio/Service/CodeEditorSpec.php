@@ -5,6 +5,7 @@ namespace spec\Gnugat\Medio\Service;
 use Gnugat\Medio\Service\CodeDetector;
 use Gnugat\Medio\Service\CodeEditor;
 use Gnugat\Medio\Service\CodeNavigator;
+use Gnugat\Medio\Service\MultilineEditor;
 use Gnugat\Redaktilo\Editor;
 use Gnugat\Redaktilo\File;
 use Gnugat\Redaktilo\Text;
@@ -27,10 +28,20 @@ class CodeEditorSpec extends ObjectBehavior
     const ARGUMENT_NAME = 'dependency';
     const INLINE_CONSTRUCTOR = '    public function __construct(OtherDependency $otherDependency)';
     const INLINE_CONSTRUCTOR_ARGUMENTS = '    public function __construct(OtherDependency $otherDependency, Dependency $dependency)';
+    const FIRST_LINE_CONSTRUCTOR = '    public function __construct(';
+    const SECOND_LINE_CONSTRUCTOR = '        OtherDependency $otherDependency';
+    const THIRD_LINE_CONSTRUCTOR = '    )';
+    const SECOND_LINE_CONSTRUCTOR_COMMA = '        OtherDependency $otherDependency,';
+    const NEW_LINE_CONSTRUCTOR = '        Dependency $dependency';
 
-    function let(CodeDetector $codeDetector, CodeNavigator $codeNavigator, Editor $editor)
+    function let(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        MultilineEditor $multilineEditor
+    )
     {
-        $this->beConstructedWith($codeDetector, $codeNavigator, $editor);
+        $this->beConstructedWith($codeDetector, $codeNavigator, $editor, $multilineEditor);
     }
 
     function it_opens_a_file(Editor $editor, File $file)
@@ -100,31 +111,41 @@ class CodeEditorSpec extends ObjectBehavior
         Text $text
     )
     {
-        $lines = array(self::EMPTY_CONSTRUCTOR);
-
+        $codeDetector->hasMultilineArguments($text, self::METHOD_NAME)->willReturn(false);
+        $line = self::EMPTY_CONSTRUCTOR;
         $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
+        $text->getLine()->willReturn($line);
         $codeDetector->hasAnyArguments($text, self::METHOD_NAME)->willReturn(false);
-        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
-        $text->getLines()->willReturn($lines);
         $editor->replace($text, self::CONSTRUCTOR_ONE_ARGUMENT)->shouldBeCalled();
 
         $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
     }
 
-    function it_inserts_another_property_to_inline_method(
+    function it_inserts_another_argument_to_inline_method(
         CodeDetector $codeDetector,
         CodeNavigator $codeNavigator,
         Editor $editor,
         Text $text
     )
     {
-        $lines = array(self::INLINE_CONSTRUCTOR);
-
+        $codeDetector->hasMultilineArguments($text, self::METHOD_NAME)->willReturn(false);
+        $line = self::INLINE_CONSTRUCTOR;
         $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
+        $text->getLine()->willReturn($line);
         $codeDetector->hasAnyArguments($text, self::METHOD_NAME)->willReturn(true);
-        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
-        $text->getLines()->willReturn($lines);
         $editor->replace($text, self::INLINE_CONSTRUCTOR_ARGUMENTS)->shouldBeCalled();
+
+        $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
+    }
+
+    function it_inserts_another_argument_to_multiline_method(
+        CodeDetector $codeDetector,
+        MultilineEditor $multilineEditor,
+        Text $text
+    )
+    {
+        $codeDetector->hasMultilineArguments($text, self::METHOD_NAME)->willReturn(true);
+        $multilineEditor->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
 
         $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
     }
