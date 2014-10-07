@@ -19,6 +19,14 @@ class CodeEditorSpec extends ObjectBehavior
     const USE_STATEMENT = 'use fixture\Gnugat\Medio\Dependency;';
     const PROPERTY = '    private $dependency;';
     const VARIABLE_NAME = 'dependency';
+    const EMPTY_CONSTRUCTOR = '    public function __construct()';
+    const LINE_NUMBER = 0;
+    const CONSTRUCTOR_ONE_ARGUMENT = '    public function __construct(Dependency $dependency)';
+    const METHOD_NAME = '__construct';
+    const ARGUMENT_TYPE = 'Dependency';
+    const ARGUMENT_NAME = 'dependency';
+    const INLINE_CONSTRUCTOR = '    public function __construct(OtherDependency $otherDependency)';
+    const INLINE_CONSTRUCTOR_ARGUMENTS = '    public function __construct(OtherDependency $otherDependency, Dependency $dependency)';
 
     function let(CodeDetector $codeDetector, CodeNavigator $codeNavigator, Editor $editor)
     {
@@ -83,5 +91,41 @@ class CodeEditorSpec extends ObjectBehavior
         $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
         $this->addProperty($text, self::VARIABLE_NAME);
+    }
+
+    function it_inserts_first_method_argument(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $lines = array(self::EMPTY_CONSTRUCTOR);
+
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
+        $codeDetector->hasAnyArguments($text, self::METHOD_NAME)->willReturn(false);
+        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
+        $text->getLines()->willReturn($lines);
+        $editor->replace($text, self::CONSTRUCTOR_ONE_ARGUMENT)->shouldBeCalled();
+
+        $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
+    }
+
+    function it_inserts_another_property_to_inline_method(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $lines = array(self::INLINE_CONSTRUCTOR);
+
+        $codeNavigator->goToMethod($text, self::METHOD_NAME)->shouldBeCalled();
+        $codeDetector->hasAnyArguments($text, self::METHOD_NAME)->willReturn(true);
+        $text->getCurrentLineNumber()->willReturn(self::LINE_NUMBER);
+        $text->getLines()->willReturn($lines);
+        $editor->replace($text, self::INLINE_CONSTRUCTOR_ARGUMENTS)->shouldBeCalled();
+
+        $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
     }
 }

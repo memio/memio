@@ -83,4 +83,26 @@ class CodeEditor
         $this->editor->insertBelow($text, $property);
         $this->editor->insertBelow($text, self::EMPTY_LINE);
     }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     * @param string $argumentName
+     * @param string $argumentType
+     */
+    public function addArgument(Text $text, $methodName, $argumentName, $argumentType = null)
+    {
+        $this->codeNavigator->goToMethod($text, $methodName);
+        $constructorArgument = '';
+        if ($this->codeDetector->hasAnyArguments($text, $methodName)) {
+            $constructorArgument = ', ';
+        }
+        $constructorArgument .= $argumentType ? $argumentType.' ' : '';
+        $constructorArgument .= '$'.$argumentName;
+        $constructorLineNumber = $text->getCurrentLineNumber();
+        $lines = $text->getLines();
+        $currentConstructor = $lines[$constructorLineNumber];
+        $newConstructor = str_replace(')', $constructorArgument.')', $currentConstructor);
+        $this->editor->replace($text, $newConstructor);
+    }
 }
