@@ -75,8 +75,8 @@ class CodeEditor
         $emptyLine = '';
 
         $this->codeNavigator->goToClassOpening($text);
-        while ($this->codeDetector->hasOneUseBelow($text)) {
-            $this->codeNavigator->goOneUseBelow($text);
+        while ($this->codeDetector->hasOnePropertyBelow($text)) {
+            $this->codeNavigator->goOnePropertyBelow($text);
         }
         $this->editor->insertBelow($text, $property);
         $this->editor->insertBelow($text, self::EMPTY_LINE);

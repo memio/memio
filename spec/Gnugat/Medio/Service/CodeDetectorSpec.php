@@ -32,14 +32,14 @@ class CodeDetectorSpec extends ObjectBehavior
 
     function it_detects_if_use_statement_is_needed(Editor $editor, Text $text)
     {
-        $editor->has($text, self::NAMESPACE_STATEMENT)->willReturn(true);
+        $editor->hasBelow($text, self::NAMESPACE_STATEMENT, 0)->willReturn(true);
 
         $this->isUseNeeded($text, self::NAME_SPACE)->shouldBe(false);
     }
 
     function it_detects_if_use_statement_is_not_needed(Editor $editor, Text $text)
     {
-        $editor->has($text, self::NAMESPACE_STATEMENT)->willReturn(false);
+        $editor->hasBelow($text, self::NAMESPACE_STATEMENT, 0)->willReturn(false);
 
         $this->isUseNeeded($text, self::NAME_SPACE)->shouldBe(true);
     }
@@ -113,18 +113,14 @@ class CodeDetectorSpec extends ObjectBehavior
 
     function it_detects_presence_of_next_use(Editor $editor, Text $text)
     {
-        $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->shouldBeCalled();
+        $editor->hasBelow($text, CodeDetector::USE_PATTERN)->willReturn(true);
 
         $this->hasOneUseBelow($text)->shouldBe(true);
     }
 
     function it_detects_absence_of_next_use(Editor $editor, Text $text)
     {
-        $patternNotFoundException = new PatternNotFoundException(
-            $text->getWrappedObject(),
-            CodeDetector::USE_PATTERN
-        );
-        $editor->jumpBelow($text, CodeDetector::USE_PATTERN)->willThrow($patternNotFoundException);
+        $editor->hasBelow($text, CodeDetector::USE_PATTERN)->willReturn(false);
 
         $this->hasOneUseBelow($text)->shouldBe(false);
     }

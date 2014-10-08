@@ -41,7 +41,7 @@ class CodeDetector
     {
         $namespaceStatement = sprintf('namespace %s;', $namespace);
 
-        return !$this->editor->has($text, $namespaceStatement);
+        return !$this->editor->hasBelow($text, $namespaceStatement, 0);
     }
 
     /**
@@ -76,13 +76,7 @@ class CodeDetector
      */
     public function hasOneUseBelow(Text $text)
     {
-        try {
-            $this->editor->jumpBelow($text, self::USE_PATTERN);
-        } catch (PatternNotFoundException $e) {
-            return false;
-        }
-
-        return true;
+        return $this->editor->hasBelow($text, self::USE_PATTERN);
     }
 
     /**
