@@ -125,4 +125,16 @@ class CodeEditor
         $newConstructor = str_replace(')', $constructorArgument.')', $currentConstructor);
         $this->editor->replace($text, $newConstructor);
     }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     * @param string $variableName
+     */
+    public function addPropertyInitialization(Text $text, $methodName, $variableName)
+    {
+        $propertyInitialization = sprintf('        $this->%s = $%s;', $variableName, $variableName);
+        $this->codeNavigator->goToMethodClosing($text, $methodName);
+        $this->editor->insertAbove($text, $propertyInitialization);
+    }
 }

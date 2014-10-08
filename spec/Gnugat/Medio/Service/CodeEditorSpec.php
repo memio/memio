@@ -27,6 +27,7 @@ class CodeEditorSpec extends ObjectBehavior
     const ARGUMENT_NAME = 'dependency';
     const INLINE_CONSTRUCTOR = '    public function __construct(OtherDependency $otherDependency)';
     const INLINE_CONSTRUCTOR_ARGUMENTS = '    public function __construct(OtherDependency $otherDependency, Dependency $dependency)';
+    const PROPERTY_INITIALIZATION = '        $this->dependency = $dependency;';
 
     function let(
         CodeDetector $codeDetector,
@@ -142,5 +143,17 @@ class CodeEditorSpec extends ObjectBehavior
         $multilineEditor->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
 
         $this->addArgument($text, self::METHOD_NAME, self::ARGUMENT_NAME, self::ARGUMENT_TYPE);
+    }
+
+    function it_inserts_property_initialization(
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $codeNavigator->goToMethodClosing($text, self::METHOD_NAME)->shouldBeCalled();
+        $editor->insertAbove($text, self::PROPERTY_INITIALIZATION)->shouldBeCalled();
+
+        $this->addPropertyInitialization($text, self::METHOD_NAME, self::VARIABLE_NAME);
     }
 }
