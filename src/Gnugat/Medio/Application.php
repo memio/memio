@@ -3,16 +3,17 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Convertor;
-use Gnugat\Medio\PhpEditor;
-use Gnugat\Medio\Command\Command;
+use Gnugat\Medio\Service\CodeDetector;
+use Gnugat\Medio\Service\CodeEditor;
+use Gnugat\Medio\Service\CodeNavigator;
+use Gnugat\Medio\Service\MultilineEditor;
 use Gnugat\Medio\Command\InjectDependencyCommand;
-use Gnugat\Medio\Command\SpecDependencyCommand;
 use Gnugat\Redaktilo\EditorFactory;
 
 class Application
 {
     /**
-     * @var array of Command
+     * @var array of Gnugat\Medio\Command\Command;
      */
     private $commands = array();
 
@@ -20,12 +21,13 @@ class Application
     {
         $convertor = new Convertor();
         $editor = EditorFactory::createEditor();
-        $phpEditor = new PhpEditor($editor);
-        $injectDependencyCommand = new InjectDependencyCommand($convertor, $phpEditor);
-        $specDependencyCommand = new SpecDependencyCommand($convertor, $phpEditor);
+        $codeNavigator = new CodeNavigator($editor);
+        $codeDetector = new CodeDetector($codeNavigator, $editor);
+        $multilineEditor = new MultilineEditor($codeDetector, $codeNavigator, $editor);
+        $codeEditor = new CodeEditor($codeDetector, $codeNavigator, $editor, $multilineEditor);
+        $injectDependencyCommand = new InjectDependencyCommand($codeDetector, $codeEditor, $convertor, $editor);
 
         $this->commands['d:i'] = $injectDependencyCommand;
-        $this->commands['d:s'] = $specDependencyCommand;
     }
 
     /**

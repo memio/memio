@@ -25,4 +25,14 @@ class InjectDependencyTest extends EditionTestCase
 
         $this->runFor($input);
     }
+
+    public function testNotEmptyService()
+    {
+        $input = new Input();
+        $input->fixtureName = 'NotEmptyService';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
+
+        $this->runFor($input);
+    }
 }

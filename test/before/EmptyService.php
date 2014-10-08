@@ -4,8 +4,7 @@ namespace fixture\Gnugat\Medio;
 
 class EmptyService
 {
-    public function __construct(
-    )
+    public function __construct()
     {
     }
 }

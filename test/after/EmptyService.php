@@ -8,9 +8,7 @@ class EmptyService
 {
     private $dependency;
 
-    public function __construct(
-        Dependency $dependency
-    )
+    public function __construct(Dependency $dependency)
     {
         $this->dependency = $dependency;
     }
