@@ -158,4 +158,18 @@ class CodeDetectorSpec extends ObjectBehavior
 
         $this->hasMultilineArguments($text, self::METHOD_NAME)->shouldBe(false);
     }
+
+    function it_detects_presence_of_next_property(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, CodeDetector::PROPERTY_PATTERN)->willReturn(true);
+
+        $this->hasOnePropertyBelow($text)->shouldBe(true);
+    }
+
+    function it_detects_absence_of_next_property(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, CodeDetector::PROPERTY_PATTERN)->willReturn(false);
+
+        $this->hasOnePropertyBelow($text)->shouldBe(false);
+    }
 }

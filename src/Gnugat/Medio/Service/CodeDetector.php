@@ -9,6 +9,7 @@ use Gnugat\Redaktilo\Text;
 class CodeDetector
 {
     const USE_PATTERN = '/^use /';
+    const PROPERTY_PATTERN = '/^    private \$/';
 
     /**
      * @var CodeNavigator
@@ -109,5 +110,15 @@ class CodeDetector
         $hasInlineArguments = $this->editor->hasBelow($text, $inlineArgumentsPattern, 0);
 
         return !$hasInlineArguments;
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasOnePropertyBelow(Text $text)
+    {
+        return $this->editor->hasBelow($text, self::PROPERTY_PATTERN);
     }
 }
