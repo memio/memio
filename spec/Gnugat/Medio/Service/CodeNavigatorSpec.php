@@ -107,4 +107,24 @@ class CodeNavigatorSpec extends ObjectBehavior
 
         $this->shouldThrow($patternNotFoundException)->duringGoToClassOpening($text);
     }
+
+    function it_selects_a_method_closing(Editor $editor, Text $text)
+    {
+        $editor->jumpBelow($text, self::METHOD_PATTERN, 0)->shouldBeCalled();
+        $editor->jumpBelow($text, CodeNavigator::METHOD_CLOSING_PATTERN)->shouldBeCalled();
+
+        $this->goToMethodClosing($text, self::METHOD_NAME);
+    }
+
+    function it_cannot_select_closing_of_missing_method(Editor $editor, Text $text)
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            self::METHOD_PATTERN
+        );
+        $editor->jumpBelow($text, self::METHOD_PATTERN, 0)->willThrow($patternNotFoundException);
+
+        $this->shouldThrow($patternNotFoundException)->duringGoToMethodClosing($text, self::METHOD_NAME);
+
+    }
 }

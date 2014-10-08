@@ -12,6 +12,7 @@ class CodeNavigator
     const PROPERTY_PATTERN = '/^    private \$/';
     const NAMESPACE_PATTERN = '/^namespace /';
     const CLASS_OPENING_PATTERN = '/^{$/';
+    const METHOD_CLOSING_PATTERN = '/^    }$/';
 
     /**
      * @var Editor
@@ -71,9 +72,23 @@ class CodeNavigator
 
     /**
      * @param Text $text
+     *
+     * @throws PatternNotFoundException If the class is missing
      */
     public function goToClassOpening(Text $text)
     {
         $this->editor->jumpBelow($text, self::CLASS_OPENING_PATTERN, 0);
+    }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     *
+     * @throws PatternNotFoundException If the method is missing
+     */
+    public function goToMethodClosing(Text $text, $methodName)
+    {
+        $this->goToMethod($text, $methodName);
+        $this->editor->jumpBelow($text, self::METHOD_CLOSING_PATTERN);
     }
 }
