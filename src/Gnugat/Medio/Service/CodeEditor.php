@@ -3,7 +3,6 @@
 namespace Gnugat\Medio\Service;
 
 use Gnugat\Redaktilo\Editor;
-use Gnugat\Redaktilo\File;
 use Gnugat\Redaktilo\Text;
 use Gnugat\Redaktilo\Search\PatternNotFoundException;
 
@@ -48,24 +47,6 @@ class CodeEditor
         $this->codeNavigator = $codeNavigator;
         $this->editor = $editor;
         $this->multilineEditor = $multilineEditor;
-    }
-
-    /**
-     * @param string $filename
-     *
-     * @return File
-     */
-    public function open($filename)
-    {
-        return $this->editor->open($filename);
-    }
-
-    /**
-     * @param File $file
-     */
-    public function save(File $file)
-    {
-        return $this->editor->save($file);
     }
 
     /**

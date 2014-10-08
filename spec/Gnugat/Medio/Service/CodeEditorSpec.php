@@ -7,14 +7,12 @@ use Gnugat\Medio\Service\CodeEditor;
 use Gnugat\Medio\Service\CodeNavigator;
 use Gnugat\Medio\Service\MultilineEditor;
 use Gnugat\Redaktilo\Editor;
-use Gnugat\Redaktilo\File;
 use Gnugat\Redaktilo\Text;
 use Gnugat\Redaktilo\Search\PatternNotFoundException;
 use PhpSpec\ObjectBehavior;
 
 class CodeEditorSpec extends ObjectBehavior
 {
-    const FILENAME = 'fixture/Gnugat/Medio/Service.php';
     const FULLY_QUALIFIED_CLASSNAME = 'fixture\Gnugat\Medio\Dependency';
 
     const USE_STATEMENT = 'use fixture\Gnugat\Medio\Dependency;';
@@ -37,20 +35,6 @@ class CodeEditorSpec extends ObjectBehavior
     )
     {
         $this->beConstructedWith($codeDetector, $codeNavigator, $editor, $multilineEditor);
-    }
-
-    function it_opens_a_file(Editor $editor, File $file)
-    {
-        $editor->open(self::FILENAME)->willReturn($file);
-
-        $this->open(self::FILENAME)->shouldBe($file);
-    }
-
-    function it_saves_a_file(Editor $editor, File $file)
-    {
-        $editor->save($file)->shouldBeCalled();
-
-        $this->save($file);
     }
 
     function it_inserts_use_statement(
