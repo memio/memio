@@ -116,7 +116,6 @@ class CodeDetector
         return $this->editor->hasAbove($text, self::PROPERTY_PATTERN);
     }
 
-
     /**
      * @param Text $text
      *
