@@ -5,11 +5,7 @@
 
 ## Synopsis
 
-    medio dependency:injection fully_qualified_classname filename
-
-    Shortcuts:
-
-        * d:i
+    medio d:i fully_qualified_classname filename
 
     Arguments:
 
@@ -36,9 +32,7 @@ class Service
 
 Medio provides an easy way to inject its first dependency:
 
-    medio dependency:inject 'fixture\Gnugat\Medio\SubDir\Dependency' ./fixture/Gnugat/Medio/Service.php
-
-> Note: the shortcut `d:i` an be used instead of `dependency:inject`.
+    medio d:i 'fixture\Gnugat\Medio\SubDir\Dependency' ./fixture/Gnugat/Medio/Service.php
 
 It will edit the class and leave it as follows:
 
