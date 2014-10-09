@@ -72,14 +72,17 @@ class CodeEditor
     public function addProperty(Text $text, $variableName)
     {
         $property = sprintf('    private $%s;', $variableName);
-        $emptyLine = '';
 
         $this->codeNavigator->goToClassOpening($text);
         while ($this->codeDetector->hasOnePropertyBelow($text)) {
             $this->codeNavigator->goOnePropertyBelow($text);
         }
         $this->editor->insertBelow($text, $property);
-        $this->editor->insertBelow($text, self::EMPTY_LINE);
+        if ($this->codeDetector->hasOnePropertyAbove($text)) {
+            $this->editor->insertAbove($text, self::EMPTY_LINE);
+        } else {
+            $this->editor->insertBelow($text, self::EMPTY_LINE);
+        }
     }
 
     /**

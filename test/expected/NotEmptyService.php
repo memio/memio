@@ -7,9 +7,9 @@ use fixture\Gnugat\Medio\SubDir\OtherDependency;
 
 class EmptyService
 {
-    private $dependency;
-
     private $otherDependency;
+
+    private $dependency;
 
     public function __construct(OtherDependency $otherDependency, Dependency $dependency)
     {

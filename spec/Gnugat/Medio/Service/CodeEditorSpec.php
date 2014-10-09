@@ -78,6 +78,7 @@ class CodeEditorSpec extends ObjectBehavior
         $codeNavigator->goToClassOpening($text)->shouldBeCalled();
         $codeDetector->hasOnePropertyBelow($text)->willReturn(false);
         $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
+        $codeDetector->hasOnePropertyAbove($text)->willReturn(false);
         $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
         $this->addProperty($text, self::VARIABLE_NAME);
@@ -93,7 +94,8 @@ class CodeEditorSpec extends ObjectBehavior
         $codeNavigator->goToClassOpening($text)->shouldBeCalled();
         $codeDetector->hasOnePropertyBelow($text)->willReturn(false);
         $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
-        $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
+        $codeDetector->hasOnePropertyAbove($text)->willReturn(true);
+        $editor->insertAbove($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
         $this->addProperty($text, self::VARIABLE_NAME);
     }
