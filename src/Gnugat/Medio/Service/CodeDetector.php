@@ -111,6 +111,17 @@ class CodeDetector
      *
      * @return bool
      */
+    public function hasOnePropertyAbove(Text $text)
+    {
+        return $this->editor->hasAbove($text, self::PROPERTY_PATTERN);
+    }
+
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
     public function hasOnePropertyBelow(Text $text)
     {
         return $this->editor->hasBelow($text, self::PROPERTY_PATTERN);
