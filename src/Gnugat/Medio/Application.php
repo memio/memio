@@ -2,32 +2,22 @@
 
 namespace Gnugat\Medio;
 
-use Gnugat\Medio\Convertor;
-use Gnugat\Medio\Service\CodeDetector;
-use Gnugat\Medio\Service\CodeEditor;
-use Gnugat\Medio\Service\CodeNavigator;
-use Gnugat\Medio\Service\MultilineEditor;
-use Gnugat\Medio\Command\InjectDependencyCommand;
-use Gnugat\Redaktilo\EditorFactory;
+use Gnugat\Medio\Command\Command;
 
 class Application
 {
     /**
-     * @var array of Gnugat\Medio\Command\Command;
+     * @var array of Command;
      */
     private $commands = array();
 
-    public function __construct()
+    /**
+     * @param string  $name
+     * @param Command $command
+     */
+    public function addCommand($name, Command $command)
     {
-        $convertor = new Convertor();
-        $editor = EditorFactory::createEditor();
-        $codeNavigator = new CodeNavigator($editor);
-        $codeDetector = new CodeDetector($codeNavigator, $editor);
-        $multilineEditor = new MultilineEditor($codeDetector, $codeNavigator, $editor);
-        $codeEditor = new CodeEditor($codeDetector, $codeNavigator, $editor, $multilineEditor);
-        $injectDependencyCommand = new InjectDependencyCommand($codeDetector, $codeEditor, $convertor, $editor);
-
-        $this->commands['d:i'] = $injectDependencyCommand;
+        $this->commands[$name] = $command;
     }
 
     /**

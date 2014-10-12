@@ -3,5 +3,7 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-$application = new Application();
+use Gnugat\Medio\Container;
+
+$application = Container::getApplication();
 $application->run($argc, $argv);

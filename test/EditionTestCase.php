@@ -2,7 +2,7 @@
 
 namespace test\Gnugat\Medio;
 
-use Gnugat\Medio\Application;
+use Gnugat\Medio\Container;
 use test\Gnugat\Medio\Helper\Input;
 
 class EditionTestCase extends \PHPUnit_Framework_TestCase
@@ -18,7 +18,7 @@ class EditionTestCase extends \PHPUnit_Framework_TestCase
             $filename,
         );
 
-        $application = new Application();
+        $application = Container::getApplication();
         $application->run(count($argv), $argv);
 
         $this->assertCorrectlyEdited($input->fixtureName);
