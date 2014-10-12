@@ -7,21 +7,13 @@ A [highly opiniated](./doc/42-vocabulary.md) code helper.
 
 require __DIR__.'/vendor/autoload.php';
 
-use Gnugat\Medio\Convertor;
-use Gnugat\Medio\Service\CodeDetector;
-use Gnugat\Medio\Service\CodeEditor;
-use Gnugat\Medio\Service\CodeNavigator;
-use Gnugat\Medio\Service\MultilineEditor;
-use Gnugat\Medio\Command\InjectDependencyCommand;
-use Gnugat\Redaktilo\EditorFactory;
+use Gnugat\Medio\Container;
 
-$convertor = new Convertor();
-$editor = EditorFactory::createEditor();
-$codeNavigator = new CodeNavigator($editor);
-$codeDetector = new CodeDetector($codeNavigator, $editor);
-$multilineEditor = new MultilineEditor($codeDetector, $codeNavigator, $editor);
-$codeEditor = new CodeEditor($codeDetector, $codeNavigator, $editor, $multilineEditor);
-$injectDependencyCommand = new InjectDependencyCommand($codeDetector, $codeEditor, $convertor, $editor);
+$editor = Container::getEditor();
+$codeNavigator = Container::getCodeNavigator();
+$codeDetector = Container::getCodeDetector();
+$codeEditor = Container::getCodeEditor();
+$injectDependencyCommand = Container::getInjectDependencyCommand();
 
 $filename = __DIR__'/vendor/gnugat/medio/test/before/EmptyService.php';
 $fullyQualifiedClassname = 'fixture\Gnugat\Medio\Dependency';
@@ -35,6 +27,9 @@ $file->getLine(); // use fixture\Gnugat\Medio\Dependency;
 
 $injectDependencyCommand->run($fullyQualifiedClassname, $filename); // see ./doc/21-inject-dependency.md
 ```
+
+> **Note**: The `Container` class is only provided for demonstration purpose,
+> please use an actual Dependency Injection Container in your projects.
 
 Two kinds of classes can be found:
 

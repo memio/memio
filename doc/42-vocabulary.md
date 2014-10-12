@@ -1,5 +1,7 @@
 # Vocabulary
 
+Medio uses a highly opiniated vocabulary. Please find below its definitions:
+
 * [Dependency](#dependency)
 * [Method](#method)
 * [Property](#property)
@@ -7,7 +9,7 @@
 ## Dependency
 
 An object used by the current one. It is passed as a constructor argument and
-stored as a property:
+stored as a [property](#property):
 
 ```php
 <?php
