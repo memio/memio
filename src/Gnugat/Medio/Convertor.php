@@ -9,6 +9,19 @@ class Convertor
      *
      * @return string
      */
+    public function toNamespace($fullyQualifiedClassname)
+    {
+        $parts = explode('\\', $fullyQualifiedClassname);
+        array_pop($parts);
+
+        return implode('\\', $parts);
+    }
+
+    /**
+     * @param string $fullyQualifiedClassname
+     *
+     * @return string
+     */
     public function toClassName($fullyQualifiedClassname)
     {
         $parts = explode('\\', $fullyQualifiedClassname);

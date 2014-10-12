@@ -1,7 +1,7 @@
 {
     "name": "gnugat/medio",
     "license": "MIT",
-    "type": "project",
+    "type": "library",
     "description": "Helps you with your PHP code",
     "keywords": ["PHP", "IDE", "helper"],
     "autoload": {
@@ -20,10 +20,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "gnugat/redaktilo": "~1.0"
+        "gnugat/redaktilo": "~1.1"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": "~4.2"
     }
 }

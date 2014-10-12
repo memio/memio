@@ -3,10 +3,22 @@
 namespace Gnugat\Medio\Command;
 
 use Gnugat\Medio\Convertor;
-use Gnugat\Medio\Editor;
+use Gnugat\Medio\Service\CodeDetector;
+use Gnugat\Medio\Service\CodeEditor;
+use Gnugat\Redaktilo\Editor;
 
 class InjectDependencyCommand implements Command
 {
+    /**
+     * @var CodeDetector
+     */
+    private $codeDetector;
+
+    /**
+     * @var CodeEditor
+     */
+    private $codeEditor;
+
     /**
      * @var Convertor
      */
@@ -18,11 +30,20 @@ class InjectDependencyCommand implements Command
     private $editor;
 
     /**
-     * @param Convertor $convertor
-     * @param Editor    $editor
+     * @param CodeDetector $codeDetector
+     * @param CodeEditor   $codeEditor
+     * @param Convertor    $convertor
+     * @param Editor       $editor
      */
-    public function __construct(Convertor $convertor, Editor $editor)
+    public function __construct(
+        CodeDetector $codeDetector,
+        CodeEditor $codeEditor,
+        Convertor $convertor,
+        Editor $editor
+    )
     {
+        $this->codeDetector = $codeDetector;
+        $this->codeEditor = $codeEditor;
         $this->convertor = $convertor;
         $this->editor = $editor;
     }
@@ -35,13 +56,17 @@ class InjectDependencyCommand implements Command
      */
     public function run($fullyQualifiedClassname, $filename)
     {
+        $namespace = $this->convertor->toNamespace($fullyQualifiedClassname);
         $className = $this->convertor->toClassName($fullyQualifiedClassname);
         $variableName = $this->convertor->toVariableName($className);
 
         $file = $this->editor->open($filename);
-        $this->editor->addUse($file, $fullyQualifiedClassname);
-        $this->editor->addProperty($file, $className, $variableName);
-        $this->editor->addDependency($file, $className, $variableName);
+        if ($this->codeDetector->isUseNeeded($file, $namespace)) {
+            $this->codeEditor->addUse($file, $fullyQualifiedClassname);
+        }
+        $this->codeEditor->addProperty($file, $variableName);
+        $this->codeEditor->addArgument($file, '__construct', $variableName, $className);
+        $this->codeEditor->addPropertyInitialization($file, '__construct', $variableName);
         $this->editor->save($file);
 
         return Command::EXIT_SUCCESS;
