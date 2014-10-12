@@ -1,2 +1,7 @@
+# Third party libraries
 /composer.lock
 /vendor
+
+# Temporary files
+!/test/after/.gitkeep
+/test/after/
