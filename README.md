@@ -50,6 +50,8 @@ Classes which manipulate simple unit of code:
 * CodeDetector, checks:
     * the need of a use statement
     * the presence of a use statement below the current line
+    * the presence of a constant above the current line
+    * the presence of a constant below the current line
     * the presence of a property above the current line
     * the presence of a property below the current line
     * the presence of arguments in a method

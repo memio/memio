@@ -191,4 +191,32 @@ class CodeDetectorSpec extends ObjectBehavior
 
         $this->hasOnePropertyBelow($text)->shouldBe(false);
     }
+
+    function it_detects_presence_of_next_constant(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, CodeDetector::CONSTANT_PATTERN)->willReturn(true);
+
+        $this->hasOneConstantBelow($text)->shouldBe(true);
+    }
+
+    function it_detects_absence_of_next_constant(Editor $editor, Text $text)
+    {
+        $editor->hasBelow($text, CodeDetector::CONSTANT_PATTERN)->willReturn(false);
+
+        $this->hasOneConstantBelow($text)->shouldBe(false);
+    }
+
+    function it_detects_presence_of_previous_constant(Editor $editor, Text $text)
+    {
+        $editor->hasAbove($text, CodeDetector::CONSTANT_PATTERN)->willReturn(true);
+
+        $this->hasOneConstantAbove($text)->shouldBe(true);
+    }
+
+    function it_detects_absence_of_previous_constant(Editor $editor, Text $text)
+    {
+        $editor->hasAbove($text, CodeDetector::CONSTANT_PATTERN)->willReturn(false);
+
+        $this->hasOneConstantAbove($text)->shouldBe(false);
+    }
 }

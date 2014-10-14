@@ -19,6 +19,7 @@ class CodeDetector
 {
     const USE_PATTERN = '/^use /';
     const PROPERTY_PATTERN = '/^    private \$/';
+    const CONSTANT_PATTERN = '/^    const /';
 
     /**
      * @var CodeNavigator
@@ -133,5 +134,25 @@ class CodeDetector
     public function hasOnePropertyBelow(Text $text)
     {
         return $this->editor->hasBelow($text, self::PROPERTY_PATTERN);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasOneConstantAbove(Text $text)
+    {
+        return $this->editor->hasAbove($text, self::CONSTANT_PATTERN);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function hasOneConstantBelow(Text $text)
+    {
+        return $this->editor->hasBelow($text, self::CONSTANT_PATTERN);
     }
 }
