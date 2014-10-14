@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.2.0
+
+* added selection of next constant
+* added detection of next constant
+* added detection of previous constant
+
 ## 0.1.0
 
 * added selection of method

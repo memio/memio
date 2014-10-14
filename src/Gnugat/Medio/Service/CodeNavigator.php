@@ -19,6 +19,7 @@ class CodeNavigator
 {
     const CONSTRUCTOR_PATTERN = '/^    public function __construct\(/';
     const PROPERTY_PATTERN = '/^    private \$/';
+    const CONSTANT_PATTERN = '/^    const /';
     const NAMESPACE_PATTERN = '/^namespace /';
     const CLASS_OPENING_PATTERN = '/^{$/';
     const METHOD_CLOSING_PATTERN = '/^    }$/';
@@ -56,6 +57,16 @@ class CodeNavigator
     public function goOnePropertyBelow(Text $text)
     {
         $this->editor->jumpBelow($text, self::PROPERTY_PATTERN);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @throws PatternNotFoundException If there's no property below
+     */
+    public function goOneConstantBelow(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::CONSTANT_PATTERN);
     }
 
     /**

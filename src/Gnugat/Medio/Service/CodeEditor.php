@@ -83,15 +83,19 @@ class CodeEditor
         $property = sprintf('    private $%s;', $variableName);
 
         $this->codeNavigator->goToClassOpening($text);
+        while ($this->codeDetector->hasOneConstantBelow($text)) {
+            $this->codeNavigator->goOneConstantBelow($text);
+        }
         while ($this->codeDetector->hasOnePropertyBelow($text)) {
             $this->codeNavigator->goOnePropertyBelow($text);
         }
         $this->editor->insertBelow($text, $property);
-        if ($this->codeDetector->hasOnePropertyAbove($text)) {
+        if ($this->codeDetector->hasOnePropertyAbove($text) || $this->codeDetector->hasOneConstantAbove($text)) {
             $this->editor->insertAbove($text, self::EMPTY_LINE);
-        } else {
-            $this->editor->insertBelow($text, self::EMPTY_LINE);
+
+            return;
         }
+        $this->editor->insertBelow($text, self::EMPTY_LINE);
     }
 
     /**

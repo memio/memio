@@ -85,8 +85,10 @@ class CodeEditorSpec extends ObjectBehavior
     )
     {
         $codeNavigator->goToClassOpening($text)->shouldBeCalled();
+        $codeDetector->hasOneConstantBelow($text)->willReturn(false);
         $codeDetector->hasOnePropertyBelow($text)->willReturn(false);
         $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
+        $codeDetector->hasOneConstantAbove($text)->willReturn(false);
         $codeDetector->hasOnePropertyAbove($text)->willReturn(false);
         $editor->insertBelow($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
@@ -101,14 +103,35 @@ class CodeEditorSpec extends ObjectBehavior
     )
     {
         $codeNavigator->goToClassOpening($text)->shouldBeCalled();
-        $codeDetector->hasOnePropertyBelow($text)->willReturn(false);
+        $codeDetector->hasOneConstantBelow($text)->willReturn(false);
+        $codeDetector->hasOnePropertyBelow($text)->willReturn(true, false);
+        $codeNavigator->goOnePropertyBelow($text)->shouldBeCalled();
         $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
+        $codeDetector->hasOneConstantAbove($text)->willReturn(false);
         $codeDetector->hasOnePropertyAbove($text)->willReturn(true);
         $editor->insertAbove($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
 
         $this->addProperty($text, self::VARIABLE_NAME);
     }
 
+    function it_inserts_property_after_constants(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $codeNavigator->goToClassOpening($text)->shouldBeCalled();
+        $codeDetector->hasOneConstantBelow($text)->willReturn(true, false);
+        $codeNavigator->goOneConstantBelow($text)->shouldBeCalled();
+        $codeDetector->hasOnePropertyBelow($text)->willReturn(false);
+        $editor->insertBelow($text, self::PROPERTY)->shouldBeCalled();
+        $codeDetector->hasOneConstantAbove($text)->willReturn(true);
+        $codeDetector->hasOnePropertyAbove($text)->willReturn(false);
+        $editor->insertAbove($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
+
+        $this->addProperty($text, self::VARIABLE_NAME);
+    }
 
     function it_inserts_first_method_argument(
         CodeDetector $codeDetector,
