@@ -25,6 +25,16 @@ class InjectDependencyTest extends EditionTestCase
         $this->runFor($input);
     }
 
+    public function testEmptyServiceWithConstants()
+    {
+        $input = new Input();
+        $input->fixtureName = 'EmptyServiceWithConstants';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
+
+        $this->runFor($input);
+    }
+
     public function testSameNamespace()
     {
         $input = new Input();
@@ -39,6 +49,16 @@ class InjectDependencyTest extends EditionTestCase
     {
         $input = new Input();
         $input->fixtureName = 'NotEmptyService';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
+
+        $this->runFor($input);
+    }
+
+    public function testNotEmptyServiceWithConstants()
+    {
+        $input = new Input();
+        $input->fixtureName = 'NotEmptyServiceWithConstants';
         $input->commandName = 'd:i';
         $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
 
