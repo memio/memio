@@ -64,6 +64,24 @@ class CodeNavigatorSpec extends ObjectBehavior
         $this->shouldThrow($patternNotFoundException)->duringGoOnePropertyBelow($text);
     }
 
+    function it_selects_the_next_constant(Editor $editor, Text $text)
+    {
+        $editor->jumpBelow($text, CodeNavigator::CONSTANT_PATTERN)->shouldBeCalled();
+
+        $this->goOneConstantBelow($text);
+    }
+
+    function it_cannot_select_missing_constant(Editor $editor, Text $text)
+    {
+        $patternNotFoundException = new PatternNotFoundException(
+            $text->getWrappedObject(),
+            CodeNavigator::CONSTANT_PATTERN
+        );
+        $editor->jumpBelow($text, CodeNavigator::CONSTANT_PATTERN)->willThrow($patternNotFoundException);
+
+        $this->shouldThrow($patternNotFoundException)->duringGoOneConstantBelow($text);
+    }
+
     function it_selects_the_namespace(Editor $editor, Text $text)
     {
         $editor->jumpBelow($text, CodeNavigator::NAMESPACE_PATTERN, 0)->shouldBeCalled();

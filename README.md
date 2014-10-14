@@ -43,6 +43,7 @@ Classes which manipulate simple unit of code:
 * CodeNavigator, sets the current line to:
     * the namespace
     * the class opening brace
+    * the constant below the current line
     * the property below the current line
     * a method
     * a method closing brace
