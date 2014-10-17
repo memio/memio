@@ -18,6 +18,8 @@ use Gnugat\Redaktilo\Search\PatternNotFoundException;
 class CodeEditor
 {
     const EMPTY_LINE = '';
+    const METHOD_OPENING = '    {';
+    const METHOD_CLOSING = '    }';
 
     /**
      * @var CodeDetector
@@ -133,5 +135,23 @@ class CodeEditor
         $propertyInitialization = sprintf('        $this->%s = $%s;', $variableName, $variableName);
         $this->codeNavigator->goToMethodClosing($text, $methodName);
         $this->editor->insertAbove($text, $propertyInitialization);
+    }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     */
+    public function addMethod(Text $text, $methodName)
+    {
+        $method = sprintf('    public function %s()', $methodName);
+
+        $this->codeNavigator->goToClassEnding($text);
+        $wasClassEmpty = $this->codeDetector->isClassEmpty($text);
+        $this->editor->insertAbove($text, self::METHOD_CLOSING);
+        $this->editor->insertAbove($text, self::METHOD_OPENING);
+        $this->editor->insertAbove($text, $method);
+        if (!$wasClassEmpty) {
+            $this->editor->insertAbove($text, self::EMPTY_LINE);
+        }
     }
 }

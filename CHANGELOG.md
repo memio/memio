@@ -2,6 +2,7 @@
 
 ## 0.2.0
 
+* added insertion of method
 * added detection of empty class
 * added detection of method presence
 * added selection of class ending

@@ -114,6 +114,39 @@ class CodeEditorSpec extends ObjectBehavior
         $this->addProperty($text, self::VARIABLE_NAME);
     }
 
+    function it_inserts_method_in_empty_class(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $codeNavigator->goToClassEnding($text)->shouldBeCalled();
+        $codeDetector->isClassEmpty($text)->willReturn(true);
+        $editor->insertAbove($text, CodeEditor::METHOD_CLOSING)->shouldBeCalled();
+        $editor->insertAbove($text, CodeEditor::METHOD_OPENING)->shouldBeCalled();
+        $editor->insertAbove($text, self::EMPTY_CONSTRUCTOR)->shouldBeCalled();
+
+        $this->addMethod($text, self::METHOD_NAME);
+    }
+
+    function it_inserts_method_in_non_empty_class(
+        CodeDetector $codeDetector,
+        CodeNavigator $codeNavigator,
+        Editor $editor,
+        Text $text
+    )
+    {
+        $codeNavigator->goToClassEnding($text)->shouldBeCalled();
+        $codeDetector->isClassEmpty($text)->willReturn(false);
+        $editor->insertAbove($text, CodeEditor::METHOD_CLOSING)->shouldBeCalled();
+        $editor->insertAbove($text, CodeEditor::METHOD_OPENING)->shouldBeCalled();
+        $editor->insertAbove($text, self::EMPTY_CONSTRUCTOR)->shouldBeCalled();
+        $editor->insertAbove($text, CodeEditor::EMPTY_LINE)->shouldBeCalled();
+
+        $this->addMethod($text, self::METHOD_NAME);
+    }
+
     function it_inserts_property_after_constants(
         CodeDetector $codeDetector,
         CodeNavigator $codeNavigator,

@@ -68,6 +68,7 @@ Classes which manipulate simple unit of code:
     * a property
     * a method argument
     * a property initiaization
+    * a method
 
 Those classes expects an instance of `Gnugat\Redaktilo\Text`, their changes are
 only made in memory.
