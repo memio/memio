@@ -43,6 +43,7 @@ Classes which manipulate simple unit of code:
 * CodeNavigator, sets the current line to:
     * the namespace
     * the class opening brace
+    * the class closing brace
     * the constant below the current line
     * the property below the current line
     * a method
@@ -51,10 +52,12 @@ Classes which manipulate simple unit of code:
 * CodeDetector, checks:
     * the need of a use statement
     * the presence of a use statement below the current line
+    * if the class is empty
     * the presence of a constant above the current line
     * the presence of a constant below the current line
     * the presence of a property above the current line
     * the presence of a property below the current line
+    * the presence of a method
     * the presence of arguments in a method
     * if the methods argument are inlined
     * the presence of a method argument below the current line
@@ -65,6 +68,7 @@ Classes which manipulate simple unit of code:
     * a property
     * a method argument
     * a property initiaization
+    * a method
 
 Those classes expects an instance of `Gnugat\Redaktilo\Text`, their changes are
 only made in memory.
@@ -76,6 +80,7 @@ Classes which do smart manipulations, using services:
 * InjectDependencyCommand:
     * inserts a use statement if needed
     * inserts a new property
+    * inserts a constructor if it doesn't exist yet
     * inserts a constructor argument
     * inserts the property initialization in the constructor
 

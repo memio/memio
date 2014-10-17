@@ -22,6 +22,7 @@ class CodeNavigator
     const CONSTANT_PATTERN = '/^    const /';
     const NAMESPACE_PATTERN = '/^namespace /';
     const CLASS_OPENING_PATTERN = '/^{$/';
+    const CLASS_ENDING_PATTERN = '/^}$/';
     const METHOD_CLOSING_PATTERN = '/^    }$/';
 
     /**
@@ -98,6 +99,16 @@ class CodeNavigator
     public function goToClassOpening(Text $text)
     {
         $this->editor->jumpBelow($text, self::CLASS_OPENING_PATTERN, 0);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @throws PatternNotFoundException If the class is missing
+     */
+    public function goToClassEnding(Text $text)
+    {
+        $this->editor->jumpBelow($text, self::CLASS_ENDING_PATTERN, 0);
     }
 
     /**

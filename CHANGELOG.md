@@ -2,6 +2,11 @@
 
 ## 0.2.0
 
+* added insertion of missing constructor in dependency injection command
+* added insertion of method
+* added detection of empty class
+* added detection of method presence
+* added selection of class ending
 * added selection of next constant
 * added detection of next constant
 * added detection of previous constant

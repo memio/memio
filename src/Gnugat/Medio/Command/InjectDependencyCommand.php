@@ -73,6 +73,9 @@ class InjectDependencyCommand implements Command
         if ($this->codeDetector->isUseNeeded($file, $namespace)) {
             $this->codeEditor->addUse($file, $fullyQualifiedClassname);
         }
+        if (!$this->codeDetector->hasMethod($file, '__construct')) {
+            $this->codeEditor->addMethod($file, '__construct');
+        }
         $this->codeEditor->addProperty($file, $variableName);
         $this->codeEditor->addArgument($file, '__construct', $variableName, $className);
         $this->codeEditor->addPropertyInitialization($file, '__construct', $variableName);

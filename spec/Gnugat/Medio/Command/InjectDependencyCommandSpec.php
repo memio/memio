@@ -58,6 +58,7 @@ class InjectDependencyCommandSpec extends ObjectBehavior
         $editor->open(self::FILENAME)->willReturn($file);
         $codeDetector->isUseNeeded($file, self::NAME_SPACE)->willReturn(true);
         $codeEditor->addUse($file, self::FULLY_QUALIFIED_CLASSNAME)->shouldBeCalled();
+        $codeDetector->hasMethod($file, '__construct')->willReturn(true);
         $codeEditor->addProperty($file, self::VARIABLE_NAME)->shouldBeCalled();
         $codeEditor->addArgument($file, '__construct', self::VARIABLE_NAME, self::CLASS_NAME)->shouldBeCalled();
         $codeEditor->addPropertyInitialization($file, '__construct', self::VARIABLE_NAME)->shouldBeCalled();
@@ -80,6 +81,32 @@ class InjectDependencyCommandSpec extends ObjectBehavior
 
         $editor->open(self::FILENAME)->willReturn($file);
         $codeDetector->isUseNeeded($file, self::NAME_SPACE)->willReturn(false);
+        $codeDetector->hasMethod($file, '__construct')->willReturn(true);
+        $codeEditor->addProperty($file, self::VARIABLE_NAME)->shouldBeCalled();
+        $codeEditor->addArgument($file, '__construct', self::VARIABLE_NAME, self::CLASS_NAME)->shouldBeCalled();
+        $codeEditor->addPropertyInitialization($file, '__construct', self::VARIABLE_NAME)->shouldBeCalled();
+        $editor->save($file)->shouldBeCalled();
+
+        $this->run(self::FULLY_QUALIFIED_CLASSNAME, self::FILENAME)->shouldBe(Command::EXIT_SUCCESS);
+    }
+
+    function it_inserts_missing_constructor(
+        CodeDetector $codeDetector,
+        Convertor $convertor,
+        CodeEditor $codeEditor,
+        Editor $editor,
+        File $file
+    )
+    {
+        $convertor->toNamespace(self::FULLY_QUALIFIED_CLASSNAME)->willReturn(self::NAME_SPACE);
+        $convertor->toClassName(self::FULLY_QUALIFIED_CLASSNAME)->willReturn(self::CLASS_NAME);
+        $convertor->toVariableName(self::CLASS_NAME)->willReturn(self::VARIABLE_NAME);
+
+        $editor->open(self::FILENAME)->willReturn($file);
+        $codeDetector->isUseNeeded($file, self::NAME_SPACE)->willReturn(true);
+        $codeEditor->addUse($file, self::FULLY_QUALIFIED_CLASSNAME)->shouldBeCalled();
+        $codeDetector->hasMethod($file, '__construct')->willReturn(false);
+        $codeEditor->addMethod($file, '__construct')->shouldBeCalled();
         $codeEditor->addProperty($file, self::VARIABLE_NAME)->shouldBeCalled();
         $codeEditor->addArgument($file, '__construct', self::VARIABLE_NAME, self::CLASS_NAME)->shouldBeCalled();
         $codeEditor->addPropertyInitialization($file, '__construct', self::VARIABLE_NAME)->shouldBeCalled();

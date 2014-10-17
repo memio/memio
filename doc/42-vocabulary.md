@@ -6,6 +6,9 @@ Medio uses a highly opiniated vocabulary. Please find below its definitions:
     * [Inline arguments](#inline-arguments)
     * [Multiline arguments](#multiline-arguments)
 * [Class](#class)
+    * [Class opening](#class-opening)
+    * [Class ending](#class-ending)
+    * [Empty class](#empty-class)
 * [Constant](#constant)
 * [Dependency](#dependency)
 * [Method](#method)
@@ -74,9 +77,22 @@ An object following these rules:
 <?php
 
 class Object
-{ // <- This is the class opening
+{
 }
 ```
+
+### Class opening
+
+The opening braces of a class. It should be on its own line, not indented.
+
+### Class ending
+
+The closing braces of a class. It should be on its own line, not indented.
+
+### Empty class
+
+A class without any [constants](#constant), [properties](#property) and
+[methods](#method).
 
 ## Constant
 
