@@ -64,4 +64,14 @@ class InjectDependencyTest extends EditionTestCase
 
         $this->runFor($input);
     }
+
+    public function testNoConstructor()
+    {
+        $input = new Input();
+        $input->fixtureName = 'NoConstructor';
+        $input->commandName = 'd:i';
+        $input->fullyQualifiedClassname = 'fixture\Gnugat\Medio\SubDir\Dependency';
+
+        $this->runFor($input);
+    }
 }

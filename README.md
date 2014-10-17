@@ -80,6 +80,7 @@ Classes which do smart manipulations, using services:
 * InjectDependencyCommand:
     * inserts a use statement if needed
     * inserts a new property
+    * inserts a constructor if it doesn't exist yet
     * inserts a constructor argument
     * inserts the property initialization in the constructor
 
