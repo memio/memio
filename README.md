@@ -56,6 +56,7 @@ Classes which manipulate simple unit of code:
     * the presence of a constant below the current line
     * the presence of a property above the current line
     * the presence of a property below the current line
+    * the presence of a method
     * the presence of arguments in a method
     * if the methods argument are inlined
     * the presence of a method argument below the current line

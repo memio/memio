@@ -60,6 +60,19 @@ class CodeDetector
      *
      * @return bool
      */
+    public function hasMethod(Text $text, $methodName)
+    {
+        $methodPattern = sprintf('    public function %s\(', $methodName);
+
+        return $this->editor->hasBelow($text, $methodPattern, 0);
+    }
+
+    /**
+     * @param Text   $text
+     * @param string $methodName
+     *
+     * @return bool
+     */
     public function hasAnyArguments(Text $text, $methodName)
     {
         try {
