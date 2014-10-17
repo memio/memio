@@ -62,7 +62,7 @@ class CodeDetector
      */
     public function hasMethod(Text $text, $methodName)
     {
-        $methodPattern = sprintf('    public function %s\(', $methodName);
+        $methodPattern = sprintf('/^    public function %s\(/', $methodName);
 
         return $this->editor->hasBelow($text, $methodPattern, 0);
     }
@@ -167,5 +167,19 @@ class CodeDetector
     public function hasOneConstantBelow(Text $text)
     {
         return $this->editor->hasBelow($text, self::CONSTANT_PATTERN);
+    }
+
+    /**
+     * @param Text $text
+     *
+     * @return bool
+     */
+    public function isClassEmpty(Text $text)
+    {
+        $this->codeNavigator->goToClassOpening($text);
+        $this->codeNavigator->goOneLineBelow($text);
+        $line = $text->getLine();
+
+        return '}' === $line;
     }
 }

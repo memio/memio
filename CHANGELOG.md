@@ -2,6 +2,7 @@
 
 ## 0.2.0
 
+* added detection of empty class
 * added detection of method presence
 * added selection of class ending
 * added selection of next constant

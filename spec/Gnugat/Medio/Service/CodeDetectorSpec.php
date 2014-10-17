@@ -53,6 +53,24 @@ class CodeDetectorSpec extends ObjectBehavior
         $this->isUseNeeded($text, self::NAME_SPACE)->shouldBe(true);
     }
 
+    function it_detects_if_class_is_empty(CodeNavigator $codeNavigator, Editor $editor, Text $text)
+    {
+        $codeNavigator->goToClassOpening($text)->shouldBeCalled();
+        $codeNavigator->goOneLineBelow($text)->shouldBeCalled();
+        $text->getLine()->willReturn('}');
+
+        $this->isClassEmpty($text)->shouldBe(true);
+    }
+
+    function it_detects_if_class_is_not_empty(CodeNavigator $codeNavigator, Editor $editor, Text $text)
+    {
+        $codeNavigator->goToClassOpening($text)->shouldBeCalled();
+        $codeNavigator->goOneLineBelow($text)->shouldBeCalled();
+        $text->getLine()->willReturn('    private $property;');
+
+        $this->isClassEmpty($text)->shouldBe(false);
+    }
+
     function it_detects_presence_of_method(Editor $editor, Text $text)
     {
         $editor->hasBelow($text, self::METHOD_PATTERN, 0)->willReturn(true);
@@ -62,7 +80,7 @@ class CodeDetectorSpec extends ObjectBehavior
 
     function it_detects_absence_of_method(Editor $editor, Text $text)
     {
-        $editor->hasBelow($text, self::METHOD_NAME, 0)->willReturn(false);
+        $editor->hasBelow($text, self::METHOD_PATTERN, 0)->willReturn(false);
 
         $this->hasMethod($text, self::METHOD_NAME)->shouldBe(false);
     }
