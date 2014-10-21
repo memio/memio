@@ -2,6 +2,7 @@
 
 ## 0.3.0
 
+* added selection of method declaration
 * added insertion of spec method
 * added detection of spec method
 
