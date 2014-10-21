@@ -17,14 +17,15 @@ Medio uses a highly opiniated vocabulary. Please find below its definitions:
 
 ## Argument
 
-A variable passed to a [method](#method):
+A variable passed to a [method](#method). It is type hinted when it is an object
+or an array, and can have a default value:
 
 ```php
 <?php
 
 class Object
 {
-    public function method($argument)
+    public function method(Dependency $depdendency, $argument, $option = null)
     {
     }
 }

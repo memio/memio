@@ -2,6 +2,7 @@
 
 ## 0.3.0
 
+* added insertion of spec method
 * added detection of spec method
 
 ## 0.2.0

@@ -69,8 +69,10 @@ Classes which manipulate simple unit of code:
     * a method argument
     * a property initiaization
     * a method
-* SpecDetector checks:
+* SpecDetector, checks:
     * the presence of a method
+* SpecEditor, inserts:
+    * a method
 
 Those classes expects an instance of `Gnugat\Redaktilo\Text`, their changes are
 only made in memory.
