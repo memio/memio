@@ -7,16 +7,29 @@ A [highly opiniated](#high-opinions) library, helping you to manipulate code.
 ```php
 <?php
 
-namespace Gnugat\Medio;
+namespace Gnugat\Medio\Php;
 
 use Gnugat\Redaktilo\Search\PatternNotFoundException;
 
-class Selector
+class PhpSelector
 {
     // @throw PatternNotFoundException
     public function methodDeclaration(Text $text, $name, $visibility = 'public');
 }
+```
 
+```php
+<?php
+
+namespace Gnugat\Medio\Php;
+
+use Gnugat\Redaktilo\Search\PatternNotFoundException;
+
+class PhpDetector
+{
+    // @return bool
+    public function methodDeclaration(Text $text, $name, $visibility = 'public');
+}
 ```
 
 ## High opinions

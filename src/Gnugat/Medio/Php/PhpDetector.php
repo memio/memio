@@ -6,11 +6,11 @@ use Gnugat\Redaktilo\Editor;
 use Gnugat\Redaktilo\Text;
 
 /**
- * Sets the Text's current line number to:
+ * Detects the presence of:
  *
  * + a method declaration
  */
-class PhpSelector
+class PhpDetector
 {
     /**
      * @var Editor
@@ -30,7 +30,7 @@ class PhpSelector
      * @param string $name
      * @param string $visibility
      *
-     * @throws \Gnugat\Redaktilo\Search\PatternNotFoundException If the method is not found
+     * @return bool
      */
     public function methodDeclaration(Text $text, $name, $visibility = 'public')
     {
@@ -38,6 +38,7 @@ class PhpSelector
             $visibility .= ' ';
         }
         $pattern = sprintf('/^    %sfunction %s\(/', $visibility, $name);
-        $this->editor->jumpBelow($text, $pattern, 0);
+
+        return $this->editor->hasBelow($text, $pattern, 0);
     }
 }

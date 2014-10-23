@@ -2,7 +2,8 @@
 
 ## 0.3.0
 
-* added selection of method declaration
+* added detection of PHP method declaration
+* added selection of PHP method declaration
 * added insertion of spec method
 * added detection of spec method
 
