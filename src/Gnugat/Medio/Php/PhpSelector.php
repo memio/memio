@@ -1,11 +1,11 @@
 <?php
 
-namespace Gnugat\Medio;
+namespace Gnugat\Medio\Php;
 
 use Gnugat\Redaktilo\Editor;
 use Gnugat\Redaktilo\Text;
 
-class Selector
+class PhpSelector
 {
     /**
      * @var Editor

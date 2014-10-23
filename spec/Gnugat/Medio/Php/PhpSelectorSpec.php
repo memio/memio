@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Gnugat\Medio;
+namespace spec\Gnugat\Medio\Php;
 
 use Gnugat\Redaktilo\Editor;
 use Gnugat\Redaktilo\Search\PatternNotFoundException;
