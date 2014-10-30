@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.3.0
+
+* added detection of PHP method declaration
+* added selection of PHP method declaration
+* added insertion of spec method
+* added detection of spec method
+
 ## 0.2.0
 
 * added insertion of missing constructor in dependency injection command
