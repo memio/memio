@@ -10,7 +10,7 @@
 
     <testsuites>
         <testsuite name="Medio Test Suite">
-            <directory>./test</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

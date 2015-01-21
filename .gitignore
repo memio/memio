@@ -1,7 +1,4 @@
-# Third party libraries
+# Third party
 /composer.lock
+/phpunit.xml
 /vendor
-
-# Temporary files
-!/test/after/.gitkeep
-/test/after/

@@ -4,12 +4,6 @@
     "type": "library",
     "description": "Helps you with your PHP code",
     "keywords": ["PHP", "IDE", "helper"],
-    "autoload": {
-        "psr-4": {
-            "Gnugat\\Medio\\": "src/Gnugat/Medio",
-            "test\\Gnugat\\Medio\\": "test"
-        }
-    },
     "authors": [
         {
             "name": "Loïc Chardonnet",
@@ -18,12 +12,19 @@
             "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-4": { "Gnugat\\Medio\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Gnugat\\Medio\\Tests\\": "tests" }
+    },
     "require": {
         "php": ">=5.3.3",
-        "gnugat/redaktilo": "~1.1"
+        "nikic/php-parser": "~1.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "phpunit/phpunit": "~4.2"
+        "phpunit/phpunit": "~4.4",
+        "phpspec/phpspec": "~2.1",
+        "ciaranmcnulty/phpspec-typehintedmethods": "~1.1"
     }
 }
