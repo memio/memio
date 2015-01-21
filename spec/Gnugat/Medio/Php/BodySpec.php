@@ -3,7 +3,6 @@
 namespace spec\Gnugat\Medio\Php;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class BodySpec extends ObjectBehavior
 {
