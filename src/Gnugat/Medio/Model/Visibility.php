@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnugat\Medio\Php;
+namespace Gnugat\Medio\Model;
 
 class Visibility
 {

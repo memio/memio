@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Gnugat\Medio\Php;
+namespace spec\Gnugat\Medio\Model;
 
 use PhpSpec\ObjectBehavior;
 

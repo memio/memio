@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Gnugat\Medio\Php;
+namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Php\Argument;
-use Gnugat\Medio\Php\Body;
-use Gnugat\Medio\Php\Visibility;
+use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Body;
+use Gnugat\Medio\Model\Visibility;
 use PhpSpec\ObjectBehavior;
 
 class MethodSpec extends ObjectBehavior
