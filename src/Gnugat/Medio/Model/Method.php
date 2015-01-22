@@ -20,17 +20,17 @@ class Method
     private $name;
 
     /**
-     * @var string
+     * @var Visibility
      */
     private $visibility;
 
     /**
-     * @param array  $arguments
-     * @param Body   $body
-     * @param string $name
-     * @param string $visibility
+     * @param array      $arguments
+     * @param Body       $body
+     * @param string     $name
+     * @param Visibility $visibility
      */
-    public function __construct(array $arguments, Body $body, $name, $visibility = Visibility::PUBLIC_)
+    public function __construct(array $arguments, Body $body, $name, Visibility $visibility)
     {
         $this->arguments = $arguments;
         $this->body = $body;
@@ -63,12 +63,12 @@ class Method
     }
 
     /**
-     * @param string $visibility
+     * @param Visibility $visibility
      *
      * @return bool
      */
-    public function hasVisibility($visibility)
+    public function getVisibility()
     {
-        return ($this->visibility === $visibility);
+        return $this->visibility;
     }
 }

@@ -13,13 +13,15 @@ class MethodSpec extends ObjectBehavior
 
     private $arguments;
     private $body;
+    private $visibility;
 
     function let()
     {
         $this->arguments = array(new Argument('array', 'lines'));
         $this->body = new Body(array());
+        $this->visibility = new Visibility('public');
 
-        $this->beConstructedWith($this->arguments, $this->body, self::NAME);
+        $this->beConstructedWith($this->arguments, $this->body, self::NAME, $this->visibility);
     }
 
     function it_has_arguments()
@@ -39,6 +41,6 @@ class MethodSpec extends ObjectBehavior
 
     function it_has_a_visibility()
     {
-        $this->hasVisibility(Visibility::PUBLIC_)->shouldBe(true);
+        $this->getVisibility()->shouldBe($this->visibility);
     }
 }
