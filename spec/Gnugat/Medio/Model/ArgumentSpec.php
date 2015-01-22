@@ -21,6 +21,12 @@ class ArgumentSpec extends ObjectBehavior
         $this->getName()->shouldBe('lines');
     }
 
+    function it_can_be_renamed()
+    {
+        $this->rename('lineCollection');
+        $this->getName()->shouldBe('lineCollection');
+    }
+
     function it_can_be_an_object()
     {
         $this->isObject()->shouldBe(false);

@@ -7,14 +7,9 @@ use PhpSpec\ObjectBehavior;
 
 class ArgumentCollectionSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array());
-    }
-
     function it_has_arguments()
     {
-        $this->getArguments()->shouldHaveCount(0);
+        $this->all()->shouldHaveCount(0);
     }
 
     function it_can_get_more_arguments()
@@ -22,6 +17,18 @@ class ArgumentCollectionSpec extends ObjectBehavior
         $this->add(new Argument('array', 'lines'));
         $this->add(new Argument('string', 'content'));
 
-        $this->getArguments()->shouldHaveCount(2);
+        $this->all()->shouldHaveCount(2);
+    }
+
+    function it_renames_arguments_to_avoid_collision()
+    {
+        $this->add(new Argument('string', 'line'));
+        $this->add(new Argument('string', 'line'));
+
+        $arguments = $this->all();
+        $argument1 = $arguments[0];
+        $argument1->getName()->shouldBe('line1');
+        $argument2 = $arguments[1];
+        $argument2->getName()->shouldBe('line2');
     }
 }

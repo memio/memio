@@ -48,6 +48,14 @@ class Argument
     }
 
     /**
+     * @param string $newName
+     */
+    public function rename($newName)
+    {
+        $this->name = $newName;
+    }
+
+    /**
      * @return bool
      */
     public function isObject()
