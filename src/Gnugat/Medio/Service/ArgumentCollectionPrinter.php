@@ -20,24 +20,18 @@ class ArgumentCollectionPrinter
     }
 
     /**
-     * {@inheritDoc}
+     * @param ArgumentCollection $argumentCollection
+     *
+     * @return string
      */
-    public function format($model)
+    public function format(ArgumentCollection $argumentCollection)
     {
         $printedArguments = array();
-        $arguments = $model->all();
+        $arguments = $argumentCollection->all();
         foreach ($arguments as $argument) {
             $printedArguments[] = $this->argumentPrinter->format($argument);
         }
 
         return implode(', ', $printedArguments);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function supports($model)
-    {
-        return $model instanceof ArgumentCollection;
     }
 }

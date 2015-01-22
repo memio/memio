@@ -14,16 +14,6 @@ class ArgumentCollectionPrinterSpec extends ObjectBehavior
         $this->beConstructedWith(new ArgumentPrinter());
     }
 
-    function it_supports_argument_collection()
-    {
-        $this->supports(new ArgumentCollection())->shouldBe(true);
-    }
-
-    function it_does_not_support_anything_else()
-    {
-        $this->supports(new \StdClass())->shouldBe(false);
-    }
-
     function it_formats_no_arguments()
     {
         $this->format(new ArgumentCollection())->shouldBe('');

@@ -7,31 +7,25 @@ use Gnugat\Medio\Model\Argument;
 class ArgumentPrinter
 {
     /**
-     * {@inheritDoc}
+     * @param Argument $argument
+     *
+     * @return string
      */
-    public function format($model)
+    public function format(Argument $argument)
     {
-        $type = $model->getType();
+        $type = $argument->getType();
         if ('array' === $type) {
-            return 'array $'.$model->getName();
+            return 'array $'.$argument->getName();
         }
         if ('callable' === $type && version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            return 'callable $'.$model->getName();
+            return 'callable $'.$argument->getName();
         }
-        if (!$model->isObject()) {
-            return '$'.$model->getName();
+        if (!$argument->isObject()) {
+            return '$'.$argument->getName();
         }
         $nameSpaces = explode('\\', $type);
         $className = end($nameSpaces);
 
-        return $className.' $'.$model->getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function supports($model)
-    {
-        return $model instanceof Argument;
+        return $className.' $'.$argument->getName();
     }
 }
