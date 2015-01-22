@@ -8,7 +8,7 @@ class ArgumentSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('array', 'lines');
+        $this->beConstructedWith('array', 'lines', false);
     }
 
     function it_has_a_type()
@@ -19,5 +19,10 @@ class ArgumentSpec extends ObjectBehavior
     function it_has_a_name()
     {
         $this->getName()->shouldBe('lines');
+    }
+
+    function it_can_be_an_object()
+    {
+        $this->isObject()->shouldBe(false);
     }
 }
