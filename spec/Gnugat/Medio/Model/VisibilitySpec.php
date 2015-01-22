@@ -3,7 +3,6 @@
 namespace spec\Gnugat\Medio\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class VisibilitySpec extends ObjectBehavior
 {

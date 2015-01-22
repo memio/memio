@@ -2,7 +2,7 @@
 
 namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Body;
 use Gnugat\Medio\Model\Visibility;
 use PhpSpec\ObjectBehavior;
@@ -11,22 +11,22 @@ class MethodSpec extends ObjectBehavior
 {
     const NAME = '__construct';
 
-    private $arguments;
+    private $argumentCollection;
     private $body;
     private $visibility;
 
     function let()
     {
-        $this->arguments = array(new Argument('array', 'lines'));
+        $this->argumentCollection = new ArgumentCollection(array());
         $this->body = new Body(array());
         $this->visibility = new Visibility('public');
 
-        $this->beConstructedWith($this->arguments, $this->body, self::NAME, $this->visibility);
+        $this->beConstructedWith($this->argumentCollection, $this->body, self::NAME, $this->visibility);
     }
 
-    function it_has_arguments()
+    function it_has_argument_collection()
     {
-        $this->getArguments()->shouldBe($this->arguments);
+        $this->getArgumentCollection()->shouldBe($this->argumentCollection);
     }
 
     function it_has_a_body()

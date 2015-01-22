@@ -5,9 +5,9 @@ namespace Gnugat\Medio\Model;
 class Method
 {
     /**
-     * @var array
+     * @var ArgumentCollection
      */
-    private $arguments;
+    private $argumentCollection;
 
     /**
      * @var Body
@@ -25,25 +25,25 @@ class Method
     private $visibility;
 
     /**
-     * @param array      $arguments
-     * @param Body       $body
-     * @param string     $name
-     * @param Visibility $visibility
+     * @param ArgumentCollection $argumentCollection
+     * @param Body               $body
+     * @param string             $name
+     * @param Visibility         $visibility
      */
-    public function __construct(array $arguments, Body $body, $name, Visibility $visibility)
+    public function __construct(ArgumentCollection $argumentCollection, Body $body, $name, Visibility $visibility)
     {
-        $this->arguments = $arguments;
+        $this->argumentCollection = $argumentCollection;
         $this->body = $body;
         $this->name = $name;
         $this->visibility = $visibility;
     }
 
     /**
-     * @return array
+     * @return ArgumentCollection
      */
-    public function getArguments()
+    public function getArgumentCollection()
     {
-        return $this->arguments;
+        return $this->argumentCollection;
     }
 
     /**
