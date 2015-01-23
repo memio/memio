@@ -14,6 +14,36 @@ Use [Composer](https://getcomposer.org/download):
 
     composer require gnugat/medio:~0.3
 
+## Usage
+
+Let's say that we have an array of variables which represent a method's arguments:
+
+```php
+$arguments = array('string', new \ArrayObject(), function () {});
+```
+
+Here's a snippet which uses Medio:
+
+```php
+$argumentCollection = $variableArgumentCollectionFactory->make($variables);
+echo $argumentCollectionPrinter->format($argumentCollection);
+```
+
+It should print the following generated code:
+
+```
+$argument1, ArrayObject $arrayObject, callable $argument2
+```
+
+As you can see the arguments have been type hinted and the object has been named
+after its type. The non object arguments have been named using a generic name
+(`argument`), but name collision has been detected and they've been suffixed by
+a number.
+
+For more examples, see:
+
+* [Creating a phpspec extension](./doc/example-phpspec-extension.md)
+
 ## Details
 
 Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
@@ -35,113 +65,3 @@ Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Me
 
 > **Note**: those "pretty printer" aren't "fidelity printers", they'll format the
 > code based on highly opinions (they can be considered as "nice printers").
-
-## Example
-
-[phpspec](http://phpspec.net) is a tool that automates spec BDD and provides code
-generation based on the specifications.
-
-In this example we'll create an extension which generates a better argument generation:
-
-```php
-<?php
-
-namespace Acme\PhpSpecMedio\Generator;
-
-use Gnugat\Medio\PrettyPrinter\ArgumentCollectionPrinter;
-use Gnugat\Medio\Factory\VariableArgumentCollectionFactory;
-
-use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
-use PhpSpec\CodeGenerator\TemplateRenderer;
-use PhpSpec\Locator\ResourceInterface;
-use PhpSpec\Util\Filesystem;
-
-class TypeHintedMethodGenerator implements GeneratorInterface
-{
-    private $templates;
-    private $filesystem;
-
-    public function __construct(
-      TemplateRenderer $templates,
-      Filesystem $filesystem,
-      ArgumentCollectionPrinter $argumentCollectionPrinter ,
-      VariableArgumentCollectionFactory $variableArgumentCollectionFactory,
-    )
-    {
-        $this->templates = $templates;
-        $this->filesystem = $filesystem;
-
-        $this->variableArgumentCollectionFactory = $variableArgumentCollectionFactory;
-        $this->argumentCollectionPrinter = $argumentCollectionPrinter;
-    }
-
-    public function generate(ResourceInterface $resource, array $data = array())
-    {
-        // We create a modelization of arguments, from the given variables
-        $argumentCollection = $this->variableArgumentCollectionFactory->make($data['arguments']);
-        // From this modelization, we generate the formated list of arguments
-        $printedArguments = $this->argumentCollectionPrinter->format($argumentCollection);
-
-        // The rest is phpspec gibberish to generate the code...
-        $content = $this->templates->render('method', array(
-            '%name%' => $data['name'],
-            '%arguments%' => $printedArguments,
-        ));
-        $filename = $resource->getSrcFilename();
-        $code = $this->filesystem->getFileContents($filename);
-        $code = preg_replace('/}[ \n]*$/', rtrim($content) ."\n}\n", trim($code));
-        $this->filesystem->putFileContents($filename, $code);
-    }
-
-    public function supports(ResourceInterface $resource, $generation, array $data)
-    {
-        return 'method' === $generation;
-    }
-
-    public function getPriority()
-    {
-        return 0;
-    }
-}
-```
-
-If we then write the following spec:
-
-```php
-<?php
-
-namespace spec\Acme\PhpSpecMedio\MyClass;
-
-use PhpSpec\ObjectBehavior;
-
-class MyClassSpec extends ObjectBehavior
-{
-    function it_does_something()
-    {
-        $aString = 'Nobody expects the Spanish Inquisition!';
-        $anObject = new \ArrayObject();
-        $aBoolean
-
-        $this->someCall($aString, $anObject, $aBoolean);
-    }
-}
-```
-
-Then phpspec will generate the following code:
-
-```php
-<?php
-
-namespace Acme\PhpSpecMedio\MyClass;
-
-class MyClass
-{
-    public function someCall($argument1, ArrayObject $arrayObject, $argument2)
-    {
-    }
-}
-```
-
-As you can see, the object argument has been type hinted and named after its type.
-The scalar arguments have been named genericly (`argument`), but name collision
-has been detected so they've suffixed by a number.
