@@ -4,7 +4,7 @@ namespace Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\ArgumentCollection;
 
-class ArgumentCollectionPrinter
+class InlineArgumentCollectionPrinter
 {
     /**
      * @var ArgumentPrinter

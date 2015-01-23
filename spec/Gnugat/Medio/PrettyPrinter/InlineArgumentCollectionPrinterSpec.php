@@ -7,7 +7,7 @@ use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 use PhpSpec\ObjectBehavior;
 
-class ArgumentCollectionPrinterSpec extends ObjectBehavior
+class InlineArgumentCollectionPrinterSpec extends ObjectBehavior
 {
     function let()
     {

@@ -11,7 +11,7 @@ In this example we'll create an extension which generates better arguments
 
 namespace Acme\PhpSpecMedio\Generator;
 
-use Gnugat\Medio\PrettyPrinter\ArgumentCollectionPrinter;
+use Gnugat\Medio\PrettyPrinter\InlineArgumentCollectionPrinter;
 use Gnugat\Medio\Factory\VariableArgumentCollectionFactory;
 
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
@@ -27,7 +27,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     public function __construct(
       TemplateRenderer $templates,
       Filesystem $filesystem,
-      ArgumentCollectionPrinter $argumentCollectionPrinter ,
+      InlineArgumentCollectionPrinter $inlineArgumentCollectionPrinter ,
       VariableArgumentCollectionFactory $variableArgumentCollectionFactory,
     )
     {
@@ -35,7 +35,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         $this->filesystem = $filesystem;
 
         $this->variableArgumentCollectionFactory = $variableArgumentCollectionFactory;
-        $this->argumentCollectionPrinter = $argumentCollectionPrinter;
+        $this->inlineArgumentCollectionPrinter = $inlineArgumentCollectionPrinter;
     }
 
     public function generate(ResourceInterface $resource, array $data = array())
@@ -44,7 +44,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         $argumentCollection = $this->variableArgumentCollectionFactory->make($data['arguments']);
 
         // From this modelization, we generate the formated list of arguments
-        $printedArguments = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $printedArguments = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         // The rest is phpspec gibberish to generate the code...
         $content = $this->templates->render('method', array(

@@ -26,7 +26,7 @@ Here's a snippet which uses Medio:
 
 ```php
 $argumentCollection = $variableArgumentCollectionFactory->make($variables);
-echo $argumentCollectionPrinter->dump($argumentCollection);
+echo $inlineArgumentCollectionPrinter->dump($argumentCollection);
 ```
 
 It should print the following generated code:
@@ -61,7 +61,7 @@ Creating those models manually can be tedious, so factories are provided (in `Gn
 Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Medio\PrettyPrinter`):
 
 * `ArgumentPrinter` takes care of type hinting
-* `ArgumentCollectionPrinter` makes an inline list of arguments
+* `InlineArgumentCollectionPrinter` makes an inline list of arguments
 
 > **Note**: those "pretty printer" aren't "fidelity printers", they'll format the
 > code based on highly opinions (they can be considered as "nice printers").
