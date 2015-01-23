@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Gnugat\Medio\Service;
+namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;

@@ -22,11 +22,11 @@ Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
 * an `ArgumentCollection` can have 0 to many `Argument`, it also takes care of avoiding name collision
 * an `Argument` has a type, a name and a way to tell if it's an object or not
 
-Creating those models manually can be tedious, so factories are provided (in `Gnugat\Medio\Service`):
+Creating those models manually can be tedious, so factories are provided (in `Gnugat\Medio\Factory`):
 
 * `ArgumentFactory` can create an `Argument` from a given type or a given variable
 
-Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Medio\Service`):
+Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Medio\PrettyPrinter`):
 
 * `ArgumentPrinter` takes care of type hinting
 * `ArgumentCollectionPrinter` makes an inline list of arguments
@@ -46,8 +46,8 @@ In this example we'll create an extension which generates a better argument gene
 
 namespace Acme\PhpSpecMedio\Generator;
 
-use Gnugat\Medio\Service\ArgumentCollectionPrinter;
-use Gnugat\Medio\Service\ArgumentFactory;
+use Gnugat\Medio\PrettyPrinter\ArgumentCollectionPrinter;
+use Gnugat\Medio\Factory\ArgumentFactory;
 
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
 use PhpSpec\CodeGenerator\TemplateRenderer;

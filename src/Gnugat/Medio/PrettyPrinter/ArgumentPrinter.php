@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnugat\Medio\Service;
+namespace Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
 

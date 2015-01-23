@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Gnugat\Medio\Service;
+namespace spec\Gnugat\Medio\Factory;
 
 use PhpSpec\ObjectBehavior;
 
@@ -8,7 +8,7 @@ class ArgumentFactorySpec extends ObjectBehavior
 {
     function it_names_objects_after_their_type()
     {
-        $argument = $this->makeFromType('Gnugat\Medio\Service\ArgumentFactory');
+        $argument = $this->makeFromType('Gnugat\Medio\Factory\ArgumentFactory');
 
         $argument->getName()->shouldBe('argumentFactory');
         $argument->isObject()->shouldBe(true);

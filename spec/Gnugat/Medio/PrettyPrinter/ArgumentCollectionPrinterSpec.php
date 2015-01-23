@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Gnugat\Medio\Service;
+namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
-use Gnugat\Medio\Service\ArgumentPrinter;
+use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentCollectionPrinterSpec extends ObjectBehavior
