@@ -24,7 +24,8 @@ Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
 
 Creating those models manually can be tedious, so factories are provided (in `Gnugat\Medio\Factory`):
 
-* `ArgumentFactory` can create an `Argument` from a given type or a given variable
+* `TypeArgumentFactory` can create an `Argument` from a given type
+* `VariableArgumentFactory` can create an `Argument` from a given variable (guesses the type)
 
 Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Medio\PrettyPrinter`):
 
@@ -47,7 +48,7 @@ In this example we'll create an extension which generates a better argument gene
 namespace Acme\PhpSpecMedio\Generator;
 
 use Gnugat\Medio\PrettyPrinter\ArgumentCollectionPrinter;
-use Gnugat\Medio\Factory\ArgumentFactory;
+use Gnugat\Medio\Factory\VariableArgumentFactory;
 
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
 use PhpSpec\CodeGenerator\TemplateRenderer;
@@ -62,14 +63,14 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     public function __construct(
       TemplateRenderer $templates,
       Filesystem $filesystem,
-      ArgumentCollectionPrinter $argumentFactory,
-      ArgumentFactory $argumentCollectionPrinter,
+      ArgumentCollectionPrinter $argumentCollectionPrinter ,
+      VariableArgumentFactory $variableArgumentFactory,
     )
     {
         $this->templates = $templates;
         $this->filesystem = $filesystem;
 
-        $this->argumentFactory = $argumentFactory;
+        $this->variableArgumentFactory = $variableArgumentFactory;
         $this->argumentCollectionPrinter = $argumentCollectionPrinter;
     }
 
@@ -78,7 +79,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         // We create a modelization of arguments, from the given variables
         $argumentCollection = new ArgumentCollection();
         foreach ($data['arguments'] as $argument) {
-          $argumentCollection->add($this->argumentFactory->makeFromVariable($argument));
+          $argumentCollection->add($this->variableArgumentFactory->makeFromVariable($argument));
         }
         // From this modelization, we generate the formated list of arguments
         $printedArguments = $this->argumentCollectionPrinter->format($argumentCollection);
