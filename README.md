@@ -26,6 +26,7 @@ Creating those models manually can be tedious, so factories are provided (in `Gn
 
 * `TypeArgumentFactory` can create an `Argument` from a given type
 * `VariableArgumentFactory` can create an `Argument` from a given variable (guesses the type)
+* `VariableArgumentCollectionFactory` can create an `ArgumentCollection` from an array of variables
 
 Once modelized, the code can be generated using "pretty printers" (in `Gnugat\Medio\PrettyPrinter`):
 
@@ -48,7 +49,7 @@ In this example we'll create an extension which generates a better argument gene
 namespace Acme\PhpSpecMedio\Generator;
 
 use Gnugat\Medio\PrettyPrinter\ArgumentCollectionPrinter;
-use Gnugat\Medio\Factory\VariableArgumentFactory;
+use Gnugat\Medio\Factory\VariableArgumentCollectionFactory;
 
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
 use PhpSpec\CodeGenerator\TemplateRenderer;
@@ -64,23 +65,20 @@ class TypeHintedMethodGenerator implements GeneratorInterface
       TemplateRenderer $templates,
       Filesystem $filesystem,
       ArgumentCollectionPrinter $argumentCollectionPrinter ,
-      VariableArgumentFactory $variableArgumentFactory,
+      VariableArgumentCollectionFactory $variableArgumentCollectionFactory,
     )
     {
         $this->templates = $templates;
         $this->filesystem = $filesystem;
 
-        $this->variableArgumentFactory = $variableArgumentFactory;
+        $this->variableArgumentCollectionFactory = $variableArgumentCollectionFactory;
         $this->argumentCollectionPrinter = $argumentCollectionPrinter;
     }
 
     public function generate(ResourceInterface $resource, array $data = array())
     {
         // We create a modelization of arguments, from the given variables
-        $argumentCollection = new ArgumentCollection();
-        foreach ($data['arguments'] as $argument) {
-          $argumentCollection->add($this->variableArgumentFactory->makeFromVariable($argument));
-        }
+        $argumentCollection = $this->variableArgumentCollectionFactory->make($data['arguments']);
         // From this modelization, we generate the formated list of arguments
         $printedArguments = $this->argumentCollectionPrinter->format($argumentCollection);
 
