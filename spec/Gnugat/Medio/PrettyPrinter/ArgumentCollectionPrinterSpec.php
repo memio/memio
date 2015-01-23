@@ -14,21 +14,21 @@ class ArgumentCollectionPrinterSpec extends ObjectBehavior
         $this->beConstructedWith(new ArgumentPrinter());
     }
 
-    function it_formats_no_arguments()
+    function it_generates_no_arguments()
     {
-        $this->format(new ArgumentCollection())->shouldBe('');
+        $this->dump(new ArgumentCollection())->shouldBe('');
     }
 
-    function it_formats_one_argument()
+    function it_generates_one_argument()
     {
         $argument = new Argument('array', 'lines');
         $argumentCollection = new ArgumentCollection();
         $argumentCollection->add($argument);
 
-        $this->format($argumentCollection)->shouldBe('array $lines');
+        $this->dump($argumentCollection)->shouldBe('array $lines');
     }
 
-    function it_formats_many_arguments()
+    function it_generates_many_arguments()
     {
         $argument1 = new Argument('array', 'lines');
         $argument2 = new Argument('string', 'content');
@@ -38,7 +38,7 @@ class ArgumentCollectionPrinterSpec extends ObjectBehavior
         $argumentCollection->add($argument2);
         $argumentCollection->add($argument3);
 
-        $this->format($argumentCollection)->shouldBe('array $lines, $content, StdClass $myClass');
+        $this->dump($argumentCollection)->shouldBe('array $lines, $content, StdClass $myClass');
     }
 
     function it_avoids_name_collision()
@@ -49,6 +49,6 @@ class ArgumentCollectionPrinterSpec extends ObjectBehavior
         $argumentCollection->add($argument1);
         $argumentCollection->add($argument2);
 
-        $this->format($argumentCollection)->shouldBe('$line1, $line2');
+        $this->dump($argumentCollection)->shouldBe('$line1, $line2');
     }
 }

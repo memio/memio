@@ -26,7 +26,7 @@ Here's a snippet which uses Medio:
 
 ```php
 $argumentCollection = $variableArgumentCollectionFactory->make($variables);
-echo $argumentCollectionPrinter->format($argumentCollection);
+echo $argumentCollectionPrinter->dump($argumentCollection);
 ```
 
 It should print the following generated code:

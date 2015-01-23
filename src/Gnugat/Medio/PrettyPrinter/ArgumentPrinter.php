@@ -11,7 +11,7 @@ class ArgumentPrinter
      *
      * @return string
      */
-    public function format(Argument $argument)
+    public function dump(Argument $argument)
     {
         $type = $argument->getType();
         if ('array' === $type) {

@@ -44,7 +44,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         $argumentCollection = $this->variableArgumentCollectionFactory->make($data['arguments']);
 
         // From this modelization, we generate the formated list of arguments
-        $printedArguments = $this->argumentCollectionPrinter->format($argumentCollection);
+        $printedArguments = $this->argumentCollectionPrinter->dump($argumentCollection);
 
         // The rest is phpspec gibberish to generate the code...
         $content = $this->templates->render('method', array(

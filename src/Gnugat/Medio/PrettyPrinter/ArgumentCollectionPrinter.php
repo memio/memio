@@ -24,12 +24,12 @@ class ArgumentCollectionPrinter
      *
      * @return string
      */
-    public function format(ArgumentCollection $argumentCollection)
+    public function dump(ArgumentCollection $argumentCollection)
     {
         $printedArguments = array();
         $arguments = $argumentCollection->all();
         foreach ($arguments as $argument) {
-            $printedArguments[] = $this->argumentPrinter->format($argument);
+            $printedArguments[] = $this->argumentPrinter->dump($argument);
         }
 
         return implode(', ', $printedArguments);
