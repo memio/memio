@@ -19,9 +19,7 @@
         "psr-4": { "Gnugat\\Medio\\Tests\\": "tests" }
     },
     "require": {
-        "php": ">=5.3.3",
-        "nikic/php-parser": "~1.1",
-        "simple-bus/message-bus": "~2.0"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.4",
