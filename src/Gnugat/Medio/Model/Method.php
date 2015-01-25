@@ -10,30 +10,23 @@ class Method
     private $argumentCollection;
 
     /**
-     * @var Body
-     */
-    private $body;
-
-    /**
      * @var string
      */
     private $name;
 
     /**
-     * @var Visibility
+     * @var string
      */
     private $visibility;
 
     /**
      * @param ArgumentCollection $argumentCollection
-     * @param Body               $body
      * @param string             $name
-     * @param Visibility         $visibility
+     * @param string             $visibility
      */
-    public function __construct(ArgumentCollection $argumentCollection, Body $body, $name, Visibility $visibility)
+    public function __construct(ArgumentCollection $argumentCollection, $name, $visibility)
     {
         $this->argumentCollection = $argumentCollection;
-        $this->body = $body;
         $this->name = $name;
         $this->visibility = $visibility;
     }
@@ -47,14 +40,6 @@ class Method
     }
 
     /**
-     * @return Body
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
      * @return string
      */
     public function getName()
@@ -63,9 +48,7 @@ class Method
     }
 
     /**
-     * @param Visibility $visibility
-     *
-     * @return bool
+     * @return string
      */
     public function getVisibility()
     {
