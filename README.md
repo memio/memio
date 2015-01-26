@@ -65,6 +65,7 @@ Once modelized, the code can be generated using "[pretty printers](http://stacko
 * `ArgumentPrinter` takes care of type hinting
 * `InlineArgumentCollectionPrinter` makes an inline list of arguments
 * `MultilineArgumentCollectionPrinter` makes a list of arguments, each on its own line
+* `MethodPrinter` makes a method (can choose multiline arguments to avoid being lengthier than 120 charactes)
 
 > **Note**: those "pretty printer" aren't "fidelity printers", they'll format the
 > code based on highly opinions (they can be considered as "nice printers").

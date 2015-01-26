@@ -5,7 +5,7 @@ namespace Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 
-class MultilineArgumentCollectionFactory
+class MultilineArgumentCollectionPrinter
 {
     /**
      * @var ArgumentPrinter
@@ -33,9 +33,9 @@ class MultilineArgumentCollectionFactory
         }
         $printedArguments = array();
         foreach ($arguments as $argument) {
-            $printedArguments[] = '        '.$this->argumentPrinter->dump($argument);
+            $printedArguments[] = "\n        ".$this->argumentPrinter->dump($argument);
         }
 
-        return implode(",\n", $printedArguments)."\n";
+        return implode(',', $printedArguments)."\n    ";
     }
 }

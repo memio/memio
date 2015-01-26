@@ -7,7 +7,7 @@ use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 use PhpSpec\ObjectBehavior;
 
-class MultilineArgumentCollectionFactorySpec extends ObjectBehavior
+class MultilineArgumentCollectionPrinterSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,8 +26,9 @@ class MultilineArgumentCollectionFactorySpec extends ObjectBehavior
         $argumentCollection->add($argument);
 
         $this->dump($argumentCollection)->shouldBe(<<<'EOT'
-        array $lines
 
+        array $lines
+    
 EOT
         );
     }
@@ -43,10 +44,11 @@ EOT
         $argumentCollection->add($argument3);
 
         $this->dump($argumentCollection)->shouldBe(<<<'EOT'
+
         array $lines,
         $content,
         StdClass $myClass
-
+    
 EOT
 );
     }
