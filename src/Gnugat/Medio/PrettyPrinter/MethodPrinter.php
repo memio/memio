@@ -12,20 +12,28 @@ class MethodPrinter
     private $inlineArgumentCollectionPrinter;
 
     /**
+     * @var MethodPhpdocPrinter
+     */
+    private $methodPhpdocPrinter;
+
+    /**
      * @var MultilineArgumentCollectionPrinter
      */
     private $multilineArgumentCollectionPrinter;
 
     /**
      * @param InlineArgumentCollectionPrinter    $inlineArgumentCollectionPrinter
+     * @param MethodPhpdocPrinter                $methodPhpdocPrinter
      * @param MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
      */
     public function __construct(
         InlineArgumentCollectionPrinter $inlineArgumentCollectionPrinter,
+        MethodPhpdocPrinter $methodPhpdocPrinter,
         MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
     )
     {
         $this->inlineArgumentCollectionPrinter = $inlineArgumentCollectionPrinter;
+        $this->methodPhpdocPrinter = $methodPhpdocPrinter;
         $this->multilineArgumentCollectionPrinter = $multilineArgumentCollectionPrinter;
     }
 
@@ -41,10 +49,12 @@ class MethodPrinter
         $visibility = $method->getVisibility();
         $visibility .= (empty($visibility) ? '' : ' ');
         $name = $method->getName();
-        $methodLine = sprintf('    %sfunction %s(%s)', $visibility, $name, $arguments);
+        $phpdoc = $this->methodPhpdocPrinter->dump($method);
+        $phpdoc .= (empty($phpdoc) ? '' : "\n");
+        $methodLine = $phpdoc.sprintf('    %sfunction %s(%s)', $visibility, $name, $arguments);
         if (strlen($methodLine) > 120) {
             $multilineArguments = $this->multilineArgumentCollectionPrinter->dump($argumentCollection);
-            $methodLine = sprintf('    %sfunction %s(%s)', $visibility, $name, $multilineArguments);
+            $methodLine = $phpdoc.sprintf('    %sfunction %s(%s)', $visibility, $name, $multilineArguments);
         }
 
         return <<<EOT

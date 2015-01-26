@@ -1,10 +1,12 @@
 # Medio
 
-A highly opiniated code generator library.
+A highly opinionated code generator library.
 
-Currently provides only a way to generate arguments for a class method:
+Currently provides only a way to generate a brand new class method:
 
-* objects, arrays and callables are typehinted
+* arguments are documented using PHPdoc (variable names are aligned)
+* if the method would be too long on one line (> 120 columns), its arguments are displayed each on their own line
+* objects, arrays and callables arguments are typehinted
 * can automatically name the arguments for you (handles name collision)
 
 ## Installation
@@ -25,13 +27,22 @@ Here's a snippet which uses Medio:
 
 ```php
 $argumentCollection = $variableArgumentCollectionFactory->make($arguments);
-echo $inlineArgumentCollectionPrinter->dump($argumentCollection);
+$method = new Method($argumentCollection, '__construct', 'public');
+
+echo $methodPrinter->dump($method);
 ```
 
 It should print the following generated code:
 
 ```
-$argument1, ArrayObject $arrayObject, callable $argument2
+    /**
+     * @param string      $argument1
+     * @param ArrayObject $arrayObject
+     * @param callable    $argument2
+     */
+    public function __construct($argument1, ArrayObject $arrayObject, callable $argument2)
+    {
+    }
 ```
 
 As you can see the arguments have been type hinted and the object has been named

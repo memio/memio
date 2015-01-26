@@ -6,6 +6,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\PrettyPrinter\InlineArgumentCollectionPrinter;
+use Gnugat\Medio\PrettyPrinter\MethodPhpdocPrinter;
 use Gnugat\Medio\PrettyPrinter\MultilineArgumentCollectionPrinter;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 use PhpSpec\ObjectBehavior;
@@ -18,6 +19,7 @@ class MethodPrinterSpec extends ObjectBehavior
 
         $this->beConstructedWith(
             new InlineArgumentCollectionPrinter($argumentPrinter),
+            new MethodPhpdocPrinter(),
             new MultilineArgumentCollectionPrinter($argumentPrinter)
         );
     }
@@ -42,6 +44,9 @@ EOT
         $method = new Method($argumentCollection, '__construct', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'
+    /**
+     * @param string $argument
+     */
     public function __construct($argument)
     {
     }
@@ -57,6 +62,10 @@ EOT
         $method = new Method($argumentCollection, '__construct', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'
+    /**
+     * @param InlineArgumentCollectionPrinter    $inlineArgumentCollectionPrinter
+     * @param MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
+     */
     public function __construct(
         InlineArgumentCollectionPrinter $inlineArgumentCollectionPrinter,
         MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
