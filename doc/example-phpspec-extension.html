@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medio</title>
+
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
+                Medio
+                <small class="hidden-xs hidden-sm">
+                    A highly opinionated PHP code generator library
+                </small>
+            </a>
+
+                            <a href="https://github.com/gnugat/medio">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/example-phpspec-extension.html">
+                                        Example: phpspec extension
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Example - phpspec extension</h1>
+<p><a href="http://phpspec.net">phpspec</a> is a tool that automates spec BDD and provides code
+generation based on the specifications.</p>
+<p>In this example we'll create an extension which generates better arguments
+(typehints, objects named after their type and all!):</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Acme\PhpSpecMedio\Generator;
+
+use Gnugat\Medio\PrettyPrinter\InlineArgumentCollectionPrinter;
+use Gnugat\Medio\Factory\VariableArgumentCollectionFactory;
+
+use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
+use PhpSpec\CodeGenerator\TemplateRenderer;
+use PhpSpec\Locator\ResourceInterface;
+use PhpSpec\Util\Filesystem;
+
+class TypeHintedMethodGenerator implements GeneratorInterface
+{
+    private $templates;
+    private $filesystem;
+
+    public function __construct(
+      TemplateRenderer $templates,
+      Filesystem $filesystem,
+      InlineArgumentCollectionPrinter $inlineArgumentCollectionPrinter ,
+      VariableArgumentCollectionFactory $variableArgumentCollectionFactory,
+    )
+    {
+        $this-&gt;templates = $templates;
+        $this-&gt;filesystem = $filesystem;
+
+        $this-&gt;variableArgumentCollectionFactory = $variableArgumentCollectionFactory;
+        $this-&gt;inlineArgumentCollectionPrinter = $inlineArgumentCollectionPrinter;
+    }
+
+    public function generate(ResourceInterface $resource, array $data = array())
+    {
+        // We create a modelization of arguments, from the given variables
+        $argumentCollection = $this-&gt;variableArgumentCollectionFactory-&gt;make($data['arguments']);
+
+        // From this modelization, we generate the formated list of arguments
+        $printedArguments = $this-&gt;inlineArgumentCollectionPrinter-&gt;dump($argumentCollection);
+
+        // The rest is phpspec gibberish to generate the code...
+        $content = $this-&gt;templates-&gt;render('method', array(
+            '%name%' =&gt; $data['name'],
+            '%arguments%' =&gt; $printedArguments,
+        ));
+        $filename = $resource-&gt;getSrcFilename();
+        $code = $this-&gt;filesystem-&gt;getFileContents($filename);
+        $code = preg_replace('/}[ \n]*$/', rtrim($content) ."\n}\n", trim($code));
+        $this-&gt;filesystem-&gt;putFileContents($filename, $code);
+    }
+
+    public function supports(ResourceInterface $resource, $generation, array $data)
+    {
+        return 'method' === $generation;
+    }
+
+    public function getPriority()
+    {
+        return 0;
+    }
+}</code></pre>
+<p>When we write the following spec:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace spec\Acme\PhpSpecMedio\MyClass;
+
+use PhpSpec\ObjectBehavior;
+
+class MyClassSpec extends ObjectBehavior
+{
+    function it_does_something()
+    {
+        $aString = 'Nobody expects the Spanish Inquisition!';
+        $anObject = new \ArrayObject();
+        $aBoolean
+
+        $this-&gt;someCall($aString, $anObject, $aBoolean);
+    }
+}</code></pre>
+<p>Then phpspec will generate the following code:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Acme\PhpSpecMedio\MyClass;
+
+class MyClass
+{
+    public function someCall($argument1, \ArrayObject $arrayObject, $argument2)
+    {
+    }
+}</code></pre>
+<p>As you can see, the object argument has been type hinted and named after its type.
+Scalar arguments have been named in a generic manner (<code>argument</code>), but name
+collision has been detected so they've suffixed by a number.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

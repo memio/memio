@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medio</title>
+
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
+                Medio
+                <small class="hidden-xs hidden-sm">
+                    A highly opinionated PHP code generator library
+                </small>
+            </a>
+
+                            <a href="https://github.com/gnugat/medio">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/example-phpspec-extension.html">
+                                        Example: phpspec extension
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>How to contribute</h1>
+<p>Everybody should be able to help. Here's how you can make this project more
+awesome:</p>
+<ol>
+<li><a href="https://github.com/gnugat/medio/fork_select">Fork it</a></li>
+<li>improve it</li>
+<li>submit a <a href="https://help.github.com/articles/creating-a-pull-request">pull request</a></li>
+</ol>
+<p>Your work will then be reviewed as soon as possible (suggestions about some
+changes, improvements or alternatives may be given).</p>
+<p>Here's some tips to make you the best contributor ever:</p>
+<ul>
+<li><a href="#standard-code">Standard code</a></li>
+<li><a href="#specifications">Specifications</a></li>
+<li><a href="#keeping-your-fork-up-to-date">Keeping your fork up-to-date</a></li>
+</ul>
+<h2>Standard code</h2>
+<p>Use <a href="http://cs.sensiolabs.org/">PHP CS fixer</a> to make your code compliant with
+Medio's coding standards:</p>
+<pre><code>php-cs-fixer fix --config=sf23 .</code></pre>
+<h2>Specifications</h2>
+<p>Medio drives its development using <a href="http://www.phpspec.net/">phpspec</a>:</p>
+<pre><code># Generate the specification class:
+phpspec describe 'Gnugat\Medio\MyNewClass'
+
+# Customize the specification class:
+$EDITOR tests/spec/Gnugat/Medio/MyNewClass.php
+
+# Generate the specified class:
+phpspec run
+
+# Customize the class:
+$EDITOR src/Gnugat/Medio/MyNewClass.php
+
+phpspec run # Should be green!</code></pre>
+<h2>Keeping your fork up-to-date</h2>
+<p>To keep your fork up-to-date, you should track the upstream (original) one
+using the following command:</p>
+<pre><code>git remote add upstream https://github.com/gnugat/medio.git</code></pre>
+<p>Then get the upstream changes:</p>
+<pre><code>git checkout master
+git pull --rebase origin master
+git pull --rebase upstream master
+git checkout &lt;your-branch&gt;
+git rebase master</code></pre>
+<p>Finally, publish your changes:</p>
+<pre><code>git push -f origin &lt;your-branch&gt;</code></pre>
+<p>Your pull request will be automatically updated.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

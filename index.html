@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medio</title>
+
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
+                Medio
+                <small class="hidden-xs hidden-sm">
+                    A highly opinionated PHP code generator library
+                </small>
+            </a>
+
+                            <a href="https://github.com/gnugat/medio">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/example-phpspec-extension.html">
+                                        Example: phpspec extension
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Medio</h1>
+<p>A highly opinionated code generator library.</p>
+<p>Currently provides only a way to generate a brand new class method:</p>
+<ul>
+<li>arguments are documented using PHPdoc (variable names are aligned)</li>
+<li>if the method would be too long on one line (> 120 columns), its arguments are displayed each on their own line</li>
+<li>objects, arrays and callables arguments are typehinted</li>
+<li>can automatically name the arguments for you (handles name collision)</li>
+</ul>
+<h2>Installation</h2>
+<p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
+<pre><code>composer require gnugat/medio:~0.3.0</code></pre>
+<h2>Usage</h2>
+<p>Let's say that we have an array of variables which represent a method's arguments:</p>
+<pre><code class="language-php">$arguments = array('string', new \ArrayObject(), function () {});</code></pre>
+<p>Here's a snippet which uses Medio:</p>
+<pre><code class="language-php">$argumentCollection = $variableArgumentCollectionFactory-&gt;make($arguments);
+$method = new Method($argumentCollection, '__construct', 'public');
+
+echo $methodPrinter-&gt;dump($method);</code></pre>
+<p>It should print the following generated code:</p>
+<pre><code>    /**
+     * @param string       $argument1
+     * @param \ArrayObject $arrayObject
+     * @param callable     $argument2
+     */
+    public function __construct($argument1, \ArrayObject $arrayObject, callable $argument2)
+    {
+    }</code></pre>
+<p>As you can see the arguments have been type hinted and the object has been named
+after its type. The non object arguments have been named using a generic name
+(<code>argument</code>), but name collision has been detected and they've been suffixed by
+a number.</p>
+<p>For more examples, see:</p>
+<ul>
+<li><a href="./doc/example-phpspec-extension.html">Creating a phpspec extension</a></li>
+</ul>
+<h2>Details</h2>
+<p><img alt="UML class Diagram" src="http://yuml.me/63a3a935" /></p>
+<p>Medio provides a modelisation of your code (in <code>Gnugat\Medio\Model</code>):</p>
+<ul>
+<li>a <code>Method</code> has an <code>ArgumentCollection</code></li>
+<li>an <code>ArgumentCollection</code> can have 0 to many <code>Argument</code>, it also takes care of avoiding name collision</li>
+<li>an <code>Argument</code> has a type, a name and a way to tell if it's an object or not</li>
+</ul>
+<p>Creating those models manually can be tedious, so factories are provided (in <code>Gnugat\Medio\Factory</code>):</p>
+<ul>
+<li><code>TypeArgumentFactory</code> can create an <code>Argument</code> from a given type</li>
+<li><code>VariableArgumentFactory</code> can create an <code>Argument</code> from a given variable (guesses the type)</li>
+<li><code>VariableArgumentCollectionFactory</code> can create an <code>ArgumentCollection</code> from an array of variables</li>
+</ul>
+<p>Once modelized, the code can be generated using "<a href="http://stackoverflow.com/a/5834775/3437428">pretty printers</a>"
+(in <code>Gnugat\Medio\PrettyPrinter</code>):</p>
+<ul>
+<li><code>ArgumentPrinter</code> takes care of type hinting</li>
+<li><code>InlineArgumentCollectionPrinter</code> makes an inline list of arguments</li>
+<li><code>MultilineArgumentCollectionPrinter</code> makes a list of arguments, each on its own line</li>
+<li><code>MethodPrinter</code> makes a method (can choose multiline arguments to avoid being lengthier than 120 charactes)</li>
+<li><code>MethodPhpdocPrinter</code> generates a method's PHPDoc, with aligned argument names</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: those "pretty printer" aren't "fidelity printers", they'll format the
+code based on highly opinions (they can be considered as "nice printers").</p>
+</blockquote>
+<h2>Further documentation</h2>
+<p>You can see the current and past versions using one of the following:</p>
+<ul>
+<li>the <code>git tag</code> command</li>
+<li>the <a href="https://github.com/gnugat/medio/releases">releases page on Github</a></li>
+<li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
+</ul>
+<p>You can find more documentation at the following links:</p>
+<ul>
+<li><a href="LICENSE">copyright and MIT license</a></li>
+<li><a href="VERSIONING.html">versioning and branching models</a></li>
+<li><a href="CONTRIBUTING.html">contribution instructions</a></li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
