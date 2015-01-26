@@ -35,13 +35,13 @@ EOT
     {
         $argumentCollection = new ArgumentCollection();
         $argumentCollection->add(new Argument('string', 'argument'));
-        $argumentCollection->add(new Argument('ArrayObject', 'arrayObject', true));
+        $argumentCollection->add(new Argument('\\ArrayObject', 'arrayObject', true));
         $method = new Method($argumentCollection, '__construct', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**
-     * @param string      $argument
-     * @param ArrayObject $arrayObject
+     * @param string       $argument
+     * @param \ArrayObject $arrayObject
      */
 EOT
         );

@@ -23,8 +23,9 @@ class ArgumentPrinter
         if (!$argument->isObject()) {
             return '$'.$argument->getName();
         }
-        $nameSpaces = explode('\\', $type);
-        $className = end($nameSpaces);
+        // $nameSpaces = explode('\\', $type);
+        // $className = end($nameSpaces);
+        $className = $type;
 
         return $className.' $'.$argument->getName();
     }

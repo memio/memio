@@ -57,18 +57,15 @@ EOT
     function it_generates_method_longer_than_120_characters_on_many_lines()
     {
         $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument('InlineArgumentCollectionPrinter', 'inlineArgumentCollectionPrinter', true));
-        $argumentCollection->add(new Argument('MultilineArgumentCollectionPrinter', 'multilineArgumentCollectionPrinter', true));
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $argumentCollection->add(new Argument('\\ArrayObject', 'thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo', true));
+        $method = new Method($argumentCollection, 'thisIsAlmostAsLongAsJavaMethodsButNotQuiteSo', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**
-     * @param InlineArgumentCollectionPrinter    $inlineArgumentCollectionPrinter
-     * @param MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
+     * @param \ArrayObject $thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo
      */
-    public function __construct(
-        InlineArgumentCollectionPrinter $inlineArgumentCollectionPrinter,
-        MultilineArgumentCollectionPrinter $multilineArgumentCollectionPrinter
+    public function thisIsAlmostAsLongAsJavaMethodsButNotQuiteSo(
+        \ArrayObject $thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo
     )
     {
     }

@@ -21,7 +21,7 @@ class ArgumentPrinterSpec extends ObjectBehavior
 
     function it_generates_objects()
     {
-        $this->dump(new Argument('\\StdClass', 'myClass', true))->shouldBe('StdClass $myClass');
+        $this->dump(new Argument('\\StdClass', 'myClass', true))->shouldBe('\\StdClass $myClass');
     }
 
     function it_generates_other_types()

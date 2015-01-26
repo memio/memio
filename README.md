@@ -36,11 +36,11 @@ It should print the following generated code:
 
 ```
     /**
-     * @param string      $argument1
-     * @param ArrayObject $arrayObject
-     * @param callable    $argument2
+     * @param string       $argument1
+     * @param \ArrayObject $arrayObject
+     * @param callable     $argument2
      */
-    public function __construct($argument1, ArrayObject $arrayObject, callable $argument2)
+    public function __construct($argument1, \ArrayObject $arrayObject, callable $argument2)
     {
     }
 ```

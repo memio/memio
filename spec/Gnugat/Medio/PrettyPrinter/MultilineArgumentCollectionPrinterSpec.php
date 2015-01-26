@@ -21,9 +21,8 @@ class MultilineArgumentCollectionPrinterSpec extends ObjectBehavior
 
     function it_generates_one_argument()
     {
-        $argument = new Argument('array', 'lines');
         $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add($argument);
+        $argumentCollection->add(new Argument('array', 'lines'));
 
         $this->dump($argumentCollection)->shouldBe(<<<'EOT'
 
@@ -35,19 +34,16 @@ EOT
 
     function it_generates_many_arguments()
     {
-        $argument1 = new Argument('array', 'lines');
-        $argument2 = new Argument('string', 'content');
-        $argument3 = new Argument('\\StdClass', 'myClass', true);
         $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add($argument1);
-        $argumentCollection->add($argument2);
-        $argumentCollection->add($argument3);
+        $argumentCollection->add(new Argument('array', 'lines'));
+        $argumentCollection->add(new Argument('string', 'content'));
+        $argumentCollection->add(new Argument('\\StdClass', 'myClass', true));
 
         $this->dump($argumentCollection)->shouldBe(<<<'EOT'
 
         array $lines,
         $content,
-        StdClass $myClass
+        \StdClass $myClass
     
 EOT
 );

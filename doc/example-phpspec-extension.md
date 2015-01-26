@@ -100,7 +100,7 @@ namespace Acme\PhpSpecMedio\MyClass;
 
 class MyClass
 {
-    public function someCall($argument1, ArrayObject $arrayObject, $argument2)
+    public function someCall($argument1, \ArrayObject $arrayObject, $argument2)
     {
     }
 }

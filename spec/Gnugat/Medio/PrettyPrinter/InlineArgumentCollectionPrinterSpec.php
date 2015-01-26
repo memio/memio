@@ -38,7 +38,7 @@ class InlineArgumentCollectionPrinterSpec extends ObjectBehavior
         $argumentCollection->add($argument2);
         $argumentCollection->add($argument3);
 
-        $this->dump($argumentCollection)->shouldBe('array $lines, $content, StdClass $myClass');
+        $this->dump($argumentCollection)->shouldBe('array $lines, $content, \\StdClass $myClass');
     }
 
     function it_avoids_name_collision()
