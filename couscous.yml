@@ -1,0 +1,20 @@
+template:
+    url: https://github.com/CouscousPHP/Template-Light.git
+
+baseUrl: http://gnugat.github.io/medio
+
+title: Medio
+subTitle: A highly opinionated PHP code generator library
+
+github:
+    user: gnugat
+    repo: medio
+
+menu:
+    items:
+        home:
+            text: Home
+            relativeUrl:
+        example-phpspec-extension:
+            text: Example: phpspec extension
+            relativeUrl: doc/example-phpspec-extension.html

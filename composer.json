@@ -2,8 +2,8 @@
     "name": "gnugat/medio",
     "license": "MIT",
     "type": "library",
-    "description": "Helps you with your PHP code",
-    "keywords": ["PHP", "IDE", "helper"],
+    "description": "A highly opinionated PHP code generator library",
+    "keywords": ["generator", "PHP", "code"],
     "authors": [
         {
             "name": "Loïc Chardonnet",

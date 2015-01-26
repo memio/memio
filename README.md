@@ -56,7 +56,7 @@ For more examples, see:
 
 ## Details
 
-![UML class Diagram](http://yuml.me/a29e062a)
+![UML class Diagram](http://yuml.me/63a3a935)
 
 Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
 
