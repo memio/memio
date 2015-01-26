@@ -1,11 +1,9 @@
 # CHANGELOG
 
-## 0.3.0
+## 0.3.0: Green field
 
-* added detection of PHP method declaration
-* added selection of PHP method declaration
-* added insertion of spec method
-* added detection of spec method
+* added generation of method with phpdoc and typehinted arguments
+* removed everything
 
 ## 0.2.0
 

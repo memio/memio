@@ -81,3 +81,17 @@ Once modelized, the code can be generated using "[pretty printers](http://stacko
 
 > **Note**: those "pretty printer" aren't "fidelity printers", they'll format the
 > code based on highly opinions (they can be considered as "nice printers").
+
+## Further documentation
+
+You can see the current and past versions using one of the following:
+
+* the `git tag` command
+* the [releases page on Github](https://github.com/gnugat/medio/releases)
+* the file listing the [changes between versions](CHANGELOG.md)
+
+You can find more documentation at the following links:
+
+* [copyright and MIT license](LICENSE)
+* [versioning and branching models](VERSIONING.md)
+* [contribution instructions](CONTRIBUTING.md)

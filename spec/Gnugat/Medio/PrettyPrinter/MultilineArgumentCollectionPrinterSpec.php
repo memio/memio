@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Medio project.
+ *
+ * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
@@ -27,7 +36,7 @@ class MultilineArgumentCollectionPrinterSpec extends ObjectBehavior
         $this->dump($argumentCollection)->shouldBe(<<<'EOT'
 
         array $lines
-    
+
 EOT
         );
     }
@@ -44,7 +53,7 @@ EOT
         array $lines,
         $content,
         \StdClass $myClass
-    
+
 EOT
 );
     }
