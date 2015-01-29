@@ -16,14 +16,15 @@
         "psr-4": { "Gnugat\\Medio\\": "src/Gnugat/Medio" }
     },
     "autoload-dev": {
-        "psr-4": { "Gnugat\\Medio\\Tests\\": "tests" }
+        "psr-4": { "Gnugat\\Medio\\Examples\\": "examples" }
     },
     "require": {
         "php": ">=5.3.3"
     },
     "require-dev": {
+        "ciaranmcnulty/phpspec-typehintedmethods": "~1.1",
+        "mnapoli/php-di": "~4.4",
         "phpunit/phpunit": "~4.4",
-        "phpspec/phpspec": "~2.1",
-        "ciaranmcnulty/phpspec-typehintedmethods": "~1.1"
+        "phpspec/phpspec": "~2.1"
     }
 }
