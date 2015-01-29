@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Type;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentCollectionSpec extends ObjectBehavior
@@ -23,16 +24,16 @@ class ArgumentCollectionSpec extends ObjectBehavior
 
     function it_can_get_more_arguments()
     {
-        $this->add(new Argument('array', 'lines'));
-        $this->add(new Argument('string', 'content'));
+        $this->add(new Argument(new Type('array'), 'lines'));
+        $this->add(new Argument(new Type('string'), 'content'));
 
         $this->all()->shouldHaveCount(2);
     }
 
     function it_renames_arguments_to_avoid_collision()
     {
-        $this->add(new Argument('string', 'line'));
-        $this->add(new Argument('string', 'line'));
+        $this->add(new Argument(new Type('string'), 'line'));
+        $this->add(new Argument(new Type('string'), 'line'));
 
         $arguments = $this->all();
         $argument1 = $arguments[0];

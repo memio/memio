@@ -13,6 +13,7 @@ namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
+use Gnugat\Medio\Model\Type;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 use PhpSpec\ObjectBehavior;
 
@@ -30,7 +31,7 @@ class InlineArgumentCollectionPrinterSpec extends ObjectBehavior
 
     function it_generates_one_argument()
     {
-        $argument = new Argument('array', 'lines');
+        $argument = new Argument(new Type('array'), 'lines');
         $argumentCollection = new ArgumentCollection();
         $argumentCollection->add($argument);
 
@@ -39,21 +40,21 @@ class InlineArgumentCollectionPrinterSpec extends ObjectBehavior
 
     function it_generates_many_arguments()
     {
-        $argument1 = new Argument('array', 'lines');
-        $argument2 = new Argument('string', 'content');
-        $argument3 = new Argument('\\StdClass', 'myClass', true);
+        $argument1 = new Argument(new Type('array'), 'lines');
+        $argument2 = new Argument(new Type('string'), 'content');
+        $argument3 = new Argument(new Type('stdClass'), 'myClass', true);
         $argumentCollection = new ArgumentCollection();
         $argumentCollection->add($argument1);
         $argumentCollection->add($argument2);
         $argumentCollection->add($argument3);
 
-        $this->dump($argumentCollection)->shouldBe('array $lines, $content, \\StdClass $myClass');
+        $this->dump($argumentCollection)->shouldBe('array $lines, $content, \\stdClass $myClass');
     }
 
     function it_avoids_name_collision()
     {
-        $argument1 = new Argument('string', 'line');
-        $argument2 = new Argument('string', 'line');
+        $argument1 = new Argument(new Type('string'), 'line');
+        $argument2 = new Argument(new Type('string'), 'line');
         $argumentCollection = new ArgumentCollection();
         $argumentCollection->add($argument1);
         $argumentCollection->add($argument2);

@@ -11,13 +11,14 @@
 
 namespace spec\Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Type;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('array', 'lines', false);
+        $this->beConstructedWith(new Type('array'), 'lines');
     }
 
     function it_has_a_type()

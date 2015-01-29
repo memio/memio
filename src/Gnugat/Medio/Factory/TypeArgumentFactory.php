@@ -12,27 +12,25 @@
 namespace Gnugat\Medio\Factory;
 
 use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Type;
 
 class TypeArgumentFactory
 {
     /**
-     * @param string $type
+     * @param string $typeName
      *
      * @return Argument
      */
-    public function make($type)
+    public function make($typeName)
     {
-        $nonObjectTypes = array('array', 'boolean', 'callable', 'double', 'integer', 'NULL', 'resource', 'string');
-        if (in_array($type, $nonObjectTypes, true)) {
+        $type = new Type($typeName);
+        if (!$type->isObject()) {
             return new Argument($type, 'argument');
         }
-        if ($type[0] !== '\\') {
-            $type = '\\'.$type;
-        }
-        $nameSpaces = explode('\\', $type);
+        $nameSpaces = explode('\\', $type->getName());
         $className = end($nameSpaces);
         $name = lcfirst($className);
 
-        return new Argument($type, $name, true);
+        return new Argument($type, $name);
     }
 }

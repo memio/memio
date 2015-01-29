@@ -3,7 +3,6 @@
 namespace spec\Gnugat\Medio\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class VariableTypeFactorySpec extends ObjectBehavior
 {

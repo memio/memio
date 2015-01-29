@@ -14,6 +14,7 @@ namespace spec\Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Type;
 use Gnugat\Medio\PrettyPrinter\InlineArgumentCollectionPrinter;
 use Gnugat\Medio\PrettyPrinter\MethodPhpdocPrinter;
 use Gnugat\Medio\PrettyPrinter\MultilineArgumentCollectionPrinter;
@@ -49,7 +50,7 @@ EOT
     function it_generates_method_with_arguments()
     {
         $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument('string', 'argument'));
+        $argumentCollection->add(new Argument(new Type('string'), 'argument'));
         $method = new Method($argumentCollection, '__construct', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'
@@ -66,7 +67,7 @@ EOT
     function it_generates_method_longer_than_120_characters_on_many_lines()
     {
         $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument('\\ArrayObject', 'thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo', true));
+        $argumentCollection->add(new Argument(new Type('ArrayObject'), 'thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo', true));
         $method = new Method($argumentCollection, 'thisIsAlmostAsLongAsJavaMethodsButNotQuiteSo', 'public');
 
         $this->dump($method)->shouldBe(<<<'EOT'

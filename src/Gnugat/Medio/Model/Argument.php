@@ -14,7 +14,7 @@ namespace Gnugat\Medio\Model;
 class Argument
 {
     /**
-     * @var string
+     * @var Type
      */
     private $type;
 
@@ -24,20 +24,13 @@ class Argument
     private $name;
 
     /**
-     * @var bool
-     */
-    private $isObject;
-
-    /**
-     * @param string $type
+     * @param Type   $type
      * @param string $name
-     * @param bool   $isObject
      */
-    public function __construct($type, $name, $isObject = false)
+    public function __construct(Type $type, $name)
     {
         $this->type = $type;
         $this->name = $name;
-        $this->isObject = $isObject;
     }
 
     /**
@@ -45,7 +38,7 @@ class Argument
      */
     public function getType()
     {
-        return $this->type;
+        return $this->type->getName();
     }
 
     /**
@@ -69,6 +62,6 @@ class Argument
      */
     public function isObject()
     {
-        return $this->isObject;
+        return $this->type->isObject();
     }
 }

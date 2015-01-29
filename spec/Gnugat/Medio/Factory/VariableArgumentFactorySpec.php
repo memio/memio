@@ -11,14 +11,14 @@
 
 namespace spec\Gnugat\Medio\Factory;
 
-use Gnugat\Medio\Factory\TypeArgumentFactory;
+use Gnugat\Medio\Factory\VariableTypeFactory;
 use PhpSpec\ObjectBehavior;
 
 class VariableArgumentFactorySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new TypeArgumentFactory());
+        $this->beConstructedWith(new VariableTypeFactory());
     }
 
     function it_makes_object_from_variable()
