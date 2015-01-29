@@ -38,6 +38,7 @@ class MultilineArgumentCollectionPrinterSpec extends ObjectBehavior
         array $lines
 
 EOT
+        .'    '
         );
     }
 
@@ -55,6 +56,7 @@ EOT
         \StdClass $myClass
 
 EOT
-);
+        .'    '
+        );
     }
 }
