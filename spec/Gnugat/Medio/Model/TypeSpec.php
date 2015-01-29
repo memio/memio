@@ -15,6 +15,14 @@ class TypeSpec extends ObjectBehavior
         $this->isObject()->shouldBe(true);
     }
 
+    function it_preffix_object_types_by_namespace_separator()
+    {
+        $this->beConstructedWith('DateTime');
+
+        $this->getName()->shouldBe('\DateTime');
+        $this->isObject()->shouldBe(true);
+    }
+
     function it_can_be_an_array()
     {
         $this->beConstructedWith('array');

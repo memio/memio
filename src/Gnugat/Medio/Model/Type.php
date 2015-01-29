@@ -14,6 +14,9 @@ class Type
      */
     public function __construct($name)
     {
+        if (!in_array($name, $this->getNonObjectTypes()) && '\\' !== $name[0]) {
+            $name = '\\'.$name;
+        }
         $this->name = $name;
     }
 
