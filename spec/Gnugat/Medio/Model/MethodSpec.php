@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 class MethodSpec extends ObjectBehavior
 {
     const NAME = '__construct';
-    const VISIBILITY = 'public';
 
     private $argumentCollection;
 
@@ -26,7 +25,7 @@ class MethodSpec extends ObjectBehavior
     {
         $this->argumentCollection = new ArgumentCollection();
 
-        $this->beConstructedWith($this->argumentCollection, self::NAME, self::VISIBILITY);
+        $this->beConstructedWith($this->argumentCollection, self::NAME);
     }
 
     function it_has_argument_collection()
@@ -36,7 +35,7 @@ class MethodSpec extends ObjectBehavior
 
     function it_can_have_more_arguments(Argument $argument, ArgumentCollection $argumentCollection)
     {
-        $this->beConstructedWith($argumentCollection, self::NAME, self::VISIBILITY);
+        $this->beConstructedWith($argumentCollection, self::NAME);
         $argumentCollection->add($argument)->shouldBeCalled();
 
         $this->addArgument($argument);
@@ -45,10 +44,5 @@ class MethodSpec extends ObjectBehavior
     function it_has_a_name()
     {
         $this->getName()->shouldBe(self::NAME);
-    }
-
-    function it_has_a_visibility()
-    {
-        $this->getVisibility()->shouldBe(self::VISIBILITY);
     }
 }

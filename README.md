@@ -27,7 +27,7 @@ Here's a snippet which uses Medio:
 
 ```php
 $argumentCollection = $variableArgumentCollectionFactory->make($arguments);
-$method = new Method($argumentCollection, '__construct', 'public');
+$method = new Method($argumentCollection, '__construct');
 
 echo $methodPrinter->dump($method);
 ```

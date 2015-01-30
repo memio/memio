@@ -55,15 +55,13 @@ class MethodPrinter
     {
         $argumentCollection = $method->getArgumentCollection();
         $arguments = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
-        $visibility = $method->getVisibility();
-        $visibility .= (empty($visibility) ? '' : ' ');
         $name = $method->getName();
         $phpdoc = $this->methodPhpdocPrinter->dump($method);
         $phpdoc .= (empty($phpdoc) ? '' : "\n");
-        $methodLine = $phpdoc.sprintf('    %sfunction %s(%s)', $visibility, $name, $arguments);
+        $methodLine = $phpdoc.sprintf('    public function %s(%s)', $name, $arguments);
         if (strlen($methodLine) > 120) {
             $multilineArguments = $this->multilineArgumentCollectionPrinter->dump($argumentCollection);
-            $methodLine = $phpdoc.sprintf('    %sfunction %s(%s)', $visibility, $name, $multilineArguments);
+            $methodLine = $phpdoc.sprintf('    public function %s(%s)', $name, $multilineArguments);
         }
 
         return <<<EOT

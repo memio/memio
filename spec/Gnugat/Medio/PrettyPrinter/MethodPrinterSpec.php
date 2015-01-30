@@ -82,17 +82,4 @@ EOT
 EOT
         );
     }
-
-    function it_can_generate_phpspec_specification()
-    {
-        $argumentCollection = new ArgumentCollection();
-        $method = new Method($argumentCollection, 'it_is_a_specification', '');
-
-        $this->dump($method)->shouldBe(<<<'EOT'
-    function it_is_a_specification()
-    {
-    }
-EOT
-        );
-    }
 }
