@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\ArgumentCollection;
+use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 
 class MethodSpec extends ObjectBehavior
@@ -31,6 +32,14 @@ class MethodSpec extends ObjectBehavior
     function it_has_argument_collection()
     {
         $this->getArgumentCollection()->shouldBe($this->argumentCollection);
+    }
+
+    function it_can_have_more_arguments(Argument $argument, ArgumentCollection $argumentCollection)
+    {
+        $this->beConstructedWith($argumentCollection, self::NAME, self::VISIBILITY);
+        $argumentCollection->add($argument)->shouldBeCalled();
+
+        $this->addArgument($argument);
     }
 
     function it_has_a_name()

@@ -49,6 +49,14 @@ class Method
     }
 
     /**
+     * @param Argument $argument
+     */
+    public function addArgument(Argument $argument)
+    {
+        $this->argumentCollection->add($argument);
+    }
+
+    /**
      * @return string
      */
     public function getName()
