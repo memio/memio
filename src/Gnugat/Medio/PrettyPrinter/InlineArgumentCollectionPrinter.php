@@ -13,6 +13,11 @@ namespace Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\ArgumentCollection;
 
+/**
+ * Generates arguments on one line, from an ArgumentCollection.
+ *
+ * @api
+ */
 class InlineArgumentCollectionPrinter
 {
     /**

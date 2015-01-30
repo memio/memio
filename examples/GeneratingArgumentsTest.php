@@ -7,14 +7,14 @@ use DI\ContainerBuilder;
 class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
 {
     private $variableArgumentCollectionFactory;
-    private $argumentCollectionPrinter;
+    private $inlineArgumentCollectionPrinter;
 
     protected function setUp()
     {
         $container = ContainerBuilder::buildDevContainer();
 
         $this->variableArgumentCollectionFactory = $container->get('Gnugat\\Medio\\Factory\\VariableArgumentCollectionFactory');
-        $this->argumentCollectionPrinter = $container->get('Gnugat\\Medio\\PrettyPrinter\\InlineArgumentCollectionPrinter');
+        $this->inlineArgumentCollectionPrinter = $container->get('Gnugat\\Medio\\PrettyPrinter\\InlineArgumentCollectionPrinter');
     }
 
     public function testGenericNaming()
@@ -22,7 +22,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $variables = array('string');
 
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
-        $generatedCode = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         $this->assertSame($this->getExpectedCode('generic_naming'), $generatedCode);
     }
@@ -32,7 +32,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $variables = array('string', true);
 
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
-        $generatedCode = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         $this->assertSame($this->getExpectedCode('generic_naming_collision'), $generatedCode);
     }
@@ -42,7 +42,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $variables = array(new \stdClass(), new \DateTime(), $this->variableArgumentCollectionFactory);
 
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
-        $generatedCode = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         $this->assertSame($this->getExpectedCode('object_naming'), $generatedCode);
     }
@@ -52,7 +52,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $variables = array(new \stdClass(), new \stdClass());
 
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
-        $generatedCode = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         $this->assertSame($this->getExpectedCode('object_naming_collision'), $generatedCode);
     }
@@ -62,7 +62,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $variables = array(array(), new \stdClass(), function () {});
 
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
-        $generatedCode = $this->argumentCollectionPrinter->dump($argumentCollection);
+        $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
         $this->assertSame($this->getExpectedCode('typehints'), $generatedCode);
     }
