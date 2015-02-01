@@ -24,7 +24,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('generic_naming'), $generatedCode);
+        $this->assertSame($this->getExpectedCode('testGenericNaming'), $generatedCode);
     }
 
     public function testGenericNamingCollision()
@@ -34,7 +34,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('generic_naming_collision'), $generatedCode);
+        $this->assertSame($this->getExpectedCode('testGenericNamingCollision'), $generatedCode);
     }
 
     public function testObjectNaming()
@@ -44,7 +44,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('object_naming'), $generatedCode);
+        $this->assertSame($this->getExpectedCode('testObjectNaming'), $generatedCode);
     }
 
     public function testObjectNamingCollision()
@@ -54,7 +54,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('object_naming_collision'), $generatedCode);
+        $this->assertSame($this->getExpectedCode('testObjectNamingCollision'), $generatedCode);
     }
 
     public function testTypehints()
@@ -64,12 +64,12 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('typehints'), $generatedCode);
+        $this->assertSame($this->getExpectedCode('testTypehints'), $generatedCode);
     }
 
     private function getExpectedCode($forTest)
     {
-        $content = file_get_contents(__DIR__."/fixtures/GeneratingArguments/$forTest.txt");
+        $content = file_get_contents(__DIR__."/fixtures/GeneratingArgumentsTest/$forTest.txt");
 
         return rtrim($content, "\n"); // Fixtures all have an extra empty line at the end of the file.
     }
