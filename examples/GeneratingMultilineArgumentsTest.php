@@ -24,7 +24,7 @@ class GeneratingMultilineArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->multilineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testNoArguments'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testOneArgument()
@@ -34,7 +34,7 @@ class GeneratingMultilineArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->multilineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testOneArgument'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testManyArguments()
@@ -44,13 +44,6 @@ class GeneratingMultilineArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->multilineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testManyArguments'), $generatedCode);
-    }
-
-    private function getExpectedCode($forTest)
-    {
-        $content = file_get_contents(__DIR__."/fixtures/GeneratingMultilineArgumentsTest/$forTest.txt");
-
-        return rtrim($content, "\n"); // Fixtures all have an extra empty line at the end of the file.
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 }

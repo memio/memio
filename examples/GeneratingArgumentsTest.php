@@ -24,7 +24,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testGenericNaming'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testGenericNamingCollision()
@@ -34,7 +34,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testGenericNamingCollision'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testObjectNaming()
@@ -44,7 +44,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testObjectNaming'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testObjectNamingCollision()
@@ -54,7 +54,7 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testObjectNamingCollision'), $generatedCode);
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 
     public function testTypehints()
@@ -64,13 +64,6 @@ class GeneratingArgumentsTest extends \PHPUnit_Framework_TestCase
         $argumentCollection = $this->variableArgumentCollectionFactory->make($variables);
         $generatedCode = $this->inlineArgumentCollectionPrinter->dump($argumentCollection);
 
-        $this->assertSame($this->getExpectedCode('testTypehints'), $generatedCode);
-    }
-
-    private function getExpectedCode($forTest)
-    {
-        $content = file_get_contents(__DIR__."/fixtures/GeneratingArgumentsTest/$forTest.txt");
-
-        return rtrim($content, "\n"); // Fixtures all have an extra empty line at the end of the file.
+        $this->assertSame(get_expected_code(), $generatedCode);
     }
 }
