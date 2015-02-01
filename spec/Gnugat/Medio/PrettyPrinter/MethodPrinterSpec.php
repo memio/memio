@@ -36,8 +36,7 @@ class MethodPrinterSpec extends ObjectBehavior
 
     function it_generates_method_without_any_arguments()
     {
-        $argumentCollection = new ArgumentCollection();
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $method = new Method('__construct');
 
         $this->dump($method)->shouldBe(<<<'EOT'
     public function __construct()
@@ -49,9 +48,8 @@ EOT
 
     function it_generates_method_with_arguments()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('string'), 'argument'));
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $method = new Method('__construct');
+        $method->addArgument(new Argument(new Type('string'), 'argument'));
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**
@@ -66,9 +64,8 @@ EOT
 
     function it_generates_method_longer_than_120_characters_on_many_lines()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('ArrayObject'), 'thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo', true));
-        $method = new Method($argumentCollection, 'thisIsAlmostAsLongAsJavaMethodsButNotQuiteSo', 'public');
+        $method = new Method('thisIsAlmostAsLongAsJavaMethodsButNotQuiteSo');
+        $method->addArgument(new Argument(new Type('ArrayObject'), 'thisIsAlmostAsLongAsJavaArgumentButNotQuiteSo', true));
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**

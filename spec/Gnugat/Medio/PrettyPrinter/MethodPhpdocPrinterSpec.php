@@ -21,17 +21,15 @@ class MethodPhpdocPrinterSpec extends ObjectBehavior
 {
     function it_generates_nothing_if_no_arguments()
     {
-        $argumentCollection = new ArgumentCollection();
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $method = new Method('__construct');
 
         $this->dump($method)->shouldBe('');
     }
 
     function it_generates_phpdoc_for_one_scalar_argument()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('string'), 'argument'));
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $method = new Method('__construct');
+        $method->addArgument(new Argument(new Type('string'), 'argument'));
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**
@@ -43,10 +41,9 @@ EOT
 
     function it_generates_phpdoc_for_one_scalar_argument_and_one_object_argument()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('string'), 'argument'));
-        $argumentCollection->add(new Argument(new Type('ArrayObject'), 'arrayObject', true));
-        $method = new Method($argumentCollection, '__construct', 'public');
+        $method = new Method('__construct');
+        $method->addArgument(new Argument(new Type('string'), 'argument'));
+        $method->addArgument(new Argument(new Type('ArrayObject'), 'arrayObject', true));
 
         $this->dump($method)->shouldBe(<<<'EOT'
     /**

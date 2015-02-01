@@ -24,12 +24,11 @@ class Method
     private $name;
 
     /**
-     * @param ArgumentCollection $argumentCollection
-     * @param string             $name
+     * @param string $name
      */
-    public function __construct(ArgumentCollection $argumentCollection, $name)
+    public function __construct($name)
     {
-        $this->argumentCollection = $argumentCollection;
+        $this->argumentCollection = new ArgumentCollection();
         $this->name = $name;
     }
 
