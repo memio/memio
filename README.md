@@ -27,7 +27,7 @@ Here's a snippet which uses Medio:
 
 ```php
 $argumentCollection = $variableArgumentCollectionFactory->make($arguments);
-$method = new Method($argumentCollection, '__construct', 'public');
+$method = new Method($argumentCollection, '__construct');
 
 echo $methodPrinter->dump($method);
 ```
@@ -56,13 +56,14 @@ For more examples, see:
 
 ## Details
 
-![UML class Diagram](http://yuml.me/63a3a935)
+![UML class Diagram](http://yuml.me/db33df58)
 
 Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
 
 * a `Method` has an `ArgumentCollection`
 * an `ArgumentCollection` can have 0 to many `Argument`, it also takes care of avoiding name collision
-* an `Argument` has a type, a name and a way to tell if it's an object or not
+* an `Argument` has a name and type
+* a `Type`, takes care of type name uniformization and can detect if it's an object
 
 Creating those models manually can be tedious, so factories are provided (in `Gnugat\Medio\Factory`):
 
@@ -79,8 +80,8 @@ Once modelized, the code can be generated using "[pretty printers](http://stacko
 * `MethodPrinter` makes a method (can choose multiline arguments to avoid being lengthier than 120 charactes)
 * `MethodPhpdocPrinter` generates a method's PHPDoc, with aligned argument names
 
-> **Note**: those "pretty printer" aren't "fidelity printers", they'll format the
-> code based on highly opinions (they can be considered as "nice printers").
+> **Note**: those "pretty printers" aren't "fidelity printers", they'll format
+> the code based on high opinions (they can be considered as "nice printers").
 
 ## Further documentation
 

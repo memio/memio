@@ -14,6 +14,11 @@ namespace Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\PrettyPrinter\ArgumentPrinter;
 
+/**
+ * Generates one argument per line, from an ArgumentCollection.
+ *
+ * @api
+ */
 class MultilineArgumentCollectionPrinter
 {
     /**

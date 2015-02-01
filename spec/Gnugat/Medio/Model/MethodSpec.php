@@ -11,35 +11,29 @@
 
 namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Model\ArgumentCollection;
+use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 
 class MethodSpec extends ObjectBehavior
 {
     const NAME = '__construct';
-    const VISIBILITY = 'public';
-
-    private $argumentCollection;
 
     function let()
     {
-        $this->argumentCollection = new ArgumentCollection();
-
-        $this->beConstructedWith($this->argumentCollection, self::NAME, self::VISIBILITY);
+        $this->beConstructedWith(self::NAME);
     }
 
-    function it_has_argument_collection()
+    function it_has_argument_collection(Argument $argument)
     {
-        $this->getArgumentCollection()->shouldBe($this->argumentCollection);
+        $argumentCollection = $this->getArgumentCollection();
+
+        $argumentCollection->all()->shouldHaveCount(0);
+        $this->addArgument($argument);
+        $argumentCollection->all()->shouldHaveCount(1);
     }
 
     function it_has_a_name()
     {
         $this->getName()->shouldBe(self::NAME);
-    }
-
-    function it_has_a_visibility()
-    {
-        $this->getVisibility()->shouldBe(self::VISIBILITY);
     }
 }

@@ -16,16 +16,16 @@ use Gnugat\Medio\Model\Argument;
 class VariableArgumentFactory
 {
     /**
-     * @var TypeArgumentFactory
+     * @var VariableTypeFactory
      */
-    private $typeArgumentFactory;
+    private $variableTypeFactory;
 
     /**
-     * @param TypeArgumentFactory $typeArgumentFactory
+     * @param VariableTypeFactory $variableTypeFactory
      */
-    public function __construct(TypeArgumentFactory $typeArgumentFactory)
+    public function __construct(VariableTypeFactory $variableTypeFactory)
     {
-        $this->typeArgumentFactory = $typeArgumentFactory;
+        $this->variableTypeFactory = $variableTypeFactory;
     }
 
     /**
@@ -35,13 +35,14 @@ class VariableArgumentFactory
      */
     public function make($variable)
     {
-        if (is_callable($variable)) {
-            return $this->typeArgumentFactory->make('callable');
+        $type = $this->variableTypeFactory->make($variable);
+        if (!$type->isObject()) {
+            return new Argument($type, 'argument');
         }
-        if (is_object($variable)) {
-            return $this->typeArgumentFactory->make(get_class($variable));
-        }
+        $nameSpaces = explode('\\', $type->getName());
+        $className = end($nameSpaces);
+        $name = lcfirst($className);
 
-        return $this->typeArgumentFactory->make(gettype($variable));
+        return new Argument($type, $name);
     }
 }

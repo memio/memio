@@ -1,0 +1,1 @@
+\stdClass $stdClass1, \stdClass $stdClass2

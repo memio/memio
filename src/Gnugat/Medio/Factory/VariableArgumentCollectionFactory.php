@@ -13,6 +13,11 @@ namespace Gnugat\Medio\Factory;
 
 use Gnugat\Medio\Model\ArgumentCollection;
 
+/**
+ * Creates an ArgumentCollection from an array of variables.
+ *
+ * @api
+ */
 class VariableArgumentCollectionFactory
 {
     /**

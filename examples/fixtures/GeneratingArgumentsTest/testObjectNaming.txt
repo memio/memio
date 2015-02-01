@@ -1,0 +1,1 @@
+\stdClass $stdClass, \DateTime $dateTime, \Gnugat\Medio\Factory\VariableArgumentCollectionFactory $variableArgumentCollectionFactory

@@ -24,20 +24,12 @@ class Method
     private $name;
 
     /**
-     * @var string
+     * @param string $name
      */
-    private $visibility;
-
-    /**
-     * @param ArgumentCollection $argumentCollection
-     * @param string             $name
-     * @param string             $visibility
-     */
-    public function __construct(ArgumentCollection $argumentCollection, $name, $visibility)
+    public function __construct($name)
     {
-        $this->argumentCollection = $argumentCollection;
+        $this->argumentCollection = new ArgumentCollection();
         $this->name = $name;
-        $this->visibility = $visibility;
     }
 
     /**
@@ -49,18 +41,18 @@ class Method
     }
 
     /**
-     * @return string
+     * @param Argument $argument
      */
-    public function getName()
+    public function addArgument(Argument $argument)
     {
-        return $this->name;
+        $this->argumentCollection->add($argument);
     }
 
     /**
      * @return string
      */
-    public function getVisibility()
+    public function getName()
     {
-        return $this->visibility;
+        return $this->name;
     }
 }
