@@ -13,7 +13,7 @@ Currently provides only a way to generate a brand new class method:
 
 Use [Composer](https://getcomposer.org/download):
 
-    composer require gnugat/medio:~0.3.0
+    composer require gnugat/medio:~0.4.0
 
 ## Usage
 

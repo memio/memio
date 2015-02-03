@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.4.0: Refactoring
+
+* removed ArgumentCollection from Method#__Cosntruct arguments
+* removed method visibility
+* added Type
+* added examples as tests
+* tagged MultilineArgumentCollectionPrinter as part of public API
+* tagged InlineArgumentCollectionPrinter as part of public API
+* tagged VariableArgumentCollectionFactory as part of public API
+
 ## 0.3.0: Green field
 
 * added generation of method with phpdoc and typehinted arguments
