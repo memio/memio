@@ -1,0 +1,3 @@
+{% for method in methodCollection.all %}
+{% include 'method.txt.twig' with { 'method': method } only %}
+{% endfor %}

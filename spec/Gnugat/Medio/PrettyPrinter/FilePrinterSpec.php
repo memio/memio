@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Method;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -31,5 +32,13 @@ class FilePrinterSpec extends ObjectBehavior
     function it_generates_empty_class()
     {
         $this->dump(new File(self::FILENAME))->shouldBe(get_expected_code());
+    }
+
+    function it_generates_class_with_a_method_which_has_no_arguments()
+    {
+        $file = new File(self::FILENAME);
+        $file->addMethod(new Method('__construct'));
+
+        $this->dump($file)->shouldBe(get_expected_code());
     }
 }
