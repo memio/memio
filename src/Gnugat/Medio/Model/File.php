@@ -58,9 +58,12 @@ class File
         while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
             $i--;
         }
-        $namesapces = array_slice($parts, $i + 1);
+        if ($parts[$i] !== 'spec') {
+            $i++;
+        }
+        $namespaces = array_slice($parts, $i);
 
-        return implode('\\', $namesapces);
+        return implode('\\', $namespaces);
     }
 
     /**

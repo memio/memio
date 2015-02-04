@@ -17,7 +17,7 @@ use Prophecy\Argument;
 
 class FileSpec extends ObjectBehavior
 {
-    const FILENAME = '/tmp/medio/Gnugat/Medio/MyClass.php';
+    const FILENAME = '/tmp/medio/src/Gnugat/Medio/MyClass.php';
     const NAMESPACE_ = 'Gnugat\\Medio';
     const CLASSNAME = 'MyClass';
 
@@ -34,6 +34,12 @@ class FileSpec extends ObjectBehavior
     function it_has_a_namespace()
     {
         $this->getNamespace()->shouldBe(self::NAMESPACE_);
+    }
+
+    function it_can_have_phpspec_namespace()
+    {
+        $this->beConstructedWith('/tmp/medio/spec/Gnugat/Medio/MyClassSpec.php');
+        $this->getNamespace()->shouldBe('spec\\Gnugat\\Medio');
     }
 
     function it_has_a_classname()
