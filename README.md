@@ -17,17 +17,13 @@ Use [Composer](https://getcomposer.org/download):
 
 ## Usage
 
-Let's say that we have an array of variables which represent a method's arguments:
+Let's generate a constructor:
 
 ```php
-$arguments = array('string', new \ArrayObject(), function () {});
-```
-
-Here's a snippet which uses Medio:
-
-```php
-$argumentCollection = $variableArgumentCollectionFactory->make($arguments);
-$method = new Method($argumentCollection, '__construct');
+$method = new Method('__construct');
+$method->addArgument(new Argument('Vendor\\Package\\Service', 'service'));
+$method->addArgument(new Argument('array', 'config'));
+$method->addArgument(new Argument('string', 'parameter'));
 
 echo $methodPrinter->dump($method);
 ```
@@ -36,19 +32,17 @@ It should print the following generated code:
 
 ```
     /**
-     * @param string       $argument1
-     * @param \ArrayObject $arrayObject
-     * @param callable     $argument2
+     * @param \Vendor\Package\Service $service
+     * @param array                   $config
+     * @param string                  $parameter
      */
-    public function __construct($argument1, \ArrayObject $arrayObject, callable $argument2)
+    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
     {
     }
 ```
 
-As you can see the arguments have been type hinted and the object has been named
-after its type. The non object arguments have been named using a generic name
-(`argument`), but name collision has been detected and they've been suffixed by
-a number.
+If the method line had been longer than 120 characters, the arguments would have
+been put each on their own line.
 
 For more examples, see:
 
