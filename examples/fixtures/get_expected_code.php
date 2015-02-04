@@ -17,5 +17,5 @@ function get_expected_code()
     $testMethod = $trace[1]['function'];
     $filename = __DIR__.'/'.$testClass.'/'.$testMethod.'.txt';
 
-    return rtrim(file_get_contents($filename), "\n");
+    return substr(file_get_contents($filename), 0, -1);
 }
