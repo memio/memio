@@ -42,6 +42,16 @@ class File
     }
 
     /**
+     * @return string
+     */
+    public function getClassname()
+    {
+        $filenameWithoutExtension = rtrim($this->filename, '.php');
+
+        return end(explode('/', $filenameWithoutExtension));
+    }
+
+    /**
      * @return MethodCollection
      */
     public function getMethodCollection()
