@@ -62,39 +62,38 @@
 </ul>
 <h2>Installation</h2>
 <p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require gnugat/medio:~0.3.0</code></pre>
+<pre><code>composer require gnugat/medio:~0.4.0</code></pre>
 <h2>Usage</h2>
-<p>Let's say that we have an array of variables which represent a method's arguments:</p>
-<pre><code class="language-php">$arguments = array('string', new \ArrayObject(), function () {});</code></pre>
-<p>Here's a snippet which uses Medio:</p>
-<pre><code class="language-php">$argumentCollection = $variableArgumentCollectionFactory-&gt;make($arguments);
-$method = new Method($argumentCollection, '__construct', 'public');
+<p>Let's generate a constructor:</p>
+<pre><code class="language-php">$method = new Method('__construct');
+$method-&gt;addArgument(new Argument('Vendor\\Package\\Service', 'service'));
+$method-&gt;addArgument(new Argument('array', 'config'));
+$method-&gt;addArgument(new Argument('string', 'parameter'));
 
 echo $methodPrinter-&gt;dump($method);</code></pre>
 <p>It should print the following generated code:</p>
 <pre><code>    /**
-     * @param string       $argument1
-     * @param \ArrayObject $arrayObject
-     * @param callable     $argument2
+     * @param \Vendor\Package\Service $service
+     * @param array                   $config
+     * @param string                  $parameter
      */
-    public function __construct($argument1, \ArrayObject $arrayObject, callable $argument2)
+    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
     {
     }</code></pre>
-<p>As you can see the arguments have been type hinted and the object has been named
-after its type. The non object arguments have been named using a generic name
-(<code>argument</code>), but name collision has been detected and they've been suffixed by
-a number.</p>
+<p>If the method line had been longer than 120 characters, the arguments would have
+been put each on their own line.</p>
 <p>For more examples, see:</p>
 <ul>
 <li><a href="./doc/example-phpspec-extension.html">Creating a phpspec extension</a></li>
 </ul>
 <h2>Details</h2>
-<p><img alt="UML class Diagram" src="http://yuml.me/63a3a935" /></p>
+<p><img alt="UML class Diagram" src="http://yuml.me/db33df58" /></p>
 <p>Medio provides a modelisation of your code (in <code>Gnugat\Medio\Model</code>):</p>
 <ul>
 <li>a <code>Method</code> has an <code>ArgumentCollection</code></li>
 <li>an <code>ArgumentCollection</code> can have 0 to many <code>Argument</code>, it also takes care of avoiding name collision</li>
-<li>an <code>Argument</code> has a type, a name and a way to tell if it's an object or not</li>
+<li>an <code>Argument</code> has a name and type</li>
+<li>a <code>Type</code>, takes care of type name uniformization and can detect if it's an object</li>
 </ul>
 <p>Creating those models manually can be tedious, so factories are provided (in <code>Gnugat\Medio\Factory</code>):</p>
 <ul>
@@ -112,8 +111,8 @@ a number.</p>
 <li><code>MethodPhpdocPrinter</code> generates a method's PHPDoc, with aligned argument names</li>
 </ul>
 <blockquote>
-<p><strong>Note</strong>: those "pretty printer" aren't "fidelity printers", they'll format the
-code based on highly opinions (they can be considered as "nice printers").</p>
+<p><strong>Note</strong>: those "pretty printers" aren't "fidelity printers", they'll format
+the code based on high opinions (they can be considered as "nice printers").</p>
 </blockquote>
 <h2>Further documentation</h2>
 <p>You can see the current and past versions using one of the following:</p>
