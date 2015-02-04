@@ -44,6 +44,28 @@ class File
     /**
      * @return string
      */
+    public function getNamespace()
+    {
+        $filenameWithoutExtension = rtrim($this->filename, '.php');
+        $parts = explode('/', $filenameWithoutExtension);
+        $uppercases = array(
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        );
+        array_pop($parts); // Removing classname
+        $i = count($parts) - 1;
+        // Detecting the first part that starts with a lowercase character
+        while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
+            $i--;
+        }
+        $namesapces = array_slice($parts, $i + 1);
+
+        return implode('\\', $namesapces);
+    }
+
+    /**
+     * @return string
+     */
     public function getClassname()
     {
         $filenameWithoutExtension = rtrim($this->filename, '.php');
