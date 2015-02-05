@@ -63,4 +63,15 @@ class FilePrinterSpec extends ObjectBehavior
 
         $this->dump($file)->shouldBe(get_expected_code());
     }
+
+    function it_generates_class_with_a_method_which_has_many_arguments()
+    {
+        $method = new Method('__construct');
+        $method->addArgument(new Argument(new Type('array'), 'parameters'));
+        $method->addArgument(new Argument(new Type('\DateTime'), 'date'));
+        $file = new File(self::FILENAME);
+        $file->addMethod($method);
+
+        $this->dump($file)->shouldBe(get_expected_code());
+    }
 }
