@@ -4,6 +4,9 @@ namespace Gnugat\Medio;
 
 class MyClass
 {
+    /**
+     * @param string $filename
+     */
     public function __construct($filename)
     {
     }

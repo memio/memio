@@ -35,6 +35,8 @@ class ArgumentExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('should_inline_arguments', array($this, 'shouldInlineArguments')),
+            new \Twig_SimpleFunction('biggest_type_length', array($this, 'biggestTypeLength')),
+            new \Twig_SimpleFunction('indent_param', array($this, 'indentParam')),
         );
     }
 
@@ -55,6 +57,32 @@ class ArgumentExtension extends \Twig_Extension
         $inlineLength = strlen('    public function'.$method->getName().'('.implode(',', $arguments).')');
 
         return $inlineLength <= 120;
+    }
+
+    /**
+     * @param array $arguments
+     *
+     * @return int
+     */
+    public function biggestTypeLength(array $arguments)
+    {
+        $biggestTypeLength = 0;
+        foreach ($arguments as $argument) {
+            $biggestTypeLength = max($biggestTypeLength, strlen($argument->getType()));
+        }
+
+        return $biggestTypeLength;
+    }
+
+    /**
+     * @param string $type
+     * @param int    $biggestTypeLength
+     *
+     * @return string
+     */
+    public function indentParam($type, $biggestTypeLength)
+    {
+        return str_repeat(' ', $biggestTypeLength - strlen($type));
     }
 
     /**

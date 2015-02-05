@@ -1,0 +1,4 @@
+{% set biggestTypeLength = biggest_type_length(arguments) %}
+{% for argument in arguments %}{% set type = argument.type %}
+     * @param {{ type }}{{ indent_param(type, biggestTypeLength) }} ${{ argument.name }}
+{% endfor %}
