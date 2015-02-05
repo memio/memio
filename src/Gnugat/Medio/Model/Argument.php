@@ -64,4 +64,12 @@ class Argument
     {
         return $this->type->isObject();
     }
+
+    /**
+     * @return bool
+     */
+    public function hasTypeHint()
+    {
+        return $this->type->hasTypeHint();
+    }
 }

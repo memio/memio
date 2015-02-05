@@ -24,12 +24,33 @@ class TypeSpec extends ObjectBehavior
         $this->isObject()->shouldBe(true);
     }
 
-    function it_preffix_object_types_by_namespace_separator()
+    function it_preffixes_object_types_by_namespace_separator()
     {
         $this->beConstructedWith('DateTime');
 
         $this->getName()->shouldBe('\DateTime');
         $this->isObject()->shouldBe(true);
+    }
+
+    function it_can_have_a_type_hint_if_it_is_an_object()
+    {
+        $this->beConstructedWith('\DateTime');
+
+        $this->hasTypeHint()->shouldBe(true);
+    }
+
+    function it_can_have_a_type_hint_if_it_is_an_array()
+    {
+        $this->beConstructedWith('array');
+
+        $this->hasTypeHint()->shouldBe(true);
+    }
+
+    function it_can_have_a_type_hint_if_it_is_a_callable_from_php_5_4()
+    {
+        $this->beConstructedWith('callable');
+
+        $this->hasTypeHint()->shouldBe(version_compare(PHP_VERSION, '5.4.0') >= 0);
     }
 
     function it_can_be_an_array()
