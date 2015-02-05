@@ -15,6 +15,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\PrettyPrinter\Twig\ArgumentExtension;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -27,6 +28,7 @@ class FilePrinterSpec extends ObjectBehavior
     {
         $templatePath = str_replace('spec', 'src', __DIR__.'/templates');
         $twig = new Twig_Environment(new Twig_Loader_Filesystem($templatePath));
+        $twig->addExtension(new ArgumentExtension());
 
         $this->beConstructedWith($twig);
     }
@@ -68,7 +70,18 @@ class FilePrinterSpec extends ObjectBehavior
     {
         $method = new Method('__construct');
         $method->addArgument(new Argument(new Type('array'), 'parameters'));
-        $method->addArgument(new Argument(new Type('\DateTime'), 'date'));
+        $method->addArgument(new Argument(new Type('\\DateTime'), 'date'));
+        $file = new File(self::FILENAME);
+        $file->addMethod($method);
+
+        $this->dump($file)->shouldBe(get_expected_code());
+    }
+
+    function it_generates_class_with_a_method_which_has_multiline_arguments()
+    {
+        $method = new Method('__construct');
+        $method->addArgument(new Argument(new Type('Symfony\\Component\\Filesystem\\Filesystem'), 'filesystem'));
+        $method->addArgument(new Argument(new Type('Symfony\\Component\\EventDispatcher\\EventDispatcherInterface'), 'eventDispatcher'));
         $file = new File(self::FILENAME);
         $file->addMethod($method);
 

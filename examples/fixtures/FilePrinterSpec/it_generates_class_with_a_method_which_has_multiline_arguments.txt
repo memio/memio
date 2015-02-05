@@ -1,0 +1,14 @@
+<?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+    public function __construct(
+        \Symfony\Component\Filesystem\Filesystem $filesystem,
+        \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+    )
+    {
+    }
+}
+
