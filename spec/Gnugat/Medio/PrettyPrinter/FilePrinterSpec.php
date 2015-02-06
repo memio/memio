@@ -15,7 +15,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Type;
-use Gnugat\Medio\PrettyPrinter\Twig\ArgumentExtension;
+use Gnugat\Medio\PrettyPrinter\TwigExtension;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -28,7 +28,7 @@ class FilePrinterSpec extends ObjectBehavior
     {
         $templatePath = str_replace('spec', 'src', __DIR__.'/templates');
         $twig = new Twig_Environment(new Twig_Loader_Filesystem($templatePath));
-        $twig->addExtension(new ArgumentExtension());
+        $twig->addExtension(new TwigExtension());
 
         $this->beConstructedWith($twig);
     }

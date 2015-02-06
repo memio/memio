@@ -9,21 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\PrettyPrinter\Twig;
+namespace Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Method;
+use Twig_Extension;
+use Twig_Environment;
+use Twig_SimpleFunction;
 
-class ArgumentExtension extends \Twig_Extension
+class TwigExtension extends Twig_Extension
 {
     /**
-     * @var \Twig_Environment
+     * @var Twig_Environment
      */
     private $environment;
 
     /**
      * {@inheritDoc}
      */
-    public function initRuntime(\Twig_Environment $environment)
+    public function initRuntime(Twig_Environment $environment)
     {
         $this->environment = $environment;
     }
@@ -34,9 +37,9 @@ class ArgumentExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('should_inline_arguments', array($this, 'shouldInlineArguments')),
-            new \Twig_SimpleFunction('biggest_type_length', array($this, 'biggestTypeLength')),
-            new \Twig_SimpleFunction('indent_param', array($this, 'indentParam')),
+            new Twig_SimpleFunction('should_inline_arguments', array($this, 'shouldInlineArguments')),
+            new Twig_SimpleFunction('biggest_type_length', array($this, 'biggestTypeLength')),
+            new Twig_SimpleFunction('indent_param', array($this, 'indentParam')),
         );
     }
 
