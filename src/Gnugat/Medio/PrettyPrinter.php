@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnugat\Medio\PrettyPrinter;
+namespace Gnugat\Medio;
 
 use Twig_Environment;
 
@@ -13,7 +13,7 @@ use Twig_Environment;
  * + the template only accepts only one parameter: the given model
  * + the parameter must be named after the model's class name, in snake_case
  */
-class TwigPrinter
+class PrettyPrinter
 {
     /**
      * @var Twig_Environment
@@ -33,7 +33,7 @@ class TwigPrinter
      *
      * @return string
      */
-    public function dump($model)
+    public function generateCode($model)
     {
         $fqcn = get_class($model);
         $className = end(explode('\\', $fqcn));
