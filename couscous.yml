@@ -15,6 +15,12 @@ menu:
         home:
             text: Home
             relativeUrl:
-        example-phpspec-extension:
-            text: Example: phpspec extension
-            relativeUrl: doc/example-phpspec-extension.html
+        model:
+            text: Model
+            relativeUrl: doc/01-model.html
+        templates:
+            text: Templates
+            relativeUrl: doc/02-templates.html
+        examples:
+            text: Examples
+            relativeUrl: doc/03-examples.html

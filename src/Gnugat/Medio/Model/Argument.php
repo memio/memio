@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Model;
 
+/**
+ * @api
+ */
 class Argument
 {
     /**
@@ -26,6 +29,8 @@ class Argument
     /**
      * @param Type   $type
      * @param string $name
+     *
+     * @api
      */
     public function __construct(Type $type, $name)
     {

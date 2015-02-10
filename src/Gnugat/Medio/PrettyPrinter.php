@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Medio project.
+ *
+ * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gnugat\Medio;
 
 use Twig_Environment;
@@ -12,6 +21,8 @@ use Twig_Environment;
  * + the template is named after the model's class name, in snake_case
  * + the template only accepts only one parameter: the given model
  * + the parameter must be named after the model's class name, in snake_case
+ *
+ * @api
  */
 class PrettyPrinter
 {
@@ -22,6 +33,8 @@ class PrettyPrinter
 
     /**
      * @param Twig_Environment $twig
+     *
+     * @api
      */
     public function __construct(Twig_Environment $twig)
     {
@@ -32,6 +45,8 @@ class PrettyPrinter
      * @param mixed $model
      *
      * @return string
+     *
+     * @api
      */
     public function generateCode($model)
     {

@@ -1,83 +1,65 @@
 # Medio
 
-A highly opinionated code generator library.
+A highly opinionated PHP code generator library.
 
-Currently provides only a way to generate a brand new class method:
+Medio provides a model reflecting the code structure (`Argument`, `Method`, etc)
+and uses [Twig templates](http://twig.sensiolabs.org/) to generate the code.
 
-* arguments are documented using PHPdoc (variable names are aligned)
-* if the method would be too long on one line (> 120 columns), its arguments are displayed each on their own line
-* objects, arrays and callables arguments are typehinted
-* can automatically name the arguments for you (handles name collision)
+Here's the features:
+
+* [x] generate an argument (type hint when needed)
+* [x] generate a collection of arguments (inline if length < 120 characters)
+* [ ] remove legacy code
+* [ ] generate a method
+* [ ] generate a method's PHPdoc
+* [ ] generate a collection of methods
+* [ ] generate a file (namespace and class)
+* [ ] generate a property
+* [ ] generate a property's PHPdoc
+* [ ] generate a collection of properties
+* [ ] generate a constant
+* [ ] generate a collection of constants
+* [ ] generate a use statement
+* [ ] generate a collection of use statements
+* [ ] generate a license header
+
+![Logo: an elephant, a tree and some twigs](logo.jpg)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
+[![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
 
 ## Installation
 
 Use [Composer](https://getcomposer.org/download):
 
-    composer require gnugat/medio:~0.4.0
+    composer require gnugat/medio:~1.0.0-alpha1
 
 ## Usage
 
-Let's generate a constructor:
+Here's how to generate a collection of arguments:
 
 ```php
-$method = new Method('__construct');
-$method->addArgument(new Argument('Vendor\\Package\\Service', 'service'));
-$method->addArgument(new Argument('array', 'config'));
-$method->addArgument(new Argument('string', 'parameter'));
+$argumentCollection = new ArgumentCollection();
+$argumentCollection->add(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
+$argumentCollection->add(new Argument(new Type('array'), 'config'));
+$argumentCollection->add(new Argument(new Type('string'), 'parameter'));
 
-echo $methodPrinter->dump($method);
+echo $prettyPrinter->generateCode($argumentCollection);
 ```
 
 It should print the following generated code:
 
 ```
-    /**
-     * @param \Vendor\Package\Service $service
-     * @param array                   $config
-     * @param string                  $parameter
-     */
-    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
-    {
-    }
+\Vendor\Package\Service $service, array $config, $parameter
 ```
 
-If the method line had been longer than 120 characters, the arguments would have
-been put each on their own line.
-
-For more examples, see:
-
-* [Creating a phpspec extension](./doc/example-phpspec-extension.md)
-
-## Details
-
-![UML class Diagram](http://yuml.me/db33df58)
-
-Medio provides a modelisation of your code (in `Gnugat\Medio\Model`):
-
-* a `Method` has an `ArgumentCollection`
-* an `ArgumentCollection` can have 0 to many `Argument`, it also takes care of avoiding name collision
-* an `Argument` has a name and type
-* a `Type`, takes care of type name uniformization and can detect if it's an object
-
-Creating those models manually can be tedious, so factories are provided (in `Gnugat\Medio\Factory`):
-
-* `TypeArgumentFactory` can create an `Argument` from a given type
-* `VariableArgumentFactory` can create an `Argument` from a given variable (guesses the type)
-* `VariableArgumentCollectionFactory` can create an `ArgumentCollection` from an array of variables
-
-Once modelized, the code can be generated using "[pretty printers](http://stackoverflow.com/a/5834775/3437428)"
-(in `Gnugat\Medio\PrettyPrinter`):
-
-* `ArgumentPrinter` takes care of type hinting
-* `InlineArgumentCollectionPrinter` makes an inline list of arguments
-* `MultilineArgumentCollectionPrinter` makes a list of arguments, each on its own line
-* `MethodPrinter` makes a method (can choose multiline arguments to avoid being lengthier than 120 charactes)
-* `MethodPhpdocPrinter` generates a method's PHPDoc, with aligned argument names
-
-> **Note**: those "pretty printers" aren't "fidelity printers", they'll format
-> the code based on high opinions (they can be considered as "nice printers").
-
 ## Further documentation
+
+Discover more by reading the docs:
+
+* [Model](doc/01-model.md)
+* [Templates](doc/02-templates.md)
+* [Examples](doc/03-examples.md)
 
 You can see the current and past versions using one of the following:
 
@@ -85,7 +67,7 @@ You can see the current and past versions using one of the following:
 * the [releases page on Github](https://github.com/gnugat/medio/releases)
 * the file listing the [changes between versions](CHANGELOG.md)
 
-You can find more documentation at the following links:
+And finally some meta documentation:
 
 * [copyright and MIT license](LICENSE)
 * [versioning and branching models](VERSIONING.md)

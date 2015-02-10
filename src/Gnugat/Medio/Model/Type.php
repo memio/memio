@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Model;
 
+/**
+ * @api
+ */
 class Type
 {
     /**
@@ -20,6 +23,8 @@ class Type
 
     /**
      * @param string $name
+     *
+     * @api
      */
     public function __construct($name)
     {
