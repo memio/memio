@@ -26,6 +26,15 @@ class ArgumentSpec extends ObjectBehavior
         $this->getType()->shouldBe('array');
     }
 
+    function it_can_have_a_type_hint(Type $type)
+    {
+        $this->beConstructedWith($type, 'name');
+
+        $type->hasTypeHint()->shouldBeCalled();
+
+        $this->hasTypeHint();
+    }
+
     function it_has_a_name()
     {
         $this->getName()->shouldBe('lines');
@@ -37,8 +46,12 @@ class ArgumentSpec extends ObjectBehavior
         $this->getName()->shouldBe('lineCollection');
     }
 
-    function it_can_be_an_object()
+    function it_can_be_an_object(Type $type)
     {
-        $this->isObject()->shouldBe(false);
+        $this->beConstructedWith($type, 'name');
+
+        $type->isObject()->shouldBeCalled();
+
+        $this->isObject();
     }
 }

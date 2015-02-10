@@ -1,0 +1,14 @@
+<?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+    /**
+     * @param array $parameters
+     */
+    public function __construct(array $parameters)
+    {
+    }
+}
+

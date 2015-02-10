@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Model;
 
+/**
+ * @api
+ */
 class ArgumentCollection
 {
     /**
@@ -33,6 +36,8 @@ class ArgumentCollection
 
     /**
      * @param Argument $argument
+     *
+     * @api
      */
     public function add(Argument $argument)
     {

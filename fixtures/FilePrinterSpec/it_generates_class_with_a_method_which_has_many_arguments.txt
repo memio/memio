@@ -1,0 +1,15 @@
+<?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+    /**
+     * @param array     $parameters
+     * @param \DateTime $date
+     */
+    public function __construct(array $parameters, \DateTime $date)
+    {
+    }
+}
+

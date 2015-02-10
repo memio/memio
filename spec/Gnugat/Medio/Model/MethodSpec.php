@@ -23,7 +23,7 @@ class MethodSpec extends ObjectBehavior
         $this->beConstructedWith(self::NAME);
     }
 
-    function it_has_argument_collection(Argument $argument)
+    function it_has_a_collection_of_arguments(Argument $argument)
     {
         $argumentCollection = $this->getArgumentCollection();
 

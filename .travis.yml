@@ -1,0 +1,27 @@
+language: php
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+matrix:
+    include:
+        - php: 5.3.3
+          env: COMPOSER_FLAGS="--prefer-lowest"
+
+before_script:
+    - composer selfupdate
+    - composer update $COMPOSER_FLAGS
+
+script:
+    - echo '[phpspec] Running specification tests'; ./vendor/bin/phpspec run -n -f dot
+    - echo '[phpunit] Running example tests'; ./vendor/bin/phpunit

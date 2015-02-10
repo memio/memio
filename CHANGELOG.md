@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.0-alpha1: Twig templates
+
+* added argument_collection template
+* added argument template
+* added PrettyPrinter
+
 ## 0.4.0: Refactoring
 
 * removed ArgumentCollection from Method#__Cosntruct arguments
