@@ -41,8 +41,18 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/example-phpspec-extension.html">
-                                        Example: phpspec extension
+                                    <a href="http://gnugat.github.io/medio/doc/01-model.html">
+                                        Model
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/02-templates.html">
+                                        Templates
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
+                                        Examples
                                     </a>
                                 </li>
                                                     </ul>
@@ -52,76 +62,57 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Medio</h1>
-<p>A highly opinionated code generator library.</p>
-<p>Currently provides only a way to generate a brand new class method:</p>
+<p>A highly opinionated PHP code generator library.</p>
+<p>Medio provides a model reflecting the code structure (<code>Argument</code>, <code>Method</code>, etc)
+and uses <a href="http://twig.sensiolabs.org/">Twig templates</a> to generate the code.</p>
+<p>Here's the features:</p>
 <ul>
-<li>arguments are documented using PHPdoc (variable names are aligned)</li>
-<li>if the method would be too long on one line (> 120 columns), its arguments are displayed each on their own line</li>
-<li>objects, arrays and callables arguments are typehinted</li>
-<li>can automatically name the arguments for you (handles name collision)</li>
+<li>[x] generate an argument (type hint when needed)</li>
+<li>[x] generate a collection of arguments (inline if length &lt; 120 characters)</li>
+<li>[ ] remove legacy code</li>
+<li>[ ] generate a method</li>
+<li>[ ] generate a method's PHPdoc</li>
+<li>[ ] generate a collection of methods</li>
+<li>[ ] generate a file (namespace and class)</li>
+<li>[ ] generate a property</li>
+<li>[ ] generate a property's PHPdoc</li>
+<li>[ ] generate a collection of properties</li>
+<li>[ ] generate a constant</li>
+<li>[ ] generate a collection of constants</li>
+<li>[ ] generate a use statement</li>
+<li>[ ] generate a collection of use statements</li>
+<li>[ ] generate a license header</li>
 </ul>
+<p><img alt="Logo: an elephant, a tree and some twigs" src="logo.jpg" /></p>
+<p><a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img alt="SensioLabsInsight" src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" /></a>
+<a href="https://travis-ci.org/gnugat/medio"><img alt="Travis CI" src="https://travis-ci.org/gnugat/medio.png" /></a></p>
 <h2>Installation</h2>
 <p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require gnugat/medio:~0.4.0</code></pre>
+<pre><code>composer require gnugat/medio:~1.0.0-alpha1</code></pre>
 <h2>Usage</h2>
-<p>Let's generate a constructor:</p>
-<pre><code class="language-php">$method = new Method('__construct');
-$method-&gt;addArgument(new Argument('Vendor\\Package\\Service', 'service'));
-$method-&gt;addArgument(new Argument('array', 'config'));
-$method-&gt;addArgument(new Argument('string', 'parameter'));
+<p>Here's how to generate a collection of arguments:</p>
+<pre><code class="language-php">$argumentCollection = new ArgumentCollection();
+$argumentCollection-&gt;add(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
+$argumentCollection-&gt;add(new Argument(new Type('array'), 'config'));
+$argumentCollection-&gt;add(new Argument(new Type('string'), 'parameter'));
 
-echo $methodPrinter-&gt;dump($method);</code></pre>
+echo $prettyPrinter-&gt;generateCode($argumentCollection);</code></pre>
 <p>It should print the following generated code:</p>
-<pre><code>    /**
-     * @param \Vendor\Package\Service $service
-     * @param array                   $config
-     * @param string                  $parameter
-     */
-    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
-    {
-    }</code></pre>
-<p>If the method line had been longer than 120 characters, the arguments would have
-been put each on their own line.</p>
-<p>For more examples, see:</p>
-<ul>
-<li><a href="./doc/example-phpspec-extension.html">Creating a phpspec extension</a></li>
-</ul>
-<h2>Details</h2>
-<p><img alt="UML class Diagram" src="http://yuml.me/db33df58" /></p>
-<p>Medio provides a modelisation of your code (in <code>Gnugat\Medio\Model</code>):</p>
-<ul>
-<li>a <code>Method</code> has an <code>ArgumentCollection</code></li>
-<li>an <code>ArgumentCollection</code> can have 0 to many <code>Argument</code>, it also takes care of avoiding name collision</li>
-<li>an <code>Argument</code> has a name and type</li>
-<li>a <code>Type</code>, takes care of type name uniformization and can detect if it's an object</li>
-</ul>
-<p>Creating those models manually can be tedious, so factories are provided (in <code>Gnugat\Medio\Factory</code>):</p>
-<ul>
-<li><code>TypeArgumentFactory</code> can create an <code>Argument</code> from a given type</li>
-<li><code>VariableArgumentFactory</code> can create an <code>Argument</code> from a given variable (guesses the type)</li>
-<li><code>VariableArgumentCollectionFactory</code> can create an <code>ArgumentCollection</code> from an array of variables</li>
-</ul>
-<p>Once modelized, the code can be generated using "<a href="http://stackoverflow.com/a/5834775/3437428">pretty printers</a>"
-(in <code>Gnugat\Medio\PrettyPrinter</code>):</p>
-<ul>
-<li><code>ArgumentPrinter</code> takes care of type hinting</li>
-<li><code>InlineArgumentCollectionPrinter</code> makes an inline list of arguments</li>
-<li><code>MultilineArgumentCollectionPrinter</code> makes a list of arguments, each on its own line</li>
-<li><code>MethodPrinter</code> makes a method (can choose multiline arguments to avoid being lengthier than 120 charactes)</li>
-<li><code>MethodPhpdocPrinter</code> generates a method's PHPDoc, with aligned argument names</li>
-</ul>
-<blockquote>
-<p><strong>Note</strong>: those "pretty printers" aren't "fidelity printers", they'll format
-the code based on high opinions (they can be considered as "nice printers").</p>
-</blockquote>
+<pre><code>\Vendor\Package\Service $service, array $config, $parameter</code></pre>
 <h2>Further documentation</h2>
+<p>Discover more by reading the docs:</p>
+<ul>
+<li><a href="doc/01-model.html">Model</a></li>
+<li><a href="doc/02-templates.html">Templates</a></li>
+<li><a href="doc/03-examples.html">Examples</a></li>
+</ul>
 <p>You can see the current and past versions using one of the following:</p>
 <ul>
 <li>the <code>git tag</code> command</li>
 <li>the <a href="https://github.com/gnugat/medio/releases">releases page on Github</a></li>
 <li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
 </ul>
-<p>You can find more documentation at the following links:</p>
+<p>And finally some meta documentation:</p>
 <ul>
 <li><a href="LICENSE">copyright and MIT license</a></li>
 <li><a href="VERSIONING.html">versioning and branching models</a></li>

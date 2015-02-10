@@ -61,54 +61,56 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>How to contribute</h1>
-<p>Everybody should be able to help. Here's how you can make this project more
-awesome:</p>
-<ol>
-<li><a href="https://github.com/gnugat/medio/fork_select">Fork it</a></li>
-<li>improve it</li>
-<li>submit a <a href="https://help.github.com/articles/creating-a-pull-request">pull request</a></li>
-</ol>
-<p>Your work will then be reviewed as soon as possible (suggestions about some
-changes, improvements or alternatives may be given).</p>
-<p>Here's some tips to make you the best contributor ever:</p>
+                    <h1>Templates</h1>
+<p>Medio provides a "pretty printer" to generate the code. It uses <a href="http://twig.sensiolabs.org/">Twig</a>
+behind the scenes, a powerful templating engine.</p>
+<blockquote>
+<p>Keep in mind that the templates provided out of the box are highly opinionated,
+but they can be extended / over wrote.</p>
+</blockquote>
 <ul>
-<li><a href="#standard-code">Standard code</a></li>
-<li><a href="#specifications">Specifications</a></li>
-<li><a href="#keeping-your-fork-up-to-date">Keeping your fork up-to-date</a></li>
+<li><a href="#pretty-printer">Pretty Printer</a></li>
+<li><a href="#conventions">Conventions</a></li>
 </ul>
-<h2>Standard code</h2>
-<p>Use <a href="http://cs.sensiolabs.org/">PHP CS fixer</a> to make your code compliant with
-Medio's coding standards:</p>
-<pre><code>php-cs-fixer fix --config=sf23 .</code></pre>
-<h2>Specifications</h2>
-<p>Medio drives its development using <a href="http://www.phpspec.net/">phpspec</a>:</p>
-<pre><code># Generate the specification class:
-phpspec describe 'Gnugat\Medio\MyNewClass'
+<p>See also <a href="#next-readings">next readings</a>.</p>
+<h2>Pretty printer</h2>
+<p>Its API is pretty straightforward:</p>
+<pre><code class="language-php">&lt;?php
 
-# Customize the specification class:
-$EDITOR tests/spec/Gnugat/Medio/MyNewClass.php
+namespace Gnugat\Medio;
 
-# Generate the specified class:
-phpspec run
+use Twig_Environment;
 
-# Customize the class:
-$EDITOR src/Gnugat/Medio/MyNewClass.php
+class PrettyPrinter
+{
+    public function __construct(Twig_Environment $twig);
+    public function generateCode($model);
+}</code></pre>
+<p>You can build it like this:</p>
+<pre><code class="language-php">&lt;?php
 
-phpspec run # Should be green!</code></pre>
-<h2>Keeping your fork up-to-date</h2>
-<p>To keep your fork up-to-date, you should track the upstream (original) one
-using the following command:</p>
-<pre><code>git remote add upstream https://github.com/gnugat/medio.git</code></pre>
-<p>Then get the upstream changes:</p>
-<pre><code>git checkout master
-git pull --rebase origin master
-git pull --rebase upstream master
-git checkout &lt;your-branch&gt;
-git rebase master</code></pre>
-<p>Finally, publish your changes:</p>
-<pre><code>git push -f origin &lt;your-branch&gt;</code></pre>
-<p>Your pull request will be automatically updated.</p>
+require __DIR__.'/vendor/autoload.php';
+
+use Gnugat\Medio\PrettyPrinter;
+
+$loader = \Twig_Loader_Filesystem(__DIR__.'/vendor/gnugat/medio/templates'); // Replace this path
+$twig = new \Twig_Environment($loader);
+$prettyPrinter = new PrettyPrinter($twig);</code></pre>
+<h2>Conventions</h2>
+<p>A model's templates is named after its class name, in snake_case. It always take
+as its first argument the model (the variable is also named after the model's class anme in snake_case).</p>
+<blockquote>
+<p>For instance, <code>ArgumentCollection</code> should have a template named <code>argument_collection.twig</code>.
+The template should receive the model, in the <code>argument_collection</code> parameter.</p>
+</blockquote>
+<p>"Sub-templates" should be prefixed with an underscore.</p>
+<blockquote>
+<p>For example: <code>_inline_argument_collection.twig</code>.</p>
+</blockquote>
+<h2>Next readings</h2>
+<ul>
+<li><a href="03-examples.html">Examples</a></li>
+</ul>
                 </section>
 
             </div>

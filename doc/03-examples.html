@@ -61,54 +61,26 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>How to contribute</h1>
-<p>Everybody should be able to help. Here's how you can make this project more
-awesome:</p>
+                    <h1>Examples</h1>
+<p>Medio doesn't have traditional tests. It has executable examples!</p>
+<p>Have a look in the <code>examples</code> directory, each file contains a feature with many
+scenarii.</p>
+<blockquote>
+<p><strong>Note</strong>: Here, the word feature is used instead of "PHPUnit Test Class", and
+the word scenario is used instead of "test method".</p>
+<p><strong>Note</strong>: Please ignore the <code>examples/PrettyPrinterTestCase.php</code> file.</p>
+</blockquote>
+<p>Each scenario is composed of 3 kind of step:</p>
 <ol>
-<li><a href="https://github.com/gnugat/medio/fork_select">Fork it</a></li>
-<li>improve it</li>
-<li>submit a <a href="https://help.github.com/articles/creating-a-pull-request">pull request</a></li>
+<li>creation of the model</li>
+<li>generation of the code, using the built model</li>
+<li>comparison with expected code</li>
 </ol>
-<p>Your work will then be reviewed as soon as possible (suggestions about some
-changes, improvements or alternatives may be given).</p>
-<p>Here's some tips to make you the best contributor ever:</p>
-<ul>
-<li><a href="#standard-code">Standard code</a></li>
-<li><a href="#specifications">Specifications</a></li>
-<li><a href="#keeping-your-fork-up-to-date">Keeping your fork up-to-date</a></li>
-</ul>
-<h2>Standard code</h2>
-<p>Use <a href="http://cs.sensiolabs.org/">PHP CS fixer</a> to make your code compliant with
-Medio's coding standards:</p>
-<pre><code>php-cs-fixer fix --config=sf23 .</code></pre>
-<h2>Specifications</h2>
-<p>Medio drives its development using <a href="http://www.phpspec.net/">phpspec</a>:</p>
-<pre><code># Generate the specification class:
-phpspec describe 'Gnugat\Medio\MyNewClass'
-
-# Customize the specification class:
-$EDITOR tests/spec/Gnugat/Medio/MyNewClass.php
-
-# Generate the specified class:
-phpspec run
-
-# Customize the class:
-$EDITOR src/Gnugat/Medio/MyNewClass.php
-
-phpspec run # Should be green!</code></pre>
-<h2>Keeping your fork up-to-date</h2>
-<p>To keep your fork up-to-date, you should track the upstream (original) one
-using the following command:</p>
-<pre><code>git remote add upstream https://github.com/gnugat/medio.git</code></pre>
-<p>Then get the upstream changes:</p>
-<pre><code>git checkout master
-git pull --rebase origin master
-git pull --rebase upstream master
-git checkout &lt;your-branch&gt;
-git rebase master</code></pre>
-<p>Finally, publish your changes:</p>
-<pre><code>git push -f origin &lt;your-branch&gt;</code></pre>
-<p>Your pull request will be automatically updated.</p>
+<p>The expected code can be quite lengthy, in those cases it's been put in a fixture
+file. But don't panic! You can find them in the <code>fixtures</code> directory, they are
+put in a folder named after the feature, and then in a file named after the scenario.</p>
+<p>To make sure each modification added to Medio doesn't break anything, those
+examples are executed using <a href="http://phpunit.de">phpunit</a>.</p>
                 </section>
 
             </div>

@@ -61,54 +61,58 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>How to contribute</h1>
-<p>Everybody should be able to help. Here's how you can make this project more
-awesome:</p>
-<ol>
-<li><a href="https://github.com/gnugat/medio/fork_select">Fork it</a></li>
-<li>improve it</li>
-<li>submit a <a href="https://help.github.com/articles/creating-a-pull-request">pull request</a></li>
-</ol>
-<p>Your work will then be reviewed as soon as possible (suggestions about some
-changes, improvements or alternatives may be given).</p>
-<p>Here's some tips to make you the best contributor ever:</p>
+                    <h1>Model</h1>
+<p>In order to generate code, you must build some models. Here's all you need to
+know about them.</p>
+<p><img alt="UML class diagram: ArgumentCollection has Argument which has Type" src="http://yuml.me/39b32b28" /></p>
 <ul>
-<li><a href="#standard-code">Standard code</a></li>
-<li><a href="#specifications">Specifications</a></li>
-<li><a href="#keeping-your-fork-up-to-date">Keeping your fork up-to-date</a></li>
+<li><a href="#argument">Argument</a></li>
+<li><a href="#argumentcollection">ArgumentCollection</a></li>
 </ul>
-<h2>Standard code</h2>
-<p>Use <a href="http://cs.sensiolabs.org/">PHP CS fixer</a> to make your code compliant with
-Medio's coding standards:</p>
-<pre><code>php-cs-fixer fix --config=sf23 .</code></pre>
-<h2>Specifications</h2>
-<p>Medio drives its development using <a href="http://www.phpspec.net/">phpspec</a>:</p>
-<pre><code># Generate the specification class:
-phpspec describe 'Gnugat\Medio\MyNewClass'
+<p>See also <a href="#next-readings">next readings</a>.</p>
+<h2>Argument</h2>
+<p>A method's argument. It has a <code>Type</code> and a name:</p>
+<pre><code class="language-php">&lt;?php
 
-# Customize the specification class:
-$EDITOR tests/spec/Gnugat/Medio/MyNewClass.php
+namespace Gnugat\Medio\Model;
 
-# Generate the specified class:
-phpspec run
+class Argument
+{
+    public function __construct(Type $type, $name);
+}</code></pre>
+<p>The <code>Type</code> model is responsible of knowing if the argument can be type hinted:</p>
+<pre><code class="language-php">&lt;?php
 
-# Customize the class:
-$EDITOR src/Gnugat/Medio/MyNewClass.php
+namespace Gnugat\Medio\Model;
 
-phpspec run # Should be green!</code></pre>
-<h2>Keeping your fork up-to-date</h2>
-<p>To keep your fork up-to-date, you should track the upstream (original) one
-using the following command:</p>
-<pre><code>git remote add upstream https://github.com/gnugat/medio.git</code></pre>
-<p>Then get the upstream changes:</p>
-<pre><code>git checkout master
-git pull --rebase origin master
-git pull --rebase upstream master
-git checkout &lt;your-branch&gt;
-git rebase master</code></pre>
-<p>Finally, publish your changes:</p>
-<pre><code>git push -f origin &lt;your-branch&gt;</code></pre>
-<p>Your pull request will be automatically updated.</p>
+class Type
+{
+    public function __construct($name);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: a type is considered as being an object if the given name is
+different than <code>string</code>, <code>bool</code>, <code>int</code>, <code>double</code>, <code>callable</code>, <code>resource</code>,
+<code>array</code>, <code>null</code>, <code>mixed</code>.</p>
+</blockquote>
+<h2>ArgumentCollection</h2>
+<p>Methods can have 0 to many arguments, this model takes care of managing those:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class ArgumentCollection
+{
+    public function add(Argument $argument);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: ArgumentCollection will rename added arguments in case of name collision,
+by suffixing them with a number.</p>
+</blockquote>
+<h2>Next readings</h2>
+<ul>
+<li><a href="02-templates.html">Templates</a></li>
+<li><a href="03-examples.html">Examples</a></li>
+</ul>
                 </section>
 
             </div>
