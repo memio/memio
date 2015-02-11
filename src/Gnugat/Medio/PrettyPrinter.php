@@ -52,7 +52,8 @@ class PrettyPrinter
     public function generateCode($model, array $parameters = array())
     {
         $fqcn = get_class($model);
-        $className = end(explode('\\', $fqcn));
+        $namespaces = explode('\\', $fqcn);
+        $className = end($namespaces);
         $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $className));
         $parameters[$modelName] = $model;
 

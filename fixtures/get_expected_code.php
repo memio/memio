@@ -13,7 +13,8 @@ function get_expected_code()
 {
     $trace = debug_backtrace();
     $testFullyQualifiedClassname = $trace[1]['class'];
-    $testClass = end(explode('\\', $testFullyQualifiedClassname));
+    $namespaces = explode('\\', $testFullyQualifiedClassname);
+    $testClass = end($namespaces);
     $testMethod = $trace[1]['function'];
     $filename = __DIR__.'/'.$testClass.'/'.$testMethod.'.txt';
 

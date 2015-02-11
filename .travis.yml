@@ -14,9 +14,11 @@ php:
   - hhvm
 
 matrix:
-    include:
-        - php: 5.3.3
-          env: COMPOSER_FLAGS="--prefer-lowest"
+#    include:
+#        - php: 5.3.3
+#          env: COMPOSER_FLAGS="--prefer-lowest"
+    allow_failures:
+        - php: hhvm
 
 before_script:
     - curl http://cs.sensiolabs.org/get/php-cs-fixer.phar -o php-cs-fixer.phar
