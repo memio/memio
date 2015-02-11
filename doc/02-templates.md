@@ -77,7 +77,7 @@ $repository = $factory->createRepository();
 Using this repository you can get the path:
 
 ```php
-$medioTemplatesPath = $repository->get('/gnugat/medio/templates')->getPath();
+$medioTemplatesPath = $repository->get('/gnugat/medio/templates')->getFilesystemPath();
 ```
 
 ## Next readings
