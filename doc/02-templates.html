@@ -119,7 +119,7 @@ $factoryClass = PULI_FACTORY_CLASS;
 $factory = new $factoryClass();
 $repository = $factory-&gt;createRepository();</code></pre>
 <p>Using this repository you can get the path:</p>
-<pre><code class="language-php">$medioTemplatesPath = $repository-&gt;get('/gnugat/medio/templates')-&gt;getPath();</code></pre>
+<pre><code class="language-php">$medioTemplatesPath = $repository-&gt;get('/gnugat/medio/templates')-&gt;getFilesystemPath();</code></pre>
 <h2>Next readings</h2>
 <ul>
 <li><a href="03-examples.html">Examples</a></li>
