@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-alpha3: Puli
+
+* added `/gnugat/medio/templates` Puli's path
+
 ## 1.0.0-alpha2: Twig tempates parameters
 
 * added parameters argument to PrettyPrinter
