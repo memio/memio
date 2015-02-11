@@ -23,7 +23,7 @@ Here's the features:
 * [ ] generate a collection of use statements
 * [ ] generate a license header
 
-![Logo: an elephant, a tree and some twigs](logo.jpg)
+![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
 [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
