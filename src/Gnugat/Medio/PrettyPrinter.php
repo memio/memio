@@ -43,17 +43,19 @@ class PrettyPrinter
 
     /**
      * @param mixed $model
+     * @param array $parameters
      *
      * @return string
      *
      * @api
      */
-    public function generateCode($model)
+    public function generateCode($model, array $parameters = array())
     {
         $fqcn = get_class($model);
         $className = end(explode('\\', $fqcn));
         $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $className));
+        $parameters[$modelName] = $model;
 
-        return $this->twig->render($modelName.'.twig', array($modelName => $model));
+        return $this->twig->render($modelName.'.twig', $parameters);
     }
 }
