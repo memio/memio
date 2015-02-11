@@ -50,4 +50,17 @@ class GeneratingArgumentCollectionTest extends PrettyPrinterTestCase
 
         $this->assertSame(get_expected_code(), $generatedCode);
     }
+
+    public function testRestrictInlineLength()
+    {
+        $argumentCollection = new ArgumentCollection();
+        for ($i = 1; $i < 9; $i++) {
+            $argumentCollection->add(new Argument(new Type('mixed'), 'argument'.$i));
+        }
+        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection, array(
+            'length_restriction' => strlen('    public function __construct()'),
+        ));
+
+        $this->assertSame(get_expected_code(), $generatedCode);
+    }
 }
