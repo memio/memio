@@ -25,7 +25,7 @@ use Twig_Environment;
 class PrettyPrinter
 {
     public function __construct(Twig_Environment $twig);
-    public function generateCode($model);
+    public function generateCode($model, array $parameters = array());
 }
 ```
 

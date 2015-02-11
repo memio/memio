@@ -1,42 +1,16 @@
 # Medio
 
-A highly opinionated PHP code generator library.
+A code generation library, which uses [Twig templates](http://twig.sensiolabs.org/).
 
-Medio provides a model reflecting the code structure (`Argument`, `Method`, etc)
-and uses [Twig templates](http://twig.sensiolabs.org/) to generate the code.
+> **Note**: Templates provided out of the box are highly opinionated, but you can
+> customize them.
 
-Here's the features:
+In order to generate a chunk of code, you need to describe it through the
+construction of "models". Once done, you can give the top most model to the
+`PrettyPrinter` service: it will find the appropriate [Twig template](http://twig.sensiolabs.org/)
+and do the actual generation.
 
-* [x] generate an argument (type hint when needed)
-* [x] generate a collection of arguments (inline if length < 120 characters)
-* [ ] remove legacy code
-* [ ] generate a method
-* [ ] generate a method's PHPdoc
-* [ ] generate a collection of methods
-* [ ] generate a file (namespace and class)
-* [ ] generate a property
-* [ ] generate a property's PHPdoc
-* [ ] generate a collection of properties
-* [ ] generate a constant
-* [ ] generate a collection of constants
-* [ ] generate a use statement
-* [ ] generate a collection of use statements
-* [ ] generate a license header
-
-![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
-[![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
-
-## Installation
-
-Use [Composer](https://getcomposer.org/download):
-
-    composer require gnugat/medio:~1.0.0-alpha1
-
-## Usage
-
-Here's how to generate a collection of arguments:
+Want to see it in action? Here's how to generate a method's arguments:
 
 ```php
 $argumentCollection = new ArgumentCollection();
@@ -47,11 +21,29 @@ $argumentCollection->add(new Argument(new Type('string'), 'parameter'));
 echo $prettyPrinter->generateCode($argumentCollection);
 ```
 
-It should print the following generated code:
+This should print the following generated code:
 
 ```
 \Vendor\Package\Service $service, array $config, $parameter
 ```
+
+![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
+[![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
+
+## Installation
+
+Use [Composer](https://getcomposer.org/download):
+
+    composer require gnugat/medio:~1.0@alpha
+
+## TODO list
+
+* [ ] more models (`Method`, `MethodCollection`, `File`, `UseCollection`, `Property`, `PropertyCollection`, etc)
+* [ ] meta data management (PHPdoc, license header, etc)
+* [ ] building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
+* [ ] commands (inject dependency: add use statement, property, constructor argument, etc)
 
 ## Further documentation
 

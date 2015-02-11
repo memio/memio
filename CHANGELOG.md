@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-alpha2: Twig tempates parameters
+
+* added parameters argument to PrettyPrinter
+* removed legacy code:
+    * removed MultilineArgumentCollectionPrinter [**BC break**]
+    * removed InlineArgumentCollectionPrinter [**BC break**]
+    * removed VariableArgumentCollectionFactory [**BC break**]
+
 ## 1.0.0-alpha1: Twig templates
 
 * added argument_collection template
