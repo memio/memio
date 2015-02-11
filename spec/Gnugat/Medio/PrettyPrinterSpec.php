@@ -29,4 +29,12 @@ class PrettyPrinterSpec extends ObjectBehavior
 
         $this->generateCode($methodCollection);
     }
+
+    function it_passes_extra_parameters_to_template(Twig_Environment $twig)
+    {
+        $file = new File('/tmp/filename.php');
+        $twig->render('file.twig', array('extra' => 'parameter', 'file' => $file))->shouldBeCalled();
+
+        $this->generateCode($file, array('extra' => 'parameter'));
+    }
 }
