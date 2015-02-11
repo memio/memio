@@ -8,6 +8,7 @@ behind the scenes, a powerful templating engine.
 
 * [Pretty Printer](#pretty-printer)
 * [Conventions](#conventions)
+* [Puli](#puli)
 
 See also [next readings](#next-readings).
 
@@ -54,6 +55,30 @@ as its first argument the model (the variable is also named after the model's cl
 "Sub-templates" should be prefixed with an underscore.
 
 > For example: `_inline_argument_collection.twig`.
+
+## Puli
+
+Using [puli](http://docs.puli.io/), you can get easily Medio's `templates` path.
+
+First install the composer's plugin:
+
+    composer require puli/composer-plugin:~1.0@beta
+
+Then in your code you need to create a Puli repository:
+
+```php
+<?php
+
+$factoryClass = PULI_FACTORY_CLASS;
+$factory = new $factoryClass();
+$repository = $factory->createRepository();
+```
+
+Using this repository you can get the path:
+
+```php
+$medioTemplatesPath = $repository->get('/gnugat/medio/templates')->getPath();
+```
 
 ## Next readings
 
