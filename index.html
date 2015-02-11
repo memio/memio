@@ -62,43 +62,37 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Medio</h1>
-<p>A highly opinionated PHP code generator library.</p>
-<p>Medio provides a model reflecting the code structure (<code>Argument</code>, <code>Method</code>, etc)
-and uses <a href="http://twig.sensiolabs.org/">Twig templates</a> to generate the code.</p>
-<p>Here's the features:</p>
-<ul>
-<li>[x] generate an argument (type hint when needed)</li>
-<li>[x] generate a collection of arguments (inline if length &lt; 120 characters)</li>
-<li>[ ] remove legacy code</li>
-<li>[ ] generate a method</li>
-<li>[ ] generate a method's PHPdoc</li>
-<li>[ ] generate a collection of methods</li>
-<li>[ ] generate a file (namespace and class)</li>
-<li>[ ] generate a property</li>
-<li>[ ] generate a property's PHPdoc</li>
-<li>[ ] generate a collection of properties</li>
-<li>[ ] generate a constant</li>
-<li>[ ] generate a collection of constants</li>
-<li>[ ] generate a use statement</li>
-<li>[ ] generate a collection of use statements</li>
-<li>[ ] generate a license header</li>
-</ul>
-<p><img alt="Logo: an elephant, a tree and some twigs" src="https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg" /></p>
-<p><a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img alt="SensioLabsInsight" src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" /></a>
-<a href="https://travis-ci.org/gnugat/medio"><img alt="Travis CI" src="https://travis-ci.org/gnugat/medio.png" /></a></p>
-<h2>Installation</h2>
-<p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require gnugat/medio:~1.0.0-alpha1</code></pre>
-<h2>Usage</h2>
-<p>Here's how to generate a collection of arguments:</p>
+<p>A code generation library, which uses <a href="http://twig.sensiolabs.org/">Twig templates</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: Templates provided out of the box are highly opinionated, but you can
+customize them.</p>
+</blockquote>
+<p>In order to generate a chunk of code, you need to describe it through the
+construction of &quot;models&quot;. Once done, you can give the top most model to the
+<code>PrettyPrinter</code> service: it will find the appropriate <a href="http://twig.sensiolabs.org/">Twig template</a>
+and do the actual generation.</p>
+<p>Want to see it in action? Here's how to generate a method's arguments:</p>
 <pre><code class="language-php">$argumentCollection = new ArgumentCollection();
 $argumentCollection-&gt;add(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
 $argumentCollection-&gt;add(new Argument(new Type('array'), 'config'));
 $argumentCollection-&gt;add(new Argument(new Type('string'), 'parameter'));
 
 echo $prettyPrinter-&gt;generateCode($argumentCollection);</code></pre>
-<p>It should print the following generated code:</p>
+<p>This should print the following generated code:</p>
 <pre><code>\Vendor\Package\Service $service, array $config, $parameter</code></pre>
+<p><img src="https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg" alt="Logo: an elephant, a tree and some twigs" /></p>
+<p><a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" alt="SensioLabsInsight" /></a>
+<a href="https://travis-ci.org/gnugat/medio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></p>
+<h2>Installation</h2>
+<p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
+<pre><code>composer require gnugat/medio:~1.0@alpha</code></pre>
+<h2>TODO list</h2>
+<ul>
+<li>[ ] more models (<code>Method</code>, <code>MethodCollection</code>, <code>File</code>, <code>UseCollection</code>, <code>Property</code>, <code>PropertyCollection</code>, etc)</li>
+<li>[ ] meta data management (PHPdoc, license header, etc)</li>
+<li>[ ] building models from existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
+<li>[ ] commands (inject dependency: add use statement, property, constructor argument, etc)</li>
+</ul>
 <h2>Further documentation</h2>
 <p>Discover more by reading the docs:</p>
 <ul>

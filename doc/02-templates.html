@@ -62,7 +62,7 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Templates</h1>
-<p>Medio provides a "pretty printer" to generate the code. It uses <a href="http://twig.sensiolabs.org/">Twig</a>
+<p>Medio provides a &quot;pretty printer&quot; to generate the code. It uses <a href="http://twig.sensiolabs.org/">Twig</a>
 behind the scenes, a powerful templating engine.</p>
 <blockquote>
 <p>Keep in mind that the templates provided out of the box are highly opinionated,
@@ -84,7 +84,7 @@ use Twig_Environment;
 class PrettyPrinter
 {
     public function __construct(Twig_Environment $twig);
-    public function generateCode($model);
+    public function generateCode($model, array $parameters = array());
 }</code></pre>
 <p>You can build it like this:</p>
 <pre><code class="language-php">&lt;?php
@@ -103,7 +103,7 @@ as its first argument the model (the variable is also named after the model's cl
 <p>For instance, <code>ArgumentCollection</code> should have a template named <code>argument_collection.twig</code>.
 The template should receive the model, in the <code>argument_collection</code> parameter.</p>
 </blockquote>
-<p>"Sub-templates" should be prefixed with an underscore.</p>
+<p>&quot;Sub-templates&quot; should be prefixed with an underscore.</p>
 <blockquote>
 <p>For example: <code>_inline_argument_collection.twig</code>.</p>
 </blockquote>
