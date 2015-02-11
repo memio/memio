@@ -1,8 +1,0 @@
-<?php
-
-namespace {{ file.namespace }};
-
-class {{ file.classname }}
-{
-{% include 'method_collection.txt.twig' with { 'methodCollection': file.methodCollection } only %}
-}

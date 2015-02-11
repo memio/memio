@@ -1,1 +1,0 @@
-array $argument1, \stdClass $stdClass, callable $argument2
