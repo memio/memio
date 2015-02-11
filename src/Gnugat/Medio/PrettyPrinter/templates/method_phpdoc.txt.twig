@@ -1,6 +1,0 @@
-{% if method.argumentCollection.all|length > 0 -%}
-    /**
-{% include 'arguments_phpdoc.txt.twig' with { 'arguments': method.argumentCollection.all } only %}
-     */
-{{ '    ' -}}
-{% endif %}
