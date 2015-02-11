@@ -14,14 +14,18 @@ php:
   - hhvm
 
 matrix:
-    include:
-        - php: 5.3.3
-          env: COMPOSER_FLAGS="--prefer-lowest"
+#    include:
+#        - php: 5.3.3
+#          env: COMPOSER_FLAGS="--prefer-lowest"
+    allow_failures:
+        - php: hhvm
 
 before_script:
+    - curl http://cs.sensiolabs.org/get/php-cs-fixer.phar -o php-cs-fixer.phar
     - composer selfupdate
     - composer update $COMPOSER_FLAGS
 
 script:
     - echo '[phpspec] Running specification tests'; ./vendor/bin/phpspec run -n -f dot
     - echo '[phpunit] Running example tests'; ./vendor/bin/phpunit
+    - output=$(php -n php-cs-fixer.phar fix -v --dry-run --config=sf23 .); if [[ $(grep -o F <<< $output | wc -l) -gt 3 ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;

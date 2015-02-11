@@ -1,8 +1,0 @@
-<?php
-
-namespace Gnugat\Medio;
-
-class MyClass
-{
-}
-

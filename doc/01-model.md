@@ -12,7 +12,7 @@ See also [next readings](#next-readings).
 
 ## Argument
 
-A method's argument. It has a `Type` and a name:
+A method's single argument. It has a `Type` and a name:
 
 ```php
 <?php

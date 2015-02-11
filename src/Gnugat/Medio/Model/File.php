@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Gnugat\Medio\Model;
 
 class File
@@ -72,8 +71,9 @@ class File
     public function getClassname()
     {
         $filenameWithoutExtension = rtrim($this->filename, '.php');
+        $namespaces = explode('/', $filenameWithoutExtension);
 
-        return end(explode('/', $filenameWithoutExtension));
+        return end($namespaces);
     }
 
     /**
