@@ -71,6 +71,7 @@ but they can be extended / over wrote.</p>
 <ul>
 <li><a href="#pretty-printer">Pretty Printer</a></li>
 <li><a href="#conventions">Conventions</a></li>
+<li><a href="#puli">Puli</a></li>
 </ul>
 <p>See also <a href="#next-readings">next readings</a>.</p>
 <h2>Pretty printer</h2>
@@ -107,6 +108,18 @@ The template should receive the model, in the <code>argument_collection</code> p
 <blockquote>
 <p>For example: <code>_inline_argument_collection.twig</code>.</p>
 </blockquote>
+<h2>Puli</h2>
+<p>Using <a href="http://docs.puli.io/">puli</a>, you can get easily Medio's <code>templates</code> path.</p>
+<p>First install the composer's plugin:</p>
+<pre><code>composer require puli/composer-plugin:~1.0@beta</code></pre>
+<p>Then in your code you need to create a Puli repository:</p>
+<pre><code class="language-php">&lt;?php
+
+$factoryClass = PULI_FACTORY_CLASS;
+$factory = new $factoryClass();
+$repository = $factory-&gt;createRepository();</code></pre>
+<p>Using this repository you can get the path:</p>
+<pre><code class="language-php">$medioTemplatesPath = $repository-&gt;get('/gnugat/medio/templates')-&gt;getPath();</code></pre>
 <h2>Next readings</h2>
 <ul>
 <li><a href="03-examples.html">Examples</a></li>
