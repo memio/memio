@@ -25,7 +25,7 @@ class GeneratingMethodCollectionTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($methodCollection);
 
-        $this->assertSame(get_expected_code(), $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 
     public function testThreeMethods()
@@ -40,6 +40,6 @@ class GeneratingMethodCollectionTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($methodCollection);
 
-        $this->assertSame(get_expected_code(), $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 }

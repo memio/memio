@@ -16,8 +16,7 @@
         "psr-4": { "Gnugat\\Medio\\": "src/Gnugat/Medio" }
     },
     "autoload-dev": {
-        "psr-4": { "Gnugat\\Medio\\Examples\\": "examples" },
-        "files": [ "fixtures/get_expected_code.php" ]
+        "psr-4": { "Gnugat\\Medio\\Examples\\": "examples" }
     },
     "require": {
         "php": ">=5.3.3",

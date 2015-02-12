@@ -14,7 +14,7 @@ class GeneratingMethodTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
-        $this->assertSame(get_expected_code(), $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 
     public function testWithInlineArguments()
@@ -26,7 +26,7 @@ class GeneratingMethodTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
-        $this->assertSame(get_expected_code(), $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 
     public function testWithMultilineArguments()
@@ -38,6 +38,6 @@ class GeneratingMethodTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
-        $this->assertSame(get_expected_code(), $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 }
