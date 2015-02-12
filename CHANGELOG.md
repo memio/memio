@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.0.0-alpha5: MethodCollection
+
+* added method_collection template
+* tagged MethodCollection as part of public API:
+    * add
+* tagged Exception as part of API
+* tagged InvalidArgumentException as part of API
+* refactored fixtures
+
 ## 1.0.0-alpha4: Method
 
 * added method template
