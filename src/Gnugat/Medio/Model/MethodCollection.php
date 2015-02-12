@@ -13,6 +13,9 @@ namespace Gnugat\Medio\Model;
 
 use Gnugat\Medio\Exception\InvalidArgumentException;
 
+/**
+ * @api
+ */
 class MethodCollection
 {
     /**
@@ -21,17 +24,11 @@ class MethodCollection
     private $methods = array();
 
     /**
-     * @return array
-     */
-    public function all()
-    {
-        return $this->methods;
-    }
-
-    /**
      * @param Method $method
      *
      * @throws InvalidArgumentException If the name is already taken
+     *
+     * @api
      */
     public function add(Method $method)
     {
@@ -43,5 +40,13 @@ class MethodCollection
             }
         }
         $this->methods[] = $method;
+    }
+
+    /**
+     * @return array
+     */
+    public function all()
+    {
+        return $this->methods;
     }
 }

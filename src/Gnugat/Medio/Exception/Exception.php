@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Exception;
 
+/**
+ * @api
+ */
 interface Exception
 {
 }

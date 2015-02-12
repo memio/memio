@@ -1,0 +1,11 @@
+    public function __construct(\DateTime $dateTime, \ArrayObject $arrayObject)
+    {
+    }
+
+    public function getDateTime()
+    {
+    }
+
+    public function getArrayObject()
+    {
+    }
