@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Model;
 
+/**
+ * @api
+ */
 class Method
 {
     /**
@@ -25,6 +28,8 @@ class Method
 
     /**
      * @param string $name
+     *
+     * @api
      */
     public function __construct($name)
     {
@@ -33,19 +38,21 @@ class Method
     }
 
     /**
+     * @param Argument $argument
+     *
+     * @api
+     */
+    public function addArgument(Argument $argument)
+    {
+        $this->argumentCollection->add($argument);
+    }
+
+    /**
      * @return ArgumentCollection
      */
     public function getArgumentCollection()
     {
         return $this->argumentCollection;
-    }
-
-    /**
-     * @param Argument $argument
-     */
-    public function addArgument(Argument $argument)
-    {
-        $this->argumentCollection->add($argument);
     }
 
     /**

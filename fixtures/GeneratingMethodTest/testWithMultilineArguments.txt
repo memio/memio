@@ -1,0 +1,10 @@
+    public function it_has_too_many_argument_yeah(
+        $argument1,
+        $argument2,
+        $argument3,
+        $argument4,
+        $argument5,
+        $argument6
+    )
+    {
+    }

@@ -7,6 +7,7 @@ know about them.
 
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
+* [Method](#method)
 
 See also [next readings](#next-readings).
 
@@ -59,6 +60,23 @@ class ArgumentCollection
 
 > **Note**: ArgumentCollection will rename added arguments in case of name collision,
 > by suffixing them with a number.
+
+## Method
+
+By default methods are simple public ones (not static/final/abstract), with a name
+and 0 to many arguments:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Method
+{
+    public function __construct($name);
+    public function addArgument(Argument $argument);
+}
+```
 
 ## Next readings
 

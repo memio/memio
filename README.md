@@ -10,22 +10,27 @@ construction of "models". Once done, you can give the top most model to the
 `PrettyPrinter` service: it will find the appropriate [Twig template](http://twig.sensiolabs.org/)
 and do the actual generation.
 
-Want to see it in action? Here's how to generate a method's arguments:
+Want to see it in action? Here's how to generate a method with arguments:
 
 ```php
-$argumentCollection = new ArgumentCollection();
-$argumentCollection->add(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
-$argumentCollection->add(new Argument(new Type('array'), 'config'));
-$argumentCollection->add(new Argument(new Type('string'), 'parameter'));
+$method = new Method('__construct');
+$method->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
+$method->addArgument(new Argument(new Type('array'), 'config'));
+$method->addArgument(new Argument(new Type('string'), 'parameter'));
 
-echo $prettyPrinter->generateCode($argumentCollection);
+echo $prettyPrinter->generateCode($method);
 ```
 
 This should print the following generated code:
 
 ```
-\Vendor\Package\Service $service, array $config, $parameter
+    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
+    {
+    }
 ```
+
+> **Note**: each arguments would have been put on their own line if the inline
+> alternative was longer than 120 characters.
 
 ![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
 
@@ -40,7 +45,7 @@ Use [Composer](https://getcomposer.org/download):
 
 ## TODO list
 
-* [ ] more models (`Method`, `MethodCollection`, `File`, `UseCollection`, `Property`, `PropertyCollection`, etc)
+* [ ] more models (`MethodCollection`, `File`, `UseCollection`, `Property`, `PropertyCollection`, etc)
 * [ ] meta data management (PHPdoc, license header, etc)
 * [ ] building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
 * [ ] commands (inject dependency: add use statement, property, constructor argument, etc)
