@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio\Model;
 
+/**
+ * @api
+ */
 class File
 {
     /**
@@ -25,6 +28,8 @@ class File
 
     /**
      * @param string $filename
+     *
+     * @api
      */
     public function __construct($filename)
     {
@@ -88,6 +93,8 @@ class File
      * @param Method $method
      *
      * @throws InvalidArgumentException If the name is already taken
+     *
+     * @api
      */
     public function addMethod(Method $method)
     {

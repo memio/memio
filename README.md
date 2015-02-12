@@ -10,23 +10,32 @@ construction of "models". Once done, you can give the top most model to the
 `PrettyPrinter` service: it will find the appropriate [Twig template](http://twig.sensiolabs.org/)
 and do the actual generation.
 
-Want to see it in action? Here's how to generate a method with arguments:
+Want to see it in action? Here's an example:
 
 ```php
-$method = new Method('__construct');
-$method->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
-$method->addArgument(new Argument(new Type('array'), 'config'));
-$method->addArgument(new Argument(new Type('string'), 'parameter'));
+$file = new File('src/Gnugat/Medio/Fixtures/MyClass.php');
+$file->addMethod(Method::make('__construct')
+    ->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
+    ->addArgument(new Argument(new Type('array'), 'config'))
+    ->addArgument(new Argument(new Type('string'), 'parameter'))
+);
 
-echo $prettyPrinter->generateCode($method);
+echo $prettyPrinter->generateCode($file);
 ```
 
 This should print the following generated code:
 
 ```
+<?php
+
+namespace Gnugat\Medio\Fixtures;
+
+class MyClass
+{
     public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
     {
     }
+}
 ```
 
 > **Note**: each arguments would have been put on their own line if the inline
