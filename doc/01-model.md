@@ -9,6 +9,7 @@ know about them.
 * [ArgumentCollection](#argumentcollection)
 * [Method](#method)
 * [MethodCollection](#methodcollection)
+* [File](#file)
 
 See also [next readings](#next-readings).
 
@@ -98,6 +99,25 @@ class MethodCollection
 
 > **Note**: MethodCollection throws an `InvalidArgumentException` when the given
 > method has the same name as one of the existing ones.
+
+## File
+
+This is the top most model, it contains everything:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class File
+{
+    public function __construct($filename);
+    public function addMethod(Method $method);
+}
+```
+
+> **Note**: It takes care of transforming the filename into namespace/classname
+> for you.
 
 ## Next readings
 

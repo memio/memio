@@ -1,0 +1,8 @@
+<?php
+
+namespace {{ file.namespace }};
+
+class {{ file.classname }}
+{
+{% include 'method_collection.twig' with { 'method_collection': file.methodCollection } only %}
+}
