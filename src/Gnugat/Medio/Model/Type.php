@@ -36,6 +36,8 @@ class Type
 
     /**
      * @return string
+     *
+     * @api
      */
     public function getName()
     {
@@ -44,18 +46,12 @@ class Type
 
     /**
      * @return bool
+     *
+     * @api
      */
     public function isObject()
     {
         return !in_array($this->name, $this->getNonObjectTypes());
-    }
-
-    /**
-     * @return array
-     */
-    private function getNonObjectTypes()
-    {
-        return array('string', 'bool', 'int', 'double', 'callable', 'resource', 'array', 'null', 'mixed');
     }
 
     /**
@@ -66,5 +62,13 @@ class Type
         $isCallableFromPhp54 = ('callable' === $this->name && version_compare(PHP_VERSION, '5.4.0') >= 0);
 
         return ($isCallableFromPhp54 || $this->isObject() || 'array' === $this->name);
+    }
+
+    /**
+     * @return array
+     */
+    private function getNonObjectTypes()
+    {
+        return array('string', 'bool', 'int', 'double', 'callable', 'resource', 'array', 'null', 'mixed');
     }
 }

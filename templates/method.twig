@@ -1,0 +1,7 @@
+    public function {{ method.name }}({% include 'argument_collection.twig' with {
+        'argument_collection': method.argumentCollection,
+        'length_restriction': 22 + method.name | length
+    } only %})
+    {
+    }
+{#- Trimming lines -#}
