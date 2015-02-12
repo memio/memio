@@ -36,6 +36,8 @@ namespace Gnugat\Medio\Model;
 class Type
 {
     public function __construct($name);
+    public function getName();
+    public function isObject();
 }
 ```
 
