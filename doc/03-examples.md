@@ -17,7 +17,7 @@ Each scenario is composed of 3 kind of step:
 3. comparison with expected code
 
 The expected code can be quite lengthy, in those cases it's been put in a fixture
-file. But don't panic! You can find them in the `fixtures` directory, they are
+file. But don't panic! You can find them in the `examples/fixtures` directory, they are
 put in a folder named after the feature, and then in a file named after the scenario.
 
 To make sure each modification added to Medio doesn't break anything, those
