@@ -38,13 +38,29 @@ class Method
     }
 
     /**
+     * @param string $name
+     *
+     * @return Method
+     *
+     * @api
+     */
+    public static function make($name)
+    {
+        return new self($name);
+    }
+
+    /**
      * @param Argument $argument
+     *
+     * @return Method
      *
      * @api
      */
     public function addArgument(Argument $argument)
     {
         $this->argumentCollection->add($argument);
+
+        return $this;
     }
 
     /**

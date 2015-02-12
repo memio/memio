@@ -1,0 +1,3 @@
+{% for method in method_collection.all -%}
+    {% include 'method.twig' with { 'method': method } only %}{% if not loop.last %}{{ "\n\n" }}{% endif %}
+{%- endfor -%}

@@ -8,6 +8,7 @@ know about them.
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
 * [Method](#method)
+* [MethodCollection](#methodcollection)
 
 See also [next readings](#next-readings).
 
@@ -79,6 +80,24 @@ class Method
     public function addArgument(Argument $argument);
 }
 ```
+
+## MethodCollection
+
+A File can have 0 to many methods this model takes care of managing those:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class MethodCollection
+{
+    public function add(Method $method);
+}
+```
+
+> **Note**: MethodCollection throws an `InvalidArgumentException` when the given
+> method has the same name as one of the existing ones.
 
 ## Next readings
 
