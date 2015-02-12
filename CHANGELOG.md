@@ -1,26 +1,46 @@
 # CHANGELOG
 
+## 1.0.0-alpha4: Method
+
+* added method template
+* tagged Method as part of public API:
+    * __construct
+    * addArgument
+* tagged more Type methods as part of public API:
+    * getName
+    * isObject
+* removed Factory directory (legacy code):
+    * removed VariableArgumentCollectionFactory [**BC break**]
+
 ## 1.0.0-alpha3: Puli
 
 * added `/gnugat/medio/templates` Puli's path
 
 ## 1.0.0-alpha2: Twig tempates parameters
 
-* added parameters argument to PrettyPrinter
-* removed legacy code:
+* added parameters argument to PrettyPrinter#generateCode
+* removed PrettyPrinter directory (legacy code):
     * removed MultilineArgumentCollectionPrinter [**BC break**]
     * removed InlineArgumentCollectionPrinter [**BC break**]
-    * removed VariableArgumentCollectionFactory [**BC break**]
 
 ## 1.0.0-alpha1: Twig templates
 
+* tagged ArgumentCollection as part of public API:
+    * add
+* tagged Argument as part of public API:
+    * __construct
+* tagged Type as part of public API:
+    * __construct
+* tagged PrettyPrinter as part of public API:
+    * __construct
+    * generateCode
 * added argument_collection template
 * added argument template
 * added PrettyPrinter
 
 ## 0.4.0: Refactoring
 
-* removed ArgumentCollection from Method#__Cosntruct arguments
+* removed ArgumentCollection from Method#__construct arguments
 * removed method visibility
 * added Type
 * added examples as tests

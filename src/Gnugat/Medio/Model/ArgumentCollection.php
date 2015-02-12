@@ -27,14 +27,6 @@ class ArgumentCollection
     private $nameCount = array();
 
     /**
-     * @return array
-     */
-    public function all()
-    {
-        return $this->arguments;
-    }
-
-    /**
      * @param Argument $argument
      *
      * @api
@@ -55,5 +47,13 @@ class ArgumentCollection
                 $argument->rename($name.'1');
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function all()
+    {
+        return $this->arguments;
     }
 }
