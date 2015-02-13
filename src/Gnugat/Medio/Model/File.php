@@ -22,6 +22,11 @@ class File
     private $filename;
 
     /**
+     * @var PropertyCollection
+     */
+    private $propertyCollection;
+
+    /**
      * @var MethodCollection
      */
     private $methodCollection;
@@ -35,6 +40,7 @@ class File
     {
         $this->filename = $filename;
         $this->methodCollection = new MethodCollection();
+        $this->propertyCollection = new PropertyCollection();
     }
 
     /**
@@ -113,6 +119,30 @@ class File
     public function addMethod(Method $method)
     {
         $this->methodCollection->add($method);
+
+        return $this;
+    }
+
+    /**
+     * @return PropertyCollection
+     */
+    public function getPropertyCollection()
+    {
+        return $this->propertyCollection;
+    }
+
+    /**
+     * @param Property $property
+     *
+     * @return File
+     *
+     * @throws InvalidArgumentException If the name is already taken
+     *
+     * @api
+     */
+    public function addProperty(Property $property)
+    {
+        $this->propertyCollection->add($property);
 
         return $this;
     }

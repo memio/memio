@@ -12,8 +12,8 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FileSpec extends ObjectBehavior
 {
@@ -45,6 +45,15 @@ class FileSpec extends ObjectBehavior
     function it_has_a_classname()
     {
         $this->getClassname()->shouldBe(self::CLASSNAME);
+    }
+
+    function it_has_a_collection_of_properties(Property $property)
+    {
+        $propertyCollection = $this->getPropertyCollection();
+
+        $propertyCollection->all()->shouldHaveCount(0);
+        $this->addProperty($property);
+        $propertyCollection->all()->shouldHaveCount(1);
     }
 
     function it_has_a_collection_of_methods(Method $method)
