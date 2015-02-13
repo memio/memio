@@ -1,3 +1,4 @@
+{% include 'method_phpdoc.twig' with { 'method_phpdoc': make_phpdoc(method) } only %}
     public function {{ method.name }}({% include 'argument_collection.twig' with {
         'argument_collection': method.argumentCollection,
         'length_restriction': 22 + method.name | length
