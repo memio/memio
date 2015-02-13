@@ -55,7 +55,7 @@ Use [Composer](https://getcomposer.org/download):
 ## Roadmap
 
 * [ ] more models (`UseCollection`, `Property`, `PropertyCollection`, etc)
-* [ ] meta data management (PHPdoc, license header, etc)
+* [ ] meta data management (PHPdoc `@return`, license header, etc)
 * [ ] building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
 * [ ] commands (inject dependency: add use statement, property, constructor argument, etc)
 
