@@ -4,5 +4,9 @@ namespace {{ file.namespace }};
 
 class {{ file.classname }}
 {
+{% include 'property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
+{% if file.methodCollection.all is not empty and file.propertyCollection.all is not empty %}
+
+{% endif %}
 {% include 'method_collection.twig' with { 'method_collection': file.methodCollection } only %}
 }

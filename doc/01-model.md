@@ -172,6 +172,7 @@ class File
 {
     public function __construct($filename);
     public static function make($filename);
+    public function addProperty(Property $property);
     public function addMethod(Method $method);
 }
 ```
