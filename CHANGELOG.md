@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.0.0-alpha6: File
+
+* added file template
+* tagged File as part of public API:
+    * __construct
+    * addMethod
+
 ## 1.0.0-alpha5: MethodCollection
 
 * added method_collection template
