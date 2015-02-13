@@ -14,11 +14,14 @@ Want to see it in action? Here's an example:
 
 ```php
 $file = File::make('src/Gnugat/Medio/Fixtures/MyClass.php')
+    ->addProperty(new Property('service')
+    ->addProperty(new Property('config')
     ->addMethod(Method::make('__construct')
         ->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
         ->addArgument(new Argument(new Type('array'), 'config'))
         ->addArgument(new Argument(new Type('string'), 'parameter'))
     )
+    ->addMethod(new Method('getService'))
 ;
 
 echo $prettyPrinter->generateCode($file);
@@ -33,12 +36,20 @@ namespace Gnugat\Medio\Fixtures;
 
 class MyClass
 {
+    private $service;
+
+    private $config;
+
     /**
      * @param \Vendor\Package\Service $service
      * @param array                   $config
      * @param string                  $parameter
      */
     public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
+    {
+    }
+
+    public function getService()
     {
     }
 }
@@ -60,8 +71,8 @@ Use [Composer](https://getcomposer.org/download):
 
 ## Roadmap
 
-* [ ] more models (`UseCollection`, `Property`, `PropertyCollection`, etc)
-* [ ] meta data management (PHPdoc `@return`, license header, etc)
+* [ ] more models (use statements, constants, etc)
+* [ ] meta data management (PHPdoc `@return`, PHPdoc `@var`, license header, etc)
 * [ ] building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
 * [ ] commands (inject dependency: add use statement, property, constructor argument, etc)
 

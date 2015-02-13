@@ -1,0 +1,13 @@
+<?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+    private $dateTime;
+
+    public function __construct()
+    {
+    }
+}
+

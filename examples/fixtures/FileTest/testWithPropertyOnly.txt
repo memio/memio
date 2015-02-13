@@ -1,0 +1,9 @@
+<?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+    private $dateTime;
+}
+
