@@ -6,7 +6,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Type;
 
-class GeneratingArgumentCollectionTest extends PrettyPrinterTestCase
+class ArgumentCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroArguments()
     {

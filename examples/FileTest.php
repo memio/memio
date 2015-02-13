@@ -5,7 +5,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 
-class GeneratingFileTest extends PrettyPrinterTestCase
+class FileTest extends PrettyPrinterTestCase
 {
     const FILENAME = '/tmp/medio/src/Gnugat/Medio/MyClass.php';
 

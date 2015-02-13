@@ -6,7 +6,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Type;
 
-class GeneratingMethodTest extends PrettyPrinterTestCase
+class MethodTest extends PrettyPrinterTestCase
 {
     public function testWithoutArguments()
     {
