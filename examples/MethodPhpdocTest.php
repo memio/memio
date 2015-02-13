@@ -8,7 +8,7 @@ use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
 use Gnugat\Medio\Model\Type;
 
-class GeneratingMethodPhpdocTest extends PrettyPrinterTestCase
+class MethodPhpdocTest extends PrettyPrinterTestCase
 {
     public function testZeroParameters()
     {

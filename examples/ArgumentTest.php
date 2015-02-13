@@ -5,7 +5,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Type;
 
-class GeneratingArgumentTest extends PrettyPrinterTestCase
+class ArgumentTest extends PrettyPrinterTestCase
 {
     public function testNonTypeHinted()
     {
