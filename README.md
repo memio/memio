@@ -32,6 +32,11 @@ namespace Gnugat\Medio\Fixtures;
 
 class MyClass
 {
+    /**
+     * @param \Vendor\Package\Service $service
+     * @param array                   $config
+     * @param string                  $parameter
+     */
     public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
     {
     }

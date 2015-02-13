@@ -16,6 +16,7 @@ class Phpdoc extends Twig_Extension
     {
         return array(
             new Twig_SimpleFunction('indent_param', array($this, 'indentParam')),
+            new Twig_SimpleFunction('make_phpdoc', array($this, 'makePhpdoc')),
         );
     }
 
@@ -42,5 +43,18 @@ class Phpdoc extends Twig_Extension
         }
 
         return str_repeat(' ', $longestType - strlen($argument->getType()));
+    }
+
+
+    /**
+     * @param mixed $model
+     *
+     * @return string
+     */
+    public function makePhpdoc($model)
+    {
+        $className = get_class($model).'Phpdoc';
+
+        return new $className($model);
     }
 }
