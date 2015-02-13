@@ -24,7 +24,19 @@ class MethodCollection
     private $methods = array();
 
     /**
+     * @return MethodCollection
+     *
+     * @api
+     */
+    public static function make()
+    {
+        return new self();
+    }
+
+    /**
      * @param Method $method
+     *
+     * @return MethodCollection
      *
      * @throws InvalidArgumentException If the name is already taken
      *
@@ -40,6 +52,8 @@ class MethodCollection
             }
         }
         $this->methods[] = $method;
+
+        return $this;
     }
 
     /**
