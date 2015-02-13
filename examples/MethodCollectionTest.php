@@ -7,7 +7,7 @@ use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodCollection;
 use Gnugat\Medio\Model\Type;
 
-class GeneratingMethodCollectionTest extends PrettyPrinterTestCase
+class MethodCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroMethods()
     {

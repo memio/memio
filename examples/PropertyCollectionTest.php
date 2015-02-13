@@ -5,7 +5,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\PropertyCollection;
 
-class GeneratingPropertyCollectionTest extends PrettyPrinterTestCase
+class PropertyCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroProperties()
     {
