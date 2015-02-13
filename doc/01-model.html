@@ -64,10 +64,16 @@
                     <h1>Model</h1>
 <p>In order to generate code, you must build some models. Here's all you need to
 know about them.</p>
-<p><img src="http://yuml.me/39b32b28" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
+<p><img src="http://yuml.me/efe3de11" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
 <ul>
 <li><a href="#argument">Argument</a></li>
 <li><a href="#argumentcollection">ArgumentCollection</a></li>
+<li><a href="#method">Method</a></li>
+<li><a href="#methodphpdoc">MethodPhpdoc</a></li>
+<li><a href="#methodcollection">MethodCollection</a></li>
+<li><a href="#property">Property</a></li>
+<li><a href="#propertycollection">PropertyCollection</a></li>
+<li><a href="#file">File</a></li>
 </ul>
 <p>See also <a href="#next-readings">next readings</a>.</p>
 <h2>Argument</h2>
@@ -79,6 +85,7 @@ namespace Gnugat\Medio\Model;
 class Argument
 {
     public function __construct(Type $type, $name);
+    public static function make(Type $type, $name);
 }</code></pre>
 <p>The <code>Type</code> model is responsible of knowing if the argument can be type hinted:</p>
 <pre><code class="language-php">&lt;?php
@@ -88,6 +95,9 @@ namespace Gnugat\Medio\Model;
 class Type
 {
     public function __construct($name);
+    public static function make($name);
+    public function getName();
+    public function isObject();
 }</code></pre>
 <blockquote>
 <p><strong>Note</strong>: a type is considered as being an object if the given name is
@@ -102,11 +112,94 @@ namespace Gnugat\Medio\Model;
 
 class ArgumentCollection
 {
+    public static function make();
     public function add(Argument $argument);
 }</code></pre>
 <blockquote>
 <p><strong>Note</strong>: ArgumentCollection will rename added arguments in case of name collision,
 by suffixing them with a number.</p>
+</blockquote>
+<h2>Method</h2>
+<p>By default methods are simple public ones (not static/final/abstract), with a name
+and 0 to many arguments:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class Method
+{
+    public function __construct($name);
+    public static function make($name);
+    public function addArgument(Argument $argument);
+}</code></pre>
+<h2>MethodPhpdoc</h2>
+<p>A Method can be documented using PHPdoc. This model takes care of it for you:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class MethodPhpdoc
+{
+    public function __construct(Method $method);
+    public static function make(Method $method);
+}</code></pre>
+<h2>MethodCollection</h2>
+<p>A File can have 0 to many methods this model takes care of managing those:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class MethodCollection
+{
+    public static function make();
+    public function add(Method $method);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: MethodCollection throws an <code>InvalidArgumentException</code> when the given
+method has the same name as one of the existing ones.</p>
+</blockquote>
+<h2>Property</h2>
+<p>By default properties are always simple private ones (not static, no default value):</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class Property
+{
+    public function __construct($name);
+    public static function make($name);
+}</code></pre>
+<h2>PropertyCollection</h2>
+<p>A File can have 0 to many methods this model takes care of managing those:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class PropertyCollection
+{
+    public static function make();
+    public function add(Property $property);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: PropertyCollection throws an <code>InvalidArgumentException</code> when the
+given property has the same name as one of the existing ones.</p>
+</blockquote>
+<h2>File</h2>
+<p>This is the top most model, it contains everything:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class File
+{
+    public function __construct($filename);
+    public static function make($filename);
+    public function addProperty(Property $property);
+    public function addMethod(Method $method);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: It takes care of transforming the filename into namespace/classname
+for you.</p>
 </blockquote>
 <h2>Next readings</h2>
 <ul>

@@ -62,29 +62,110 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>CHANGELOG</h1>
+<h2>1.0.0-alpha8: Properties</h2>
+<ul>
+<li>added property template</li>
+<li>added property_collection template</li>
+<li>tagged Property as part of public API:
+<ul>
+<li>__construct</li>
+<li>make</li>
+</ul></li>
+<li>tagged PropertyCollection as part of public API:
+<ul>
+<li>make</li>
+<li>add</li>
+</ul></li>
+<li>tagged File#addProperty as part of public API</li>
+</ul>
+<h2>1.0.0-alpha7: MethodPhpdoc</h2>
+<ul>
+<li>added method_phpdoc template</li>
+<li>tagged MethodPhpdoc as part of public API:
+<ul>
+<li>__construct</li>
+<li>make</li>
+</ul></li>
+<li>added static constructors make to every model</li>
+<li>added static constructors as part of public API</li>
+</ul>
+<h2>1.0.0-alpha6: File</h2>
+<ul>
+<li>added file template</li>
+<li>tagged File as part of public API:
+<ul>
+<li>__construct</li>
+<li>addMethod</li>
+</ul></li>
+</ul>
+<h2>1.0.0-alpha5: MethodCollection</h2>
+<ul>
+<li>added method_collection template</li>
+<li>tagged MethodCollection as part of public API:
+<ul>
+<li>add</li>
+</ul></li>
+<li>tagged Exception as part of API</li>
+<li>tagged InvalidArgumentException as part of API</li>
+<li>refactored fixtures</li>
+</ul>
+<h2>1.0.0-alpha4: Method</h2>
+<ul>
+<li>added method template</li>
+<li>tagged Method as part of public API:
+<ul>
+<li>__construct</li>
+<li>addArgument</li>
+</ul></li>
+<li>tagged more Type methods as part of public API:
+<ul>
+<li>getName</li>
+<li>isObject</li>
+</ul></li>
+<li>removed Factory directory (legacy code):
+<ul>
+<li>removed VariableArgumentCollectionFactory [<strong>BC break</strong>]</li>
+</ul></li>
+</ul>
 <h2>1.0.0-alpha3: Puli</h2>
 <ul>
 <li>added <code>/gnugat/medio/templates</code> Puli's path</li>
 </ul>
 <h2>1.0.0-alpha2: Twig tempates parameters</h2>
 <ul>
-<li>added parameters argument to PrettyPrinter</li>
-<li>removed legacy code:
+<li>added parameters argument to PrettyPrinter#generateCode</li>
+<li>removed PrettyPrinter directory (legacy code):
 <ul>
 <li>removed MultilineArgumentCollectionPrinter [<strong>BC break</strong>]</li>
 <li>removed InlineArgumentCollectionPrinter [<strong>BC break</strong>]</li>
-<li>removed VariableArgumentCollectionFactory [<strong>BC break</strong>]</li>
 </ul></li>
 </ul>
 <h2>1.0.0-alpha1: Twig templates</h2>
 <ul>
+<li>tagged ArgumentCollection as part of public API:
+<ul>
+<li>add</li>
+</ul></li>
+<li>tagged Argument as part of public API:
+<ul>
+<li>__construct</li>
+</ul></li>
+<li>tagged Type as part of public API:
+<ul>
+<li>__construct</li>
+</ul></li>
+<li>tagged PrettyPrinter as part of public API:
+<ul>
+<li>__construct</li>
+<li>generateCode</li>
+</ul></li>
 <li>added argument_collection template</li>
 <li>added argument template</li>
 <li>added PrettyPrinter</li>
 </ul>
 <h2>0.4.0: Refactoring</h2>
 <ul>
-<li>removed ArgumentCollection from Method#__Cosntruct arguments</li>
+<li>removed ArgumentCollection from Method#__construct arguments</li>
 <li>removed method visibility</li>
 <li>added Type</li>
 <li>added examples as tests</li>

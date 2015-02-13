@@ -71,25 +71,57 @@ customize them.</p>
 construction of &quot;models&quot;. Once done, you can give the top most model to the
 <code>PrettyPrinter</code> service: it will find the appropriate <a href="http://twig.sensiolabs.org/">Twig template</a>
 and do the actual generation.</p>
-<p>Want to see it in action? Here's how to generate a method's arguments:</p>
-<pre><code class="language-php">$argumentCollection = new ArgumentCollection();
-$argumentCollection-&gt;add(new Argument(new Type('Vendor\\Package\\Service'), 'service'));
-$argumentCollection-&gt;add(new Argument(new Type('array'), 'config'));
-$argumentCollection-&gt;add(new Argument(new Type('string'), 'parameter'));
+<p>Want to see it in action? Here's an example:</p>
+<pre><code class="language-php">$file = File::make('src/Gnugat/Medio/Fixtures/MyClass.php')
+    -&gt;addProperty(new Property('service')
+    -&gt;addProperty(new Property('config')
+    -&gt;addMethod(Method::make('__construct')
+        -&gt;addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
+        -&gt;addArgument(new Argument(new Type('array'), 'config'))
+        -&gt;addArgument(new Argument(new Type('string'), 'parameter'))
+    )
+    -&gt;addMethod(new Method('getService'))
+;
 
-echo $prettyPrinter-&gt;generateCode($argumentCollection);</code></pre>
+echo $prettyPrinter-&gt;generateCode($file);</code></pre>
 <p>This should print the following generated code:</p>
-<pre><code>\Vendor\Package\Service $service, array $config, $parameter</code></pre>
+<pre><code>&lt;?php
+
+namespace Gnugat\Medio\Fixtures;
+
+class MyClass
+{
+    private $service;
+
+    private $config;
+
+    /**
+     * @param \Vendor\Package\Service $service
+     * @param array                   $config
+     * @param string                  $parameter
+     */
+    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
+    {
+    }
+
+    public function getService()
+    {
+    }
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: each arguments would have been put on their own line if the inline
+alternative was longer than 120 characters.</p>
+</blockquote>
 <p><img src="https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg" alt="Logo: an elephant, a tree and some twigs" /></p>
 <p><a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" alt="SensioLabsInsight" /></a>
 <a href="https://travis-ci.org/gnugat/medio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></p>
 <h2>Installation</h2>
 <p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
 <pre><code>composer require gnugat/medio:~1.0@alpha</code></pre>
-<h2>TODO list</h2>
+<h2>Roadmap</h2>
 <ul>
-<li>[ ] more models (<code>Method</code>, <code>MethodCollection</code>, <code>File</code>, <code>UseCollection</code>, <code>Property</code>, <code>PropertyCollection</code>, etc)</li>
-<li>[ ] meta data management (PHPdoc, license header, etc)</li>
+<li>[ ] more models (use statements, constants, etc)</li>
+<li>[ ] meta data management (PHPdoc <code>@return</code>, PHPdoc <code>@var</code>, license header, etc)</li>
 <li>[ ] building models from existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
 <li>[ ] commands (inject dependency: add use statement, property, constructor argument, etc)</li>
 </ul>
