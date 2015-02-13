@@ -20,8 +20,9 @@ class GeneratingFileTest extends PrettyPrinterTestCase
 
     public function testWithMethodOnly()
     {
-        $file = new File(self::FILENAME);
-        $file->addMethod(new Method('__construct'));
+        $file = File::make(self::FILENAME)
+            ->addMethod(new Method('__construct'))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 

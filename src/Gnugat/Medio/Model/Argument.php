@@ -39,6 +39,19 @@ class Argument
     }
 
     /**
+     * @param Type   $type
+     * @param string $name
+     *
+     * @return Argument
+     *
+     * @api
+     */
+    public static function make(Type $type, $name)
+    {
+        return new self($type, $name);
+    }
+
+    /**
      * @return string
      */
     public function getType()

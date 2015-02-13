@@ -20,8 +20,9 @@ class GeneratingMethodCollectionTest extends PrettyPrinterTestCase
 
     public function testOneMethod()
     {
-        $methodCollection = new MethodCollection();
-        $methodCollection->add(new Method('__construct'));
+        $methodCollection = MethodCollection::make()
+            ->add(new Method('__construct'))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($methodCollection);
 
@@ -30,13 +31,14 @@ class GeneratingMethodCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeMethods()
     {
-        $methodCollection = new MethodCollection();
-        $methodCollection->add(Method::make('__construct')
-            ->addArgument(new Argument(new Type('DateTime'), 'dateTime'))
-            ->addArgument(new Argument(new Type('ArrayObject'), 'arrayObject'))
-        );
-        $methodCollection->add(new Method('getDateTime'));
-        $methodCollection->add(new Method('getArrayObject'));
+        $methodCollection = MethodCollection::make()
+            ->add(Method::make('__construct')
+                ->addArgument(new Argument(new Type('DateTime'), 'dateTime'))
+                ->addArgument(new Argument(new Type('ArrayObject'), 'arrayObject'))
+            )
+            ->add(new Method('getDateTime'))
+            ->add(new Method('getArrayObject'))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($methodCollection);
 

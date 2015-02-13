@@ -27,7 +27,19 @@ class ArgumentCollection
     private $nameCount = array();
 
     /**
+     * @return ArgumentCollection
+     *
+     * @api
+     */
+    public static function make()
+    {
+        return new self();
+    }
+
+    /**
      * @param Argument $argument
+     *
+     * @return ArgumentCollection
      *
      * @api
      */
@@ -40,13 +52,15 @@ class ArgumentCollection
         }
         $this->arguments[] = $argument;
         if ($this->nameCount[$name] !== 2) {
-            return;
+            return $this;
         }
         foreach ($this->arguments as $argument) {
             if ($argument->getName() === $name) {
                 $argument->rename($name.'1');
             }
         }
+
+        return $this;
     }
 
     /**
