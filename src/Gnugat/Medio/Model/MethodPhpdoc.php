@@ -27,6 +27,18 @@ class MethodPhpdoc
     }
 
     /**
+     * @param Method $method
+     *
+     * @return MethodPhpdoc
+     *
+     * @api
+     */
+    public static function make(Method $method)
+    {
+        return new self($method);
+    }
+
+    /**
      * @return array
      */
     public function getParameters()

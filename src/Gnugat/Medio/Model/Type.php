@@ -35,6 +35,18 @@ class Type
     }
 
     /**
+     * @param string $name
+     *
+     * @return Type
+     *
+     * @api
+     */
+    public static function make($name)
+    {
+        return new self($name);
+    }
+
+    /**
      * @return string
      *
      * @api

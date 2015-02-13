@@ -26,6 +26,7 @@ namespace Gnugat\Medio\Model;
 class Argument
 {
     public function __construct(Type $type, $name);
+    public static function make(Type $type, $name);
 }
 ```
 
@@ -39,6 +40,7 @@ namespace Gnugat\Medio\Model;
 class Type
 {
     public function __construct($name);
+    public static function make($name);
     public function getName();
     public function isObject();
 }
@@ -59,6 +61,7 @@ namespace Gnugat\Medio\Model;
 
 class ArgumentCollection
 {
+    public static function make();
     public function add(Argument $argument);
 }
 ```
@@ -79,6 +82,7 @@ namespace Gnugat\Medio\Model;
 class Method
 {
     public function __construct($name);
+    public static function make($name);
     public function addArgument(Argument $argument);
 }
 ```
@@ -95,6 +99,7 @@ namespace Gnugat\Medio\Model;
 class MethodPhpdoc
 {
     public function __construct(Method $method);
+    public static function make(Method $method);
 }
 ```
 
@@ -109,6 +114,7 @@ namespace Gnugat\Medio\Model;
 
 class MethodCollection
 {
+    public static function make();
     public function add(Method $method);
 }
 ```
@@ -128,6 +134,7 @@ namespace Gnugat\Medio\Model;
 class File
 {
     public function __construct($filename);
+    public static function make($filename);
     public function addMethod(Method $method);
 }
 ```

@@ -19,8 +19,9 @@ class GeneratingArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testOneArgument()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('bool'), 'isObject'));
+        $argumentCollection = ArgumentCollection::make()
+            ->add(new Argument(new Type('bool'), 'isObject'))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
 
@@ -29,10 +30,11 @@ class GeneratingArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeArguments()
     {
-        $argumentCollection = new ArgumentCollection();
-        $argumentCollection->add(new Argument(new Type('\\SplFileInfo'), 'file'));
-        $argumentCollection->add(new Argument(new Type('string'), 'newLine'));
-        $argumentCollection->add(new Argument(new Type('int'), 'lineNumber'));
+        $argumentCollection = ArgumentCollection::make()
+            ->add(new Argument(new Type('\\SplFileInfo'), 'file'))
+            ->add(new Argument(new Type('string'), 'newLine'))
+            ->add(new Argument(new Type('int'), 'lineNumber'))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
 

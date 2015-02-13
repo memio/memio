@@ -13,12 +13,13 @@ and do the actual generation.
 Want to see it in action? Here's an example:
 
 ```php
-$file = new File('src/Gnugat/Medio/Fixtures/MyClass.php');
-$file->addMethod(Method::make('__construct')
-    ->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
-    ->addArgument(new Argument(new Type('array'), 'config'))
-    ->addArgument(new Argument(new Type('string'), 'parameter'))
-);
+$file = File::make('src/Gnugat/Medio/Fixtures/MyClass.php')
+    ->addMethod(Method::make('__construct')
+        ->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
+        ->addArgument(new Argument(new Type('array'), 'config'))
+        ->addArgument(new Argument(new Type('string'), 'parameter'))
+    )
+;
 
 echo $prettyPrinter->generateCode($file);
 ```

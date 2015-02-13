@@ -38,6 +38,18 @@ class File
     }
 
     /**
+     * @param string $filename
+     *
+     * @return File
+     *
+     * @api
+     */
+    public static function make($filename)
+    {
+        return new self($filename);
+    }
+
+    /**
      * @return string
      */
     public function getFilename()
@@ -92,6 +104,8 @@ class File
     /**
      * @param Method $method
      *
+     * @return File
+     *
      * @throws InvalidArgumentException If the name is already taken
      *
      * @api
@@ -99,5 +113,7 @@ class File
     public function addMethod(Method $method)
     {
         $this->methodCollection->add($method);
+
+        return $this;
     }
 }
