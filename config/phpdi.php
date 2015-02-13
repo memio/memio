@@ -7,5 +7,6 @@ return array(
         ->constructor(DI\link('medio.templates')),
 
     'Twig_Environment' => DI\Object()
-        ->constructor(DI\link('Twig_Loader_Filesystem')),
+        ->constructor(DI\link('Twig_Loader_Filesystem'))
+        ->method('addExtension', DI\Link('Gnugat\\Medio\\TwigExtension\\Phpdoc')),
 );

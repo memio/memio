@@ -8,6 +8,7 @@ know about them.
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
 * [Method](#method)
+* [MethodPhpdoc](#methodphpdoc)
 * [MethodCollection](#methodcollection)
 * [File](#file)
 
@@ -79,6 +80,21 @@ class Method
 {
     public function __construct($name);
     public function addArgument(Argument $argument);
+}
+```
+
+## MethodPhpdoc
+
+A Method can be documented using PHPdoc. This model takes care of it for you:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class MethodPhpdoc
+{
+    public function __construct(Method $method);
 }
 ```
 
