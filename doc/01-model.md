@@ -11,6 +11,7 @@ know about them.
 * [MethodPhpdoc](#methodphpdoc)
 * [MethodCollection](#methodcollection)
 * [Property](#property)
+* [PropertyCollection](#propertycollection)
 * [File](#file)
 
 See also [next readings](#next-readings).
@@ -138,6 +139,25 @@ class Property
     public static function make($name);
 }
 ```
+
+## PropertyCollection
+
+A File can have 0 to many methods this model takes care of managing those:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class PropertyCollection
+{
+    public static function make();
+    public function add(Property $property);
+}
+```
+
+> **Note**: PropertyCollection throws an `InvalidArgumentException` when the
+> given property has the same name as one of the existing ones.
 
 ## File
 
