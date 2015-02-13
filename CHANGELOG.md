@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.0.0-alpha7: MethodPhpdoc
+
+* added method_phpdoc template
+* tagged MethodPhpdoc as part of public API:
+    * __construct
+    * make
+* added static constructors make to every model
+* added static constructors as part of public API
+
 ## 1.0.0-alpha6: File
 
 * added file template
