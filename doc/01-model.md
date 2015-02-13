@@ -10,6 +10,7 @@ know about them.
 * [Method](#method)
 * [MethodPhpdoc](#methodphpdoc)
 * [MethodCollection](#methodcollection)
+* [Property](#property)
 * [File](#file)
 
 See also [next readings](#next-readings).
@@ -121,6 +122,22 @@ class MethodCollection
 
 > **Note**: MethodCollection throws an `InvalidArgumentException` when the given
 > method has the same name as one of the existing ones.
+
+## Property
+
+By default properties are always simple private ones (not static, no default value):
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Property
+{
+    public function __construct($name);
+    public static function make($name);
+}
+```
 
 ## File
 
