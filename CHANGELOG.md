@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.0.0-alpha8: Properties
+
+* added property template
+* added property_collection template
+* tagged Property as part of public API:
+    * __construct
+    * make
+* tagged PropertyCollection as part of public API:
+    * make
+    * add
+* tagged File#addProperty as part of public API
+
 ## 1.0.0-alpha7: MethodPhpdoc
 
 * added method_phpdoc template
