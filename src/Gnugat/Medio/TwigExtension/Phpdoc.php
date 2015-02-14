@@ -36,7 +36,6 @@ class Phpdoc extends Twig_Extension
      */
     public function indentParam(MethodPhpdoc $methodPhpdoc, Argument $argument)
     {
-        $arguments = $methodPhpdoc->getParameters();
         $longestType = 0;
         foreach ($methodPhpdoc->getParameters() as $parameter) {
             $longestType = max($longestType, strlen($parameter->getType()));

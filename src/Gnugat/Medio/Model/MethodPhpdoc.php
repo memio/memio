@@ -51,6 +51,8 @@ class MethodPhpdoc
      */
     public function isEmpty()
     {
-        return empty($this->getParameters());
+        $parameters = $this->method->getArgumentCollection()->all();
+
+        return empty($parameters);
     }
 }
