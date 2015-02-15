@@ -12,6 +12,7 @@ know about them.
 * [MethodCollection](#methodcollection)
 * [Property](#property)
 * [PropertyCollection](#propertycollection)
+* [Constant](#constant)
 * [File](#file)
 
 See also [next readings](#next-readings).
@@ -158,6 +159,22 @@ class PropertyCollection
 
 > **Note**: PropertyCollection throws an `InvalidArgumentException` when the
 > given property has the same name as one of the existing ones.
+
+## Constant
+
+This is a class constant:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Constant
+{
+    public function __construct($name, $value);
+    public static function make($name, $value);
+}
+```
 
 ## File
 
