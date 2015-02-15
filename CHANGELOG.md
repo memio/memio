@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.0.0-alpha9: Constants
+
+* added constant template
+* added constant_collection template
+* tagged Constant as part of public API:
+    * __construct
+    * make
+* tagged ConstantCollection as part of public API:
+    * make
+    * add
+* tagged File#addConstant as part of public API
+
 ## 1.0.0-alpha8: Properties
 
 * added property template
