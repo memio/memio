@@ -64,7 +64,7 @@
                     <h1>Model</h1>
 <p>In order to generate code, you must build some models. Here's all you need to
 know about them.</p>
-<p><img src="http://yuml.me/efe3de11" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
+<p><img src="http://yuml.me/a5124cb7" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
 <ul>
 <li><a href="#argument">Argument</a></li>
 <li><a href="#argumentcollection">ArgumentCollection</a></li>
@@ -73,6 +73,8 @@ know about them.</p>
 <li><a href="#methodcollection">MethodCollection</a></li>
 <li><a href="#property">Property</a></li>
 <li><a href="#propertycollection">PropertyCollection</a></li>
+<li><a href="#constant">Constant</a></li>
+<li><a href="#constantcollection">ConstantCollection</a></li>
 <li><a href="#file">File</a></li>
 </ul>
 <p>See also <a href="#next-readings">next readings</a>.</p>
@@ -170,7 +172,7 @@ class Property
     public static function make($name);
 }</code></pre>
 <h2>PropertyCollection</h2>
-<p>A File can have 0 to many methods this model takes care of managing those:</p>
+<p>A File can have 0 to many properties, this model takes care of managing those:</p>
 <pre><code class="language-php">&lt;?php
 
 namespace Gnugat\Medio\Model;
@@ -183,6 +185,32 @@ class PropertyCollection
 <blockquote>
 <p><strong>Note</strong>: PropertyCollection throws an <code>InvalidArgumentException</code> when the
 given property has the same name as one of the existing ones.</p>
+</blockquote>
+<h2>Constant</h2>
+<p>This is a class constant:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class Constant
+{
+    public function __construct($name, $value);
+    public static function make($name, $value);
+}</code></pre>
+<h2>ConstantCollection</h2>
+<p>A File can have 0 to many constants, this model takes care of managing those:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class ConstantCollection
+{
+    public static function make();
+    public function add(Constant $cosntant);
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: ConstantCollection throws an <code>InvalidArgumentException</code> when the
+given cosntant has the same name as one of the existing ones.</p>
 </blockquote>
 <h2>File</h2>
 <p>This is the top most model, it contains everything:</p>

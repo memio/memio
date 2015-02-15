@@ -72,42 +72,50 @@ construction of &quot;models&quot;. Once done, you can give the top most model t
 <code>PrettyPrinter</code> service: it will find the appropriate <a href="http://twig.sensiolabs.org/">Twig template</a>
 and do the actual generation.</p>
 <p>Want to see it in action? Here's an example:</p>
-<pre><code class="language-php">$file = File::make('src/Gnugat/Medio/Fixtures/MyClass.php')
-    -&gt;addProperty(new Property('service')
-    -&gt;addProperty(new Property('config')
-    -&gt;addMethod(Method::make('__construct')
-        -&gt;addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
-        -&gt;addArgument(new Argument(new Type('array'), 'config'))
-        -&gt;addArgument(new Argument(new Type('string'), 'parameter'))
+<pre><code class="language-php">$file = File::make('/src/Gnugat/Medio/MyClass.php')
+    -&gt;addConstant(new Constant('FIRST_CONSTANT', '0'))
+    -&gt;addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
+
+    -&gt;addProperty(new Property('firstProperty'))
+    -&gt;addProperty(new Property('secondProperty'))
+
+    -&gt;addMethod(Method::make('firstMethod')
+        -&gt;addArgument(new Argument(new Type('DateTime'), 'firstArgument'))
+        -&gt;addArgument(new Argument(new Type('array'), 'secondArgument'))
+        -&gt;addArgument(new Argument(new Type('string'), 'thirdArgument'))
     )
-    -&gt;addMethod(new Method('getService'))
+    -&gt;addMethod(new Method('secondMethod'))
 ;
 
 echo $prettyPrinter-&gt;generateCode($file);</code></pre>
 <p>This should print the following generated code:</p>
 <pre><code>&lt;?php
 
-namespace Gnugat\Medio\Fixtures;
+namespace Gnugat\Medio;
 
 class MyClass
 {
-    private $service;
+    const FIRST_CONSTANT = 0;
+    const SECOND_CONSTANT = 'meh';
 
-    private $config;
+    private $firstProperty;
+
+    private $secondProperty;
 
     /**
-     * @param \Vendor\Package\Service $service
-     * @param array                   $config
-     * @param string                  $parameter
+     * @param \DateTime $firstArgument
+     * @param array     $secondArgument
+     * @param string    $thirdArgument
      */
-    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
+    public function firstMethod(\DateTime $firstArgument, array $secondArgument, $thirdArgument)
     {
     }
 
-    public function getService()
+    public function secondMethod()
     {
     }
-}</code></pre>
+}
+</code></pre>
 <blockquote>
 <p><strong>Note</strong>: each arguments would have been put on their own line if the inline
 alternative was longer than 120 characters.</p>
@@ -120,10 +128,10 @@ alternative was longer than 120 characters.</p>
 <pre><code>composer require gnugat/medio:~1.0@alpha</code></pre>
 <h2>Roadmap</h2>
 <ul>
-<li>[ ] more models (use statements, constants, etc)</li>
-<li>[ ] meta data management (PHPdoc <code>@return</code>, PHPdoc <code>@var</code>, license header, etc)</li>
-<li>[ ] building models from existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
-<li>[ ] commands (inject dependency: add use statement, property, constructor argument, etc)</li>
+<li>more models (use statements, etc)</li>
+<li>meta data management (PHPdoc <code>@return</code>, PHPdoc <code>@var</code>, license header, etc)</li>
+<li>building models from existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
+<li>commands (inject dependency: add use statement, property, constructor argument, etc)</li>
 </ul>
 <h2>Further documentation</h2>
 <p>Discover more by reading the docs:</p>
