@@ -13,15 +13,19 @@ and do the actual generation.
 Want to see it in action? Here's an example:
 
 ```php
-$file = File::make('src/Gnugat/Medio/Fixtures/MyClass.php')
-    ->addProperty(new Property('service')
-    ->addProperty(new Property('config')
-    ->addMethod(Method::make('__construct')
-        ->addArgument(new Argument(new Type('Vendor\\Package\\Service'), 'service'))
-        ->addArgument(new Argument(new Type('array'), 'config'))
-        ->addArgument(new Argument(new Type('string'), 'parameter'))
+$file = File::make('/src/Gnugat/Medio/MyClass.php')
+    ->addConstant(new Constant('FIRST_CONSTANT', '0'))
+    ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
+
+    ->addProperty(new Property('firstProperty'))
+    ->addProperty(new Property('secondProperty'))
+
+    ->addMethod(Method::make('firstMethod')
+        ->addArgument(new Argument(new Type('DateTime'), 'firstArgument'))
+        ->addArgument(new Argument(new Type('array'), 'secondArgument'))
+        ->addArgument(new Argument(new Type('string'), 'thirdArgument'))
     )
-    ->addMethod(new Method('getService'))
+    ->addMethod(new Method('secondMethod'))
 ;
 
 echo $prettyPrinter->generateCode($file);
@@ -32,27 +36,32 @@ This should print the following generated code:
 ```
 <?php
 
-namespace Gnugat\Medio\Fixtures;
+namespace Gnugat\Medio;
 
 class MyClass
 {
-    private $service;
+    const FIRST_CONSTANT = 0;
+    const SECOND_CONSTANT = 'meh';
 
-    private $config;
+    private $firstProperty;
+
+    private $secondProperty;
 
     /**
-     * @param \Vendor\Package\Service $service
-     * @param array                   $config
-     * @param string                  $parameter
+     * @param \DateTime $firstArgument
+     * @param array     $secondArgument
+     * @param string    $thirdArgument
      */
-    public function __construct(\Vendor\Package\Service $service, array $config, $parameter)
+    public function firstMethod(\DateTime $firstArgument, array $secondArgument, $thirdArgument)
     {
     }
 
-    public function getService()
+    public function secondMethod()
     {
     }
 }
+
+
 ```
 
 > **Note**: each arguments would have been put on their own line if the inline
@@ -71,10 +80,10 @@ Use [Composer](https://getcomposer.org/download):
 
 ## Roadmap
 
-* [ ] more models (use statements, constants, etc)
-* [ ] meta data management (PHPdoc `@return`, PHPdoc `@var`, license header, etc)
-* [ ] building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
-* [ ] commands (inject dependency: add use statement, property, constructor argument, etc)
+* more models (use statements, etc)
+* meta data management (PHPdoc `@return`, PHPdoc `@var`, license header, etc)
+* building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
+* commands (inject dependency: add use statement, property, constructor argument, etc)
 
 ## Further documentation
 

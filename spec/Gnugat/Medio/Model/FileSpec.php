@@ -11,6 +11,7 @@
 
 namespace spec\Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
@@ -45,6 +46,15 @@ class FileSpec extends ObjectBehavior
     function it_has_a_classname()
     {
         $this->getClassname()->shouldBe(self::CLASSNAME);
+    }
+
+    function it_has_a_collection_of_constants(Constant $constant)
+    {
+        $constantCollection = $this->getConstantCollection();
+
+        $constantCollection->all()->shouldHaveCount(0);
+        $this->addConstant($constant);
+        $constantCollection->all()->shouldHaveCount(1);
     }
 
     function it_has_a_collection_of_properties(Property $property)

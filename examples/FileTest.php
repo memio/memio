@@ -11,9 +11,12 @@
 
 namespace Gnugat\Medio\Examples;
 
+use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Type;
 
 class FileTest extends PrettyPrinterTestCase
 {
@@ -28,33 +31,21 @@ class FileTest extends PrettyPrinterTestCase
         $this->assertExpectedCode($generatedCode);
     }
 
-    public function testWithPropertyOnly()
+    public function testFull()
     {
         $file = File::make(self::FILENAME)
-            ->addProperty(new Property('dateTime'))
-        ;
+            ->addConstant(new Constant('FIRST_CONSTANT', '0'))
+            ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
-        $generatedCode = $this->prettyPrinter->generateCode($file);
+            ->addProperty(new Property('firstProperty'))
+            ->addProperty(new Property('secondProperty'))
 
-        $this->assertExpectedCode($generatedCode);
-    }
-
-    public function testWithMethodOnly()
-    {
-        $file = File::make(self::FILENAME)
-            ->addMethod(new Method('__construct'))
-        ;
-
-        $generatedCode = $this->prettyPrinter->generateCode($file);
-
-        $this->assertExpectedCode($generatedCode);
-    }
-
-    public function testWithPropertyAndMethod()
-    {
-        $file = File::make(self::FILENAME)
-            ->addProperty(new Property('dateTime'))
-            ->addMethod(new Method('__construct'))
+            ->addMethod(Method::make('firstMethod')
+                ->addArgument(new Argument(new Type('DateTime'), 'firstArgument'))
+                ->addArgument(new Argument(new Type('array'), 'secondArgument'))
+                ->addArgument(new Argument(new Type('string'), 'thirdArgument'))
+            )
+            ->addMethod(new Method('secondMethod'))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
