@@ -39,10 +39,12 @@ require __DIR__.'/vendor/autoload.php';
 
 use Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\TwigExtension\Phpdoc;
+use Gnugat\Medio\TwigExtension\Whitespace;
 
 $loader = \Twig_Loader_Filesystem(__DIR__.'/vendor/gnugat/medio/templates'); // Replace this path
 $twig = new \Twig_Environment($loader);
 $twig->addExtension(new Phpdoc());
+$twig->addExtension(new Whitespace());
 $prettyPrinter = new PrettyPrinter($twig);
 ```
 

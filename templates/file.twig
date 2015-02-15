@@ -4,8 +4,12 @@ namespace {{ file.namespace }};
 
 class {{ file.classname }}
 {
+{% include 'constant_collection.twig' with { 'constant_collection': file.constantCollection } only %}
+{% if needs_line_after(file, 'constants') %}
+
+{% endif %}
 {% include 'property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
-{% if file.methodCollection.all is not empty and file.propertyCollection.all is not empty %}
+{% if needs_line_after(file, 'properties') %}
 
 {% endif %}
 {% include 'method_collection.twig' with { 'method_collection': file.methodCollection } only %}

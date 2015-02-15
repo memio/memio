@@ -1,0 +1,4 @@
+{% for constant in constant_collection.all -%}
+    {% include 'constant.twig' with { 'constant': constant } only %}
+
+{% endfor -%}

@@ -22,6 +22,11 @@ class File
     private $filename;
 
     /**
+     * @var ConstantCollection
+     */
+    private $constantCollection;
+
+    /**
      * @var PropertyCollection
      */
     private $propertyCollection;
@@ -39,6 +44,7 @@ class File
     public function __construct($filename)
     {
         $this->filename = $filename;
+        $this->constantCollection = new ConstantCollection();
         $this->methodCollection = new MethodCollection();
         $this->propertyCollection = new PropertyCollection();
     }
@@ -143,6 +149,30 @@ class File
     public function addProperty(Property $property)
     {
         $this->propertyCollection->add($property);
+
+        return $this;
+    }
+
+    /**
+     * @return ConstantCollection
+     */
+    public function getConstantCollection()
+    {
+        return $this->constantCollection;
+    }
+
+    /**
+     * @param Constant $constant
+     *
+     * @return File
+     *
+     * @throws InvalidArgumentException If the name is already taken
+     *
+     * @api
+     */
+    public function addConstant(Constant $constant)
+    {
+        $this->constantCollection->add($constant);
 
         return $this;
     }

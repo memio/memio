@@ -3,7 +3,7 @@
 In order to generate code, you must build some models. Here's all you need to
 know about them.
 
-![UML class diagram: ArgumentCollection has Argument which has Type](http://yuml.me/2bdcf4b6)
+![UML class diagram: ArgumentCollection has Argument which has Type](http://yuml.me/a5124cb7)
 
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
@@ -12,6 +12,8 @@ know about them.
 * [MethodCollection](#methodcollection)
 * [Property](#property)
 * [PropertyCollection](#propertycollection)
+* [Constant](#constant)
+* [ConstantCollection](#constantcollection)
 * [File](#file)
 
 See also [next readings](#next-readings).
@@ -142,7 +144,7 @@ class Property
 
 ## PropertyCollection
 
-A File can have 0 to many methods this model takes care of managing those:
+A File can have 0 to many properties, this model takes care of managing those:
 
 ```php
 <?php
@@ -158,6 +160,41 @@ class PropertyCollection
 
 > **Note**: PropertyCollection throws an `InvalidArgumentException` when the
 > given property has the same name as one of the existing ones.
+
+## Constant
+
+This is a class constant:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Constant
+{
+    public function __construct($name, $value);
+    public static function make($name, $value);
+}
+```
+
+## ConstantCollection
+
+A File can have 0 to many constants, this model takes care of managing those:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class ConstantCollection
+{
+    public static function make();
+    public function add(Constant $cosntant);
+}
+```
+
+> **Note**: ConstantCollection throws an `InvalidArgumentException` when the
+> given cosntant has the same name as one of the existing ones.
 
 ## File
 
