@@ -13,6 +13,7 @@ know about them.
 * [Property](#property)
 * [PropertyCollection](#propertycollection)
 * [Constant](#constant)
+* [ConstantCollection](#constantcollection)
 * [File](#file)
 
 See also [next readings](#next-readings).
@@ -143,7 +144,7 @@ class Property
 
 ## PropertyCollection
 
-A File can have 0 to many methods this model takes care of managing those:
+A File can have 0 to many properties, this model takes care of managing those:
 
 ```php
 <?php
@@ -175,6 +176,25 @@ class Constant
     public static function make($name, $value);
 }
 ```
+
+## ConstantCollection
+
+A File can have 0 to many constants, this model takes care of managing those:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class ConstantCollection
+{
+    public static function make();
+    public function add(Constant $cosntant);
+}
+```
+
+> **Note**: ConstantCollection throws an `InvalidArgumentException` when the
+> given cosntant has the same name as one of the existing ones.
 
 ## File
 

@@ -1,0 +1,3 @@
+{% for constant in constant_collection.all -%}
+    {% include 'constant.twig' with { 'constant': constant } only %}{{ "\n" }}{% if not loop.last %}{{ "\n" }}{% endif %}
+{%- endfor -%}

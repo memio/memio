@@ -1,0 +1,6 @@
+    const FIRST_CONSTANT = 0;
+
+    const SECOND_CONSTANT = 1;
+
+    const THIRD_CONSTANT = 2;
+
