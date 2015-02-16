@@ -1,5 +1,7 @@
 {% include 'method_phpdoc.twig' with { 'method_phpdoc': make_phpdoc(method) } only %}
-    {{ method.visibility ~ ('' == method.visibility ? '' : ' ') }}function {{ method.name }}({% include 'argument_collection.twig' with {
+    {{ method.visibility ~ ('' == method.visibility ? '' : ' ') }}
+    {{- method.isStatic ? 'static ' : '' -}}
+    function {{ method.name }}({% include 'argument_collection.twig' with {
         'argument_collection': method.argumentCollection,
         'length_restriction': 22 + method.name | length
     } only %})
