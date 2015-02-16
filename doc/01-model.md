@@ -234,7 +234,7 @@ File can start with a license header. This "meta data" model takes care of it:
 ```php
 <?php
 
-namespace Gnugat\Medio\Model\MetaData;
+namespace Gnugat\Medio\Model;
 
 class License
 {

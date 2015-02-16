@@ -11,7 +11,7 @@
 
 namespace Gnugat\Medio\Examples;
 
-use Gnugat\Medio\Model\MetaData\License;
+use Gnugat\Medio\Model\License;
 
 class LicenseTest extends PrettyPrinterTestCase
 {

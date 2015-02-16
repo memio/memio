@@ -14,7 +14,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\MetaData\License;
+use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\Type;
