@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 1.0.0-alpha10: Imports
+
+* added license template
+* added import template
+* added import_collection template
+* tagged License as part of public API:
+    * __construct
+    * make
+* tagged Import as part of public API:
+    * __construct
+    * make
+    * setAlias
+    * removeAlias
+* tagged ImportCollection as part of public API:
+    * make
+    * add
+* tagged File#addImport as part of public API
+* tagged visibilities as part of public API:
+    * Method#makePublic
+    * Method#makePrivate
+    * Method#makeProtected
+    * Method#removeVisibility
+    * Property#makePublic
+    * Property#makePrivate
+    * Property#makeProtected
+* tagged staticness as part of public API:
+    * Method#makeStatic
+    * Method#removeStatic
+    * Property#makeStatic
+    * Property#removeStatic
+
 ## 1.0.0-alpha9: Constants
 
 * added constant template
