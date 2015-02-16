@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Gnugat\Medio\Model\MetaData;
+namespace spec\Gnugat\Medio\Model;
 
 use PhpSpec\ObjectBehavior;
 
