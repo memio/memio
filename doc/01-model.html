@@ -64,7 +64,7 @@
                     <h1>Model</h1>
 <p>In order to generate code, you must build some models. Here's all you need to
 know about them.</p>
-<p><img src="http://yuml.me/a5124cb7" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
+<p><img src="http://yuml.me/213ff6db" alt="UML class diagram: ArgumentCollection has Argument which has Type" /></p>
 <ul>
 <li><a href="#argument">Argument</a></li>
 <li><a href="#argumentcollection">ArgumentCollection</a></li>
@@ -76,6 +76,7 @@ know about them.</p>
 <li><a href="#constant">Constant</a></li>
 <li><a href="#constantcollection">ConstantCollection</a></li>
 <li><a href="#file">File</a></li>
+<li><a href="#license">License</a></li>
 </ul>
 <p>See also <a href="#next-readings">next readings</a>.</p>
 <h2>Argument</h2>
@@ -133,6 +134,14 @@ class Method
     public function __construct($name);
     public static function make($name);
     public function addArgument(Argument $argument);
+
+    public function makeStatic();
+    public function removeStatic();
+
+    public function makePrivate();
+    public function makeProtected();
+    public function makePublic();
+    public function removeVisibility();
 }</code></pre>
 <h2>MethodPhpdoc</h2>
 <p>A Method can be documented using PHPdoc. This model takes care of it for you:</p>
@@ -170,6 +179,13 @@ class Property
 {
     public function __construct($name);
     public static function make($name);
+
+    public function makeStatic();
+    public function removeStatic();
+
+    public function makePrivate();
+    public function makeProtected();
+    public function makePublic();
 }</code></pre>
 <h2>PropertyCollection</h2>
 <p>A File can have 0 to many properties, this model takes care of managing those:</p>
@@ -229,6 +245,19 @@ class File
 <p><strong>Note</strong>: It takes care of transforming the filename into namespace/classname
 for you.</p>
 </blockquote>
+<h2>License</h2>
+<p>File can start with a license header. This &quot;meta data&quot; model takes care of it:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio\Model;
+
+class License
+{
+    public function __construct($filename);
+    public static function make($filename);
+    public function addProperty(Property $property);
+    public function addMethod(Method $method);
+}</code></pre>
 <h2>Next readings</h2>
 <ul>
 <li><a href="02-templates.html">Templates</a></li>
