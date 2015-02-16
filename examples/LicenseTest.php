@@ -15,9 +15,13 @@ use Gnugat\Medio\Model\MetaData\License;
 
 class LicenseTest extends PrettyPrinterTestCase
 {
+    const PROJECT_NAME = 'gnugat/medio';
+    const AUTHOR_NAME = 'Loïc Chardonnet';
+    const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
+
     public function testSimpleOne()
     {
-        $license = new License('gnugat/medio', 'Loïc Chardonnet', 'loic.chardonnet@gmail.com');
+        $license = new License(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
 
         $generatedCode = $this->prettyPrinter->generateCode($license);
 
