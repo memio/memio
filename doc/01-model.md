@@ -15,6 +15,7 @@ know about them.
 * [Constant](#constant)
 * [ConstantCollection](#constantcollection)
 * [Import](#import)
+* [ImportCollection](#importcollection)
 * [File](#file)
 * [License](#license)
 
@@ -228,6 +229,22 @@ class Import
     public static function make($fqcn);
     public function setAlias($alias);
     public function removeAlias();
+}
+```
+
+## ImportCollection
+
+A File can have 0 to many use statements:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class ImportCollection
+{
+    public static function make();
+    public function add(Import $import);
 }
 ```
 
