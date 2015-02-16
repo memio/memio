@@ -1,1 +1,1 @@
-{% if argument.hasTypeHint %}{{ argument.type }} {% endif %}${{ argument.name -}}
+{{ argument.hasTypeHint ? argument.type ~ ' ' }}${{ argument.name -}}

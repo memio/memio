@@ -1,5 +1,5 @@
 {% for argument in argument_collection.all %}
 
-        {% include 'argument.twig' with { 'argument': argument } only %}{% if not loop.last %},{% endif %}
-{% endfor %}
+        {% include 'argument.twig' with { 'argument': argument } only %}{{ (not loop.last) ? ',' }}
+{%- endfor %}
 {{ "\n    " -}}
