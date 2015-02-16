@@ -3,7 +3,7 @@
 In order to generate code, you must build some models. Here's all you need to
 know about them.
 
-![UML class diagram: ArgumentCollection has Argument which has Type](http://yuml.me/a5124cb7)
+![UML class diagram: ArgumentCollection has Argument which has Type](http://yuml.me/213ff6db)
 
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
