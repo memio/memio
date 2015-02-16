@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
@@ -46,6 +47,15 @@ class FileSpec extends ObjectBehavior
     function it_has_a_classname()
     {
         $this->getClassname()->shouldBe(self::CLASSNAME);
+    }
+
+    function it_has_a_collection_of_imports(Import $import)
+    {
+        $importCollection = $this->getImportCollection();
+
+        $importCollection->all()->shouldHaveCount(0);
+        $this->addImport($import);
+        $importCollection->all()->shouldHaveCount(1);
     }
 
     function it_has_a_collection_of_constants(Constant $constant)

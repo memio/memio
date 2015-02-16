@@ -6,6 +6,10 @@
 
 namespace {{ file.namespace }};
 
+{% include 'import_collection.twig' with { 'import_collection': file.importCollection } only %}
+{% if needs_line_after(file, 'imports') %}
+
+{% endif %}
 class {{ file.classname }}
 {
 {% include 'constant_collection.twig' with { 'constant_collection': file.constantCollection } only %}

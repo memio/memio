@@ -22,6 +22,11 @@ class File
     private $filename;
 
     /**
+     * @var ImportCollection
+     */
+    private $importCollection;
+
+    /**
      * @var ConstantCollection
      */
     private $constantCollection;
@@ -44,6 +49,7 @@ class File
     public function __construct($filename)
     {
         $this->filename = $filename;
+        $this->importCollection = new ImportCollection();
         $this->constantCollection = new ConstantCollection();
         $this->methodCollection = new MethodCollection();
         $this->propertyCollection = new PropertyCollection();
@@ -173,6 +179,28 @@ class File
     public function addConstant(Constant $constant)
     {
         $this->constantCollection->add($constant);
+
+        return $this;
+    }
+
+    /**
+     * @return ImportCollection
+     */
+    public function getImportCollection()
+    {
+        return $this->importCollection;
+    }
+
+    /**
+     * @param Import $import
+     *
+     * @return File
+     *
+     * @api
+     */
+    public function addImport(Import $import)
+    {
+        $this->importCollection->add($import);
 
         return $this;
     }

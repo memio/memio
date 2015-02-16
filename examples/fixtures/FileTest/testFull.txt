@@ -2,6 +2,8 @@
 
 namespace Gnugat\Medio;
 
+use DateTime;
+
 class MyClass
 {
     const FIRST_CONSTANT = 0;

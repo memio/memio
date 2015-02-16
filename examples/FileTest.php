@@ -14,6 +14,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
@@ -49,6 +50,8 @@ class FileTest extends PrettyPrinterTestCase
     public function testFull()
     {
         $file = File::make(self::FILENAME)
+            ->addImport(new Import('DateTime'))
+
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
