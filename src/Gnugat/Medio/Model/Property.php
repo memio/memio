@@ -22,6 +22,11 @@ class Property
     private $name;
 
     /**
+     * @var string
+     */
+    private $visibility = 'private';
+
+    /**
      * @param string $name
      *
      * @api
@@ -49,5 +54,49 @@ class Property
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Method
+     *
+     * @api
+     */
+    public function makePrivate()
+    {
+        $this->visibility = 'private';
+
+        return $this;
+    }
+
+    /**
+     * @return Method
+     *
+     * @api
+     */
+    public function makeProtected()
+    {
+        $this->visibility = 'protected';
+
+        return $this;
+    }
+
+    /**
+     * @return Method
+     *
+     * @api
+     */
+    public function makePublic()
+    {
+        $this->visibility = 'public';
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVisibility()
+    {
+        return $this->visibility;
     }
 }

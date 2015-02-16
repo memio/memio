@@ -89,6 +89,11 @@ class Method
     public function __construct($name);
     public static function make($name);
     public function addArgument(Argument $argument);
+
+    public function makePrivate();
+    public function makeProtected();
+    public function makePublic();
+    public function removeVisibility();
 }
 ```
 
@@ -140,6 +145,10 @@ class Property
 {
     public function __construct($name);
     public static function make($name);
+
+    public function makePrivate();
+    public function makeProtected();
+    public function makePublic();
 }
 ```
 
