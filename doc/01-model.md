@@ -15,6 +15,7 @@ know about them.
 * [Constant](#constant)
 * [ConstantCollection](#constantcollection)
 * [File](#file)
+* [License](#license)
 
 See also [next readings](#next-readings).
 
@@ -216,6 +217,24 @@ class File
 
 > **Note**: It takes care of transforming the filename into namespace/classname
 > for you.
+
+## License
+
+File can start with a license header. This "meta data" model takes care of it:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model\MetaData;
+
+class License
+{
+    public function __construct($filename);
+    public static function make($filename);
+    public function addProperty(Property $property);
+    public function addMethod(Method $method);
+}
+```
 
 ## Next readings
 

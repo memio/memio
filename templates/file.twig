@@ -1,4 +1,8 @@
 <?php
+{% if license is defined %}
+
+{% include 'license.twig' with { 'license': license } only %}
+{% endif %}
 
 namespace {{ file.namespace }};
 
