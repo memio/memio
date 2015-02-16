@@ -82,4 +82,15 @@ class MethodTest extends PrettyPrinterTestCase
 
         $this->assertExpectedCode($generatedCode);
     }
+
+    public function testStatic()
+    {
+        $method = Method::make('method')
+            ->makeStatic()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
 }

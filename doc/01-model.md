@@ -90,6 +90,9 @@ class Method
     public static function make($name);
     public function addArgument(Argument $argument);
 
+    public function makeStatic();
+    public function removeStatic();
+
     public function makePrivate();
     public function makeProtected();
     public function makePublic();
@@ -145,6 +148,9 @@ class Property
 {
     public function __construct($name);
     public static function make($name);
+
+    public function makeStatic();
+    public function removeStatic();
 
     public function makePrivate();
     public function makeProtected();
