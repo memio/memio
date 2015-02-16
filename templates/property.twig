@@ -1,2 +1,4 @@
-    {{ property.visibility }} ${{ property.name }};
+    {{ property.visibility ~ ' ' }}
+    {{- property.isStatic ? 'static ' : '' -}}
+    ${{ property.name }};
 {#- Trimming lines -#}

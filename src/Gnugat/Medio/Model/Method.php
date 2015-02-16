@@ -31,6 +31,9 @@ class Method
      */
     private $visibility = 'public';
 
+    /**
+     * @var bool
+     */
     private $isStatic = false;
 
     /**

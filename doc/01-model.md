@@ -149,6 +149,9 @@ class Property
     public function __construct($name);
     public static function make($name);
 
+    public function makeStatic();
+    public function removeStatic();
+
     public function makePrivate();
     public function makeProtected();
     public function makePublic();

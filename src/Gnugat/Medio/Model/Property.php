@@ -27,6 +27,11 @@ class Property
     private $visibility = 'private';
 
     /**
+     * @var bool
+     */
+    private $isStatic = false;
+
+    /**
      * @param string $name
      *
      * @api
@@ -98,5 +103,35 @@ class Property
     public function getVisibility()
     {
         return $this->visibility;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatic()
+    {
+        return $this->isStatic;
+    }
+
+    /**
+     * @return Method
+     *
+     * @api
+     */
+    public function makeStatic()
+    {
+        $this->isStatic = true;
+
+        return $this;
+    }
+
+    /**
+     * @return Method
+     *
+     * @api
+     */
+    public function removeStatic()
+    {
+        $this->isStatic = false;
     }
 }

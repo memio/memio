@@ -50,4 +50,22 @@ class PropertySpec extends ObjectBehavior
         $this->makePrivate();
         $this->getVisibility()->shouldBe('private');
     }
+
+    function it_is_not_static_by_default()
+    {
+        $this->isStatic()->shouldBe(false);
+    }
+
+    function it_can_be_made_static()
+    {
+        $this->makeStatic();
+        $this->isStatic()->shouldBe(true);
+    }
+
+    function it_can_be_made_back_to_non_static()
+    {
+        $this->makeStatic();
+        $this->removeStatic();
+        $this->isStatic()->shouldBe(false);
+    }
 }

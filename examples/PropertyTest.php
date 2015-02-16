@@ -45,4 +45,15 @@ class PropertyTest extends PrettyPrinterTestCase
 
         $this->assertSame('    protected $inheritanceIsBad;', $generatedCode);
     }
+
+    public function testStatic()
+    {
+        $property = Property::make('property')
+            ->makeStatic()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($property);
+
+        $this->assertSame('    private static $property;', $generatedCode);
+    }
 }
