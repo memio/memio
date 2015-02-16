@@ -1,0 +1,3 @@
+    function it_has_phpspec_style()
+    {
+    }

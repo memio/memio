@@ -36,4 +36,34 @@ class MethodSpec extends ObjectBehavior
     {
         $this->getName()->shouldBe(self::NAME);
     }
+
+    function it_has_public_visibility_by_default()
+    {
+        $this->getVisibility()->shouldBe('public');
+    }
+
+    function it_can_have_private_visibility()
+    {
+        $this->makePrivate();
+        $this->getVisibility()->shouldBe('private');
+    }
+
+    function it_can_have_protected_visibility()
+    {
+        $this->makeProtected();
+        $this->getVisibility()->shouldBe('protected');
+    }
+
+    function it_can_have_no_visibility()
+    {
+        $this->removeVisibility();
+        $this->getVisibility()->shouldBe('');
+    }
+
+    function it_can_be_changed_back_to_public_visibility()
+    {
+        $this->makePrivate();
+        $this->makePublic();
+        $this->getVisibility()->shouldBe('public');
+    }
 }

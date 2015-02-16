@@ -26,4 +26,28 @@ class PropertySpec extends ObjectBehavior
     {
         $this->getName()->shouldBe(self::NAME);
     }
+
+    function it_has_private_visibility_by_default()
+    {
+        $this->getVisibility()->shouldBe('private');
+    }
+
+    function it_can_have_public_visibility()
+    {
+        $this->makePublic();
+        $this->getVisibility()->shouldBe('public');
+    }
+
+    function it_can_have_protected_visibility()
+    {
+        $this->makeProtected();
+        $this->getVisibility()->shouldBe('protected');
+    }
+
+    function it_can_be_changed_back_to_private_visibility()
+    {
+        $this->makePublic();
+        $this->makePrivate();
+        $this->getVisibility()->shouldBe('private');
+    }
 }

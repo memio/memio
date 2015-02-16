@@ -49,4 +49,37 @@ class MethodTest extends PrettyPrinterTestCase
 
         $this->assertExpectedCode($generatedCode);
     }
+
+    public function testNoVisibility()
+    {
+        $method = Method::make('it_has_phpspec_style')
+            ->removeVisibility()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testPrivateVisibility()
+    {
+        $method = Method::make('extractMe')
+            ->makePrivate()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testProtectedVisibility()
+    {
+        $method = Method::make('inheritanceIsBad')
+            ->makeProtected()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
 }

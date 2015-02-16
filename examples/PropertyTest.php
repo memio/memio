@@ -23,4 +23,26 @@ class PropertyTest extends PrettyPrinterTestCase
 
         $this->assertSame('    private $dateTime;', $generatedCode);
     }
+
+    public function testPublicVisibility()
+    {
+        $property = Property::make('dto')
+            ->makePublic()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($property);
+
+        $this->assertSame('    public $dto;', $generatedCode);
+    }
+
+    public function testProtectedVisibility()
+    {
+        $property = Property::make('inheritanceIsBad')
+            ->makeProtected()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($property);
+
+        $this->assertSame('    protected $inheritanceIsBad;', $generatedCode);
+    }
 }
