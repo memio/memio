@@ -15,12 +15,18 @@ menu:
         home:
             text: Home
             relativeUrl:
-        model:
-            text: Model
-            relativeUrl: doc/01-model.html
-        templates:
-            text: Templates
-            relativeUrl: doc/02-templates.html
-        examples:
-            text: Examples
-            relativeUrl: doc/03-examples.html
+        introduction:
+            text: Introduction
+            relativeUrl: doc/01-introduction.html
+        installation:
+            text: Installation
+            relativeUrl: doc/02-instalation.html
+        usage:
+            text: Usage
+            relativeUrl: doc/03-usage.html
+        cheat_sheet:
+            text: Cheat Sheet
+            relativeUrl: doc/04-cheat-sheet.html
+        extending:
+            text: Extending
+            relativeUrl: doc/05-extending.html

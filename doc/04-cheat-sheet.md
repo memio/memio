@@ -1,10 +1,9 @@
-# Model
+# Cheat Sheet
 
-In order to generate code, you must build some models. Here's all you need to
-know about them.
+Here you will find prototypes of all classes and methods that are part of the public API:
 
-![UML class diagram: ArgumentCollection has Argument which has Type](http://yuml.me/213ff6db)
-
+* [PrettyPrinter](#prettyprinter)
+* [Type](#type)
 * [Argument](#argument)
 * [ArgumentCollection](#argumentcollection)
 * [Method](#method)
@@ -21,9 +20,42 @@ know about them.
 
 See also [next readings](#next-readings).
 
-## Argument
+## PrettyPrinter
 
-A method's single argument. It has a `Type` and a name:
+```php
+<?php
+
+namespace Gnugat\Medio;
+
+class PrettyPrinter
+{
+    public function __construct(Twig_Environment $twig);
+    public function generateCode($model, array $parameters = array());
+}
+```
+
+## Type
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Type
+{
+    public function __construct($name);
+    public static function make($name);
+
+    public function getName();
+    public function isObject();
+}
+```
+
+> **Note**: a type is considered as being an object if the given name is
+> different than `string`, `bool`, `int`, `double`, `callable`, `resource`,
+> `array`, `null`, `mixed`.
+
+## Argument
 
 ```php
 <?php
@@ -37,29 +69,7 @@ class Argument
 }
 ```
 
-The `Type` model is responsible of knowing if the argument can be type hinted:
-
-```php
-<?php
-
-namespace Gnugat\Medio\Model;
-
-class Type
-{
-    public function __construct($name);
-    public static function make($name);
-    public function getName();
-    public function isObject();
-}
-```
-
-> **Note**: a type is considered as being an object if the given name is
-> different than `string`, `bool`, `int`, `double`, `callable`, `resource`,
-> `array`, `null`, `mixed`.
-
 ## ArgumentCollection
-
-Methods can have 0 to many arguments, this model takes care of managing those:
 
 ```php
 <?php
@@ -73,13 +83,7 @@ class ArgumentCollection
 }
 ```
 
-> **Note**: ArgumentCollection will rename added arguments in case of name collision,
-> by suffixing them with a number.
-
 ## Method
-
-By default methods are simple public ones (not static/final/abstract), with a name
-and 0 to many arguments:
 
 ```php
 <?php
@@ -90,6 +94,7 @@ class Method
 {
     public function __construct($name);
     public static function make($name);
+
     public function addArgument(Argument $argument);
 
     public function makeStatic();
@@ -103,8 +108,6 @@ class Method
 ```
 
 ## MethodPhpdoc
-
-A Method can be documented using PHPdoc. This model takes care of it for you:
 
 ```php
 <?php
@@ -120,8 +123,6 @@ class MethodPhpdoc
 
 ## MethodCollection
 
-A File can have 0 to many methods this model takes care of managing those:
-
 ```php
 <?php
 
@@ -134,12 +135,7 @@ class MethodCollection
 }
 ```
 
-> **Note**: MethodCollection throws an `InvalidArgumentException` when the given
-> method has the same name as one of the existing ones.
-
 ## Property
-
-By default properties are always simple private ones (not static, no default value):
 
 ```php
 <?php
@@ -162,8 +158,6 @@ class Property
 
 ## PropertyCollection
 
-A File can have 0 to many properties, this model takes care of managing those:
-
 ```php
 <?php
 
@@ -176,12 +170,7 @@ class PropertyCollection
 }
 ```
 
-> **Note**: PropertyCollection throws an `InvalidArgumentException` when the
-> given property has the same name as one of the existing ones.
-
 ## Constant
-
-This is a class constant:
 
 ```php
 <?php
@@ -197,8 +186,6 @@ class Constant
 
 ## ConstantCollection
 
-A File can have 0 to many constants, this model takes care of managing those:
-
 ```php
 <?php
 
@@ -210,9 +197,6 @@ class ConstantCollection
     public function add(Constant $cosntant);
 }
 ```
-
-> **Note**: ConstantCollection throws an `InvalidArgumentException` when the
-> given cosntant has the same name as one of the existing ones.
 
 ## Import
 
@@ -234,8 +218,6 @@ class Import
 
 ## ImportCollection
 
-A File can have 0 to many use statements:
-
 ```php
 <?php
 
@@ -250,8 +232,6 @@ class ImportCollection
 
 ## File
 
-This is the top most model, it contains everything:
-
 ```php
 <?php
 
@@ -261,6 +241,9 @@ class File
 {
     public function __construct($filename);
     public static function make($filename);
+
+    public function addImport(Import $import);
+    public function addConstant(Constant $constant);
     public function addProperty(Property $property);
     public function addMethod(Method $method);
 }
@@ -271,8 +254,6 @@ class File
 
 ## License
 
-File can start with a license header. This "meta data" model takes care of it:
-
 ```php
 <?php
 
@@ -280,14 +261,18 @@ namespace Gnugat\Medio\Model;
 
 class License
 {
-    public function __construct($filename);
-    public static function make($filename);
-    public function addProperty(Property $property);
-    public function addMethod(Method $method);
+    public function __construct($projectName, $authorName, $authorEmail);
+    public static function make($projectName, $authorName, $authorEmail);
 }
 ```
 
 ## Next readings
 
-* [Templates](02-templates.md)
-* [Examples](03-examples.md)
+* [Extending](05-extending.md)
+
+Previous pages:
+
+* [Usage](03-usage.md)
+* [Installation](02-installation.md)
+* [Introduction](01-introduction.md)
+* [README](../README.md)
