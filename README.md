@@ -5,6 +5,19 @@ A code generation library, which uses [Twig templates](http://twig.sensiolabs.or
 > **Note**: Templates provided out of the box are highly opinionated, but you can
 > customize them.
 
+![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
+[![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
+
+## Installation
+
+Use [Composer](https://getcomposer.org/download):
+
+    composer require gnugat/medio:~1.0@alpha
+
+## Usage
+
 In order to generate a chunk of code, you need to describe it through the
 construction of "models". Once done, you can give the top most model to the
 `PrettyPrinter` service: it will find the appropriate [Twig template](http://twig.sensiolabs.org/)
@@ -60,23 +73,10 @@ class MyClass
     {
     }
 }
-
-
 ```
 
 > **Note**: each arguments would have been put on their own line if the inline
 > alternative was longer than 120 characters.
-
-![Logo: an elephant, a tree and some twigs](https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592)
-[![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
-
-## Installation
-
-Use [Composer](https://getcomposer.org/download):
-
-    composer require gnugat/medio:~1.0@alpha
 
 ## Roadmap
 
@@ -90,9 +90,11 @@ Use [Composer](https://getcomposer.org/download):
 
 Discover more by reading the docs:
 
-* [Model](doc/01-model.md)
-* [Templates](doc/02-templates.md)
-* [Examples](doc/03-examples.md)
+* [Introduction](01-introduction.md)
+* [Installation](02-installation.md)
+* [Usage](03-usage.md)
+* [Cheat Sheet](04-cheat-sheet.md)
+* [Extending](05-extending.md)
 
 You can see the current and past versions using one of the following:
 
