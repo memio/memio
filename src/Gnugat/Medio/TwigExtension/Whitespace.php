@@ -46,9 +46,13 @@ class Whitespace extends Twig_Extension
      */
     public function needsLineAfter(File $file, $block)
     {
+        $imports = $file->getImportCollection()->all();
         $constants = $file->getConstantCollection()->all();
         $properties = $file->getPropertyCollection()->all();
         $methods = $file->getMethodCollection()->all();
+        if ('imports' === $block) {
+            return !empty($imports);
+        }
         if ('constants' === $block) {
             return (!empty($constants) && (!empty($properties) || !empty($methods)));
         }

@@ -14,6 +14,8 @@ know about them.
 * [PropertyCollection](#propertycollection)
 * [Constant](#constant)
 * [ConstantCollection](#constantcollection)
+* [Import](#import)
+* [ImportCollection](#importcollection)
 * [File](#file)
 * [License](#license)
 
@@ -211,6 +213,40 @@ class ConstantCollection
 
 > **Note**: ConstantCollection throws an `InvalidArgumentException` when the
 > given cosntant has the same name as one of the existing ones.
+
+## Import
+
+A use statement:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class Import
+{
+    public function __construct($fqcn);
+    public static function make($fqcn);
+    public function setAlias($alias);
+    public function removeAlias();
+}
+```
+
+## ImportCollection
+
+A File can have 0 to many use statements:
+
+```php
+<?php
+
+namespace Gnugat\Medio\Model;
+
+class ImportCollection
+{
+    public static function make();
+    public function add(Import $import);
+}
+```
 
 ## File
 
