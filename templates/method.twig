@@ -5,6 +5,7 @@
         'argument_collection': method.argumentCollection,
         'length_restriction': 22 + method.name | length
     } only %})
-    {
-    }
+    { {{- "\n" }}
+{{- method.body is not empty ? (method.body ~ "\n")|raw -}}
+{{ "    " -}} }
 {#- Trimming lines -#}

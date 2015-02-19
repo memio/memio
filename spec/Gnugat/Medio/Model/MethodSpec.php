@@ -84,4 +84,13 @@ class MethodSpec extends ObjectBehavior
         $this->removeStatic();
         $this->isStatic()->shouldBe(false);
     }
+
+    function it_can_have_a_body()
+    {
+        $body =<<<'EOT'
+        $length = strlen('Nobody expects the spanish inquisition');
+EOT;
+        $this->setBody($body);
+        $this->getBody()->shouldBe($body);
+    }
 }

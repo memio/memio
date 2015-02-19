@@ -97,6 +97,8 @@ class Method
 
     public function addArgument(Argument $argument);
 
+    public function setBody($body);
+
     public function makeStatic();
     public function removeStatic();
 

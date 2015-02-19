@@ -93,4 +93,19 @@ class MethodTest extends PrettyPrinterTestCase
 
         $this->assertExpectedCode($generatedCode);
     }
+
+    public function testWithBody()
+    {
+        $body = <<<'EOT'
+        $length = strlen('Nobody expects the spanish inquisition');
+EOT;
+
+        $method = Method::make('method')
+            ->setBody($body)
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
 }
