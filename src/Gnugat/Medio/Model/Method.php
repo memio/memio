@@ -37,6 +37,11 @@ class Method
     private $isStatic = false;
 
     /**
+     * @var string
+     */
+    private $body = '';
+
+    /**
      * @param string $name
      *
      * @api
@@ -173,5 +178,27 @@ class Method
     public function removeStatic()
     {
         $this->isStatic = false;
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return Method
+     *
+     * @api
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }
