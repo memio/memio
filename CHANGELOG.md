@@ -1,167 +1,96 @@
 # CHANGELOG
 
-## 1.0.0-alpha10: Imports
+## 1.0.0-alpha11: Imports, Method body and doc
 
-* added license template
-* added import template
-* added import_collection template
-* tagged License as part of public API:
-    * __construct
-    * make
-* tagged Import as part of public API:
-    * __construct
-    * make
-    * setAlias
-    * removeAlias
-* tagged ImportCollection as part of public API:
-    * make
-    * add
-* tagged File#addImport as part of public API
-* tagged visibilities as part of public API:
-    * Method#makePublic
-    * Method#makePrivate
-    * Method#makeProtected
-    * Method#removeVisibility
-    * Property#makePublic
-    * Property#makePrivate
-    * Property#makeProtected
-* tagged staticness as part of public API:
-    * Method#makeStatic
-    * Method#removeStatic
-    * Property#makeStatic
-    * Property#removeStatic
+* added Imports (use statement) generation
+* added Method's body generation
+* improved documentation (introduction, installation, usage, cheat sheet and extending)
+
+## 1.0.0-alpha10: License, visibility and staticness
+
+* added License header generation
+* added Method and Property visibility
+* added Method and Property staticness
 
 ## 1.0.0-alpha9: Constants
 
-* added constant template
-* added constant_collection template
-* tagged Constant as part of public API:
-    * __construct
-    * make
-* tagged ConstantCollection as part of public API:
-    * make
-    * add
-* tagged File#addConstant as part of public API
+* added Constants generation
 
 ## 1.0.0-alpha8: Properties
 
-* added property template
-* added property_collection template
-* tagged Property as part of public API:
-    * __construct
-    * make
-* tagged PropertyCollection as part of public API:
-    * make
-    * add
-* tagged File#addProperty as part of public API
+* added Properties generation
 
-## 1.0.0-alpha7: MethodPhpdoc
+## 1.0.0-alpha7: Method's PHPdoc, static constructors
 
-* added method_phpdoc template
-* tagged MethodPhpdoc as part of public API:
-    * __construct
-    * make
-* added static constructors make to every model
-* added static constructors as part of public API
+* added Method's PHPdoc generation
+* added static constructors to all Models
 
 ## 1.0.0-alpha6: File
 
-* added file template
-* tagged File as part of public API:
-    * __construct
-    * addMethod
+* added File (namespace, class, etc) generation
 
-## 1.0.0-alpha5: MethodCollection
+## 1.0.0-alpha5: Methods, fixtures refactoring
 
-* added method_collection template
-* tagged MethodCollection as part of public API:
-    * add
-* tagged Exception as part of API
-* tagged InvalidArgumentException as part of API
-* refactored fixtures
+* added Methods generation
+* moved fixtures in `examples/fixtures`
 
 ## 1.0.0-alpha4: Method
 
-* added method template
-* tagged Method as part of public API:
-    * __construct
-    * addArgument
-* tagged more Type methods as part of public API:
-    * getName
-    * isObject
-* removed Factory directory (legacy code):
-    * removed VariableArgumentCollectionFactory [**BC break**]
+* added Method generation
+
+> **BC break**:
+>
+> * removed VariableArgumentCollectionFactory
 
 ## 1.0.0-alpha3: Puli
 
 * added `/gnugat/medio/templates` Puli's path
 
-## 1.0.0-alpha2: Twig tempates parameters
+## 1.0.0-alpha2: PrettyPrinter parameters
 
 * added parameters argument to PrettyPrinter#generateCode
-* removed PrettyPrinter directory (legacy code):
-    * removed MultilineArgumentCollectionPrinter [**BC break**]
-    * removed InlineArgumentCollectionPrinter [**BC break**]
 
-## 1.0.0-alpha1: Twig templates
+> **BC break**:
+>
+> * removed MultilineArgumentCollectionPrinter
+> * removed InlineArgumentCollectionPrinter
 
-* tagged ArgumentCollection as part of public API:
-    * add
-* tagged Argument as part of public API:
-    * __construct
-* tagged Type as part of public API:
-    * __construct
-* tagged PrettyPrinter as part of public API:
-    * __construct
-    * generateCode
-* added argument_collection template
-* added argument template
+## 1.0.0-alpha1: PrettyPrinter, Twig templates and Arguments
+
 * added PrettyPrinter
+* added Arguments generation
 
-## 0.4.0: Refactoring
+> **Note**: Usage of single pretty printer (Model specific generation is done in Twig templates)
 
-* removed ArgumentCollection from Method#__construct arguments
-* removed method visibility
-* added Type
-* added examples as tests
-* tagged MultilineArgumentCollectionPrinter as part of public API
-* tagged InlineArgumentCollectionPrinter as part of public API
-* tagged VariableArgumentCollectionFactory as part of public API
+## 0.4.0: Type, Method refactoring, executable examples
 
-## 0.3.0: Green field
+* added Type construction from variable
+* added executable examples
+* refactored Method (removed visibility, Arguments from constructor parameters)
 
-* added generation of method with phpdoc and typehinted arguments
-* removed everything
+## 0.3.0: Method, typehints and PHPdoc generation
 
-## 0.2.0
+* added Method generation
+* added Method's PHPDoc generation
+* added Arguments type hint generation
+* added inline/multiline Arguments generation
 
-* added insertion of missing constructor in dependency injection command
-* added insertion of method
-* added detection of empty class
-* added detection of method presence
-* added selection of class ending
-* added selection of next constant
-* added detection of next constant
-* added detection of previous constant
+> **BC Break**:
+>
+> * removed _everything_
 
-## 0.1.0
+> **Note**: Usage of specialized pretty printers (each Model has its own generator)
 
-* added selection of method
-* added selection of next property
-* added selection of namespace
-* added selection of next line
-* added selection of class opening
-* added selection of method closing
-* added detection of use statement need
-* added detection of next use statement presence
-* added detection of previous property presence
-* added detection of next property presence
-* added detection of method's argument presence
-* added detection of inline method arguments
-* added detection of next multiline argument
-* added insertion of multiline argument
-* added insertion of use statement
-* added insertion of property
-* added insertion of inline argument
-* added insertion of property initialization
-* added dependency injection command
+## 0.2.0: Missing Constructor generation
+
+* added Missing Constructor generation
+
+## 0.1.0: DependencyInjectionCommand
+
+* added DependencyInjectionCommand:
+    * Import generation
+    * Property with PHPdoc generation
+    * Constructor argument with PHPdoc generation
+    * Property initialization in constructor generation
+
+> **Note**: Usage of Redaktilo + regex to edit existing code
