@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
+
 /**
  * @api
  */
@@ -20,6 +22,11 @@ class File
      * @var string
      */
     private $filename;
+
+    /**
+     * @var FullyQualifiedClassname
+     */
+    private $fullyQualifiedClassname;
 
     /**
      * @var ImportCollection
@@ -48,7 +55,25 @@ class File
      */
     public function __construct($filename)
     {
+        $filenameWithoutExtension = rtrim($filename, '.php');
+        $parts = explode('/', $filenameWithoutExtension);
+        $uppercases = array(
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        );
+        $i = count($parts) - 1;
+        // Detecting the first part that starts with a lowercase character
+        while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
+            $i--;
+        }
+        if ($parts[$i] !== 'spec') {
+            $i++;
+        }
+        $namespaces = array_slice($parts, $i);
+        $fullyQualifiedClassname = implode('\\', $namespaces);
+
         $this->filename = $filename;
+        $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
         $this->importCollection = new ImportCollection();
         $this->constantCollection = new ConstantCollection();
         $this->methodCollection = new MethodCollection();
@@ -80,24 +105,7 @@ class File
      */
     public function getNamespace()
     {
-        $filenameWithoutExtension = rtrim($this->filename, '.php');
-        $parts = explode('/', $filenameWithoutExtension);
-        $uppercases = array(
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-            'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        );
-        array_pop($parts); // Removing classname
-        $i = count($parts) - 1;
-        // Detecting the first part that starts with a lowercase character
-        while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
-            $i--;
-        }
-        if ($parts[$i] !== 'spec') {
-            $i++;
-        }
-        $namespaces = array_slice($parts, $i);
-
-        return implode('\\', $namespaces);
+        return $this->fullyQualifiedClassname->getNamespace();
     }
 
     /**
@@ -105,10 +113,7 @@ class File
      */
     public function getClassname()
     {
-        $filenameWithoutExtension = rtrim($this->filename, '.php');
-        $namespaces = explode('/', $filenameWithoutExtension);
-
-        return end($namespaces);
+        return $this->fullyQualifiedClassname->getClassname();
     }
 
     /**

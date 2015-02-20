@@ -1,6 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Medio project.
+ *
+ * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gnugat\Medio\Model;
+
+use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
 
 /**
  * @api
@@ -10,7 +21,7 @@ class Import
     /**
      * @var string
      */
-    private $fqcn;
+    private $fullyQualifiedClassname;
 
     /**
      * @var string
@@ -18,23 +29,23 @@ class Import
     private $alias;
 
     /**
-     * @param string $fqcn
+     * @param string $fullyQualifiedClassname
      */
-    public function __construct($fqcn)
+    public function __construct($fullyQualifiedClassname)
     {
-        $this->fqcn = $fqcn;
+        $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
     }
 
     /**
-     * @param string $fqcn
+     * @param string $fullyQualifiedClassname
      *
      * @return Import
      *
      * @api
      */
-    public static function make($fqcn)
+    public static function make($fullyQualifiedClassname)
     {
-        return new self($fqcn);
+        return new self($fullyQualifiedClassname);
     }
 
     /**
@@ -42,7 +53,7 @@ class Import
      */
     public function getFqcn()
     {
-        return trim($this->fqcn, '\\');
+        return trim($this->fullyQualifiedClassname->getAll(), '\\');
     }
 
     /**
@@ -50,9 +61,7 @@ class Import
      */
     public function getClassname()
     {
-        $namespaces = explode('\\', $this->fqcn);
-
-        return end($namespaces);
+        return $this->fullyQualifiedClassname->getClassname();
     }
 
     /**
