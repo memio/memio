@@ -25,7 +25,7 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_handles_one_worded_model_class_names(Twig_Environment $twig)
     {
-        $file = new File('/tmp/filename.php');
+        $file = new File('/tmp/Filename.php');
         $twig->render('file.twig', array('file' => $file))->shouldBeCalled();
 
         $this->generateCode($file);
@@ -41,7 +41,7 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_passes_extra_parameters_to_template(Twig_Environment $twig)
     {
-        $file = new File('/tmp/filename.php');
+        $file = new File('/tmp/Filename.php');
         $twig->render('file.twig', array('extra' => 'parameter', 'file' => $file))->shouldBeCalled();
 
         $this->generateCode($file, array('extra' => 'parameter'));
