@@ -14,7 +14,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
-use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\ValueObject\Type;
 
 class MethodPhpdocTest extends PrettyPrinterTestCase
 {

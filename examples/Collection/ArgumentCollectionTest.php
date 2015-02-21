@@ -13,8 +13,8 @@ namespace Gnugat\Medio\Examples\Collection;
 
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Type;
 use Gnugat\Medio\ValueObject\Collection;
+use Gnugat\Medio\ValueObject\Type;
 
 class ArgumentCollectionTest extends PrettyPrinterTestCase
 {

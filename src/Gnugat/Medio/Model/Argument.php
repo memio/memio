@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\ValueObject\Type;
+
 /**
  * @api
  */

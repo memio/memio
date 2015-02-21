@@ -11,7 +11,7 @@
 
 namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\ValueObject\Type;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentSpec extends ObjectBehavior

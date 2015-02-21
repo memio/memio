@@ -18,7 +18,7 @@ use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\ValueObject\Type;
 
 class FileTest extends PrettyPrinterTestCase
 {
