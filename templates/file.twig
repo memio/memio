@@ -16,7 +16,7 @@ class {{ file.classname }}
 {% if needs_line_after(file, 'constants') %}
 
 {% endif %}
-{% include 'property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
+{% include 'collection/property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
 {% if needs_line_after(file, 'properties') %}
 
 {% endif %}

@@ -40,9 +40,9 @@ class File
     private $constants;
 
     /**
-     * @var PropertyCollection
+     * @var Collection
      */
-    private $propertyCollection;
+    private $properties;
 
     /**
      * @var Collection
@@ -77,7 +77,7 @@ class File
         $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
         $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
         $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
-        $this->propertyCollection = new PropertyCollection();
+        $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
         $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
     }
 
@@ -144,7 +144,7 @@ class File
      */
     public function getPropertyCollection()
     {
-        return $this->propertyCollection;
+        return $this->properties;
     }
 
     /**
@@ -152,13 +152,11 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addProperty(Property $property)
     {
-        $this->propertyCollection->add($property);
+        $this->properties->add($property);
 
         return $this;
     }
