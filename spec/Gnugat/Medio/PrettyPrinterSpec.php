@@ -13,6 +13,7 @@ namespace spec\Gnugat\Medio;
 
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\MethodCollection;
+use Gnugat\Medio\ValueObject\Collection;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
@@ -45,5 +46,13 @@ class PrettyPrinterSpec extends ObjectBehavior
         $twig->render('file.twig', array('extra' => 'parameter', 'file' => $file))->shouldBeCalled();
 
         $this->generateCode($file, array('extra' => 'parameter'));
+    }
+
+    function it_handles_collections(Twig_Environment $twig)
+    {
+        $collection = new Collection('Gnugat\\Medio\\Model\\Method');
+        $twig->render('collection/method_collection.twig', array('method_collection' => $collection))->shouldBeCalled();
+
+        $this->generateCode($collection);
     }
 }

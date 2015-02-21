@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio;
 
+use Gnugat\Medio\ValueObject\Collection;
+use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
 use Twig_Environment;
 
 /**
@@ -52,11 +54,17 @@ class PrettyPrinter
     public function generateCode($model, array $parameters = array())
     {
         $fqcn = get_class($model);
-        $namespaces = explode('\\', $fqcn);
-        $className = end($namespaces);
-        $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $className));
+        $suffix = '';
+        $directory = '';
+        if ($model instanceof Collection) {
+            $fqcn = $model->getType();
+            $suffix = '_collection';
+            $directory = 'collection/';
+        }
+        $className = FullyQualifiedClassname::make($fqcn)->getClassname();
+        $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $className)).$suffix;
         $parameters[$modelName] = $model;
 
-        return $this->twig->render($modelName.'.twig', $parameters);
+        return $this->twig->render($directory.$modelName.'.twig', $parameters);
     }
 }
