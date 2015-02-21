@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Collection;
 
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Import;
-use Gnugat\Medio\Model\ImportCollection;
+use Gnugat\Medio\ValueObject\Collection;
 
 class ImportCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroImports()
     {
-        $importCollection = new ImportCollection();
+        $importCollection = new Collection('Gnugat\\Medio\\Model\\Import');
 
         $generatedCode = $this->prettyPrinter->generateCode($importCollection);
 
@@ -27,7 +28,7 @@ class ImportCollectionTest extends PrettyPrinterTestCase
 
     public function testOneImport()
     {
-        $importCollection = ImportCollection::make()
+        $importCollection = Collection::make('Gnugat\\Medio\\Model\\Import')
             ->add(new Import('DateTime'))
         ;
 
@@ -38,7 +39,7 @@ class ImportCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeImports()
     {
-        $importCollection = ImportCollection::make()
+        $importCollection = Collection::make('Gnugat\\Medio\\Model\\Import')
             ->add(new Import('DateTime'))
             ->add(new Import('ArrayObject'))
             ->add(new Import('stdClass'))
