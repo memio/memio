@@ -157,8 +157,7 @@ examples are executed using [phpunit](http://phpunit.de).
 
 ## Next readings
 
-* [Cheat Sheet](04-cheat-sheet.md)
-* [Extending](05-extending.md)
+* [Extending](04-extending.md)
 
 Previous pages:
 

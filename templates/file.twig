@@ -6,19 +6,19 @@
 
 namespace {{ file.namespace }};
 
-{% include 'import_collection.twig' with { 'import_collection': file.importCollection } only %}
+{% include 'collection/import_collection.twig' with { 'import_collection': file.importCollection } only %}
 {% if needs_line_after(file, 'imports') %}
 
 {% endif %}
 class {{ file.classname }}
 {
-{% include 'constant_collection.twig' with { 'constant_collection': file.constantCollection } only %}
+{% include 'collection/constant_collection.twig' with { 'constant_collection': file.constantCollection } only %}
 {% if needs_line_after(file, 'constants') %}
 
 {% endif %}
-{% include 'property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
+{% include 'collection/property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
 {% if needs_line_after(file, 'properties') %}
 
 {% endif %}
-{% include 'method_collection.twig' with { 'method_collection': file.methodCollection } only %}
+{% include 'collection/method_collection.twig' with { 'method_collection': file.methodCollection } only %}
 }

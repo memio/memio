@@ -12,7 +12,9 @@
 namespace spec\Gnugat\Medio;
 
 use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\MethodCollection;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\MethodPhpdoc;
+use Gnugat\Medio\ValueObject\Collection;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
@@ -33,10 +35,10 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_handles_many_worded_model_class_names(Twig_Environment $twig)
     {
-        $methodCollection = new MethodCollection();
-        $twig->render('method_collection.twig', array('method_collection' => $methodCollection))->shouldBeCalled();
+        $methodPhpdoc = new MethodPhpdoc(new Method('__construct'));
+        $twig->render('method_phpdoc.twig', array('method_phpdoc' => $methodPhpdoc))->shouldBeCalled();
 
-        $this->generateCode($methodCollection);
+        $this->generateCode($methodPhpdoc);
     }
 
     function it_passes_extra_parameters_to_template(Twig_Environment $twig)
@@ -45,5 +47,13 @@ class PrettyPrinterSpec extends ObjectBehavior
         $twig->render('file.twig', array('extra' => 'parameter', 'file' => $file))->shouldBeCalled();
 
         $this->generateCode($file, array('extra' => 'parameter'));
+    }
+
+    function it_handles_collections(Twig_Environment $twig)
+    {
+        $collection = new Collection('Gnugat\\Medio\\Model\\Method');
+        $twig->render('collection/method_collection.twig', array('method_collection' => $collection))->shouldBeCalled();
+
+        $this->generateCode($collection);
     }
 }

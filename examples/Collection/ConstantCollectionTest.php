@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Collection;
 
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\ConstantCollection;
+use Gnugat\Medio\ValueObject\Collection;
 
 class ConstantCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroConstants()
     {
-        $constantCollection = new ConstantCollection();
+        $constantCollection = new Collection('Gnugat\\Medio\\Model\\Constant');
 
         $generatedCode = $this->prettyPrinter->generateCode($constantCollection);
 
@@ -27,7 +28,7 @@ class ConstantCollectionTest extends PrettyPrinterTestCase
 
     public function testOneConstant()
     {
-        $constantCollection = ConstantCollection::make()
+        $constantCollection = Collection::make('Gnugat\\Medio\\Model\\Constant')
             ->add(new Constant('MY_CONSTANT', '0'))
         ;
 
@@ -38,7 +39,7 @@ class ConstantCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeConstants()
     {
-        $constantCollection = ConstantCollection::make()
+        $constantCollection = Collection::make('Gnugat\\Medio\\Model\\Constant')
             ->add(new Constant('FIRST_CONSTANT', '0'))
             ->add(new Constant('SECOND_CONSTANT', '1'))
             ->add(new Constant('THIRD_CONSTANT', '2'))

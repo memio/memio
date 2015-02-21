@@ -9,18 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Collection;
 
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\MethodCollection;
 use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\ValueObject\Collection;
 
 class MethodCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroMethods()
     {
-        $methodCollection = new MethodCollection();
+        $methodCollection = new Collection('Gnugat\\Medio\\Model\\Method');
 
         $generatedCode = $this->prettyPrinter->generateCode($methodCollection);
 
@@ -29,7 +30,7 @@ class MethodCollectionTest extends PrettyPrinterTestCase
 
     public function testOneMethod()
     {
-        $methodCollection = MethodCollection::make()
+        $methodCollection = Collection::make('Gnugat\\Medio\\Model\\Method')
             ->add(new Method('__construct'))
         ;
 
@@ -40,7 +41,7 @@ class MethodCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeMethods()
     {
-        $methodCollection = MethodCollection::make()
+        $methodCollection = Collection::make('Gnugat\\Medio\\Model\\Method')
             ->add(Method::make('__construct')
                 ->addArgument(new Argument(new Type('DateTime'), 'dateTime'))
                 ->addArgument(new Argument(new Type('ArrayObject'), 'arrayObject'))

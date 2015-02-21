@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Collection;
 
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\PropertyCollection;
+use Gnugat\Medio\ValueObject\Collection;
 
 class PropertyCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroProperties()
     {
-        $propertyCollection = new PropertyCollection();
+        $propertyCollection = new Collection('Gnugat\\Medio\\Model\\Property');
 
         $generatedCode = $this->prettyPrinter->generateCode($propertyCollection);
 
@@ -27,7 +28,7 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testOneProperty()
     {
-        $propertyCollection = PropertyCollection::make()
+        $propertyCollection = Collection::make('Gnugat\\Medio\\Model\\Property')
             ->add(new Property('dateTime'))
         ;
 
@@ -38,7 +39,7 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeProperties()
     {
-        $propertyCollection = PropertyCollection::make()
+        $propertyCollection = Collection::make('Gnugat\\Medio\\Model\\Property')
             ->add(new Property('dateTime'))
             ->add(new Property('arrayObject'))
             ->add(new Property('isEnabled'))

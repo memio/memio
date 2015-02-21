@@ -11,6 +11,7 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\ValueObject\Collection;
 use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
 
 /**
@@ -29,24 +30,24 @@ class File
     private $fullyQualifiedClassname;
 
     /**
-     * @var ImportCollection
+     * @var Collection
      */
-    private $importCollection;
+    private $imports;
 
     /**
-     * @var ConstantCollection
+     * @var Collection
      */
-    private $constantCollection;
+    private $constants;
 
     /**
-     * @var PropertyCollection
+     * @var Collection
      */
-    private $propertyCollection;
+    private $properties;
 
     /**
-     * @var MethodCollection
+     * @var Collection
      */
-    private $methodCollection;
+    private $methods;
 
     /**
      * @param string $filename
@@ -74,10 +75,10 @@ class File
 
         $this->filename = $filename;
         $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
-        $this->importCollection = new ImportCollection();
-        $this->constantCollection = new ConstantCollection();
-        $this->methodCollection = new MethodCollection();
-        $this->propertyCollection = new PropertyCollection();
+        $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
+        $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
+        $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
+        $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
     }
 
     /**
@@ -117,11 +118,11 @@ class File
     }
 
     /**
-     * @return MethodCollection
+     * @return Collection
      */
     public function getMethodCollection()
     {
-        return $this->methodCollection;
+        return $this->methods;
     }
 
     /**
@@ -129,13 +130,11 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addMethod(Method $method)
     {
-        $this->methodCollection->add($method);
+        $this->methods->add($method);
 
         return $this;
     }
@@ -145,7 +144,7 @@ class File
      */
     public function getPropertyCollection()
     {
-        return $this->propertyCollection;
+        return $this->properties;
     }
 
     /**
@@ -153,23 +152,21 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addProperty(Property $property)
     {
-        $this->propertyCollection->add($property);
+        $this->properties->add($property);
 
         return $this;
     }
 
     /**
-     * @return ConstantCollection
+     * @return Collection
      */
     public function getConstantCollection()
     {
-        return $this->constantCollection;
+        return $this->constants;
     }
 
     /**
@@ -177,23 +174,21 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addConstant(Constant $constant)
     {
-        $this->constantCollection->add($constant);
+        $this->constants->add($constant);
 
         return $this;
     }
 
     /**
-     * @return ImportCollection
+     * @return Collection
      */
     public function getImportCollection()
     {
-        return $this->importCollection;
+        return $this->imports;
     }
 
     /**
@@ -205,7 +200,7 @@ class File
      */
     public function addImport(Import $import)
     {
-        $this->importCollection->add($import);
+        $this->imports->add($import);
 
         return $this;
     }

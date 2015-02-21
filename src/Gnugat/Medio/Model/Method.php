@@ -11,15 +11,17 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\ValueObject\Collection;
+
 /**
  * @api
  */
 class Method
 {
     /**
-     * @var ArgumentCollection
+     * @var Collection
      */
-    private $argumentCollection;
+    private $arguments;
 
     /**
      * @var string
@@ -48,7 +50,7 @@ class Method
      */
     public function __construct($name)
     {
-        $this->argumentCollection = new ArgumentCollection();
+        $this->arguments = new Collection('Gnugat\\Medio\\Model\\Argument');
         $this->name = $name;
     }
 
@@ -73,17 +75,17 @@ class Method
      */
     public function addArgument(Argument $argument)
     {
-        $this->argumentCollection->add($argument);
+        $this->arguments->add($argument);
 
         return $this;
     }
 
     /**
-     * @return ArgumentCollection
+     * @return Collection
      */
     public function getArgumentCollection()
     {
-        return $this->argumentCollection;
+        return $this->arguments;
     }
 
     /**
