@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.0.0-alpha12: Collection, FullyQualifiedClassname
+
+* refactored fully qualified classname management
+* refactored collection management
+
+> **BC break**:
+>
+> * removed Argument, Constant, Import, Method and Property collections
+
 ## 1.0.0-alpha11: Imports, Method body and doc
 
 * added Imports (use statement) generation
