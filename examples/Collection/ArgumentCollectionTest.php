@@ -9,17 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Collection;
 
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Type;
+use Gnugat\Medio\ValueObject\Collection;
 
 class ArgumentCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroArguments()
     {
-        $argumentCollection = new ArgumentCollection();
+        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
 
@@ -28,7 +30,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testOneArgument()
     {
-        $argumentCollection = ArgumentCollection::make()
+        $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
             ->add(new Argument(new Type('bool'), 'isObject'))
         ;
 
@@ -39,7 +41,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeArguments()
     {
-        $argumentCollection = ArgumentCollection::make()
+        $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
             ->add(new Argument(new Type('\\SplFileInfo'), 'file'))
             ->add(new Argument(new Type('string'), 'newLine'))
             ->add(new Argument(new Type('int'), 'lineNumber'))
@@ -52,7 +54,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testTooManyArgumentsToBeOnOneLine()
     {
-        $argumentCollection = new ArgumentCollection();
+        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
         for ($i = 1; $i < 12; $i++) {
             $argumentCollection->add(new Argument(new Type('mixed'), 'argument'.$i));
         }
@@ -64,7 +66,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testRestrictInlineLength()
     {
-        $argumentCollection = new ArgumentCollection();
+        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
         for ($i = 1; $i < 9; $i++) {
             $argumentCollection->add(new Argument(new Type('mixed'), 'argument'.$i));
         }

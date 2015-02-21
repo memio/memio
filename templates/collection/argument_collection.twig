@@ -1,0 +1,8 @@
+{% set inline %}
+    {%- include 'collection/arguments/inline.twig' with { 'argument_collection': argument_collection } only -%}
+{% endset %}
+{% if inline|length > 120 - (length_restriction | default(0))  %}
+    {%- include 'collection/arguments/multiline.twig' with { 'argument_collection': argument_collection } only -%}
+{% else %}
+    {{- inline -}}
+{% endif %}
