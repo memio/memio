@@ -20,5 +20,5 @@ class {{ file.classname }}
 {% if needs_line_after(file, 'properties') %}
 
 {% endif %}
-{% include 'method_collection.twig' with { 'method_collection': file.methodCollection } only %}
+{% include 'collection/method_collection.twig' with { 'method_collection': file.methodCollection } only %}
 }

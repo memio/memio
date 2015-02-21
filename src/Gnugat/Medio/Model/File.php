@@ -45,9 +45,9 @@ class File
     private $propertyCollection;
 
     /**
-     * @var MethodCollection
+     * @var Collection
      */
-    private $methodCollection;
+    private $methods;
 
     /**
      * @param string $filename
@@ -77,8 +77,8 @@ class File
         $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
         $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
         $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
-        $this->methodCollection = new MethodCollection();
         $this->propertyCollection = new PropertyCollection();
+        $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
     }
 
     /**
@@ -118,11 +118,11 @@ class File
     }
 
     /**
-     * @return MethodCollection
+     * @return Collection
      */
     public function getMethodCollection()
     {
-        return $this->methodCollection;
+        return $this->methods;
     }
 
     /**
@@ -130,13 +130,11 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addMethod(Method $method)
     {
-        $this->methodCollection->add($method);
+        $this->methods->add($method);
 
         return $this;
     }
