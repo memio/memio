@@ -93,8 +93,7 @@ Discover more by reading the docs:
 * [Introduction](01-introduction.md)
 * [Installation](02-installation.md)
 * [Usage](03-usage.md)
-* [Cheat Sheet](04-cheat-sheet.md)
-* [Extending](05-extending.md)
+* [Extending](04-extending.md)
 
 You can see the current and past versions using one of the following:
 
