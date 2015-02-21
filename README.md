@@ -84,7 +84,7 @@ class MyClass
 * meta data management (PHPdoc `@return`, PHPdoc `@var`, etc)
 * building models from existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
 * commands (inject dependency: add use statement, property, constructor argument, etc)
-* refactorings (unique collection, fqcn value object, demeter law, etc)
+* refactorings (visibility, staticness, demeter law, etc)
 
 ## Further documentation
 

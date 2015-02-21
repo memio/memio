@@ -29,8 +29,8 @@ $loader->addPath(__DIR__.'/my-templates');
 A model's templates is named after its class name, in snake_case. It always takes
 as its first argument the model (the variable is also named after the model's class anme in snake_case).
 
-> For instance, `ArgumentCollection` should have a template named `argument_collection.twig`.
-> The template should receive the model, in the `argument_collection` parameter.
+> For instance, `MethodPhpdoc` should have a template named `method_phpdoc.twig`.
+> The template should receive the model, in the `method_phpdoc` parameter.
 
 "Sub-templates" should be prefixed with an underscore.
 
