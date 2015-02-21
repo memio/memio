@@ -35,9 +35,9 @@ class File
     private $imports;
 
     /**
-     * @var ConstantCollection
+     * @var Collection
      */
-    private $constantCollection;
+    private $constants;
 
     /**
      * @var PropertyCollection
@@ -76,7 +76,7 @@ class File
         $this->filename = $filename;
         $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
         $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
-        $this->constantCollection = new ConstantCollection();
+        $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
         $this->methodCollection = new MethodCollection();
         $this->propertyCollection = new PropertyCollection();
     }
@@ -166,11 +166,11 @@ class File
     }
 
     /**
-     * @return ConstantCollection
+     * @return Collection
      */
     public function getConstantCollection()
     {
-        return $this->constantCollection;
+        return $this->constants;
     }
 
     /**
@@ -178,13 +178,11 @@ class File
      *
      * @return File
      *
-     * @throws InvalidArgumentException If the name is already taken
-     *
      * @api
      */
     public function addConstant(Constant $constant)
     {
-        $this->constantCollection->add($constant);
+        $this->constants->add($constant);
 
         return $this;
     }
