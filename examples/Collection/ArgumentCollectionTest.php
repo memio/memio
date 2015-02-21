@@ -13,7 +13,6 @@ namespace Gnugat\Medio\Examples\Collection;
 
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\ArgumentCollection;
 use Gnugat\Medio\Model\Type;
 use Gnugat\Medio\ValueObject\Collection;
 
