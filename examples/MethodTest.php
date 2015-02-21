@@ -13,7 +13,6 @@ namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\ValueObject\Type;
 
 class MethodTest extends PrettyPrinterTestCase
 {
@@ -30,7 +29,7 @@ class MethodTest extends PrettyPrinterTestCase
     {
         $method = new Method('it_has_too_many_argument_yes');
         for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument(new Type('string'), 'argument'.$i));
+            $method->addArgument(new Argument('string', 'argument'.$i));
         }
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
@@ -42,7 +41,7 @@ class MethodTest extends PrettyPrinterTestCase
     {
         $method = new Method('it_has_too_many_argument_yeah');
         for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument(new Type('string'), 'argument'.$i));
+            $method->addArgument(new Argument('string', 'argument'.$i));
         }
 
         $generatedCode = $this->prettyPrinter->generateCode($method);

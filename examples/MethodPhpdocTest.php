@@ -14,7 +14,6 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
-use Gnugat\Medio\ValueObject\Type;
 
 class MethodPhpdocTest extends PrettyPrinterTestCase
 {
@@ -30,7 +29,7 @@ class MethodPhpdocTest extends PrettyPrinterTestCase
     public function testOneParameter()
     {
         $methodPhpdoc = new MethodPhpdoc(Method::make('__construct')
-            ->addArgument(new Argument(new Type('bool'), 'isObject'))
+            ->addArgument(new Argument('bool', 'isObject'))
         );
 
         $generatedCode = $this->prettyPrinter->generateCode($methodPhpdoc);
@@ -41,9 +40,9 @@ class MethodPhpdocTest extends PrettyPrinterTestCase
     public function testThreeParameters()
     {
         $methodPhpdoc = new MethodPhpdoc(Method::make('__construct')
-            ->addArgument(new Argument(new Type('\\SplFileInfo'), 'file'))
-            ->addArgument(new Argument(new Type('string'), 'newLine'))
-            ->addArgument(new Argument(new Type('int'), 'lineNumber'))
+            ->addArgument(new Argument('\\SplFileInfo', 'file'))
+            ->addArgument(new Argument('string', 'newLine'))
+            ->addArgument(new Argument('int', 'lineNumber'))
         );
 
         $generatedCode = $this->prettyPrinter->generateCode($methodPhpdoc);

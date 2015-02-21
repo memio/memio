@@ -15,7 +15,6 @@ use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\ValueObject\Collection;
-use Gnugat\Medio\ValueObject\Type;
 
 class MethodCollectionTest extends PrettyPrinterTestCase
 {
@@ -43,8 +42,8 @@ class MethodCollectionTest extends PrettyPrinterTestCase
     {
         $methodCollection = Collection::make('Gnugat\\Medio\\Model\\Method')
             ->add(Method::make('__construct')
-                ->addArgument(new Argument(new Type('DateTime'), 'dateTime'))
-                ->addArgument(new Argument(new Type('ArrayObject'), 'arrayObject'))
+                ->addArgument(new Argument('DateTime', 'dateTime'))
+                ->addArgument(new Argument('ArrayObject', 'arrayObject'))
             )
             ->add(new Method('getDateTime'))
             ->add(new Method('getArrayObject'))

@@ -14,7 +14,6 @@ namespace Gnugat\Medio\Examples\Collection;
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\ValueObject\Collection;
-use Gnugat\Medio\ValueObject\Type;
 
 class ArgumentCollectionTest extends PrettyPrinterTestCase
 {
@@ -30,7 +29,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     public function testOneArgument()
     {
         $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
-            ->add(new Argument(new Type('bool'), 'isObject'))
+            ->add(new Argument('bool', 'isObject'))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
@@ -41,9 +40,9 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     public function testThreeArguments()
     {
         $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
-            ->add(new Argument(new Type('\\SplFileInfo'), 'file'))
-            ->add(new Argument(new Type('string'), 'newLine'))
-            ->add(new Argument(new Type('int'), 'lineNumber'))
+            ->add(new Argument('\\SplFileInfo', 'file'))
+            ->add(new Argument('string', 'newLine'))
+            ->add(new Argument('int', 'lineNumber'))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
@@ -55,7 +54,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     {
         $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
         for ($i = 1; $i < 12; $i++) {
-            $argumentCollection->add(new Argument(new Type('mixed'), 'argument'.$i));
+            $argumentCollection->add(new Argument('mixed', 'argument'.$i));
         }
 
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
@@ -67,7 +66,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     {
         $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
         for ($i = 1; $i < 9; $i++) {
-            $argumentCollection->add(new Argument(new Type('mixed'), 'argument'.$i));
+            $argumentCollection->add(new Argument('mixed', 'argument'.$i));
         }
         $generatedCode = $this->prettyPrinter->generateCode($argumentCollection, array(
             'length_restriction' => strlen('    public function __construct()'),
