@@ -15,7 +15,6 @@ use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Type;
-use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\ValueObject\Collection;
 
 class MethodCollectionTest extends PrettyPrinterTestCase
