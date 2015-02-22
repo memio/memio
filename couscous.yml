@@ -20,7 +20,7 @@ menu:
             relativeUrl: doc/01-introduction.html
         installation:
             text: Installation
-            relativeUrl: doc/02-instalation.html
+            relativeUrl: doc/02-installation.html
         usage:
             text: Usage
             relativeUrl: doc/03-usage.html
