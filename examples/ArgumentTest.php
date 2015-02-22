@@ -12,13 +12,12 @@
 namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Type;
 
 class ArgumentTest extends PrettyPrinterTestCase
 {
     public function testNonTypeHinted()
     {
-        $argument = new Argument(new Type('string'), 'filename');
+        $argument = new Argument('string', 'filename');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
@@ -27,7 +26,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testArray()
     {
-        $argument = new Argument(new Type('array'), 'parameters');
+        $argument = new Argument('array', 'parameters');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
@@ -36,7 +35,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testCallable()
     {
-        $argument = new Argument(new Type('callable'), 'factory');
+        $argument = new Argument('callable', 'factory');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
@@ -46,7 +45,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testObject()
     {
-        $argument = new Argument(new Type('\\DateTime'), 'dateTime');
+        $argument = new Argument('\\DateTime', 'dateTime');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 

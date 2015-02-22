@@ -18,7 +18,6 @@ use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\Type;
 
 class FileTest extends PrettyPrinterTestCase
 {
@@ -59,9 +58,9 @@ class FileTest extends PrettyPrinterTestCase
             ->addProperty(new Property('secondProperty'))
 
             ->addMethod(Method::make('firstMethod')
-                ->addArgument(new Argument(new Type('DateTime'), 'firstArgument'))
-                ->addArgument(new Argument(new Type('array'), 'secondArgument'))
-                ->addArgument(new Argument(new Type('string'), 'thirdArgument'))
+                ->addArgument(new Argument('DateTime', 'firstArgument'))
+                ->addArgument(new Argument('array', 'secondArgument'))
+                ->addArgument(new Argument('string', 'thirdArgument'))
             )
             ->addMethod(new Method('secondMethod'))
         ;

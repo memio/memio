@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Gnugat\Medio\Model;
+namespace spec\Gnugat\Medio\ValueObject;
 
 use PhpSpec\ObjectBehavior;
 
@@ -23,7 +23,7 @@ class TypeSpec extends ObjectBehavior
         $this->isObject()->shouldBe(true);
     }
 
-    function it_preffixes_object_types_by_namespace_separator()
+    function it_prefixes_object_types_by_namespace_separator()
     {
         $this->beConstructedWith('DateTime');
 

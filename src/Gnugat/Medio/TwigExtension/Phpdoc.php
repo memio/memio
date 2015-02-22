@@ -53,7 +53,6 @@ class Phpdoc extends Twig_Extension
         return str_repeat(' ', $longestType - strlen($argument->getType()));
     }
 
-
     /**
      * @param mixed $model
      *

@@ -34,9 +34,9 @@ $file = File::make('/src/Gnugat/Medio/MyClass.php')
     ->addProperty(new Property('secondProperty'))
 
     ->addMethod(Method::make('firstMethod')
-        ->addArgument(new Argument(new Type('DateTime'), 'firstArgument'))
-        ->addArgument(new Argument(new Type('array'), 'secondArgument'))
-        ->addArgument(new Argument(new Type('string'), 'thirdArgument'))
+        ->addArgument(new Argument('DateTime', 'firstArgument'))
+        ->addArgument(new Argument('array', 'secondArgument'))
+        ->addArgument(new Argument('string', 'thirdArgument'))
     )
     ->addMethod(new Method('secondMethod'))
 ;

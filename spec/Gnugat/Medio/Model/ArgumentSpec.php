@@ -11,14 +11,13 @@
 
 namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Model\Type;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new Type('array'), 'lines');
+        $this->beConstructedWith('array', 'lines');
     }
 
     function it_has_a_type()
@@ -26,13 +25,9 @@ class ArgumentSpec extends ObjectBehavior
         $this->getType()->shouldBe('array');
     }
 
-    function it_can_have_a_type_hint(Type $type)
+    function it_can_have_a_type_hint()
     {
-        $this->beConstructedWith($type, 'name');
-
-        $type->hasTypeHint()->shouldBeCalled();
-
-        $this->hasTypeHint();
+        $this->hasTypeHint()->shouldBe(true);
     }
 
     function it_has_a_name()
@@ -46,12 +41,10 @@ class ArgumentSpec extends ObjectBehavior
         $this->getName()->shouldBe('lineCollection');
     }
 
-    function it_can_be_an_object(Type $type)
+    function it_can_be_an_object()
     {
-        $this->beConstructedWith($type, 'name');
+        $this->beConstructedWith('DateTime', 'name');
 
-        $type->isObject()->shouldBeCalled();
-
-        $this->isObject();
+        $this->isObject()->shouldBe(true);
     }
 }

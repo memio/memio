@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\ValueObject\Type;
+
 /**
  * @api
  */
@@ -27,26 +29,26 @@ class Argument
     private $name;
 
     /**
-     * @param Type   $type
+     * @param string $type
      * @param string $name
      *
      * @api
      */
-    public function __construct(Type $type, $name)
+    public function __construct($type, $name)
     {
-        $this->type = $type;
+        $this->type = new Type($type);
         $this->name = $name;
     }
 
     /**
-     * @param Type   $type
+     * @param string $type
      * @param string $name
      *
      * @return Argument
      *
      * @api
      */
-    public static function make(Type $type, $name)
+    public static function make($type, $name)
     {
         return new self($type, $name);
     }
