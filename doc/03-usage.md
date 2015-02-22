@@ -42,7 +42,7 @@ $index = 1;
 foreach ($arguments as $argument) {
     $type = is_object($argument) ? get_class($argument) : gettype($argument);
     $argumentName = 'argument'.$index++;
-    $method->addArgument(new Argument(new Type($type), $argumentName));
+    $method->addArgument(new Argument($type, $argumentName));
 }
 
 echo $prettyPrinter->generateCode($method);

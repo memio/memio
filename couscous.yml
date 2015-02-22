@@ -24,9 +24,6 @@ menu:
         usage:
             text: Usage
             relativeUrl: doc/03-usage.html
-        cheat_sheet:
-            text: Cheat Sheet
-            relativeUrl: doc/04-cheat-sheet.html
         extending:
             text: Extending
-            relativeUrl: doc/05-extending.html
+            relativeUrl: doc/04-extending.html
