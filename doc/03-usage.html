@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medio</title>
+
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
+                Medio
+                <small class="hidden-xs hidden-sm">
+                    A highly opinionated PHP code generator library
+                </small>
+            </a>
+
+                            <a href="https://github.com/gnugat/medio">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/01-introduction.html">
+                                        Introduction
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/02-instalation.html">
+                                        Installation
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/03-usage.html">
+                                        Usage
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                        Extending
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Usage</h1>
+<blockquote>
+<p><strong>TL;DR</strong>: <code>PrettyPrinter#generateCode($model, array $parameters = array())</code></p>
+</blockquote>
+<p>There's only two phase to follow when using Medio:</p>
+<ol>
+<li>describing the code to generate by building the model</li>
+<li>calling <code>PrettyPrinter</code></li>
+</ol>
+<p>You can find more information on how to concretely do that here:</p>
+<ol>
+<li><a href="#the-main-service-prettyprinter">The main service: PrettyPrinter</a></li>
+<li><a href="#generating-a-small-chunk-of-code">Generating a small chunk of code</a></li>
+<li>[Generating a whole file](#generating-a-whole file)</li>
+<li><a href="#refining-models">Refining models</a></li>
+<li><a href="#more-examples">More examples</a></li>
+</ol>
+<p>See also <a href="#next-readings">the next readings</a>.</p>
+<h2>The main service: <code>PrettyPrinter</code></h2>
+<p>Medio provides a single generator which holds no logic: <code>PrettyPrinter</code>.
+Its sole responsibility is to execute the appropriate template (for this, it uses
+the given model's type).</p>
+<p>It can optionnaly take a second argument: an array of options to pass to the template.</p>
+<p>In the next sections, we'll see actual examples.</p>
+<h2>Generating a small chunk of code</h2>
+<p>When <a href="https://phpspec.net">phpspec</a> finds in a specification a method which does not
+exist, it can generate it for you. If it was using Medio, it would use the following
+snippet:</p>
+<pre><code class="language-php">$methodName = '__construct';
+$arguments = array(new ArrayObject(), 'Nobody expects the spanish inquisition!');
+
+$method = new Method($methodName);
+$index = 1;
+foreach ($arguments as $argument) {
+    $type = is_object($argument) ? get_class($argument) : gettype($argument);
+    $argumentName = 'argument'.$index++;
+    $method-&gt;addArgument(new Argument($type, $argumentName));
+}
+
+echo $prettyPrinter-&gt;generateCode($method);</code></pre>
+<p>This would output:</p>
+<pre><code>    /**
+     * @param \ArrayObject $argument1
+     * @param string       $argument2
+     */
+    public function __construct(\ArrayObject $argument1, $argument2)
+    {
+    }</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Medio type hints arguments when possible (object, array, callable for PHP &gt;= 5.4).
+It also generates the method's PHPdoc for arguments.</p>
+</blockquote>
+<h2>Generating a whole file</h2>
+<p>Medio provides the following models:</p>
+<p><img src="http://yuml.me/213ff6db" alt="UML class diagram" /></p>
+<p>It assumes that projects are using PSR-0:</p>
+<ul>
+<li>a file contains only a class/interface/trait</li>
+<li>the path of the file reflects its namespace</li>
+</ul>
+<p>With this the <code>File</code> model is able to generate the namespace and the classname,
+by simply processing the path:</p>
+<pre><code class="language-php">$file = new File('src/Gnugat/Medio/MyClass.php');
+
+echo $prettyPrinter-&gt;generateCode($file);</code></pre>
+<p>This will output:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio;
+
+class MyClass
+{
+}</code></pre>
+<p>To generate a class with constants, properties and/or methods you just need to write:</p>
+<pre><code class="language-php">$file = File::make('src/Gnugat/Medio/MyClass.php')
+    -&gt;addConstant(new Constant('MY_CONSTANT', "'string value should be quoted'"))
+    -&gt;addProperty(new Property('myProperty'))
+    -&gt;addMethod(new Method('myMethod'))
+;</code></pre>
+<blockquote>
+<p><strong>Note</strong>: You can use either <code>new Model()</code> or <code>Model::make()</code> to instantiate
+a model.
+The second choice lets you chain calls (this is also possible because setter
+methods all return <code>$this</code>).</p>
+</blockquote>
+<h2>Refining models</h2>
+<p>Medio assumes a few things by default:</p>
+<ul>
+<li>properties are private</li>
+<li>methods are public</li>
+</ul>
+<p>This can be customized:</p>
+<pre><code class="language-php">$property = Property::make('myProperty')
+    -&gt;makePublic() // you can also call makeProtected() or makePrivate()
+    -&gt;makeStatic() // you can cancel this by using removeStatic()
+;
+
+$method = Method::make('myMethod')
+    -&gt;makePrivate() // you can also call makeProtected(), makePublic() or removeVisibility()
+    -&gt;makeStatic() // you can cancel this by using removeStatic()</code></pre>
+<h2>More examples</h2>
+<p>Medio doesn't have traditional tests. It has executable examples!</p>
+<p>Have a look in the <code>examples</code> directory, each file contains a feature with many
+scenarii.</p>
+<blockquote>
+<p><strong>Note</strong>: Here, the word feature is used instead of &quot;PHPUnit Test Class&quot;, and
+the word scenario is used instead of &quot;test method&quot;.</p>
+<p>Please ignore the <code>examples/PrettyPrinterTestCase.php</code> file (used to bootstrap tests).</p>
+</blockquote>
+<p>Each scenario is composed of 3 kind of steps:</p>
+<ol>
+<li>creation of the model</li>
+<li>generation of the code, using the built model</li>
+<li>comparison with expected code</li>
+</ol>
+<p>The expected code can be quite lengthy, in those cases it's been put in a fixture
+file. But don't panic! You can find them in the <code>examples/fixtures</code> directory, they are
+put in a folder named after the feature, and then in a file named after the scenario.</p>
+<p>To make sure each modification added to Medio doesn't break anything, those
+examples are executed using <a href="http://phpunit.de">phpunit</a>.</p>
+<h2>Next readings</h2>
+<ul>
+<li><a href="04-extending.html">Extending</a></li>
+</ul>
+<p>Previous pages:</p>
+<ul>
+<li><a href="02-installation.html">Installation</a></li>
+<li><a href="01-introduction.html">Introduction</a></li>
+<li><a href="../README.html">README</a></li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

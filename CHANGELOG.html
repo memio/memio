@@ -41,18 +41,23 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model.html">
-                                        Model
+                                    <a href="http://gnugat.github.io/medio/doc/01-introduction.html">
+                                        Introduction
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-templates.html">
-                                        Templates
+                                    <a href="http://gnugat.github.io/medio/doc/02-instalation.html">
+                                        Installation
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
-                                        Examples
+                                    <a href="http://gnugat.github.io/medio/doc/03-usage.html">
+                                        Usage
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                        Extending
                                     </a>
                                 </li>
                                                     </ul>
@@ -62,212 +67,121 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>CHANGELOG</h1>
-<h2>1.0.0-alpha10: Imports</h2>
+<h2>1.0.0-alpha12: Collection, FullyQualifiedClassname</h2>
 <ul>
-<li>added license template</li>
-<li>added import template</li>
-<li>added import_collection template</li>
-<li>tagged License as part of public API:
+<li>refactored fully qualified classname management</li>
+<li>refactored collection management</li>
+</ul>
+<blockquote>
+<p><strong>BC break</strong>:</p>
 <ul>
-<li>__construct</li>
-<li>make</li>
-</ul></li>
-<li>tagged Import as part of public API:
+<li>removed Argument, Constant, Import, Method and Property collections</li>
+</ul>
+</blockquote>
+<h2>1.0.0-alpha11: Imports, Method body and doc</h2>
 <ul>
-<li>__construct</li>
-<li>make</li>
-<li>setAlias</li>
-<li>removeAlias</li>
-</ul></li>
-<li>tagged ImportCollection as part of public API:
+<li>added Imports (use statement) generation</li>
+<li>added Method's body generation</li>
+<li>improved documentation (introduction, installation, usage, cheat sheet and extending)</li>
+</ul>
+<h2>1.0.0-alpha10: License, visibility and staticness</h2>
 <ul>
-<li>make</li>
-<li>add</li>
-</ul></li>
-<li>tagged File#addImport as part of public API</li>
-<li>tagged visibilities as part of public API:
-<ul>
-<li>Method#makePublic</li>
-<li>Method#makePrivate</li>
-<li>Method#makeProtected</li>
-<li>Method#removeVisibility</li>
-<li>Property#makePublic</li>
-<li>Property#makePrivate</li>
-<li>Property#makeProtected</li>
-</ul></li>
-<li>tagged staticness as part of public API:
-<ul>
-<li>Method#makeStatic</li>
-<li>Method#removeStatic</li>
-<li>Property#makeStatic</li>
-<li>Property#removeStatic</li>
-</ul></li>
+<li>added License header generation</li>
+<li>added Method and Property visibility</li>
+<li>added Method and Property staticness</li>
 </ul>
 <h2>1.0.0-alpha9: Constants</h2>
 <ul>
-<li>added constant template</li>
-<li>added constant_collection template</li>
-<li>tagged Constant as part of public API:
-<ul>
-<li>__construct</li>
-<li>make</li>
-</ul></li>
-<li>tagged ConstantCollection as part of public API:
-<ul>
-<li>make</li>
-<li>add</li>
-</ul></li>
-<li>tagged File#addConstant as part of public API</li>
+<li>added Constants generation</li>
 </ul>
 <h2>1.0.0-alpha8: Properties</h2>
 <ul>
-<li>added property template</li>
-<li>added property_collection template</li>
-<li>tagged Property as part of public API:
-<ul>
-<li>__construct</li>
-<li>make</li>
-</ul></li>
-<li>tagged PropertyCollection as part of public API:
-<ul>
-<li>make</li>
-<li>add</li>
-</ul></li>
-<li>tagged File#addProperty as part of public API</li>
+<li>added Properties generation</li>
 </ul>
-<h2>1.0.0-alpha7: MethodPhpdoc</h2>
+<h2>1.0.0-alpha7: Method's PHPdoc, static constructors</h2>
 <ul>
-<li>added method_phpdoc template</li>
-<li>tagged MethodPhpdoc as part of public API:
-<ul>
-<li>__construct</li>
-<li>make</li>
-</ul></li>
-<li>added static constructors make to every model</li>
-<li>added static constructors as part of public API</li>
+<li>added Method's PHPdoc generation</li>
+<li>added static constructors to all Models</li>
 </ul>
 <h2>1.0.0-alpha6: File</h2>
 <ul>
-<li>added file template</li>
-<li>tagged File as part of public API:
-<ul>
-<li>__construct</li>
-<li>addMethod</li>
-</ul></li>
+<li>added File (namespace, class, etc) generation</li>
 </ul>
-<h2>1.0.0-alpha5: MethodCollection</h2>
+<h2>1.0.0-alpha5: Methods, fixtures refactoring</h2>
 <ul>
-<li>added method_collection template</li>
-<li>tagged MethodCollection as part of public API:
-<ul>
-<li>add</li>
-</ul></li>
-<li>tagged Exception as part of API</li>
-<li>tagged InvalidArgumentException as part of API</li>
-<li>refactored fixtures</li>
+<li>added Methods generation</li>
+<li>moved fixtures in <code>examples/fixtures</code></li>
 </ul>
 <h2>1.0.0-alpha4: Method</h2>
 <ul>
-<li>added method template</li>
-<li>tagged Method as part of public API:
-<ul>
-<li>__construct</li>
-<li>addArgument</li>
-</ul></li>
-<li>tagged more Type methods as part of public API:
-<ul>
-<li>getName</li>
-<li>isObject</li>
-</ul></li>
-<li>removed Factory directory (legacy code):
-<ul>
-<li>removed VariableArgumentCollectionFactory [<strong>BC break</strong>]</li>
-</ul></li>
+<li>added Method generation</li>
 </ul>
+<blockquote>
+<p><strong>BC break</strong>:</p>
+<ul>
+<li>removed VariableArgumentCollectionFactory</li>
+</ul>
+</blockquote>
 <h2>1.0.0-alpha3: Puli</h2>
 <ul>
 <li>added <code>/gnugat/medio/templates</code> Puli's path</li>
 </ul>
-<h2>1.0.0-alpha2: Twig tempates parameters</h2>
+<h2>1.0.0-alpha2: PrettyPrinter parameters</h2>
 <ul>
 <li>added parameters argument to PrettyPrinter#generateCode</li>
-<li>removed PrettyPrinter directory (legacy code):
-<ul>
-<li>removed MultilineArgumentCollectionPrinter [<strong>BC break</strong>]</li>
-<li>removed InlineArgumentCollectionPrinter [<strong>BC break</strong>]</li>
-</ul></li>
 </ul>
-<h2>1.0.0-alpha1: Twig templates</h2>
+<blockquote>
+<p><strong>BC break</strong>:</p>
 <ul>
-<li>tagged ArgumentCollection as part of public API:
+<li>removed MultilineArgumentCollectionPrinter</li>
+<li>removed InlineArgumentCollectionPrinter</li>
+</ul>
+</blockquote>
+<h2>1.0.0-alpha1: PrettyPrinter, Twig templates and Arguments</h2>
 <ul>
-<li>add</li>
-</ul></li>
-<li>tagged Argument as part of public API:
-<ul>
-<li>__construct</li>
-</ul></li>
-<li>tagged Type as part of public API:
-<ul>
-<li>__construct</li>
-</ul></li>
-<li>tagged PrettyPrinter as part of public API:
-<ul>
-<li>__construct</li>
-<li>generateCode</li>
-</ul></li>
-<li>added argument_collection template</li>
-<li>added argument template</li>
 <li>added PrettyPrinter</li>
+<li>added Arguments generation</li>
 </ul>
-<h2>0.4.0: Refactoring</h2>
+<blockquote>
+<p><strong>Note</strong>: Usage of single pretty printer (Model specific generation is done in Twig templates)</p>
+</blockquote>
+<h2>0.4.0: Type, Method refactoring, executable examples</h2>
 <ul>
-<li>removed ArgumentCollection from Method#__construct arguments</li>
-<li>removed method visibility</li>
-<li>added Type</li>
-<li>added examples as tests</li>
-<li>tagged MultilineArgumentCollectionPrinter as part of public API</li>
-<li>tagged InlineArgumentCollectionPrinter as part of public API</li>
-<li>tagged VariableArgumentCollectionFactory as part of public API</li>
+<li>added Type construction from variable</li>
+<li>added executable examples</li>
+<li>refactored Method (removed visibility, Arguments from constructor parameters)</li>
 </ul>
-<h2>0.3.0: Green field</h2>
+<h2>0.3.0: Method, typehints and PHPdoc generation</h2>
 <ul>
-<li>added generation of method with phpdoc and typehinted arguments</li>
-<li>removed everything</li>
+<li>added Method generation</li>
+<li>added Method's PHPDoc generation</li>
+<li>added Arguments type hint generation</li>
+<li>added inline/multiline Arguments generation</li>
 </ul>
-<h2>0.2.0</h2>
+<blockquote>
+<p><strong>BC Break</strong>:</p>
 <ul>
-<li>added insertion of missing constructor in dependency injection command</li>
-<li>added insertion of method</li>
-<li>added detection of empty class</li>
-<li>added detection of method presence</li>
-<li>added selection of class ending</li>
-<li>added selection of next constant</li>
-<li>added detection of next constant</li>
-<li>added detection of previous constant</li>
+<li>removed <em>everything</em></li>
 </ul>
-<h2>0.1.0</h2>
+<p><strong>Note</strong>: Usage of specialized pretty printers (each Model has its own generator)</p>
+</blockquote>
+<h2>0.2.0: Missing Constructor generation</h2>
 <ul>
-<li>added selection of method</li>
-<li>added selection of next property</li>
-<li>added selection of namespace</li>
-<li>added selection of next line</li>
-<li>added selection of class opening</li>
-<li>added selection of method closing</li>
-<li>added detection of use statement need</li>
-<li>added detection of next use statement presence</li>
-<li>added detection of previous property presence</li>
-<li>added detection of next property presence</li>
-<li>added detection of method's argument presence</li>
-<li>added detection of inline method arguments</li>
-<li>added detection of next multiline argument</li>
-<li>added insertion of multiline argument</li>
-<li>added insertion of use statement</li>
-<li>added insertion of property</li>
-<li>added insertion of inline argument</li>
-<li>added insertion of property initialization</li>
-<li>added dependency injection command</li>
+<li>added Missing Constructor generation</li>
 </ul>
+<h2>0.1.0: DependencyInjectionCommand</h2>
+<ul>
+<li>added DependencyInjectionCommand:
+<ul>
+<li>Import generation</li>
+<li>Property with PHPdoc generation</li>
+<li>Constructor argument with PHPdoc generation</li>
+<li>Property initialization in constructor generation</li>
+</ul></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Usage of Redaktilo + regex to edit existing code</p>
+</blockquote>
                 </section>
 
             </div>

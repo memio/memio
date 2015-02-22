@@ -41,18 +41,23 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model.html">
-                                        Model
+                                    <a href="http://gnugat.github.io/medio/doc/01-introduction.html">
+                                        Introduction
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-templates.html">
-                                        Templates
+                                    <a href="http://gnugat.github.io/medio/doc/02-instalation.html">
+                                        Installation
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
-                                        Examples
+                                    <a href="http://gnugat.github.io/medio/doc/03-usage.html">
+                                        Usage
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                        Extending
                                     </a>
                                 </li>
                                                     </ul>
@@ -61,72 +66,83 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Templates</h1>
-<p>Medio provides a &quot;pretty printer&quot; to generate the code. It uses <a href="http://twig.sensiolabs.org/">Twig</a>
-behind the scenes, a powerful templating engine.</p>
+                    <h1>Installation</h1>
 <blockquote>
-<p>Keep in mind that the templates provided out of the box are highly opinionated,
-but they can be extended / over wrote.</p>
+<p><strong>TL;DR</strong>: <code>composer require gnugat/medio:~1.0@alpha</code></p>
 </blockquote>
-<ul>
-<li><a href="#pretty-printer">Pretty Printer</a></li>
-<li><a href="#conventions">Conventions</a></li>
-<li><a href="#puli">Puli</a></li>
-</ul>
-<p>See also <a href="#next-readings">next readings</a>.</p>
-<h2>Pretty printer</h2>
-<p>Its API is pretty straightforward:</p>
-<pre><code class="language-php">&lt;?php
-
-namespace Gnugat\Medio;
-
-use Twig_Environment;
-
-class PrettyPrinter
-{
-    public function __construct(Twig_Environment $twig);
-    public function generateCode($model, array $parameters = array());
-}</code></pre>
-<p>You can build it like this:</p>
+<p>Installing Medio in your application is pretty similar to other PHP projects:</p>
+<ol>
+<li><a href="#composer-getting-the-sources">Composer: getting the sources</a></li>
+<li><a href="#puli-find-the-templates">Puli: find the templates</a></li>
+<li><a href="#building-the-services">Building the services</a></li>
+</ol>
+<p>See also <a href="#next-readings">the next readings</a>.</p>
+<h2>Composer: getting the sources</h2>
+<p>Medio can be installed via <a href="https://getcomposer.org/download">Composer</a>:</p>
+<pre><code>composer require gnugat/medio:~1.0@alpha</code></pre>
+<h2>Puli: find the templates</h2>
+<blockquote>
+<p><strong>Important</strong>: This step is totally optional.</p>
+</blockquote>
+<p>You can find Twig templates in the <code>templates</code> directory. Instead of hardcoding
+the path, you can use <a href="https://docs.puli.io">Puli</a>:</p>
 <pre><code class="language-php">&lt;?php
 
 require __DIR__.'/vendor/autoload.php';
+
+$factoryClass = PULI_FACTORY_CLASS;
+$factory = new $factoryClass();
+$repository = $factory-&gt;createRepository();
+
+$medioTemplatesPath = $repository-&gt;get('/gnugat/medio/templates')-&gt;getFilesystemPath();</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Giving <code>/gnugat/medio/templates</code> to Puli's repository is safe, it
+will find for you the actual path in the vendor directory.</p>
+</blockquote>
+<p>In order to do so, you need to install Puli's Composer plugin in your <code>composer.json</code>:</p>
+<pre><code>{
+    "require": {
+        "puli/composer-plugin": "~1.0@beta",
+        "puli/discovery": "~1.0@beta",
+        "puli/factory": "~1.0@beta",
+        "puli/repository": "~1.0@beta",
+        "puli/repository-manager": "~1.0@beta",
+        "webmozart/glob": "~1.0@beta",
+        "webmozart/json": "~1.0@beta",
+        "webmozart/key-value-store": "~1.0@beta"
+    }
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: This is a bit ugly, but when Puli 1.0.0@stable will be released you'll
+be able to simply do: <code>composer require puli/composer-plugin:~1.0</code>.</p>
+</blockquote>
+<h2>Building the services</h2>
+<p>Medio provides a <code>PrettyPrinter</code> class which can be instanciated once and used
+everywhere. Here's how to build it:</p>
+<pre><code class="language-php">// ...
 
 use Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\TwigExtension\Phpdoc;
 use Gnugat\Medio\TwigExtension\Whitespace;
 
-$loader = \Twig_Loader_Filesystem(__DIR__.'/vendor/gnugat/medio/templates'); // Replace this path
+$loader = \Twig_Loader_Filesystem($medioTemplatesPath);
 $twig = new \Twig_Environment($loader);
 $twig-&gt;addExtension(new Phpdoc());
 $twig-&gt;addExtension(new Whitespace());
-$prettyPrinter = new PrettyPrinter($twig);</code></pre>
-<h2>Conventions</h2>
-<p>A model's templates is named after its class name, in snake_case. It always take
-as its first argument the model (the variable is also named after the model's class anme in snake_case).</p>
-<blockquote>
-<p>For instance, <code>ArgumentCollection</code> should have a template named <code>argument_collection.twig</code>.
-The template should receive the model, in the <code>argument_collection</code> parameter.</p>
-</blockquote>
-<p>&quot;Sub-templates&quot; should be prefixed with an underscore.</p>
-<blockquote>
-<p>For example: <code>_inline_argument_collection.twig</code>.</p>
-</blockquote>
-<h2>Puli</h2>
-<p>Using <a href="http://docs.puli.io/">puli</a>, you can get easily Medio's <code>templates</code> path.</p>
-<p>First install the composer's plugin:</p>
-<pre><code>composer require puli/composer-plugin:~1.0@beta</code></pre>
-<p>Then in your code you need to create a Puli repository:</p>
-<pre><code class="language-php">&lt;?php
 
-$factoryClass = PULI_FACTORY_CLASS;
-$factory = new $factoryClass();
-$repository = $factory-&gt;createRepository();</code></pre>
-<p>Using this repository you can get the path:</p>
-<pre><code class="language-php">$medioTemplatesPath = $repository-&gt;get('/gnugat/medio/templates')-&gt;getFilesystemPath();</code></pre>
+$prettyPrinter = new PrettyPrinter($twig);</code></pre>
+<blockquote>
+<p><strong>Note</strong>: You can use the Dependency Injection Container of your choice to build it for you.</p>
+</blockquote>
 <h2>Next readings</h2>
 <ul>
-<li><a href="03-examples.html">Examples</a></li>
+<li><a href="03-usage.html">Usage</a></li>
+<li><a href="04-extending.html">Extending</a></li>
+</ul>
+<p>Previous pages:</p>
+<ul>
+<li><a href="01-introduction">Introduction</a></li>
+<li><a href="../README.html">README</a></li>
 </ul>
                 </section>
 

@@ -66,98 +66,89 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Medio</h1>
-<p>A code generation library, which uses <a href="http://twig.sensiolabs.org/">Twig templates</a>.</p>
+                    <h1>Introduction</h1>
 <blockquote>
-<p><strong>Note</strong>: Templates provided out of the box are highly opinionated, but you can
-customize them.</p>
+<p><strong>TL;DR</strong>: Describe the code to generate by building &quot;Model&quot; classes, then give
+them to the <code>PrettyPrinter</code> service. It uses Twig templates to render the code,
+you just need to replace those to customize the output.</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/gnugat/medio/master/logo.jpg" alt="Logo: an elephant, a tree and some twigs" /></p>
-<p><a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" alt="SensioLabsInsight" /></a>
-<a href="https://travis-ci.org/gnugat/medio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></p>
-<h2>Installation</h2>
-<p>Use <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require gnugat/medio:~1.0@alpha</code></pre>
-<h2>Usage</h2>
-<p>In order to generate a chunk of code, you need to describe it through the
-construction of &quot;models&quot;. Once done, you can give the top most model to the
-<code>PrettyPrinter</code> service: it will find the appropriate <a href="http://twig.sensiolabs.org/">Twig template</a>
-and do the actual generation.</p>
-<p>Want to see it in action? Here's an example:</p>
-<pre><code class="language-php">$file = File::make('/src/Gnugat/Medio/MyClass.php')
-    -&gt;addConstant(new Constant('FIRST_CONSTANT', '0'))
-    -&gt;addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
-
-    -&gt;addProperty(new Property('firstProperty'))
-    -&gt;addProperty(new Property('secondProperty'))
-
-    -&gt;addMethod(Method::make('firstMethod')
-        -&gt;addArgument(new Argument('DateTime', 'firstArgument'))
-        -&gt;addArgument(new Argument('array', 'secondArgument'))
-        -&gt;addArgument(new Argument('string', 'thirdArgument'))
-    )
-    -&gt;addMethod(new Method('secondMethod'))
-;
-
-echo $prettyPrinter-&gt;generateCode($file);</code></pre>
-<p>This should print the following generated code:</p>
-<pre><code>&lt;?php
-
-namespace Gnugat\Medio;
-
-class MyClass
-{
-    const FIRST_CONSTANT = 0;
-    const SECOND_CONSTANT = 'meh';
-
-    private $firstProperty;
-
-    private $secondProperty;
-
-    /**
-     * @param \DateTime $firstArgument
-     * @param array     $secondArgument
-     * @param string    $thirdArgument
-     */
-    public function firstMethod(\DateTime $firstArgument, array $secondArgument, $thirdArgument)
-    {
-    }
-
-    public function secondMethod()
-    {
-    }
-}</code></pre>
+<p>Medio is a Code Generator, but before diving into how to use it we'll first see
+the different kinds of code generators, their purposes and where Medio is:</p>
+<ol>
+<li><a href="#pretty-printer">Pretty Printer</a></li>
+<li><a href="#model-classes-as-input">Model classes as input</a></li>
+<li><a href="#twig-templates-as-output">Twig templates as output</a></li>
+<li><a href="#possible-usage">Possible usage</a></li>
+</ol>
+<p>See also <a href="#next-readings">the next readings</a>.</p>
+<h2>Pretty Printer</h2>
+<p>There's two big categories of generators: Fidelity ones and Pretty Printer ones.</p>
+<p>When editing an existing file the Fidelity code generator will try to keep
+everything as is, except for the things the developer asked to change of course.</p>
 <blockquote>
-<p><strong>Note</strong>: each arguments would have been put on their own line if the inline
-alternative was longer than 120 characters.</p>
+<p>For instance a Coding Style Fixer might replace tabs with spaces, but those will
+be the only character changes in the file. Another example could be a Code Optimizer
+which removes a function call from a <code>for</code> declaration: everything that is not
+in the scope of the generator will stay untouched.</p>
 </blockquote>
-<h2>Roadmap</h2>
+<p>On the other hand Pretty Printers don't manipulate the file directly: they first
+abstract it using an Abstract Syntax Tree (AST), then apply modifications and finally
+dump the AST using its own coding style.</p>
+<p>Medio is a Pretty Printer, which means that it has the following drawbacks:</p>
 <ul>
-<li>services (ImportGuesser, etc)</li>
-<li>meta data management (PHPdoc <code>@return</code>, PHPdoc <code>@var</code>, etc)</li>
-<li>building models from existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
-<li>commands (inject dependency: add use statement, property, constructor argument, etc)</li>
-<li>refactorings (visibility, staticness, demeter law, etc)</li>
+<li>it has its own coding style</li>
+<li>it can only generate code that has been modelize</li>
 </ul>
-<h2>Further documentation</h2>
-<p>Discover more by reading the docs:</p>
+<blockquote>
+<p>For example in version 1.0.0-alpha10 Medio doesn't support properties PHPdoc:
+if you edit a source which had them, they will be lost when regenerating it.</p>
+</blockquote>
+<p>In order to counter the first one, Medio uses templates to generate the code.
+They can be extended, customized and adapted to fit any coding style.</p>
+<p>The second one is taking care of by adding more models everyday.</p>
+<blockquote>
+<p><strong>Important</strong>: Currently it is only possible to generate new code with Medio,
+it is still under heavy development and the use of <a href="github.com/nikic/php-parser">PHP Parser</a> is planned.</p>
+</blockquote>
+<h2>Model classes as input</h2>
+<p>Some code generators take a configuration file in input to describe the code to
+generate (e.g. a XML file listing a class properties and methods). Others don't
+even describe the code, they rather describe a behavior in a configuration file
+and the generator has some kind of logic to guess what to generate.</p>
+<p>Medio simply takes Model classes as input: those objects describe the structure
+of a file (with the assumption that a file always contain a single class).</p>
+<p>It has been designed to be a construction brick ready to be used by anyone.
+The code generators mentioned above could use Medio:</p>
+<ol>
+<li>parse the configuration file</li>
+<li>modelize the code from it by building Medio's Model classes</li>
+<li>generate the code using Medio's Pretty Printer</li>
+</ol>
+<h2>Twig templates as output</h2>
+<p>In order to generate the output, some projects use Specialized Generators: each
+Generator class supports a specific section (e.g. MethodGenerator can generate methods)
+and contains its own generation logic. Those can be extended or overloaded to be
+customized.</p>
+<p>Medio rather uses templates, as mentioned above (more specifically it uses the
+<a href="http://twig.sensiolabs.org/">Twig Template Engine</a>). It has the advantage of
+editing the output in its final form, givinga better visibility on what's going
+to be actually generated.</p>
+<h2>Possible usage</h2>
+<p>Code Generators can be used for the following purposes:</p>
 <ul>
-<li><a href="01-introduction.html">Introduction</a></li>
+<li>bootstrap boilerplate code (e.g. property, argument and comments when injecting a dependency)</li>
+<li>caching for optimization purpose (e.g. Twig translates its templates into PHP code)</li>
+<li>translating a Domain Specific Language into code (see Intentional Programming)</li>
+</ul>
+<h2>Next readings</h2>
+<ul>
 <li><a href="02-installation.html">Installation</a></li>
 <li><a href="03-usage.html">Usage</a></li>
 <li><a href="04-extending.html">Extending</a></li>
 </ul>
-<p>You can see the current and past versions using one of the following:</p>
+<p>Previous pages:</p>
 <ul>
-<li>the <code>git tag</code> command</li>
-<li>the <a href="https://github.com/gnugat/medio/releases">releases page on Github</a></li>
-<li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
-</ul>
-<p>And finally some meta documentation:</p>
-<ul>
-<li><a href="LICENSE">copyright and MIT license</a></li>
-<li><a href="VERSIONING.html">versioning and branching models</a></li>
-<li><a href="CONTRIBUTING.html">contribution instructions</a></li>
+<li><a href="../README.html">README</a></li>
 </ul>
                 </section>
 

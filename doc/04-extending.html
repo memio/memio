@@ -41,18 +41,23 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model.html">
-                                        Model
+                                    <a href="http://gnugat.github.io/medio/doc/01-introduction.html">
+                                        Introduction
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-templates.html">
-                                        Templates
+                                    <a href="http://gnugat.github.io/medio/doc/02-instalation.html">
+                                        Installation
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
-                                        Examples
+                                    <a href="http://gnugat.github.io/medio/doc/03-usage.html">
+                                        Usage
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                        Extending
                                     </a>
                                 </li>
                                                     </ul>
@@ -61,8 +66,45 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>General Introduction</h1>
-<p>In this chapter, we'll see the different kinds of code generators and their purposes.</p>
+                    <h1>Extending</h1>
+<p>Medio uses <a href="http://twig.sensiolabs.org/">Twig templates</a> to actualy generate the
+code.</p>
+<blockquote>
+<p>Keep in mind that the templates provided out of the box are highly opinionated,
+but they can be extended / over wrote.</p>
+</blockquote>
+<ul>
+<li><a href="#overwriting-templates">Overwriting templates</a></li>
+<li><a href="#conventions">Conventions</a></li>
+</ul>
+<p>See also <a href="#next-readings">next readings</a>.</p>
+<h2>Overwriting templates</h2>
+<p>In order to change how a specific model is rendered, you need to:</p>
+<ol>
+<li>create your own template</li>
+<li>add the path to your templates to Twig's loader</li>
+</ol>
+<p>Here's an example:</p>
+<pre><code class="language-php">$loader-&gt;addPath(__DIR__.'/my-templates');</code></pre>
+<h2>Conventions</h2>
+<p>A model's templates is named after its class name, in snake_case. It always takes
+as its first argument the model (the variable is also named after the model's class anme in snake_case).</p>
+<blockquote>
+<p>For instance, <code>MethodPhpdoc</code> should have a template named <code>method_phpdoc.twig</code>.
+The template should receive the model, in the <code>method_phpdoc</code> parameter.</p>
+</blockquote>
+<p>&quot;Sub-templates&quot; should be prefixed with an underscore.</p>
+<blockquote>
+<p>For example: <code>_inline_argument_collection.twig</code>.</p>
+</blockquote>
+<h2>Next readings</h2>
+<p>Previous pages:</p>
+<ul>
+<li><a href="03-usage.html">Usage</a></li>
+<li><a href="02-installation.html">Installation</a></li>
+<li><a href="01-introduction.html">Introduction</a></li>
+<li><a href="../README.html">README</a></li>
+</ul>
                 </section>
 
             </div>
