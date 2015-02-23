@@ -36,19 +36,15 @@ class ContractSpec extends ObjectBehavior
 
     function it_can_have_constants(Constant $constant)
     {
-        $constants = $this->allConstants();
-
-        $constants->all()->shouldBe(array());
+        $this->allConstants()->shouldBe(array());
         $this->addConstant($constant);
-        $constants->all()->shouldBe(array($constant));
+        $this->allConstants()->shouldBe(array($constant));
     }
 
     function it_can_have_methods(Method $method)
     {
-        $methods = $this->allMethods();
-
-        $methods->all()->shouldBe(array());
+        $this->allMethods()->shouldBe(array());
         $this->addMethod($method);
-        $methods->all()->shouldBe(array($method));
+        $this->allMethods()->shouldBe(array($method));
     }
 }

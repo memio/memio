@@ -1,8 +1,12 @@
 interface {{ contract.name }}
 {
-{% include 'collection/constant_collection.twig' with { 'constant_collection': contract.allConstants } only %}
+{% include 'collection/constant_collection.twig' with {
+    'constant_collection': make_collection(contract.allConstants)
+} only %}
 {% if needs_line_after(contract, 'constants') %}
 
 {% endif %}
-{% include 'collection/methods/pure_virtual_collection.twig' with { 'method_collection': contract.allMethods } only %}
+{% include 'collection/methods/pure_virtual_collection.twig' with {
+    'method_collection': make_collection(contract.allMethods)
+} only %}
 }
