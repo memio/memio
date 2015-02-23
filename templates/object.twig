@@ -1,0 +1,12 @@
+class {{ object.name }}
+{
+{% include 'collection/constant_collection.twig' with { 'constant_collection': object.allConstants } only %}
+{% if needs_line_after(object, 'constants') %}
+
+{% endif %}
+{% include 'collection/property_collection.twig' with { 'property_collection': object.allProperties } only %}
+{% if needs_line_after(object, 'properties') %}
+
+{% endif %}
+{% include 'collection/method_collection.twig' with { 'method_collection': object.allMethods } only %}
+}

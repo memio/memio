@@ -13,11 +13,12 @@ namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
 
-class ContractSpec extends ObjectBehavior
+class ObjectSpec extends ObjectBehavior
 {
-    const NAME = 'MyInterface';
+    const NAME = 'MyClass';
 
     function let()
     {
@@ -41,6 +42,15 @@ class ContractSpec extends ObjectBehavior
         $constants->all()->shouldBe(array());
         $this->addConstant($constant);
         $constants->all()->shouldBe(array($constant));
+    }
+
+    function it_can_have_properties(Property $property)
+    {
+        $properties = $this->allProperties();
+
+        $properties->all()->shouldHaveCount(0);
+        $this->addProperty($property);
+        $properties->all()->shouldHaveCount(1);
     }
 
     function it_can_have_methods(Method $method)
