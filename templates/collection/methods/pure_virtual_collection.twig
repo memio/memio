@@ -1,0 +1,3 @@
+{% for method in method_collection.all -%}
+    {% include 'collection/methods/pure_virtual.twig' with { 'method': method } only %}{{ loop.last ? "\n" : "\n\n" }}
+{%- endfor -%}
