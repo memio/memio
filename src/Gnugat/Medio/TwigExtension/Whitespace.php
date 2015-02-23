@@ -12,6 +12,7 @@
 namespace Gnugat\Medio\TwigExtension;
 
 use Gnugat\Medio\Exception\InvalidArgumentException;
+use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\File;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -37,6 +38,27 @@ class Whitespace extends Twig_Extension
     }
 
     /**
+     * @param mixed  $model
+     * @param string $block
+     *
+     * @return bool
+     *
+     * @throws InvalidArgumentException If given $model is not supported
+     * @throws InvalidArgumentException If given $bock is not supported
+     */
+    public function needsLineAfter($model, $block)
+    {
+        if ($model instanceof File) {
+            return $this->forFile($model, $block);
+        }
+        if ($model instanceof Contract) {
+            return $this->forContract($model, $block);
+        }
+
+        throw new InvalidArgumentException('The function needs_line_after does not support given "'.get_class($model).'"');
+    }
+
+    /**
      * @param File   $file
      * @param string $block
      *
@@ -44,7 +66,7 @@ class Whitespace extends Twig_Extension
      *
      * @throws InvalidArgumentException If given $bock is not supported
      */
-    public function needsLineAfter(File $file, $block)
+    private function forFile($file, $block)
     {
         $imports = $file->getImportCollection()->all();
         $constants = $file->getConstantCollection()->all();
@@ -58,6 +80,25 @@ class Whitespace extends Twig_Extension
         }
         if ('properties' === $block) {
             return (!empty($properties) && !empty($methods));
+        }
+
+        throw new InvalidArgumentException('The function needs_line_after does not support given "'.$block.'"');
+    }
+
+    /**
+     * @param Contract $contract
+     * @param string   $block
+     *
+     * @return bool
+     *
+     * @throws InvalidArgumentException If given $bock is not supported
+     */
+    private function forContract(Contract $contract, $block)
+    {
+        $constants = $contract->allConstants()->all();
+        $methods = $contract->allMethods()->all();
+        if ('constants' === $block) {
+            return (!empty($constants) && !empty($methods));
         }
 
         throw new InvalidArgumentException('The function needs_line_after does not support given "'.$block.'"');
