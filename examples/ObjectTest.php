@@ -13,19 +13,17 @@ namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\Contract;
-use Gnugat\Medio\Model\Import;
-use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Property;
 
-class ContractTest extends PrettyPrinterTestCase
+class ObjectTest extends PrettyPrinterTestCase
 {
-    const NAME = 'MyInterface';
+    const NAME = 'MyClass';
 
     public function testEmpty()
     {
-        $contract = new Contract(self::NAME);
+        $contract = new Object(self::NAME);
 
         $generatedCode = $this->prettyPrinter->generateCode($contract);
 
@@ -34,9 +32,12 @@ class ContractTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $contract = Contract::make(self::NAME)
+        $contract = Object::make(self::NAME)
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
+
+            ->addProperty(new Property('firstProperty'))
+            ->addProperty(new Property('secondProperty'))
 
             ->addMethod(Method::make('firstMethod')
                 ->addArgument(new Argument('DateTime', 'firstArgument'))
