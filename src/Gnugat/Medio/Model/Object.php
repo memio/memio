@@ -56,7 +56,7 @@ class Object implements Structure
     /**
      * @param string $name
      *
-     * @return Contract
+     * @return Object
      *
      * @api
      */
@@ -68,7 +68,7 @@ class Object implements Structure
     /**
      * @param Constant $constant
      *
-     * @return Contract
+     * @return Object
      *
      * @api
      */
@@ -80,17 +80,17 @@ class Object implements Structure
     }
 
     /**
-     * @return Collection
+     * @return array
      */
     public function allConstants()
     {
-        return $this->constants;
+        return $this->constants->all();
     }
 
     /**
      * @param Method $method
      *
-     * @return Contract
+     * @return Object
      *
      * @api
      */
@@ -102,17 +102,17 @@ class Object implements Structure
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
     public function allMethods()
     {
-        return $this->methods;
+        return $this->methods->all();
     }
 
     /**
      * @param Property $property
      *
-     * @return Contract
+     * @return Object
      *
      * @api
      */
@@ -124,11 +124,11 @@ class Object implements Structure
     }
 
     /**
-     * @return Property
+     * @return array
      */
     public function allProperties()
     {
-        return $this->properties;
+        return $this->properties->all();
     }
 
     /**

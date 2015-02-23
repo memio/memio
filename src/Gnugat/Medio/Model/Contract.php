@@ -74,11 +74,11 @@ class Contract implements Structure
     }
 
     /**
-     * @return Collection
+     * @return array
      */
     public function allConstants()
     {
-        return $this->constants;
+        return $this->constants->all();
     }
 
     /**
@@ -96,11 +96,11 @@ class Contract implements Structure
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
     public function allMethods()
     {
-        return $this->methods;
+        return $this->methods->all();
     }
 
     /**
