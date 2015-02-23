@@ -37,28 +37,22 @@ class ObjectSpec extends ObjectBehavior
 
     function it_can_have_constants(Constant $constant)
     {
-        $constants = $this->allConstants();
-
-        $constants->all()->shouldBe(array());
+        $this->allConstants()->shouldBe(array());
         $this->addConstant($constant);
-        $constants->all()->shouldBe(array($constant));
+        $this->allConstants()->shouldBe(array($constant));
     }
 
     function it_can_have_properties(Property $property)
     {
-        $properties = $this->allProperties();
-
-        $properties->all()->shouldHaveCount(0);
+        $this->allProperties()->shouldBe(array());
         $this->addProperty($property);
-        $properties->all()->shouldHaveCount(1);
+        $this->allProperties()->shouldBe(array($property));
     }
 
     function it_can_have_methods(Method $method)
     {
-        $methods = $this->allMethods();
-
-        $methods->all()->shouldBe(array());
+        $this->allMethods()->shouldBe(array());
         $this->addMethod($method);
-        $methods->all()->shouldBe(array($method));
+        $this->allMethods()->shouldBe(array($method));
     }
 }
