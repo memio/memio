@@ -11,52 +11,43 @@
 
 namespace Gnugat\Medio\Examples;
 
+use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Import;
+use Gnugat\Medio\Model\License;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Property;
 
-class ConstantTest extends PrettyPrinterTestCase
+class ContractTest extends PrettyPrinterTestCase
 {
-    public function testIntegerValue()
+    const NAME = 'MyInterface';
+
+    public function testEmpty()
     {
-        $constant = new Constant('INTEGER_VALUE', '0');
+        $contract = new Contract(self::NAME);
 
-        $generatedCode = $this->prettyPrinter->generateCode($constant);
+        $generatedCode = $this->prettyPrinter->generateCode($contract);
 
-        $this->assertSame('    const INTEGER_VALUE = 0;', $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 
-    public function testStringValue()
+    public function testFull()
     {
-        $constant = new Constant('STRING_VALUE', "'meh'");
+        $contract = Contract::make(self::NAME)
+            ->addConstant(new Constant('FIRST_CONSTANT', '0'))
+            ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
-        $generatedCode = $this->prettyPrinter->generateCode($constant);
+            ->addMethod(Method::make('firstMethod')
+                ->addArgument(new Argument('DateTime', 'firstArgument'))
+                ->addArgument(new Argument('array', 'secondArgument'))
+                ->addArgument(new Argument('string', 'thirdArgument'))
+            )
+            ->addMethod(new Method('secondMethod'))
+        ;
 
-        $this->assertSame("    const STRING_VALUE = 'meh';", $generatedCode);
-    }
+        $generatedCode = $this->prettyPrinter->generateCode($contract);
 
-    public function testBooleanValue()
-    {
-        $constant = new Constant('BOOLEAN_VALUE', 'true');
-
-        $generatedCode = $this->prettyPrinter->generateCode($constant);
-
-        $this->assertSame('    const BOOLEAN_VALUE = true;', $generatedCode);
-    }
-
-    public function testArrayValue()
-    {
-        $constant = new Constant('ARRAY_VALUE', "['a', 'b']");
-
-        $generatedCode = $this->prettyPrinter->generateCode($constant);
-
-        $this->assertSame("    const ARRAY_VALUE = ['a', 'b'];", $generatedCode);
-    }
-
-    public function testExpressionValue()
-    {
-        $constant = new Constant('EXPRESSION_VALUE', "'Nobody expects the '.self::SPANISH_INQUISITION + 1");
-
-        $generatedCode = $this->prettyPrinter->generateCode($constant);
-
-        $this->assertSame("    const EXPRESSION_VALUE = 'Nobody expects the '.self::SPANISH_INQUISITION + 1;", $generatedCode);
+        $this->assertExpectedCode($generatedCode);
     }
 }
