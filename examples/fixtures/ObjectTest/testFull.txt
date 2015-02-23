@@ -1,0 +1,23 @@
+class MyClass
+{
+    const FIRST_CONSTANT = 0;
+    const SECOND_CONSTANT = 'meh';
+
+    private $firstProperty;
+
+    private $secondProperty;
+
+    /**
+     * @param \DateTime $firstArgument
+     * @param array     $secondArgument
+     * @param string    $thirdArgument
+     */
+    public function firstMethod(\DateTime $firstArgument, array $secondArgument, $thirdArgument)
+    {
+    }
+
+    public function secondMethod()
+    {
+    }
+}
+

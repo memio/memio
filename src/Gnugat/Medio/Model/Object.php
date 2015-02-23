@@ -14,11 +14,11 @@ namespace Gnugat\Medio\Model;
 use Gnugat\Medio\ValueObject\Collection;
 
 /**
- * A PHP Interface ("interface" is a reserved word and cannot be used as classname).
+ * A PHP Class ("class" is a reserved word and cannot be used as classname).
  *
  * @api
  */
-class Contract implements Structure
+class Object implements Structure
 {
     /**
      * @var Collection
@@ -36,6 +36,11 @@ class Contract implements Structure
     private $name;
 
     /**
+     * @var Collection
+     */
+    private $properties;
+
+    /**
      * @param string $name
      *
      * @api
@@ -45,6 +50,7 @@ class Contract implements Structure
         $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
         $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
         $this->name = $name;
+        $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
     }
 
     /**
@@ -101,6 +107,28 @@ class Contract implements Structure
     public function allMethods()
     {
         return $this->methods;
+    }
+
+    /**
+     * @param Property $property
+     *
+     * @return Contract
+     *
+     * @api
+     */
+    public function addProperty(Property $property)
+    {
+        $this->properties->add($property);
+
+        return $this;
+    }
+
+    /**
+     * @return Property
+     */
+    public function allProperties()
+    {
+        return $this->properties;
     }
 
     /**
