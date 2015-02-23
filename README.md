@@ -90,10 +90,10 @@ class MyClass
 
 Discover more by reading the docs:
 
-* [Introduction](01-introduction.md)
-* [Installation](02-installation.md)
-* [Usage](03-usage.md)
-* [Extending](04-extending.md)
+* [Introduction](doc/01-introduction.md)
+* [Installation](doc/02-installation.md)
+* [Usage](doc/03-usage.md)
+* [Extending](doc/04-extending.md)
 
 You can see the current and past versions using one of the following:
 
