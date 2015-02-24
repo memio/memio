@@ -17,11 +17,13 @@ use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Property;
 
 class FileTest extends PrettyPrinterTestCase
 {
     const FILENAME = '/tmp/medio/src/Gnugat/Medio/MyClass.php';
+    const FULLY_QUALIFIED_NAME = 'Gnugat\\Medio\\MyClass';
 
     const PROJECT_NAME = 'gnugat/medio';
     const AUTHOR_NAME = 'Loïc Chardonnet';
@@ -29,7 +31,7 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $file = new File(self::FILENAME);
+        $file = new File(self::FILENAME, new Object(self::FULLY_QUALIFIED_NAME));
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 
@@ -38,7 +40,7 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testWithLicense()
     {
-        $file = new File(self::FILENAME);
+        $file = new File(self::FILENAME, new Object(self::FULLY_QUALIFIED_NAME));
         $license = new License(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
 
         $generatedCode = $this->prettyPrinter->generateCode($file, array('license' => $license));
@@ -48,9 +50,7 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $file = File::make(self::FILENAME)
-            ->addImport(new Import('DateTime'))
-
+        $file = new File(self::FILENAME, Object::make(self::FULLY_QUALIFIED_NAME)
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
@@ -63,7 +63,8 @@ class FileTest extends PrettyPrinterTestCase
                 ->addArgument(new Argument('string', 'thirdArgument'))
             )
             ->addMethod(new Method('secondMethod'))
-        ;
+        );
+        $file->addImport(new Import('DateTime'));
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 

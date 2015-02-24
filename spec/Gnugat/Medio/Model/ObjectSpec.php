@@ -18,11 +18,13 @@ use PhpSpec\ObjectBehavior;
 
 class ObjectSpec extends ObjectBehavior
 {
+    const FULLY_QUALIFIED_NAME = 'Gnugat\\Medio\\MyClass';
     const NAME = 'MyClass';
+    const NAMESPACE_ = 'Gnugat\\Medio';
 
     function let()
     {
-        $this->beConstructedWith(self::NAME);
+        $this->beConstructedWith(self::FULLY_QUALIFIED_NAME);
     }
 
     function it_is_a_structure()
@@ -33,6 +35,11 @@ class ObjectSpec extends ObjectBehavior
     function it_has_a_name()
     {
         $this->getName()->shouldBe(self::NAME);
+    }
+
+    function it_has_a_namespace()
+    {
+        $this->getNamespace()->shouldBe(self::NAMESPACE_);
     }
 
     function it_can_have_constants(Constant $constant)

@@ -13,7 +13,7 @@ namespace spec\Gnugat\Medio\ValueObject;
 
 use PhpSpec\ObjectBehavior;
 
-class FullyQualifiedClassnameSpec extends ObjectBehavior
+class FullyQualifiedNameSpec extends ObjectBehavior
 {
     function let()
     {
@@ -22,12 +22,12 @@ class FullyQualifiedClassnameSpec extends ObjectBehavior
 
     function it_has_fully_qualified_classname()
     {
-        $this->getAll()->shouldBe('\\Gnugat\\Medio\\MyClass');
+        $this->getFullyQualifiedName()->shouldBe('\\Gnugat\\Medio\\MyClass');
     }
 
-    function it_has_classname()
+    function it_has_name()
     {
-        $this->getClassname()->shouldBe('MyClass');
+        $this->getName()->shouldBe('MyClass');
     }
 
     function it_has_namespace()

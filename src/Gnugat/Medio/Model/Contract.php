@@ -12,6 +12,7 @@
 namespace Gnugat\Medio\Model;
 
 use Gnugat\Medio\ValueObject\Collection;
+use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
  * A PHP Interface ("interface" is a reserved word and cannot be used as classname).
@@ -26,37 +27,37 @@ class Contract implements Structure
     private $constants;
 
     /**
+     * @var string
+     */
+    private $fullyQualifiedName;
+
+    /**
      * @var Collection
      */
     private $methods;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @param string $name
+     * @param string $fullyQualifiedName
      *
      * @api
      */
-    public function __construct($name)
+    public function __construct($fullyQualifiedName)
     {
         $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
+        $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
         $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
-        $this->name = $name;
     }
 
     /**
-     * @param string $name
+     * @param string $fullyQualifiedName
      *
      * @return Contract
      *
      * @api
      */
-    public static function make($name)
+    public static function make($fullyQualifiedName)
     {
-        return new self($name);
+        return new self($fullyQualifiedName);
     }
 
     /**
@@ -106,8 +107,24 @@ class Contract implements Structure
     /**
      * {@inheritDoc}
      */
+    public function getFullyQualifiedName()
+    {
+        return $this->fullyQualifiedName->getFullyQualifiedName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
-        return $this->name;
+        return $this->fullyQualifiedName->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNamespace()
+    {
+        return $this->fullyQualifiedName->getNamespace();
     }
 }

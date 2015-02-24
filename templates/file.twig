@@ -6,19 +6,12 @@
 
 namespace {{ file.namespace }};
 
-{% include 'collection/import_collection.twig' with { 'import_collection': file.importCollection } only %}
+{% include 'collection/import_collection.twig' with { 'import_collection': file.importCollection.all } only %}
 {% if needs_line_after(file, 'imports') %}
 
 {% endif %}
-class {{ file.classname }}
-{
-{% include 'collection/constant_collection.twig' with { 'constant_collection': file.constantCollection } only %}
-{% if needs_line_after(file, 'constants') %}
-
+{% if file.structure is contract %}
+{% include 'contract.twig' with { 'contract': file.structure } only %}
+{% else %}
+{% include 'object.twig' with { 'object': file.structure } only %}
 {% endif %}
-{% include 'collection/property_collection.twig' with { 'property_collection': file.propertyCollection } only %}
-{% if needs_line_after(file, 'properties') %}
-
-{% endif %}
-{% include 'collection/method_collection.twig' with { 'method_collection': file.methodCollection } only %}
-}

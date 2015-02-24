@@ -1,18 +1,18 @@
 class {{ object.name }}
 {
 {% include 'collection/constant_collection.twig' with {
-    'constant_collection': make_collection(object.allConstants)
+    'constant_collection': object.allConstants
 } only %}
 {% if needs_line_after(object, 'constants') %}
 
 {% endif %}
 {% include 'collection/property_collection.twig' with {
-    'property_collection': make_collection(object.allProperties)
+    'property_collection': object.allProperties
 } only %}
 {% if needs_line_after(object, 'properties') %}
 
 {% endif %}
 {% include 'collection/method_collection.twig' with {
-    'method_collection': make_collection(object.allMethods)
+    'method_collection': object.allMethods
 } only %}
 }

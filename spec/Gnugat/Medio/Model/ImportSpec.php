@@ -24,9 +24,9 @@ class ImportSpec extends ObjectBehavior
         $this->beConstructedWith(self::FQCN);
     }
 
-    function it_has_a_fully_qualified_classname()
+    function it_has_a_fully_qualified_name()
     {
-        $this->getFqcn()->shouldBe(self::FQCN);
+        $this->getFullyQualifiedName()->shouldBe(self::FQCN);
     }
 
     function it_has_classname()

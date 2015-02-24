@@ -1,4 +1,4 @@
-{% for import_ in import_collection.all %}
+{% for import_ in import_collection %}
 {% include 'import.twig' with { 'import': import_ } only %}
 
 {% endfor -%}

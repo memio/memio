@@ -15,6 +15,7 @@ use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Structure;
 use PhpSpec\ObjectBehavior;
 
 class FileSpec extends ObjectBehavior
@@ -23,9 +24,9 @@ class FileSpec extends ObjectBehavior
     const NAMESPACE_ = 'Gnugat\\Medio';
     const CLASSNAME = 'MyClass';
 
-    function let()
+    function let(Structure $structure)
     {
-        $this->beConstructedWith(self::FILENAME);
+        $this->beConstructedWith(self::FILENAME, $structure);
     }
 
     function it_has_a_filename()
@@ -33,20 +34,16 @@ class FileSpec extends ObjectBehavior
         $this->getFilename()->shouldBe(self::FILENAME);
     }
 
-    function it_has_a_namespace()
+    function it_has_a_namespace(Structure $structure)
     {
+        $structure->getNamespace()->willReturn(self::NAMESPACE_);
+
         $this->getNamespace()->shouldBe(self::NAMESPACE_);
     }
 
-    function it_can_have_phpspec_namespace()
+    function it_has_a_structure(Structure $structure)
     {
-        $this->beConstructedWith('/tmp/medio/spec/Gnugat/Medio/MyClassSpec.php');
-        $this->getNamespace()->shouldBe('spec\\Gnugat\\Medio');
-    }
-
-    function it_has_a_classname()
-    {
-        $this->getClassname()->shouldBe(self::CLASSNAME);
+        $this->getStructure()->shouldBe($structure);
     }
 
     function it_has_a_collection_of_imports(Import $import)
@@ -56,32 +53,5 @@ class FileSpec extends ObjectBehavior
         $importCollection->all()->shouldHaveCount(0);
         $this->addImport($import);
         $importCollection->all()->shouldHaveCount(1);
-    }
-
-    function it_has_a_collection_of_constants(Constant $constant)
-    {
-        $constantCollection = $this->getConstantCollection();
-
-        $constantCollection->all()->shouldHaveCount(0);
-        $this->addConstant($constant);
-        $constantCollection->all()->shouldHaveCount(1);
-    }
-
-    function it_has_a_collection_of_properties(Property $property)
-    {
-        $propertyCollection = $this->getPropertyCollection();
-
-        $propertyCollection->all()->shouldHaveCount(0);
-        $this->addProperty($property);
-        $propertyCollection->all()->shouldHaveCount(1);
-    }
-
-    function it_has_a_collection_of_methods(Method $method)
-    {
-        $methodCollection = $this->getMethodCollection();
-
-        $methodCollection->all()->shouldHaveCount(0);
-        $this->addMethod($method);
-        $methodCollection->all()->shouldHaveCount(1);
     }
 }
