@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.0.0-alpha13: Contract, Object
+
+* added interface generation
+* added class (standalone) generation
+* refactored need_after_line
+* refactored Type
+
+> **BC break**:
+>
+> * added Structure argument to File constructor
+> * renamed getCollection methods into all (e.g getArgumentCollection becomes allArguments)
+> * renamed FullyQualifiedClassname into FullyQualifiedName
+> * removed Type from Argument constructor parameters (give directly the type as a string)
+
 ## 1.0.0-alpha12: Collection, FullyQualifiedClassname
 
 * refactored fully qualified classname management
