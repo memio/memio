@@ -5,7 +5,7 @@ namespace Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\ValueObject\FullyQualifiedName;
 use Twig_Environment;
 
-class ArrayPrettyPrinter
+class ArrayPrettyPrinter implements PrettyPrinterStrategy
 {
     /**
      * @var Twig_Environment

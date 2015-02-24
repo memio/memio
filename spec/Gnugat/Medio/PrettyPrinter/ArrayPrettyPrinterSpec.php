@@ -13,6 +13,11 @@ class ArrayPrettyPrinterSpec extends ObjectBehavior
         $this->beConstructedWith($twig);
     }
 
+    function it_is_a_pretty_printer_strategy()
+    {
+        $this->shouldImplement('Gnugat\\Medio\\PrettyPrinter\\PrettyPrinterStrategy');
+    }
+
     function it_supports_arrays()
     {
         $this->supports(array())->shouldBe(true);
