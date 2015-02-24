@@ -27,4 +27,9 @@ class ArrayPrettyPrinterSpec extends ObjectBehavior
 
         $this->generateCode($arguments);
     }
+
+    function it_generates_code_empty_string_for_empty_arrays(Twig_Environment $twig)
+    {
+        $this->generateCode(array())->shouldBe('');
+    }
 }
