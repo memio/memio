@@ -1,4 +1,4 @@
-{% for argument in argument_collection.all %}
+{% for argument in argument_collection %}
 
         {% include 'argument.twig' with { 'argument': argument } only %}{{ (not loop.last) ? ',' }}
 {%- endfor %}

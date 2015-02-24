@@ -69,16 +69,10 @@ Medio provides the following models:
 
 ![UML class diagram](http://yuml.me/00e11389)
 
-It assumes that projects are using PSR-0:
-
-* a file contains only a class/interface/trait
-* the path of the file reflects its namespace
-
-With this the `File` model is able to generate the namespace and the classname,
-by simply processing the path:
+It assumes that projects are using PSR-0/PSR-4: a file contains only a class/interface/trait.
 
 ```php
-$file = new File('src/Gnugat/Medio/MyClass.php');
+$file = new File('src/Gnugat/Medio/MyClass.php', new Object('Gnugat\\Medio\\MyClass'));
 
 echo $prettyPrinter->generateCode($file);
 ```
@@ -98,11 +92,11 @@ class MyClass
 To generate a class with constants, properties and/or methods you just need to write:
 
 ```php
-$file = File::make('src/Gnugat/Medio/MyClass.php')
+$file = new File('src/Gnugat/Medio/MyClass.php', Object::make('Gnugat\\Medio\\MyClass')
     ->addConstant(new Constant('MY_CONSTANT', "'string value should be quoted'"))
     ->addProperty(new Property('myProperty'))
     ->addMethod(new Method('myMethod'))
-;
+);
 ```
 
 > **Note**: You can use either `new Model()` or `Model::make()` to instantiate

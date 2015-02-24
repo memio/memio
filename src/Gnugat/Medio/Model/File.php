@@ -12,7 +12,7 @@
 namespace Gnugat\Medio\Model;
 
 use Gnugat\Medio\ValueObject\Collection;
-use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
+use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
  * @api
@@ -25,9 +25,9 @@ class File
     private $filename;
 
     /**
-     * @var FullyQualifiedClassname
+     * @var FullyQualifiedName
      */
-    private $fullyQualifiedClassname;
+    private $fullyQualifiedName;
 
     /**
      * @var Collection
@@ -35,26 +35,12 @@ class File
     private $imports;
 
     /**
-     * @var Collection
-     */
-    private $constants;
-
-    /**
-     * @var Collection
-     */
-    private $properties;
-
-    /**
-     * @var Collection
-     */
-    private $methods;
-
-    /**
-     * @param string $filename
+     * @param string    $filename
+     * @param Structure $structure
      *
      * @api
      */
-    public function __construct($filename)
+    public function __construct($filename, Structure $structure)
     {
         $filenameWithoutExtension = rtrim($filename, '.php');
         $parts = explode('/', $filenameWithoutExtension);
@@ -71,26 +57,25 @@ class File
             $i++;
         }
         $namespaces = array_slice($parts, $i);
-        $fullyQualifiedClassname = implode('\\', $namespaces);
+        $fullyQualifiedName = implode('\\', $namespaces);
 
         $this->filename = $filename;
-        $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
+        $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
         $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
-        $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
-        $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
-        $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
+        $this->structure = $structure;
     }
 
     /**
-     * @param string $filename
+     * @param string    $filename
+     * @param Structure $structure
      *
      * @return File
      *
      * @api
      */
-    public static function make($filename)
+    public static function make($filename, Structure $structure)
     {
-        return new self($filename);
+        return new self($filename, $structure);
     }
 
     /**
@@ -106,81 +91,15 @@ class File
      */
     public function getNamespace()
     {
-        return $this->fullyQualifiedClassname->getNamespace();
+        return $this->fullyQualifiedName->getNamespace();
     }
 
     /**
      * @return string
      */
-    public function getClassname()
+    public function getName()
     {
-        return $this->fullyQualifiedClassname->getClassname();
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMethodCollection()
-    {
-        return $this->methods;
-    }
-
-    /**
-     * @param Method $method
-     *
-     * @return File
-     *
-     * @api
-     */
-    public function addMethod(Method $method)
-    {
-        $this->methods->add($method);
-
-        return $this;
-    }
-
-    /**
-     * @return PropertyCollection
-     */
-    public function getPropertyCollection()
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param Property $property
-     *
-     * @return File
-     *
-     * @api
-     */
-    public function addProperty(Property $property)
-    {
-        $this->properties->add($property);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getConstantCollection()
-    {
-        return $this->constants;
-    }
-
-    /**
-     * @param Constant $constant
-     *
-     * @return File
-     *
-     * @api
-     */
-    public function addConstant(Constant $constant)
-    {
-        $this->constants->add($constant);
-
-        return $this;
+        return $this->fullyQualifiedName->getName();
     }
 
     /**
@@ -203,5 +122,13 @@ class File
         $this->imports->add($import);
 
         return $this;
+    }
+
+    /**
+     * @return Structure
+     */
+    public function getStructure()
+    {
+        return $this->structure;
     }
 }

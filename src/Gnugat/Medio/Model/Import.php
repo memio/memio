@@ -11,7 +11,7 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
+use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
  * @api
@@ -19,9 +19,9 @@ use Gnugat\Medio\ValueObject\FullyQualifiedClassname;
 class Import
 {
     /**
-     * @var string
+     * @var FullyQualifiedName
      */
-    private $fullyQualifiedClassname;
+    private $fullyQualifiedName;
 
     /**
      * @var string
@@ -29,31 +29,31 @@ class Import
     private $alias;
 
     /**
-     * @param string $fullyQualifiedClassname
+     * @param string $fullyQualifiedName
      */
-    public function __construct($fullyQualifiedClassname)
+    public function __construct($fullyQualifiedName)
     {
-        $this->fullyQualifiedClassname = new FullyQualifiedClassname($fullyQualifiedClassname);
+        $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
     }
 
     /**
-     * @param string $fullyQualifiedClassname
+     * @param string $fullyQualifiedName
      *
      * @return Import
      *
      * @api
      */
-    public static function make($fullyQualifiedClassname)
+    public static function make($fullyQualifiedName)
     {
-        return new self($fullyQualifiedClassname);
+        return new self($fullyQualifiedName);
     }
 
     /**
      * @return string
      */
-    public function getFqcn()
+    public function getFullyQualifiedName()
     {
-        return trim($this->fullyQualifiedClassname->getAll(), '\\');
+        return trim($this->fullyQualifiedName->getFullyQualifiedName(), '\\');
     }
 
     /**
@@ -61,7 +61,7 @@ class Import
      */
     public function getClassname()
     {
-        return $this->fullyQualifiedClassname->getClassname();
+        return $this->fullyQualifiedName->getName();
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace Gnugat\Medio\Model;
 
 use Gnugat\Medio\ValueObject\Collection;
+use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
  * A PHP Class ("class" is a reserved word and cannot be used as classname).
@@ -26,14 +27,14 @@ class Object implements Structure
     private $constants;
 
     /**
+     * @var FullyQualifiedName
+     */
+    private $fullyQualifiedName;
+
+    /**
      * @var Collection
      */
     private $methods;
-
-    /**
-     * @var string
-     */
-    private $name;
 
     /**
      * @var Collection
@@ -41,28 +42,28 @@ class Object implements Structure
     private $properties;
 
     /**
-     * @param string $name
+     * @param string $fullyQualifiedName
      *
      * @api
      */
-    public function __construct($name)
+    public function __construct($fullyQualifiedName)
     {
         $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
+        $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
         $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
-        $this->name = $name;
         $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
     }
 
     /**
-     * @param string $name
+     * @param string $fullyQualifiedName
      *
      * @return Object
      *
      * @api
      */
-    public static function make($name)
+    public static function make($fullyQualifiedName)
     {
-        return new self($name);
+        return new self($fullyQualifiedName);
     }
 
     /**
@@ -134,8 +135,24 @@ class Object implements Structure
     /**
      * {@inheritDoc}
      */
+    public function getFullyQualifiedName()
+    {
+        return $this->fullyQualifiedName->getFullyQualifiedName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
-        return $this->name;
+        return $this->fullyQualifiedName->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNamespace()
+    {
+        return $this->fullyQualifiedName->getNamespace();
     }
 }

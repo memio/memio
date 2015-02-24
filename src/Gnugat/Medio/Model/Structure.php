@@ -21,18 +21,15 @@ interface Structure
     /**
      * @return string
      */
+    public function getFullyQualifiedName();
+
+    /**
+     * @return string
+     */
     public function getName();
 
-
     /**
-     * @param Method $method
-     *
-     * @return Structure
+     * @return string
      */
-    public function addMethod(Method $method);
-
-    /**
-     * @return \Gnugat\Medio\ValueObject\Collection
-     */
-    public function allMethods();
+    public function getNamespace();
 }
