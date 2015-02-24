@@ -20,8 +20,8 @@ return array(
 
     'Twig_Environment' => DI\factory(function (Container $c) {
         $twig = new Twig_Environment($c->get('Twig_Loader_Filesystem'));
-        $twig->addExtension($c->get('Gnugat\\Medio\\TwigExtension\\Collection'));
         $twig->addExtension($c->get('Gnugat\\Medio\\TwigExtension\\Phpdoc'));
+        $twig->addExtension($c->get('Gnugat\\Medio\\TwigExtension\\Type'));
         $twig->addExtension($c->get('Gnugat\\Medio\\TwigExtension\\Whitespace'));
 
         return $twig;

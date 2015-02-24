@@ -13,7 +13,6 @@ namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\ValueObject\Collection;
 use PhpSpec\ObjectBehavior;
 
 class MethodPhpdocSpec extends ObjectBehavior
@@ -23,21 +22,18 @@ class MethodPhpdocSpec extends ObjectBehavior
         $this->beConstructedWith($method);
     }
 
-    function it_can_be_empty(Collection $arguments, Method $method)
+    function it_can_be_empty(Method $method)
     {
-        $method->getArgumentCollection()->willReturn($arguments);
-        $arguments->all()->willReturn(array());
+        $method->allArguments()->willReturn(array());
 
         $this->isEmpty()->shouldBe(true);
     }
 
-    function it_has_parameters(Argument $argument, Collection $arguments, Method $method)
+    function it_has_parameters(Argument $argument, Method $method)
     {
-        $rawArguments = array($argument);
-        $method->getArgumentCollection()->willReturn($arguments);
-        $arguments->all()->willReturn($rawArguments);
+        $method->allArguments()->willReturn(array($argument));
 
-        $this->getParameters()->shouldBe($rawArguments);
+        $this->getParameters()->shouldBe(array($argument));
         $this->isEmpty()->shouldBe(false);
     }
 }

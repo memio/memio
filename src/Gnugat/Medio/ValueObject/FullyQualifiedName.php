@@ -14,17 +14,17 @@ namespace Gnugat\Medio\ValueObject;
 /**
  * @api
  */
-class FullyQualifiedClassname
+class FullyQualifiedName
 {
     /**
      * @var string
      */
-    private $all;
+    private $fullyQualifiedName;
 
     /**
      * @var string
      */
-    private $classname;
+    private $name;
 
     /**
      * @var string
@@ -32,48 +32,48 @@ class FullyQualifiedClassname
     private $namepace_;
 
     /**
-     * @param string $fullyQualifiedClassname
+     * @param string $fullyQualifiedName
      *
      * @api
      */
-    public function __construct($fullyQualifiedClassname)
+    public function __construct($fullyQualifiedName)
     {
-        $namespaces = explode('\\', $fullyQualifiedClassname);
+        $namespaces = explode('\\', $fullyQualifiedName);
 
-        $this->classname = array_pop($namespaces);
+        $this->name = array_pop($namespaces);
         $this->namepace_ = implode('\\', $namespaces);
-        if ('\\' !== $fullyQualifiedClassname[0]) {
-            $fullyQualifiedClassname = '\\'.$fullyQualifiedClassname;
+        if ('\\' !== $fullyQualifiedName[0]) {
+            $fullyQualifiedName = '\\'.$fullyQualifiedName;
         }
-        $this->all = $fullyQualifiedClassname;
+        $this->fullyQualifiedName = $fullyQualifiedName;
     }
 
     /**
-     * @param string $fullyQualifiedClassname
+     * @param string $fullyQualifiedName
      *
      * @return FullyQualifiedClassname
      *
      * @api
      */
-    public static function make($fullyQualifiedClassname)
+    public static function make($fullyQualifiedName)
     {
-        return new self($fullyQualifiedClassname);
+        return new self($fullyQualifiedName);
     }
 
     /**
      * @return string
      */
-    public function getAll()
+    public function getFullyQualifiedName()
     {
-        return $this->all;
+        return $this->fullyQualifiedName;
     }
 
     /**
      * @return string
      */
-    public function getClassname()
+    public function getName()
     {
-        return $this->classname;
+        return $this->name;
     }
 
     /**

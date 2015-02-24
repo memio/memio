@@ -2,7 +2,7 @@
     {{ method.visibility ~ (method.visibility is not empty ? ' ') }}
     {{- method.isStatic ? 'static ' -}}
     function {{ method.name }}({% include 'collection/argument_collection.twig' with {
-        'argument_collection': method.argumentCollection,
+        'argument_collection': method.allArguments,
         'length_restriction': 22 + method.name | length
     } only %})
     { {{- "\n" }}

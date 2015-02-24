@@ -81,11 +81,11 @@ class Method
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getArgumentCollection()
+    public function allArguments()
     {
-        return $this->arguments;
+        return $this->arguments->all();
     }
 
     /**

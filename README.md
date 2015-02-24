@@ -26,7 +26,7 @@ and do the actual generation.
 Want to see it in action? Here's an example:
 
 ```php
-$file = File::make('/src/Gnugat/Medio/MyClass.php')
+$file = new File('/src/Gnugat/Medio/MyClass.php', Object::make('Gnugat\\Medio\\MyClass')
     ->addConstant(new Constant('FIRST_CONSTANT', '0'))
     ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
@@ -39,7 +39,7 @@ $file = File::make('/src/Gnugat/Medio/MyClass.php')
         ->addArgument(new Argument('string', 'thirdArgument'))
     )
     ->addMethod(new Method('secondMethod'))
-;
+);
 
 echo $prettyPrinter->generateCode($file);
 ```

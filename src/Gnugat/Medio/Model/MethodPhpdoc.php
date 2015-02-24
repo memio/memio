@@ -43,7 +43,7 @@ class MethodPhpdoc
      */
     public function getParameters()
     {
-        return $this->method->getArgumentCollection()->all();
+        return $this->method->allArguments();
     }
 
     /**
@@ -51,7 +51,7 @@ class MethodPhpdoc
      */
     public function isEmpty()
     {
-        $parameters = $this->method->getArgumentCollection()->all();
+        $parameters = $this->method->allArguments();
 
         return empty($parameters);
     }

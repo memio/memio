@@ -25,11 +25,9 @@ class MethodSpec extends ObjectBehavior
 
     function it_has_a_collection_of_arguments(Argument $argument)
     {
-        $argumentCollection = $this->getArgumentCollection();
-
-        $argumentCollection->all()->shouldHaveCount(0);
+        $this->allArguments()->shouldBe(array());
         $this->addArgument($argument);
-        $argumentCollection->all()->shouldHaveCount(1);
+        $this->allArguments()->shouldBe(array($argument));
     }
 
     function it_has_a_name()
