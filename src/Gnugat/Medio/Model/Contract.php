@@ -11,7 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\Collection;
 use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
@@ -22,9 +21,9 @@ use Gnugat\Medio\ValueObject\FullyQualifiedName;
 class Contract implements Structure
 {
     /**
-     * @var Collection
+     * @var array
      */
-    private $constants;
+    private $constants = array();
 
     /**
      * @var string
@@ -32,9 +31,9 @@ class Contract implements Structure
     private $fullyQualifiedName;
 
     /**
-     * @var Collection
+     * @var array
      */
-    private $methods;
+    private $methods = array();
 
     /**
      * @param string $fullyQualifiedName
@@ -43,9 +42,7 @@ class Contract implements Structure
      */
     public function __construct($fullyQualifiedName)
     {
-        $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
         $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
-        $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
     }
 
     /**
@@ -69,7 +66,7 @@ class Contract implements Structure
      */
     public function addConstant(Constant $constant)
     {
-        $this->constants->add($constant);
+        $this->constants[] = $constant;
 
         return $this;
     }
@@ -79,7 +76,7 @@ class Contract implements Structure
      */
     public function allConstants()
     {
-        return $this->constants->all();
+        return $this->constants;
     }
 
     /**
@@ -91,7 +88,7 @@ class Contract implements Structure
      */
     public function addMethod(Method $method)
     {
-        $this->methods->add($method);
+        $this->methods[] = $method;
 
         return $this;
     }
@@ -101,7 +98,7 @@ class Contract implements Structure
      */
     public function allMethods()
     {
-        return $this->methods->all();
+        return $this->methods;
     }
 
     /**

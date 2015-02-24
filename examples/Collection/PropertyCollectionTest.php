@@ -13,39 +13,38 @@ namespace Gnugat\Medio\Examples\Collection;
 
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\ValueObject\Collection;
 
 class PropertyCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroProperties()
     {
-        $propertyCollection = new Collection('Gnugat\\Medio\\Model\\Property');
+        $properties = array();
 
-        $generatedCode = $this->prettyPrinter->generateCode($propertyCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($properties);
 
         $this->assertSame('', $generatedCode);
     }
 
     public function testOneProperty()
     {
-        $propertyCollection = Collection::make('Gnugat\\Medio\\Model\\Property')
-            ->add(new Property('dateTime'))
-        ;
+        $properties = array(
+            new Property('dateTime'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($propertyCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($properties);
 
         $this->assertExpectedCode($generatedCode);
     }
 
     public function testThreeProperties()
     {
-        $propertyCollection = Collection::make('Gnugat\\Medio\\Model\\Property')
-            ->add(new Property('dateTime'))
-            ->add(new Property('arrayObject'))
-            ->add(new Property('isEnabled'))
-        ;
+        $properties = array(
+            new Property('dateTime'),
+            new Property('arrayObject'),
+            new Property('isEnabled'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($propertyCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($properties);
 
         $this->assertExpectedCode($generatedCode);
     }

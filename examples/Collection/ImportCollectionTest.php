@@ -13,39 +13,38 @@ namespace Gnugat\Medio\Examples\Collection;
 
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
 use Gnugat\Medio\Model\Import;
-use Gnugat\Medio\ValueObject\Collection;
 
 class ImportCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroImports()
     {
-        $importCollection = new Collection('Gnugat\\Medio\\Model\\Import');
+        $imports = array();
 
-        $generatedCode = $this->prettyPrinter->generateCode($importCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($imports);
 
         $this->assertSame('', $generatedCode);
     }
 
     public function testOneImport()
     {
-        $importCollection = Collection::make('Gnugat\\Medio\\Model\\Import')
-            ->add(new Import('DateTime'))
-        ;
+        $imports = array(
+            new Import('DateTime'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($importCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($imports);
 
         $this->assertExpectedCode($generatedCode);
     }
 
     public function testThreeImports()
     {
-        $importCollection = Collection::make('Gnugat\\Medio\\Model\\Import')
-            ->add(new Import('DateTime'))
-            ->add(new Import('ArrayObject'))
-            ->add(new Import('stdClass'))
-        ;
+        $imports = array(
+            new Import('DateTime'),
+            new Import('ArrayObject'),
+            new Import('stdClass'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($importCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($imports);
 
         $this->assertExpectedCode($generatedCode);
     }

@@ -48,10 +48,8 @@ class FileSpec extends ObjectBehavior
 
     function it_has_a_collection_of_imports(Import $import)
     {
-        $importCollection = $this->getImportCollection();
-
-        $importCollection->all()->shouldHaveCount(0);
+        $this->allImports()->shouldBe(array());
         $this->addImport($import);
-        $importCollection->all()->shouldHaveCount(1);
+        $this->allImports()->shouldBe(array($import));
     }
 }

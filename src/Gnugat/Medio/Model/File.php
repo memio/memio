@@ -11,7 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\Collection;
 use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
@@ -30,9 +29,9 @@ class File
     private $fullyQualifiedName;
 
     /**
-     * @var Collection
+     * @var array
      */
-    private $imports;
+    private $imports = array();
 
     /**
      * @param string    $filename
@@ -61,7 +60,6 @@ class File
 
         $this->filename = $filename;
         $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
-        $this->imports = new Collection('Gnugat\\Medio\\Model\\Import');
         $this->structure = $structure;
     }
 
@@ -103,9 +101,9 @@ class File
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getImportCollection()
+    public function allImports()
     {
         return $this->imports;
     }
@@ -119,7 +117,7 @@ class File
      */
     public function addImport(Import $import)
     {
-        $this->imports->add($import);
+        $this->imports[] = $import;
 
         return $this;
     }

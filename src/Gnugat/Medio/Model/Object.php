@@ -11,7 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\Collection;
 use Gnugat\Medio\ValueObject\FullyQualifiedName;
 
 /**
@@ -22,9 +21,9 @@ use Gnugat\Medio\ValueObject\FullyQualifiedName;
 class Object implements Structure
 {
     /**
-     * @var Collection
+     * @var array
      */
-    private $constants;
+    private $constants = array();
 
     /**
      * @var FullyQualifiedName
@@ -32,14 +31,14 @@ class Object implements Structure
     private $fullyQualifiedName;
 
     /**
-     * @var Collection
+     * @var array
      */
-    private $methods;
+    private $methods = array();
 
     /**
-     * @var Collection
+     * @var array
      */
-    private $properties;
+    private $properties = array();
 
     /**
      * @param string $fullyQualifiedName
@@ -48,10 +47,7 @@ class Object implements Structure
      */
     public function __construct($fullyQualifiedName)
     {
-        $this->constants = new Collection('Gnugat\\Medio\\Model\\Constant');
         $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
-        $this->methods = new Collection('Gnugat\\Medio\\Model\\Method');
-        $this->properties = new Collection('Gnugat\\Medio\\Model\\Property');
     }
 
     /**
@@ -75,7 +71,7 @@ class Object implements Structure
      */
     public function addConstant(Constant $constant)
     {
-        $this->constants->add($constant);
+        $this->constants[] = $constant;
 
         return $this;
     }
@@ -85,7 +81,7 @@ class Object implements Structure
      */
     public function allConstants()
     {
-        return $this->constants->all();
+        return $this->constants;
     }
 
     /**
@@ -97,7 +93,7 @@ class Object implements Structure
      */
     public function addMethod(Method $method)
     {
-        $this->methods->add($method);
+        $this->methods[] = $method;
 
         return $this;
     }
@@ -107,7 +103,7 @@ class Object implements Structure
      */
     public function allMethods()
     {
-        return $this->methods->all();
+        return $this->methods;
     }
 
     /**
@@ -119,7 +115,7 @@ class Object implements Structure
      */
     public function addProperty(Property $property)
     {
-        $this->properties->add($property);
+        $this->properties[] = $property;
 
         return $this;
     }
@@ -129,7 +125,7 @@ class Object implements Structure
      */
     public function allProperties()
     {
-        return $this->properties->all();
+        return $this->properties;
     }
 
     /**

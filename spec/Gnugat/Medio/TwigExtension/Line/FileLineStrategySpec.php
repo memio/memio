@@ -12,7 +12,6 @@
 namespace spec\Gnugat\Medio\TwigExtension\Line;
 
 use Gnugat\Medio\Model\File;
-use Gnugat\Medio\ValueObject\Collection;
 use PhpSpec\ObjectBehavior;
 
 class FileLineStrategySpec extends ObjectBehavior
@@ -29,10 +28,9 @@ class FileLineStrategySpec extends ObjectBehavior
         $this->supports($file)->shouldBe(true);
     }
 
-    function it_needs_line_after_imports_if_file_has_imports(Collection $collection, File $file)
+    function it_needs_line_after_imports_if_file_has_imports(File $file)
     {
-        $file->getImportCollection()->willReturn($collection);
-        $collection->all()->willReturn(array(1));
+        $file->allImports()->willReturn(array(1));
 
         $this->needsLineAfter($file, self::IMPORT_BLOCK)->shouldBe(true);
     }

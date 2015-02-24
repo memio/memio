@@ -19,56 +19,56 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroArguments()
     {
-        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
+        $arguments = array();
 
-        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
         $this->assertSame('', $generatedCode);
     }
 
     public function testOneArgument()
     {
-        $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
-            ->add(new Argument('bool', 'isObject'))
-        ;
+        $arguments = array(
+            new Argument('bool', 'isObject'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
         $this->assertSame('$isObject', $generatedCode);
     }
 
     public function testThreeArguments()
     {
-        $argumentCollection = Collection::make('Gnugat\\Medio\\Model\\Argument')
-            ->add(new Argument('\\SplFileInfo', 'file'))
-            ->add(new Argument('string', 'newLine'))
-            ->add(new Argument('int', 'lineNumber'))
-        ;
+        $arguments = array(
+            new Argument('\\SplFileInfo', 'file'),
+            new Argument('string', 'newLine'),
+            new Argument('int', 'lineNumber'),
+        );
 
-        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
         $this->assertSame('\\SplFileInfo $file, $newLine, $lineNumber', $generatedCode);
     }
 
     public function testTooManyArgumentsToBeOnOneLine()
     {
-        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
+        $arguments = array();
         for ($i = 1; $i < 12; $i++) {
-            $argumentCollection->add(new Argument('mixed', 'argument'.$i));
+            $arguments[] = new Argument('mixed', 'argument'.$i);
         }
 
-        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection);
+        $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
         $this->assertExpectedCode($generatedCode);
     }
 
     public function testRestrictInlineLength()
     {
-        $argumentCollection = new Collection('Gnugat\\Medio\\Model\\Argument');
+        $arguments = array();
         for ($i = 1; $i < 9; $i++) {
-            $argumentCollection->add(new Argument('mixed', 'argument'.$i));
+            $arguments[] = new Argument('mixed', 'argument'.$i);
         }
-        $generatedCode = $this->prettyPrinter->generateCode($argumentCollection, array(
+        $generatedCode = $this->prettyPrinter->generateCode($arguments, array(
             'length_restriction' => strlen('    public function __construct()'),
         ));
 

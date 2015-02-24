@@ -11,11 +11,11 @@
 
 namespace spec\Gnugat\Medio;
 
+use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
 use Gnugat\Medio\Model\Object;
-use Gnugat\Medio\ValueObject\Collection;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
@@ -28,10 +28,10 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_handles_one_worded_model_class_names(Twig_Environment $twig)
     {
-        $file = new File('/tmp/Filename.php', new Object('Gnugat\\Medio\\MyClass'));
-        $twig->render('file.twig', array('file' => $file))->shouldBeCalled();
+        $argument = new Argument('string', 'filename');
+        $twig->render('argument.twig', array('argument' => $argument))->shouldBeCalled();
 
-        $this->generateCode($file);
+        $this->generateCode($argument);
     }
 
     function it_handles_many_worded_model_class_names(Twig_Environment $twig)
@@ -44,17 +44,22 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_passes_extra_parameters_to_template(Twig_Environment $twig)
     {
-        $file = new File('/tmp/Filename.php', new Object('Gnugat\\Medio\\MyClass'));
-        $twig->render('file.twig', array('extra' => 'parameter', 'file' => $file))->shouldBeCalled();
+        $argument = new Argument('int', 'total');
+        $twig->render('argument.twig', array('extra' => 'parameter', 'argument' => $argument))->shouldBeCalled();
 
-        $this->generateCode($file, array('extra' => 'parameter'));
+        $this->generateCode($argument, array('extra' => 'parameter'));
     }
 
     function it_handles_collections(Twig_Environment $twig)
     {
-        $collection = new Collection('Gnugat\\Medio\\Model\\Method');
-        $twig->render('collection/method_collection.twig', array('method_collection' => $collection->all()))->shouldBeCalled();
+        $collection = array(new Argument('bool', 'isObject'));
+        $twig->render('collection/argument_collection.twig', array('argument_collection' => $collection))->shouldBeCalled();
 
         $this->generateCode($collection);
+    }
+
+    function it_handles_empty_collections()
+    {
+        $this->generateCode(array())->shouldBe('');
     }
 }

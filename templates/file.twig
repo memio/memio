@@ -6,7 +6,7 @@
 
 namespace {{ file.namespace }};
 
-{% include 'collection/import_collection.twig' with { 'import_collection': file.importCollection.all } only %}
+{% include 'collection/import_collection.twig' with { 'import_collection': file.allImports } only %}
 {% if needs_line_after(file, 'imports') %}
 
 {% endif %}

@@ -29,18 +29,9 @@ class FileLineStrategy implements LineStrategy
      */
     public function needsLineAfter($model, $block)
     {
-        $imports = $model->getImportCollection()->all();
+        $imports = $model->allImports();
         if ('imports' === $block) {
             return (!empty($imports));
-        }
-        $constants = $model->getConstantCollection()->all();
-        $properties = $model->getPropertyCollection()->all();
-        $methods = $model->getMethodCollection()->all();
-        if ('constants' === $block) {
-            return (!empty($constants) && (!empty($properties) || !empty($methods)));
-        }
-        if ('properties' === $block) {
-            return (!empty($properties) && !empty($methods));
         }
 
         throw new InvalidArgumentException('The function needs_line_after does not support given "'.$block.'"');
