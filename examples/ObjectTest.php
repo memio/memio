@@ -20,19 +20,20 @@ use Gnugat\Medio\Model\Property;
 class ObjectTest extends PrettyPrinterTestCase
 {
     const NAME = 'MyClass';
+    const PARENT = 'MyParent';
 
     public function testEmpty()
     {
-        $contract = new Object(self::NAME);
+        $object = new Object(self::NAME);
 
-        $generatedCode = $this->prettyPrinter->generateCode($contract);
+        $generatedCode = $this->prettyPrinter->generateCode($object);
 
         $this->assertExpectedCode($generatedCode);
     }
 
     public function testFull()
     {
-        $contract = Object::make(self::NAME)
+        $object = Object::make(self::NAME)
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
@@ -47,7 +48,18 @@ class ObjectTest extends PrettyPrinterTestCase
             ->addMethod(new Method('secondMethod'))
         ;
 
-        $generatedCode = $this->prettyPrinter->generateCode($contract);
+        $generatedCode = $this->prettyPrinter->generateCode($object);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithParent()
+    {
+        $object = Object::make(self::NAME)
+            ->extend(Object::make(self::PARENT))
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($object);
 
         $this->assertExpectedCode($generatedCode);
     }

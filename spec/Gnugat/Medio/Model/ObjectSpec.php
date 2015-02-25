@@ -13,6 +13,7 @@ namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
 
@@ -61,5 +62,19 @@ class ObjectSpec extends ObjectBehavior
         $this->allMethods()->shouldBe(array());
         $this->addMethod($method);
         $this->allMethods()->shouldBe(array($method));
+    }
+
+    function it_can_have_a_parent(Object $parent)
+    {
+        $this->hasParent()->shouldBe(false);
+        $this->getParent()->shouldBe(null);
+
+        $this->extend($parent);
+        $this->hasParent()->shouldBe(true);
+        $this->getParent()->shouldBe($parent);
+
+        $this->removeParent();
+        $this->hasParent()->shouldBe(false);
+        $this->getParent()->shouldBe(null);
     }
 }

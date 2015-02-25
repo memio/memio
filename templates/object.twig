@@ -1,4 +1,4 @@
-class {{ object.name }}
+class {{ object.name }}{{ object.hasParent ? ' extends ' ~ object.Parent.name }}
 {
 {% include 'collection/constant_collection.twig' with {
     'constant_collection': object.allConstants

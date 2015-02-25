@@ -34,6 +34,11 @@ class Object implements Structure
     private $methods = array();
 
     /**
+     * @var Object
+     */
+    private $parent;
+
+    /**
      * @var array
      */
     private $properties = array();
@@ -148,5 +153,45 @@ class Object implements Structure
     public function getNamespace()
     {
         return $this->fullyQualifiedName->getNamespace();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasParent()
+    {
+        return (null !== $this->parent);
+    }
+
+    /**
+     * @return Object
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Object $parent
+     *
+     * @return Object
+     *
+     * @api
+     */
+    public function extend(Object $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Object
+     *
+     * @api
+     */
+    public function removeParent()
+    {
+        $this->parent = null;
     }
 }
