@@ -11,10 +11,7 @@
 
 namespace spec\Gnugat\Medio\Model;
 
-use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\FullyQualifiedName;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\Structure;
 use PhpSpec\ObjectBehavior;
 
