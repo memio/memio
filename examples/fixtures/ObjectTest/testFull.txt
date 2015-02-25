@@ -1,4 +1,4 @@
-class MyClass
+class MyClass extends MyParent implements FirstContract, SecondContract
 {
     const FIRST_CONSTANT = 0;
     const SECOND_CONSTANT = 'meh';

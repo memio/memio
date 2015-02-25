@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Property;
@@ -76,5 +77,12 @@ class ObjectSpec extends ObjectBehavior
         $this->removeParent();
         $this->hasParent()->shouldBe(false);
         $this->getParent()->shouldBe(null);
+    }
+
+    function it_can_implement_contracts(Contract $contract)
+    {
+        $this->allContracts()->shouldBe(array());
+        $this->implement($contract);
+        $this->allContracts()->shouldBe(array($contract));
     }
 }

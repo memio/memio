@@ -13,6 +13,7 @@ namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Property;
@@ -20,7 +21,6 @@ use Gnugat\Medio\Model\Property;
 class ObjectTest extends PrettyPrinterTestCase
 {
     const NAME = 'MyClass';
-    const PARENT = 'MyParent';
 
     public function testEmpty()
     {
@@ -34,6 +34,11 @@ class ObjectTest extends PrettyPrinterTestCase
     public function testFull()
     {
         $object = Object::make(self::NAME)
+            ->extend(new Object('MyParent'))
+
+            ->implement(new Contract('FirstContract'))
+            ->implement(new Contract('SecondContract'))
+
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
@@ -46,17 +51,6 @@ class ObjectTest extends PrettyPrinterTestCase
                 ->addArgument(new Argument('string', 'thirdArgument'))
             )
             ->addMethod(new Method('secondMethod'))
-        ;
-
-        $generatedCode = $this->prettyPrinter->generateCode($object);
-
-        $this->assertExpectedCode($generatedCode);
-    }
-
-    public function testWithParent()
-    {
-        $object = Object::make(self::NAME)
-            ->extend(Object::make(self::PARENT))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($object);

@@ -1,4 +1,7 @@
-class {{ object.name }}{{ object.hasParent ? ' extends ' ~ object.Parent.name }}
+class {{ object.name }}
+    {{- object.hasParent ? ' extends ' ~ object.Parent.name }}
+    {{- object.allContracts is not empty ? ' implements ' }}
+    {%- include 'collection/contract_collection.twig' with { 'contract_collection': object.allContracts } only %}
 {
 {% include 'collection/constant_collection.twig' with {
     'constant_collection': object.allConstants
