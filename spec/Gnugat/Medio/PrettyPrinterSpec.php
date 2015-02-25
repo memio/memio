@@ -12,10 +12,8 @@
 namespace spec\Gnugat\Medio;
 
 use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
-use Gnugat\Medio\Model\Object;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
@@ -61,5 +59,12 @@ class PrettyPrinterSpec extends ObjectBehavior
     function it_handles_empty_collections()
     {
         $this->generateCode(array())->shouldBe('');
+    }
+
+    function it_throws_exception_when_no_strategy_support_the_given_arguments()
+    {
+        $invalidArgumentException = 'Gnugat\\Medio\\Exception\\InvalidArgumentException';
+
+        $this->shouldThrow($invalidArgumentException)->duringGenerateCode('nope');
     }
 }

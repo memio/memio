@@ -11,6 +11,9 @@
 
 namespace Gnugat\Medio;
 
+use Gnugat\Medio\Exception\InvalidArgumentException;
+use Gnugat\Medio\PrettyPrinter\ArrayPrettyPrinter;
+use Gnugat\Medio\PrettyPrinter\ModelPrettyPrinter;
 use Gnugat\Medio\ValueObject\FullyQualifiedName;
 use Twig_Environment;
 
@@ -28,6 +31,11 @@ use Twig_Environment;
 class PrettyPrinter
 {
     /**
+     * @var array
+     */
+    private $strategies = array();
+
+    /**
      * @var Twig_Environment
      */
     private $twig;
@@ -40,6 +48,8 @@ class PrettyPrinter
     public function __construct(Twig_Environment $twig)
     {
         $this->twig = $twig;
+        $this->strategies[] = new ArrayPrettyPrinter($twig);
+        $this->strategies[] = new ModelPrettyPrinter($twig);
     }
 
     /**
@@ -48,27 +58,18 @@ class PrettyPrinter
      *
      * @return string
      *
+     * @throws InvalidArgumentException If the given model and parameters aren't supported
+     *
      * @api
      */
     public function generateCode($model, array $parameters = array())
     {
-        if (is_array($model)) {
-            if (empty($model)) {
-                return '';
+        foreach ($this->strategies as $strategy) {
+            if ($strategy->supports($model, $parameters)) {
+                return $strategy->generateCode($model, $parameters);
             }
-            $firstElement = current($model);
-            $fqcn = get_class($firstElement);
-            $suffix = '_collection';
-            $directory = 'collection/';
-        } else {
-            $fqcn = get_class($model);
-            $suffix = '';
-            $directory = '';
         }
-        $name = FullyQualifiedName::make($fqcn)->getName();
-        $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name)).$suffix;
-        $parameters[$modelName] = $model;
 
-        return $this->twig->render($directory.$modelName.'.twig', $parameters);
+        throw new InvalidArgumentException('No PrettyPrinter support the given model and parameters');
     }
 }

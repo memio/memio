@@ -31,7 +31,7 @@ class ModelPrettyPrinterSpec extends ObjectBehavior
     {
         $argument = new Argument('bool', 'isObject');
 
-        $this->supports($argument)->shouldBe(true);
+        $this->supports($argument, array())->shouldBe(true);
     }
 
     function it_generates_code_using_root_templates(Twig_Environment $twig)

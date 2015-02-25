@@ -29,7 +29,7 @@ class ArrayPrettyPrinterSpec extends ObjectBehavior
 
     function it_supports_arrays()
     {
-        $this->supports(array())->shouldBe(true);
+        $this->supports(array(), array())->shouldBe(true);
     }
 
     function it_generates_code_using_collection_templates(Twig_Environment $twig)
