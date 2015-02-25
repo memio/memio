@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.0.0-alpha14: Parents
+
+* added interface parents generation
+* added class interfaces generation
+* added class parent generation
+* refactored FullyQualifiedName
+* refactored PrettyPrinter
+
+> **BC breaks**:
+>
+> * replaced Import by FullyQualifiedName
+
+> **Note**: PrettyPrinter now builds the TwigExtension (makes instanciation easier).
+
 ## 1.0.0-alpha13: Contract, Object
 
 * added interface generation
