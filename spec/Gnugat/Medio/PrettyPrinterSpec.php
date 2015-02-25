@@ -15,12 +15,15 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\MethodPhpdoc;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument as ProphecyArgument;
 use Twig_Environment;
 
 class PrettyPrinterSpec extends ObjectBehavior
 {
     function let(Twig_Environment $twig)
     {
+        $twig->addExtension(ProphecyArgument::any())->shouldBeCalled();
+
         $this->beConstructedWith($twig);
     }
 
