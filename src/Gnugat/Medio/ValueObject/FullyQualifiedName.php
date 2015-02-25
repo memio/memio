@@ -29,7 +29,7 @@ class FullyQualifiedName
     /**
      * @var string
      */
-    private $namepace_;
+    private $namepace;
 
     /**
      * @param string $fullyQualifiedName
@@ -41,7 +41,7 @@ class FullyQualifiedName
         $namespaces = explode('\\', $fullyQualifiedName);
 
         $this->name = array_pop($namespaces);
-        $this->namepace_ = implode('\\', $namespaces);
+        $this->namepace = implode('\\', $namespaces);
         if ('\\' !== $fullyQualifiedName[0]) {
             $fullyQualifiedName = '\\'.$fullyQualifiedName;
         }
@@ -51,7 +51,7 @@ class FullyQualifiedName
     /**
      * @param string $fullyQualifiedName
      *
-     * @return FullyQualifiedClassname
+     * @return FullyQualifiedName
      *
      * @api
      */
@@ -81,6 +81,6 @@ class FullyQualifiedName
      */
     public function getNamespace()
     {
-        return $this->namepace_;
+        return $this->namepace;
     }
 }
