@@ -12,7 +12,6 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Exception\InvalidArgumentException;
-use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\PrettyPrinter\ArrayPrettyPrinter;
 use Gnugat\Medio\PrettyPrinter\ModelPrettyPrinter;
 use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
