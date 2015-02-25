@@ -1,4 +1,4 @@
-interface MyInterface
+interface MyInterface extends FirstContract, SecondContract
 {
     const FIRST_CONSTANT = 0;
     const SECOND_CONSTANT = 'meh';
