@@ -61,10 +61,10 @@ class ContractSpec extends ObjectBehavior
         $this->allMethods()->shouldBe(array($method));
     }
 
-    function it_can_implement_contracts(Contract $contract)
+    function it_can_extend_contracts(Contract $contract)
     {
         $this->allContracts()->shouldBe(array());
-        $this->addContract($contract);
+        $this->extend($contract);
         $this->allContracts()->shouldBe(array($contract));
     }
 }

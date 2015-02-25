@@ -32,7 +32,7 @@ class ContractTest extends PrettyPrinterTestCase
     public function testWithOneContract()
     {
         $contract = Contract::make(self::NAME)
-            ->addContract(new Contract('MyFirstContract'))
+            ->extend(new Contract('MyFirstContract'))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($contract);
@@ -43,9 +43,9 @@ class ContractTest extends PrettyPrinterTestCase
     public function testWithThreeContracts()
     {
         $contract = Contract::make(self::NAME)
-            ->addContract(new Contract('MyFirstContract'))
-            ->addContract(new Contract('MySecondContract'))
-            ->addContract(new Contract('MyThirdContract'))
+            ->extend(new Contract('MyFirstContract'))
+            ->extend(new Contract('MySecondContract'))
+            ->extend(new Contract('MyThirdContract'))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($contract);

@@ -89,7 +89,7 @@ class Contract implements Structure
      *
      * @api
      */
-    public function addContract(Contract $contract)
+    public function extend(Contract $contract)
     {
         $this->contracts[] = $contract;
 
