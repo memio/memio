@@ -1,0 +1,4 @@
+interface MyInterface extends MyFirstContract, MySecondContract, MyThirdContract
+{
+}
+

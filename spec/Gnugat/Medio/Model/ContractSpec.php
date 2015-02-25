@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
@@ -58,5 +59,12 @@ class ContractSpec extends ObjectBehavior
         $this->allMethods()->shouldBe(array());
         $this->addMethod($method);
         $this->allMethods()->shouldBe(array($method));
+    }
+
+    function it_can_implement_contracts(Contract $contract)
+    {
+        $this->allContracts()->shouldBe(array());
+        $this->addContract($contract);
+        $this->allContracts()->shouldBe(array($contract));
     }
 }

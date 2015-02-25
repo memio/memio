@@ -29,6 +29,30 @@ class ContractTest extends PrettyPrinterTestCase
         $this->assertExpectedCode($generatedCode);
     }
 
+    public function testWithOneContract()
+    {
+        $contract = Contract::make(self::NAME)
+            ->addContract(new Contract('MyFirstContract'))
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($contract);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithThreeContracts()
+    {
+        $contract = Contract::make(self::NAME)
+            ->addContract(new Contract('MyFirstContract'))
+            ->addContract(new Contract('MySecondContract'))
+            ->addContract(new Contract('MyThirdContract'))
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($contract);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
     public function testFull()
     {
         $contract = Contract::make(self::NAME)

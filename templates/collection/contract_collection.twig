@@ -1,0 +1,4 @@
+{% for contract in contract_collection -%}
+    {{ contract.name }}{{ not loop.last ? ', ' }}
+{%- endfor %}
+

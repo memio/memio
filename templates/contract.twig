@@ -1,4 +1,6 @@
 interface {{ contract.name }}
+    {{- contract.allContracts is not empty ? ' extends ' }}
+    {%- include 'collection/contract_collection.twig' with { 'contract_collection': contract.allContracts } only %}
 {
 {% include 'collection/constant_collection.twig' with {
     'constant_collection': contract.allConstants

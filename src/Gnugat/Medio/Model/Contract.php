@@ -24,6 +24,11 @@ class Contract implements Structure
     private $constants = array();
 
     /**
+     * @var array
+     */
+    private $contracts = array();
+
+    /**
      * @var string
      */
     private $fullyQualifiedName;
@@ -75,6 +80,28 @@ class Contract implements Structure
     public function allConstants()
     {
         return $this->constants;
+    }
+
+    /**
+     * @param Contract $contract
+     *
+     * @return Contract
+     *
+     * @api
+     */
+    public function addContract(Contract $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function allContracts()
+    {
+        return $this->contracts;
     }
 
     /**
