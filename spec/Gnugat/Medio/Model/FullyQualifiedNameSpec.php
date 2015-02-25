@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Gnugat\Medio\ValueObject;
+namespace spec\Gnugat\Medio\Model;
 
 use PhpSpec\ObjectBehavior;
 

@@ -12,6 +12,7 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Exception\InvalidArgumentException;
+use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\PrettyPrinter\ArrayPrettyPrinter;
 use Gnugat\Medio\PrettyPrinter\ModelPrettyPrinter;
 use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
@@ -21,7 +22,6 @@ use Gnugat\Medio\TwigExtension\Line\ObjectLineStrategy;
 use Gnugat\Medio\TwigExtension\Phpdoc;
 use Gnugat\Medio\TwigExtension\Type;
 use Gnugat\Medio\TwigExtension\Whitespace;
-use Gnugat\Medio\ValueObject\FullyQualifiedName;
 use Twig_Environment;
 
 /**

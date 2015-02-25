@@ -11,8 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\FullyQualifiedName;
-
 /**
  * A PHP Class ("class" is a reserved word and cannot be used as classname).
  *

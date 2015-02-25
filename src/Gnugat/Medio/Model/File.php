@@ -11,8 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\ValueObject\FullyQualifiedName;
-
 /**
  * @api
  */

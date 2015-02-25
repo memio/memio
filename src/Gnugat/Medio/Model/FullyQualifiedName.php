@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\ValueObject;
+namespace Gnugat\Medio\Model;
 
 /**
  * @api
