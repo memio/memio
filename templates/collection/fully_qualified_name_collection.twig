@@ -1,0 +1,4 @@
+{% for fully_qualified_name in fully_qualified_name_collection %}
+{% include 'fully_qualified_name.twig' with { 'fully_qualified_name': fully_qualified_name } only %}
+
+{% endfor -%}

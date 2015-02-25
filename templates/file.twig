@@ -6,8 +6,10 @@
 
 namespace {{ file.namespace }};
 
-{% include 'collection/import_collection.twig' with { 'import_collection': file.allImports } only %}
-{% if needs_line_after(file, 'imports') %}
+{% include 'collection/fully_qualified_name_collection.twig' with {
+    'fully_qualified_name_collection': file.allFullyQualifiedNames
+} only %}
+{% if needs_line_after(file, 'fully_qualified_names') %}
 
 {% endif %}
 {% if file.structure is contract %}

@@ -14,7 +14,7 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Import;
+use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
@@ -64,7 +64,7 @@ class FileTest extends PrettyPrinterTestCase
             )
             ->addMethod(new Method('secondMethod'))
         );
-        $file->addImport(new Import('DateTime'));
+        $file->addFullyQualifiedName(new FullyQualifiedName('DateTime'));
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 

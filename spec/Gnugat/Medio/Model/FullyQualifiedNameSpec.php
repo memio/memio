@@ -22,7 +22,7 @@ class FullyQualifiedNameSpec extends ObjectBehavior
 
     function it_has_fully_qualified_classname()
     {
-        $this->getFullyQualifiedName()->shouldBe('\\Gnugat\\Medio\\MyClass');
+        $this->getFullyQualifiedName()->shouldBe('Gnugat\\Medio\\MyClass');
     }
 
     function it_has_name()

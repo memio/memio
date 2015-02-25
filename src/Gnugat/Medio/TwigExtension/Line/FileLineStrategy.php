@@ -29,9 +29,9 @@ class FileLineStrategy implements LineStrategy
      */
     public function needsLineAfter($model, $block)
     {
-        $imports = $model->allImports();
-        if ('imports' === $block) {
-            return (!empty($imports));
+        $fullyQualifiedNames = $model->allFullyQualifiedNames();
+        if ('fully_qualified_names' === $block) {
+            return (!empty($fullyQualifiedNames));
         }
 
         throw new InvalidArgumentException('The function needs_line_after does not support given "'.$block.'"');

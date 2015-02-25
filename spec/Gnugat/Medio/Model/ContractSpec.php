@@ -43,7 +43,7 @@ class ContractSpec extends ObjectBehavior
 
     function it_has_a_fully_qualified_name()
     {
-        $this->getFullyQualifiedName()->shouldBe('\\'.self::FULLY_QUALIFIED_NAME);
+        $this->getFullyQualifiedName()->shouldBe(self::FULLY_QUALIFIED_NAME);
     }
 
     function it_can_have_constants(Constant $constant)

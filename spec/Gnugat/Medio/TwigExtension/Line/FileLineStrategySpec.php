@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 
 class FileLineStrategySpec extends ObjectBehavior
 {
-    const IMPORT_BLOCK = 'imports';
+    const IMPORT_BLOCK = 'fully_qualified_names';
 
     function it_is_a_line_strategy()
     {
@@ -28,9 +28,9 @@ class FileLineStrategySpec extends ObjectBehavior
         $this->supports($file)->shouldBe(true);
     }
 
-    function it_needs_line_after_imports_if_file_has_imports(File $file)
+    function it_needs_line_after_fully_qualified_names_if_file_has_fully_qualified_names(File $file)
     {
-        $file->allImports()->willReturn(array(1));
+        $file->allFullyQualifiedNames()->willReturn(array(1));
 
         $this->needsLineAfter($file, self::IMPORT_BLOCK)->shouldBe(true);
     }

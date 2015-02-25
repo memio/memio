@@ -29,7 +29,7 @@ class File
     /**
      * @var array
      */
-    private $imports = array();
+    private $fullyQualifiedNames = array();
 
     /**
      * @param string    $filename
@@ -101,21 +101,21 @@ class File
     /**
      * @return array
      */
-    public function allImports()
+    public function allFullyQualifiedNames()
     {
-        return $this->imports;
+        return $this->fullyQualifiedNames;
     }
 
     /**
-     * @param Import $import
+     * @param FullyQualifiedName $fullyQualifiedName
      *
      * @return File
      *
      * @api
      */
-    public function addImport(Import $import)
+    public function addFullyQualifiedName(FullyQualifiedName $fullyQualifiedName)
     {
-        $this->imports[] = $import;
+        $this->fullyQualifiedNames[] = $fullyQualifiedName;
 
         return $this;
     }

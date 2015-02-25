@@ -14,7 +14,6 @@ namespace Gnugat\Medio\Examples;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Contract;
-use Gnugat\Medio\Model\Import;
 use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;

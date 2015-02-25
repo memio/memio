@@ -12,7 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\Import;
+use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\Structure;
@@ -46,10 +46,10 @@ class FileSpec extends ObjectBehavior
         $this->getStructure()->shouldBe($structure);
     }
 
-    function it_has_a_collection_of_imports(Import $import)
+    function it_has_a_collection_of_fully_qualified_name(FullyQualifiedName $fullyQualifiedName)
     {
-        $this->allImports()->shouldBe(array());
-        $this->addImport($import);
-        $this->allImports()->shouldBe(array($import));
+        $this->allFullyQualifiedNames()->shouldBe(array());
+        $this->addFullyQualifiedName($fullyQualifiedName);
+        $this->allFullyQualifiedNames()->shouldBe(array($fullyQualifiedName));
     }
 }

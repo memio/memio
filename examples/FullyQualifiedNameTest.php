@@ -11,26 +11,26 @@
 
 namespace Gnugat\Medio\Examples;
 
-use Gnugat\Medio\Model\Import;
+use Gnugat\Medio\Model\FullyQualifiedName;
 
-class ImportTest extends PrettyPrinterTestCase
+class FullyQualifiedNameTest extends PrettyPrinterTestCase
 {
     public function testSimpleOne()
     {
-        $import = new Import('\\DateTime');
+        $fullyQualifiedName = new FullyQualifiedName('\\DateTime');
 
-        $generatedCode = $this->prettyPrinter->generateCode($import);
+        $generatedCode = $this->prettyPrinter->generateCode($fullyQualifiedName);
 
         $this->assertSame('use DateTime;', $generatedCode);
     }
 
     public function testWithAlias()
     {
-        $import = Import::make('\\ArrayObject')
+        $fullyQualifiedName = FullyQualifiedName::make('\\ArrayObject')
             ->setAlias('StdArray')
         ;
 
-        $generatedCode = $this->prettyPrinter->generateCode($import);
+        $generatedCode = $this->prettyPrinter->generateCode($fullyQualifiedName);
 
         $this->assertSame('use ArrayObject as StdArray;', $generatedCode);
     }
