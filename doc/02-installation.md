@@ -67,6 +67,7 @@ everywhere. Here's how to build it:
 // ...
 
 use Gnugat\Medio\PrettyPrinter;
+use Gnugat\Medio\TwigExtension\Line\Line;
 use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
 use Gnugat\Medio\TwigExtension\Line\FileLineStrategy;
 use Gnugat\Medio\TwigExtension\Line\ObjectLineStrategy;
@@ -79,11 +80,11 @@ $line->add(new ContractLineStrategy());
 $line->add(new FileLineStrategy());
 $line->add(new ObjectLineStrategy());
 
-$loader = \Twig_Loader_Filesystem($medioTemplatesPath);
+$loader = new \Twig_Loader_Filesystem($medioTemplatesPath);
 $twig = new \Twig_Environment($loader);
 $twig->addExtension(new Phpdoc());
 $twig->addExtension(new Type());
-$twig->addExtension(new Whitespace());
+$twig->addExtension(new Whitespace($line));
 
 $prettyPrinter = new PrettyPrinter($twig);
 ```
