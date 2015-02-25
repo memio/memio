@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-alpha15: Fixed File
+
+* fixed File constructor
+
 ## 1.0.0-alpha14: Parents
 
 * added interface parents generation
