@@ -43,20 +43,26 @@ class File
     {
         $filenameWithoutExtension = rtrim($filename, '.php');
         $parts = explode('/', $filenameWithoutExtension);
-        $uppercases = array(
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-            'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        );
-        $i = count($parts) - 1;
-        // Detecting the first part that starts with a lowercase character
-        while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
-            $i--;
+
+        if (count($parts) > 1) {
+            $uppercases = array(
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            );
+            $i = count($parts) - 1;
+            // Detecting the first part that starts with a lowercase character
+            while ($i >= 0 && in_array($parts[$i][0], $uppercases, true)) {
+                $i--;
+            }
+            if ($parts[$i] !== 'spec') {
+                $i++;
+            }
+            $namespaces = array_slice($parts, $i);
+            $fullyQualifiedName = implode('\\', $namespaces);
+        } else {
+            //file is not in namespace subdirectories
+            $fullyQualifiedName = $filenameWithoutExtension;
         }
-        if ($parts[$i] !== 'spec') {
-            $i++;
-        }
-        $namespaces = array_slice($parts, $i);
-        $fullyQualifiedName = implode('\\', $namespaces);
 
         $this->filename = $filename;
         $this->fullyQualifiedName = new FullyQualifiedName($fullyQualifiedName);
