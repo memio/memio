@@ -34,4 +34,18 @@ class FullyQualifiedNameSpec extends ObjectBehavior
     {
         $this->getNamespace()->shouldBe('Gnugat\\Medio');
     }
+
+    function it_can_have_an_alias()
+    {
+        $this->hasAlias()->shouldBe(false);
+        $this->getName()->shouldBe('MyClass');
+
+        $this->setAlias('MyAlias');
+        $this->hasAlias()->shouldBe(true);
+        $this->getName()->shouldBe('MyAlias');
+
+        $this->removeAlias();
+        $this->hasAlias()->shouldBe(false);
+        $this->getName()->shouldBe('MyClass');
+    }
 }

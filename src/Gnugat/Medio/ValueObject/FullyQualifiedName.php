@@ -32,6 +32,11 @@ class FullyQualifiedName
     private $namepace;
 
     /**
+     * @var string
+     */
+    private $alias;
+
+    /**
      * @param string $fullyQualifiedName
      *
      * @api
@@ -73,7 +78,7 @@ class FullyQualifiedName
      */
     public function getName()
     {
-        return $this->name;
+        return (null === $this->alias) ? $this->name : $this->alias;
     }
 
     /**
@@ -82,5 +87,37 @@ class FullyQualifiedName
     public function getNamespace()
     {
         return $this->namepace;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAlias()
+    {
+        return (null !== $this->alias);
+    }
+
+    /**
+     * @param string $alias
+     *
+     * @return FullyQualifiedName
+     *
+     * @api
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * @return FullyQualifiedName
+     *
+     * @api
+     */
+    public function removeAlias()
+    {
+        $this->alias = null;
     }
 }
