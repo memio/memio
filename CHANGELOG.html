@@ -67,6 +67,22 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>CHANGELOG</h1>
+<h2>1.0.0-alpha13: Contract, Object</h2>
+<ul>
+<li>added interface generation</li>
+<li>added class (standalone) generation</li>
+<li>refactored need_after_line</li>
+<li>refactored Type</li>
+</ul>
+<blockquote>
+<p><strong>BC break</strong>:</p>
+<ul>
+<li>added Structure argument to File constructor</li>
+<li>renamed getCollection methods into all (e.g getArgumentCollection becomes allArguments)</li>
+<li>renamed FullyQualifiedClassname into FullyQualifiedName</li>
+<li>removed Type from Argument constructor parameters (give directly the type as a string)</li>
+</ul>
+</blockquote>
 <h2>1.0.0-alpha12: Collection, FullyQualifiedClassname</h2>
 <ul>
 <li>refactored fully qualified classname management</li>

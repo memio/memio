@@ -84,7 +84,7 @@ construction of &quot;models&quot;. Once done, you can give the top most model t
 <code>PrettyPrinter</code> service: it will find the appropriate <a href="http://twig.sensiolabs.org/">Twig template</a>
 and do the actual generation.</p>
 <p>Want to see it in action? Here's an example:</p>
-<pre><code class="language-php">$file = File::make('/src/Gnugat/Medio/MyClass.php')
+<pre><code class="language-php">$file = new File('/src/Gnugat/Medio/MyClass.php', Object::make('Gnugat\\Medio\\MyClass')
     -&gt;addConstant(new Constant('FIRST_CONSTANT', '0'))
     -&gt;addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
@@ -97,7 +97,7 @@ and do the actual generation.</p>
         -&gt;addArgument(new Argument('string', 'thirdArgument'))
     )
     -&gt;addMethod(new Method('secondMethod'))
-;
+);
 
 echo $prettyPrinter-&gt;generateCode($file);</code></pre>
 <p>This should print the following generated code:</p>
@@ -142,10 +142,10 @@ alternative was longer than 120 characters.</p>
 <h2>Further documentation</h2>
 <p>Discover more by reading the docs:</p>
 <ul>
-<li><a href="01-introduction.html">Introduction</a></li>
-<li><a href="02-installation.html">Installation</a></li>
-<li><a href="03-usage.html">Usage</a></li>
-<li><a href="04-extending.html">Extending</a></li>
+<li><a href="doc/01-introduction.html">Introduction</a></li>
+<li><a href="doc/02-installation.html">Installation</a></li>
+<li><a href="doc/03-usage.html">Usage</a></li>
+<li><a href="doc/04-extending.html">Extending</a></li>
 </ul>
 <p>You can see the current and past versions using one of the following:</p>
 <ul>

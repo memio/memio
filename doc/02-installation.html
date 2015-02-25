@@ -122,12 +122,22 @@ everywhere. Here's how to build it:</p>
 <pre><code class="language-php">// ...
 
 use Gnugat\Medio\PrettyPrinter;
+use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
+use Gnugat\Medio\TwigExtension\Line\FileLineStrategy;
+use Gnugat\Medio\TwigExtension\Line\ObjectLineStrategy;
 use Gnugat\Medio\TwigExtension\Phpdoc;
+use Gnugat\Medio\TwigExtension\Type;
 use Gnugat\Medio\TwigExtension\Whitespace;
+
+$line = new Line();
+$line-&gt;add(new ContractLineStrategy());
+$line-&gt;add(new FileLineStrategy());
+$line-&gt;add(new ObjectLineStrategy());
 
 $loader = \Twig_Loader_Filesystem($medioTemplatesPath);
 $twig = new \Twig_Environment($loader);
 $twig-&gt;addExtension(new Phpdoc());
+$twig-&gt;addExtension(new Type());
 $twig-&gt;addExtension(new Whitespace());
 
 $prettyPrinter = new PrettyPrinter($twig);</code></pre>
