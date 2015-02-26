@@ -68,4 +68,11 @@ class PropertySpec extends ObjectBehavior
         $this->removeStatic();
         $this->isStatic()->shouldBe(false);
     }
+
+    function it_can_have_a_default_value()
+    {
+        $this->getDefaultValue()->shouldBe(null);
+        $this->setDefaultValue('null');
+        $this->getDefaultValue()->shouldBe('null');
+    }
 }

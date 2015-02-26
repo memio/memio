@@ -56,4 +56,15 @@ class PropertyTest extends PrettyPrinterTestCase
 
         $this->assertSame('    private static $property;', $generatedCode);
     }
+
+    public function testDefaultValue()
+    {
+        $property = Property::make('property')
+            ->setDefaultValue("'default'")
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($property);
+
+        $this->assertSame('    private $property = \'default\';', $generatedCode);
+    }
 }

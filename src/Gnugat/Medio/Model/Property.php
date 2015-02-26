@@ -19,6 +19,11 @@ class Property
     /**
      * @var string
      */
+    private $defaultValue;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -133,5 +138,27 @@ class Property
     public function removeStatic()
     {
         $this->isStatic = false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @param string $defaultValue
+     *
+     * @return Property
+     *
+     * @api
+     */
+    public function setDefaultValue($defaultValue)
+    {
+        $this->defaultValue = $defaultValue;
+
+        return $this;
     }
 }
