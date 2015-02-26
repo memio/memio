@@ -67,7 +67,7 @@ This would output:
 
 Medio provides the following models:
 
-![UML class diagram](http://yuml.me/00e11389)
+![UML class diagram](http://yuml.me/119b08be)
 
 It assumes that projects are using PSR-0/PSR-4: a file contains only a class/interface/trait.
 
