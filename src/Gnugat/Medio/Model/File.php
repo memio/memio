@@ -27,6 +27,11 @@ class File
     private $fullyQualifiedNames = array();
 
     /**
+     * @var Strucutre
+     */
+    private $structure;
+
+    /**
      * @param string    $filename
      * @param Structure $structure
      *
