@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.0-alpha16: Final class
+
+* added final class generation
+* added property default value generation
+* fixed FullyQualifiedName
+
 ## 1.0.0-alpha15: Fixed File
 
 * fixed File constructor
