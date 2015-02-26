@@ -85,4 +85,13 @@ class ObjectSpec extends ObjectBehavior
         $this->implement($contract);
         $this->allContracts()->shouldBe(array($contract));
     }
+
+    function it_can_be_final()
+    {
+        $this->isFinal()->shouldBe(false);
+        $this->makeFinal();
+        $this->isFinal()->shouldBe(true);
+        $this->removeFinal();
+        $this->isFinal()->shouldBe(false);
+    }
 }

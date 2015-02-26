@@ -31,6 +31,17 @@ class ObjectTest extends PrettyPrinterTestCase
         $this->assertExpectedCode($generatedCode);
     }
 
+    public function testFinal()
+    {
+        $object = Object::make(self::NAME)
+            ->makeFinal()
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($object);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
     public function testFull()
     {
         $object = Object::make(self::NAME)

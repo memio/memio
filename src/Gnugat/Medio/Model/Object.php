@@ -34,6 +34,11 @@ class Object implements Structure
     private $fullyQualifiedName;
 
     /**
+     * @var bool
+     */
+    private $isFinal = false;
+
+    /**
      * @var array
      */
     private $methods = array();
@@ -220,5 +225,37 @@ class Object implements Structure
     public function removeParent()
     {
         $this->parent = null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinal()
+    {
+        return $this->isFinal;
+    }
+
+    /**
+     * @return Object
+     *
+     * @api
+     */
+    public function makeFinal()
+    {
+        $this->isFinal = true;
+
+        return $this;
+    }
+
+    /**
+     * @return Object
+     *
+     * @api
+     */
+    public function removeFinal()
+    {
+        $this->isFinal = false;
+
+        return $this;
     }
 }
