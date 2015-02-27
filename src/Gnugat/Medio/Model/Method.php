@@ -14,10 +14,10 @@ namespace Gnugat\Medio\Model;
 use Gnugat\Medio\Exception\DomainException;
 
 /**
-   * @api
-   */
-  class Method
-  {
+ * @api
+ */
+class Method
+{
     /**
      * @var array
      */
