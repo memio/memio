@@ -36,6 +36,11 @@ class Method
      */
     private $isStatic = false;
 
+    /**                
+     * @var bool
+     */
+    private $isAbstract = false;
+
     /**
      * @var string
      */
@@ -164,6 +169,11 @@ class Method
      */
     public function makeStatic()
     {
+        
+        if ($this->isAbstract()) {
+            throw new \Gnugat\Medio\Exception\DomainException("You can`t declare abstract method as static: " . $this->getName());
+        }
+        
         $this->isStatic = true;
 
         return $this;
@@ -188,6 +198,11 @@ class Method
      */
     public function setBody($body)
     {
+        
+        if ($this->isAbstract()) {
+            throw new \Gnugat\Medio\Exception\DomainException("You can`t set body to abstract method: " . $this->getName());
+        }
+        
         $this->body = $body;
 
         return $this;
@@ -199,5 +214,40 @@ class Method
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @return $this
+     */
+    public function makeAbstract()
+    {
+  
+        if ($this->isStatic()) {
+            throw new \Gnugat\Medio\Exception\DomainException("You can`t declare static method as abstract: " . $this->getName());
+        }
+
+        if ($this->getBody()) {
+            throw new \Gnugat\Medio\Exception\DomainException("Method contain body. You can`t declare method as abstract: " . $this->getName());
+        }
+      
+        $this->isAbstract = true;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function removeAbstract()
+    {
+        $this->isAbstract = false;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbstract()
+    {
+        return $this->isAbstract;
     }
 }
