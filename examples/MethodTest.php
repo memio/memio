@@ -130,7 +130,7 @@ EOT;
         $this->assertTrue($method->isAbstract());
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
-        $this->assertExpectedCode($generatedCode);
+        $this->assertSame('    public abstract function method();', $generatedCode);
       
         $method->removeAbstract();
         $this->assertFalse($method->isAbstract());
