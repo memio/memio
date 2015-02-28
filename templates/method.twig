@@ -1,11 +1,9 @@
 {% include 'method_phpdoc.twig' with { 'method_phpdoc': make_phpdoc(method) } only %}
     {{ method.visibility ~ (method.visibility is not empty ? ' ') }}
     {{- method.isStatic ? 'static ' -}}
+    {{- method.isAbstract ? 'abstract ' -}}
     function {{ method.name }}({% include 'collection/argument_collection.twig' with {
         'argument_collection': method.allArguments,
         'length_restriction': 22 + method.name | length
-    } only %})
-    { {{- "\n" }}
-{{- method.body is not empty ? (method.body ~ "\n")|raw -}}
-{{ "    " -}} }
+    } only %}){% include 'method_body.twig' with { 'method': method } only %}
 {#- Trimming lines -#}
