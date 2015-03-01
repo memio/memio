@@ -172,9 +172,8 @@ class Method
     public function makeStatic()
     {
         if ($this->isAbstract()) {
-            throw new DomainException("You can`t declare abstract method as static: ".$this->getName());
+            throw new DomainException("You can't declare abstract method as static: ".$this->getName());
         }
-
         $this->isStatic = true;
 
         return $this;
@@ -200,9 +199,8 @@ class Method
     public function setBody($body)
     {
         if ($this->isAbstract()) {
-            throw new DomainException("You can`t set body to abstract method: ".$this->getName());
+            throw new DomainException("You can't set body to abstract method: ".$this->getName());
         }
-
         $this->body = $body;
 
         return $this;
@@ -222,13 +220,11 @@ class Method
     public function makeAbstract()
     {
         if ($this->isStatic()) {
-            throw new DomainException("You can`t declare static method as abstract: ".$this->getName());
+            throw new DomainException("You can't declare static method as abstract: ".$this->getName());
         }
-
         if ($this->getBody()) {
-            throw new DomainException("Method contain body. You can`t declare method as abstract: ".$this->getName());
+            throw new DomainException("Method contain body. You can't declare method as abstract: ".$this->getName());
         }
-
         $this->isAbstract = true;
 
         return $this;
@@ -251,4 +247,4 @@ class Method
     {
         return $this->isAbstract;
     }
-  }
+}
