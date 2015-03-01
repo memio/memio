@@ -92,14 +92,6 @@ class MethodTest extends PrettyPrinterTestCase
 
         $this->assertExpectedCode($generatedCode);
     }
-  
-    /**
-     * @expectedException \Gnugat\Medio\Exception\DomainException
-     */
-    public function testSetAbstractAndStatic()
-    {
-        Method::make('method')->makeAbstract()->makeStatic();
-    }
 
     public function testWithBody()
     {
@@ -116,40 +108,12 @@ EOT;
         $this->assertExpectedCode($generatedCode);
     }
 
-    /**
-     * @expectedException \Gnugat\Medio\Exception\DomainException
-     */
-    public function testSetAbstractAndBody()
-    {
-      Method::make('method')->makeAbstract()->setBody('test');
-    }
-  
     public function testAbstract()
     {
         $method = Method::make('method')->makeAbstract();
-        $this->assertTrue($method->isAbstract());
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
-        $this->assertSame('    public abstract function method();', $generatedCode);
-      
-        $method->removeAbstract();
-        $this->assertFalse($method->isAbstract());
-    }
 
-    /**
-     * @expectedException \Gnugat\Medio\Exception\DomainException
-     */
-    public function testSetStaticAndAbstract()
-    {
-        Method::make('method')->makeStatic()->makeAbstract();
+        $this->assertSame('    public abstract function method();', $generatedCode);
     }
-  
-    /**
-     * @expectedException \Gnugat\Medio\Exception\DomainException
-     */
-    public function testSetBodyAndAbstract()
-    {
-        Method::make('method')->setBody('tmp')->makeAbstract();
-    }
-  
 }
