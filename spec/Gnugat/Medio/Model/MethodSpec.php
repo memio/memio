@@ -76,6 +76,14 @@ class MethodSpec extends ObjectBehavior
         $this->isStatic()->shouldBe(true);
     }
 
+    function it_cannot_be_made_static_if_it_is_abstract()
+    {
+        $this->makeAbstract();
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringMakeStatic();
+    }
+
     function it_can_be_made_back_to_non_static()
     {
         $this->makeStatic();
@@ -90,5 +98,40 @@ class MethodSpec extends ObjectBehavior
 EOT;
         $this->setBody($body);
         $this->getBody()->shouldBe($body);
+    }
+
+    function it_cannot_have_a_body_if_it_is_abstract()
+    {
+        $this->makeAbstract();
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringSetBody('test');
+    }
+
+    function it_can_be_abstract()
+    {
+        $this->isAbstract()->shouldBe(false);
+
+        $this->makeAbstract();
+        $this->isAbstract()->shouldBe(true);
+
+        $this->removeAbstract();
+        $this->isAbstract()->shouldBe(false);
+    }
+
+    function it_cannot_be_abstract_if_it_is_static()
+    {
+        $this->makeStatic();
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringMakeAbstract();
+    }
+
+    function it_cannot_be_abstract_if_has_a_body()
+    {
+        $this->setBody('test');
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringMakeAbstract();
     }
 }
