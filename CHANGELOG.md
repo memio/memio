@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.0.0-alpha17: Abstract method
+
+* added abstract method generation
+* added tutorial documentation
+
+> **BC breaks**:
+>
+> * moved structure from File constructor to setter
+
 ## 1.0.0-alpha16: Final class
 
 * added final class generation
