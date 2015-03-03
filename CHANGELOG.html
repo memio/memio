@@ -41,22 +41,17 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-introduction.html">
-                                        Introduction
+                                    <a href="http://gnugat.github.io/medio/doc/01-tutorial.html">
+                                        Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-installation.html">
-                                        Installation
+                                    <a href="http://gnugat.github.io/medio/doc/02-examples.html">
+                                        Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-usage.html">
-                                        Usage
-                                    </a>
-                                </li>
-                                                            <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                    <a href="http://gnugat.github.io/medio/doc/03-extending.html">
                                         Extending
                                     </a>
                                 </li>
@@ -67,6 +62,42 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>CHANGELOG</h1>
+<h2>1.0.0-alpha17: Abstract method</h2>
+<ul>
+<li>added abstract method generation</li>
+<li>added tutorial documentation</li>
+</ul>
+<blockquote>
+<p><strong>BC breaks</strong>:</p>
+<ul>
+<li>moved structure from File constructor to setter</li>
+</ul>
+</blockquote>
+<h2>1.0.0-alpha16: Final class</h2>
+<ul>
+<li>added final class generation</li>
+<li>added property default value generation</li>
+<li>fixed FullyQualifiedName</li>
+</ul>
+<h2>1.0.0-alpha15: Fixed File</h2>
+<ul>
+<li>fixed File constructor</li>
+</ul>
+<h2>1.0.0-alpha14: Parents</h2>
+<ul>
+<li>added interface parents generation</li>
+<li>added class interfaces generation</li>
+<li>added class parent generation</li>
+<li>refactored FullyQualifiedName</li>
+<li>refactored PrettyPrinter</li>
+</ul>
+<blockquote>
+<p><strong>BC breaks</strong>:</p>
+<ul>
+<li>replaced Import by FullyQualifiedName</li>
+</ul>
+<p><strong>Note</strong>: PrettyPrinter now builds the TwigExtension (makes instanciation easier).</p>
+</blockquote>
 <h2>1.0.0-alpha13: Contract, Object</h2>
 <ul>
 <li>added interface generation</li>

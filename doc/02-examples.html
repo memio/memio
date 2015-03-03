@@ -61,31 +61,38 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Versioning and branching models</h1>
-<p>This file explains the versioning and branching models of this project.</p>
-<h2>Versioning</h2>
-<p>The versioning is inspired by <a href="http://semver.org/">Semantic Versioning</a>:</p>
+                    <h1>Examples</h1>
+<p>In the <code>examples</code> directory we can find tests written with <a href="https://phpunit.de/">PHPUnit</a>,
+they have been designed to also be used as living examples.</p>
+<p>Each test method is structured in a similar way:</p>
+<pre><code class="language-php">// Describing the model
+$argument = new Argument('string', 'filename');
+
+// Generating the code
+$generatedCode = $this-&gt;prettyPrinter-&gt;generateCode($argument);
+
+// Checking it against what's expected
+$this-&gt;assertSame('$filename', $generatedCode);</code></pre>
+<p>Sometimes the expected code is spanned on many lines, in that case we will find
+<code>$this-&gt;assertExpectedCode($generatedCode);</code>.
+This assertion uses the current Test Class and method names to guess the location of a fixture file,
+where the expected code is.</p>
+<p>Those can be found in <code>examples/fixutres/&lt;TestClassName&gt;/&lt;testMethodName&gt;.txt</code>.</p>
 <blockquote>
-<p>Given a version number MAJOR.MINOR.PATCH, increment the:</p>
-<ol>
-<li>MAJOR version when you make incompatible API changes</li>
-<li>MINOR version when you add functionality in a backwards-compatible manner</li>
-<li>PATCH version when you make backwards-compatible bug fixes</li>
-</ol>
+<p><strong>Note</strong>: Fixture files always have an extra line, which is trimmed before the actual assertion.</p>
 </blockquote>
-<h3>Public API</h3>
-<p>Classes and methods marked with the <code>@api</code> tag are considered to be the public
-API of this project.</p>
-<h2>Branching Model</h2>
-<p>The branching is inspired by <a href="https://github.com/jbenet">@jbenet</a>
-<a href="https://gist.github.com/jbenet/ee6c9ac48068889b0912">simple git branching model</a>:</p>
-<blockquote>
-<ol>
-<li><code>master</code> must always be deployable.</li>
-<li><strong>all changes</strong> are made through feature branches (pull-request + merge)</li>
-<li>rebase to avoid/resolve conflicts; merge in to <code>master</code></li>
-</ol>
-</blockquote>
+<p>When changes are applied to Medio, the following command is executed to make sure no regressions
+have been introduced:</p>
+<pre><code>phpunit</code></pre>
+<h2>Next readings</h2>
+<ul>
+<li><a href="03-extending.html">Extending</a></li>
+</ul>
+<p>Previous pages:</p>
+<ul>
+<li><a href="01-tutorial.html">Tutorial</a></li>
+<li><a href="../README.html">README</a></li>
+</ul>
                 </section>
 
             </div>

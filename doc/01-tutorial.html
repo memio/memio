@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medio</title>
+
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
+                Medio
+                <small class="hidden-xs hidden-sm">
+                    A highly opinionated PHP code generator library
+                </small>
+            </a>
+
+                            <a href="https://github.com/gnugat/medio">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/01-tutorial.html">
+                                        Tutorial
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/02-examples.html">
+                                        Examples
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/03-extending.html">
+                                        Extending
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Tutorial</h1>
+<p>Medio provides a way to describe Models (classes, properties, methods etc).
+Here's a cheat sheet of those:</p>
+<p><img src="http://yuml.me/119b08be" alt="UML class diagram" /></p>
+<p>In this tutorial, we'll see how to:</p>
+<ol>
+<li>Generate a chunk of code (e.g. a single argument)</li>
+<li>Generate a standalone collection (e.g. many arguments)</li>
+<li>Generate a collection in a Model (e.g. method's arguments)</li>
+<li>Example: phpspec's method generation</li>
+<li>PSR-2 and multiline arguments</li>
+<li>Visibility, staticness, virtual, etc...</li>
+<li>Constant and default values</li>
+<li>Class and Interface</li>
+<li>File</li>
+</ol>
+<h2>1. Generating a chunk of code (e.g. a single argument)</h2>
+<p>The code sample in the <a href="../README.html">README</a> demonstrates how to generate a complete file.
+But it is also possible to only generate a chunk of code, like a method's argument.</p>
+<p>We can describe it by providing the type and the name:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Argument;
+
+$filename = new Argument('string', 'filename');
+
+echo $prettyPrinter-&gt;generateCode($filename);</code></pre>
+<blockquote>
+<p><strong>Note</strong>: the following types are accepted: string, bool, int, double, callable, resource, array, null, mixed.
+If something else is given, Medio will consider it as an object.</p>
+</blockquote>
+<p>This should print the following:</p>
+<pre><code class="language-php">$filename</code></pre>
+<p>Medio is able to automatically type hint an argument, when necessary:</p>
+<pre><code class="language-php">$createdAt = new Argument('DateTime', 'createdAt');
+
+echo $prettyPrinter-&gt;generateCode($createdAt);</code></pre>
+<p>This will result in:</p>
+<pre><code class="language-php">\DateTime $createdAt</code></pre>
+<blockquote>
+<p><strong>Note</strong>: The following types will trigger the type hint: object, array and callable (only for PHP &gt;= 5.4).
+For now object type hints are their fully qualified name (full namespace + class name), but this can change in the future.</p>
+</blockquote>
+<h2>2. Generating a standalone collection (e.g. many arguments)</h2>
+<p>An argument on its own is not very usefull, usually methods have a collection of arguments (0 to many).
+This can be done by using arrays:</p>
+<pre><code class="language-php">$handleArguments = array(
+    new Argument('Symfony\Component\HttpFoundation\Request', 'request'),
+    new Argument('int', 'type'),
+    new Argument('bool', 'catch'),
+);
+
+echo $prettyPrinter-&gt;generateCode($handleArguments);</code></pre>
+<p>With this we'll be able to see in our console:</p>
+<pre><code class="language-php">\Symfony\Component\HttpFoundation\Request $request, $type, $catch</code></pre>
+<p>The concept of collection is used for the following models:</p>
+<ul>
+<li>a method's <code>Arguments</code></li>
+<li>a class/interface's <code>Constants</code></li>
+<li>a class/interface's parents <code>Contracts</code></li>
+<li>a file's <code>FullyQualifiedNames</code> (use statements)</li>
+<li>a class/interface's <code>Methods</code></li>
+<li>a class's <code>Properties</code></li>
+</ul>
+<h2>3. Generating a collection in a Model (e.g. method's arguments)</h2>
+<p>As explained above, a <code>Method</code> can have a collection of <code>Arguments</code> (0 to many).
+In order to describe this method, we don't need to prepare an array before hand:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Method;
+
+$handle = Method::make('handle')
+    -&gt;addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
+    -&gt;addArgument(new Argument('int', 'type'))
+    -&gt;addArgument(new Argument('bool', 'catch'))
+;
+
+echo $prettyPrinter-&gt;generateCode($handle);</code></pre>
+<blockquote>
+<p><strong>Note</strong>: All models can either be instanciated using <code>new</code> or the static method <code>make</code>.
+The second option enable &quot;fluent interface&quot; (chaining method calls) for PHP &lt; 5.6 (from this version you can use <code>(new Model)-&gt;method()</code>).</p>
+</blockquote>
+<p>Here's the result:</p>
+<pre><code class="language-php">    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int                                       $type
+     * @param bool                                      $catch
+     */
+    public function handle(\Symfony\Component\HttpFoundation\Request $request, $type, $catch)
+    {
+    }</code></pre>
+<h2>4. Example: phpspec's method generation</h2>
+<p>Let's take the <a href="https://phpspec.net">phpspec</a> example: when running your tests, it
+is able to generate missing methods. If it were using Medio, it would use the following
+snippet:</p>
+<pre><code class="language-php">// Those are the parameters phpspec gathers from your tests
+$methodName = '__construct';
+$arguments = array(new ArrayObject(), 'Nobody expects the spanish inquisition!');
+
+// Using them we can describe the method to generate
+$method = new Method($methodName);
+$index = 1;
+foreach ($arguments as $argument) {
+    $type = is_object($argument) ? get_class($argument) : gettype($argument);
+    $argumentName = 'argument'.$index++;
+    $method-&gt;addArgument(new Argument($type, $argumentName));
+}
+
+// To make this example easier directly display the generated code
+echo $prettyPrinter-&gt;generateCode($method);</code></pre>
+<p>This would output:</p>
+<pre><code>    /**
+     * @param \ArrayObject $argument1
+     * @param string       $argument2
+     */
+    public function __construct(\ArrayObject $argument1, $argument2)
+    {
+    }</code></pre>
+<h2>5. PSR-2 and multiline arguments</h2>
+<p>The <a href="http://www.php-fig.org/psr/psr-2/">PSR-2 Coding Standard</a> advises us to avoid
+lines longer than 120 characters.
+Medio takes care of this when generating a method's arguments by checking the length:
+if it's going to be too long it'll put each arguments on their own line.</p>
+<p>Here's a code sample:</p>
+<pre><code class="language-php">$specification = new Method('it_is_a_very_long_method');
+for ($i = 1; $i &lt;= 7; $i++) {
+    $specification-&gt;addArgument(new Argument('mixed', 'argument'.$i));
+}
+
+echo $prettyPrinter-&gt;generateCode($specification);</code></pre>
+<p>This will output:</p>
+<pre><code class="language-php">    public function it_is_a_very_long_method(
+        $argument1,
+        $argument2,
+        $argument3,
+        $argument4,
+        $argument5,
+        $argument6,
+        $argument7
+    )
+    {
+    }</code></pre>
+<h2>6. Visibility, staticness, virtual, etc...</h2>
+<p>Medio assumes a few things by default:</p>
+<ul>
+<li>properties are private, not static, not abstract</li>
+<li>methods are public, not static, not abstract, not final</li>
+<li>classes are not final</li>
+</ul>
+<p>This can be customized:</p>
+<pre><code class="language-php">$finalObject = Object::make()
+    -&gt;makeFinal()  // can be cancelled with removeFinal()
+
+$publicStaticProperty = Property::make('myProperty')
+    -&gt;makePublic() // also available: makeProtected() and makePrivate()
+    -&gt;makeStatic() // can be cancelled with removeStatic()
+;
+
+$superMethod = Method::make('myMethod')
+    -&gt;makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
+    -&gt;makeStatic() // can be cancelled with removeStatic()
+    -&gt;makeFinal() // can be cancelled with removeFinal()</code></pre>
+<h2>7. Constant and default values</h2>
+<p>A constant or a default value can be many things: a string encapsulated between single or double quotes,
+an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. <code>__DIR__.'/path'</code>).</p>
+<p>To allow all of those in the simplest possible way, Medio let you write the raw value that will be
+printed:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Constant;
+
+$firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
+$secondConstant = new Constant('SECOND_CONSTANT', 'null');</code></pre>
+<h2>8. Class and Interface</h2>
+<p>In PHP, <code>class</code> and <code>interface</code> are two reserved keywords. In order to be able to
+have Models describing those, Medio provides respectively <code>Object</code> and <code>Contract</code>.</p>
+<p>Here's an example of interface generation:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Contract;
+
+$myMethod = new Method('myMethod')
+    -&gt;addArgument('mixed', 'myArgument')
+);
+$myContract = Contract::make('Gnugat\Medio\MyInterface')
+    -&gt;extend(new Contract('Gnugat\Medio\MyParentInterface'))
+    -&gt;addConstant(new Constant('MY_CONSTANT', '42'))
+    -&gt;addMethod($myMethod)
+;
+
+echo $prettyPrinter-&gt;generateCode($myContract);</code></pre>
+<p>Will output:</p>
+<pre><code class="language-php">interface MyInterface extends MyParentInterface
+{
+    const MY_CONSTANT = 42;
+
+    /**
+     * @param mixed $myArgument
+     */
+    public function myMethod($myArgument);
+}</code></pre>
+<p>Objects can extend only one parent, but can implement many interfaces. Contracts
+can extend many interfaces.</p>
+<h2>9. File</h2>
+<p>Finally, we can generate a whole <code>File</code>:</p>
+<pre><code class="language-php">$myFile = File::make('src/Gnugat/Medio/MyObject')
+    -&gt;addFullyQualifiedName($myContract-&gt;getFullyQualifiedName())
+    -&gt;setStructure(Object::make('Gnugat\Medio\MyObject')
+        -&gt;implement($myContract)
+        -&gt;addMethod($myMethod)
+    )
+;
+
+$prettyPrinter-&gt;generateCode($myFile);</code></pre>
+<p>This will output:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Gnugat\Medio;
+
+use Gnugat\Medio\MyInterface;
+
+class MyObject implements MyInterface
+{
+    /**
+     * @param mixed $myArgument
+     */
+    public function myMethod($myArgument)
+    {
+    }
+}</code></pre>
+<h2>Next readings</h2>
+<ul>
+<li><a href="02-examples.html">Examples</a></li>
+<li><a href="03-extending.html">Extending</a></li>
+</ul>
+<p>Previous pages:</p>
+<ul>
+<li><a href="../README.html">README</a></li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
