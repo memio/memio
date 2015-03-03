@@ -42,11 +42,6 @@ class PrettyPrinter
     private $strategies = array();
 
     /**
-     * @var Twig_Environment
-     */
-    private $twig;
-
-    /**
      * @param Twig_Environment $twig
      *
      * @api
@@ -62,7 +57,6 @@ class PrettyPrinter
         $twig->addExtension(new Type());
         $twig->addExtension(new Whitespace($line));
 
-        $this->twig = $twig;
         $this->strategies[] = new ArrayPrettyPrinter($twig);
         $this->strategies[] = new ModelPrettyPrinter($twig);
     }
