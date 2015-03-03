@@ -1,23 +1,25 @@
 # Tutorial
 
-Medio provides a way to describe classes, properties, methods, etc using Models.
+Medio provides a way to describe Models (classes, properties, methods etc).
 Here's a cheat sheet of those:
 
 ![UML class diagram](http://yuml.me/119b08be)
 
 In this tutorial, we'll see how to:
 
-1. Generating a chunk of code (e.g. a single argument)
-2. Generating a standalone collection (e.g. many arguments)
-3. Generating a collection in a Model (e.g. method's arguments)
+1. Generate a chunk of code (e.g. a single argument)
+2. Generate a standalone collection (e.g. many arguments)
+3. Generate a collection in a Model (e.g. method's arguments)
 4. Example: phpspec's method generation
 5. PSR-2 and multiline arguments
 6. Visibility, staticness, virtual, etc...
-7. Class and Interface
+7. Constant and default values
+8. Class and Interface
+9. File
 
 ## 1. Generating a chunk of code (e.g. a single argument)
 
-The code sample in the [README](../README.md) deomnstrates how to generate a complete file.
+The code sample in the [README](../README.md) demonstrates how to generate a complete file.
 But it is also possible to only generate a chunk of code, like a method's argument.
 
 We can describe it by providing the type and the name:
@@ -25,9 +27,9 @@ We can describe it by providing the type and the name:
 ```php
 use Gnugat\Medio\Model\Argument;
 
-$argument = new Argument('string', 'filename');
+$filename = new Argument('string', 'filename');
 
-echo $prettyPrinter->generateCode($argument);
+echo $prettyPrinter->generateCode($filename);
 ```
 
 > **Note**: the following types are accepted: string, bool, int, double, callable, resource, array, null, mixed.
@@ -42,9 +44,9 @@ $filename
 Medio is able to automatically type hint an argument, when necessary:
 
 ```php
-$argument = new Argument('DateTime', 'createdAt');
+$createdAt = new Argument('DateTime', 'createdAt');
 
-echo $prettyPrinter->generateCode($argument);
+echo $prettyPrinter->generateCode($createdAt);
 ```
 
 This will result in:
@@ -62,13 +64,13 @@ An argument on its own is not very usefull, usually methods have a collection of
 This can be done by using arrays:
 
 ```php
-$arguments = array(
+$handleArguments = array(
     new Argument('Symfony\Component\HttpFoundation\Request', 'request'),
     new Argument('int', 'type'),
     new Argument('bool', 'catch'),
 );
 
-echo $prettyPrinter->generateCode($arguments);
+echo $prettyPrinter->generateCode($handleArguments);
 ```
 
 With this we'll be able to see in our console:
@@ -94,13 +96,13 @@ In order to describe this method, we don't need to prepare an array before hand:
 ```php
 use Gnugat\Medio\Model\Method;
 
-$method = Method::make('handle')
+$handle = Method::make('handle')
     ->addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
     ->addArgument(new Argument('int', 'type'))
     ->addArgument(new Argument('bool', 'catch'))
 ;
 
-echo $prettyPrinter->generateCode($method);
+echo $prettyPrinter->generateCode($handle);
 ```
 
 > **Note**: All models can either be instanciated using `new` or the static method `make`.
@@ -165,12 +167,12 @@ if it's going to be too long it'll put each arguments on their own line.
 Here's a code sample:
 
 ```php
-$method = new Method('it_is_a_very_long_method');
-for ($i = 1; $i < 8; $i++) {
-    $method->addArgument(new Argument('mixed', 'argument'.$i));
+$specification = new Method('it_is_a_very_long_method');
+for ($i = 1; $i <= 7; $i++) {
+    $specification->addArgument(new Argument('mixed', 'argument'.$i));
 }
 
-echo $prettyPrinter->generateCode($method);
+echo $prettyPrinter->generateCode($specification);
 ```
 
 This will output:
@@ -200,21 +202,36 @@ Medio assumes a few things by default:
 This can be customized:
 
 ```php
-$object = Object::make()
+$finalObject = Object::make()
     ->makeFinal()  // can be cancelled with removeFinal()
 
-$property = Property::make('myProperty')
+$publicStaticProperty = Property::make('myProperty')
     ->makePublic() // also available: makeProtected() and makePrivate()
     ->makeStatic() // can be cancelled with removeStatic()
 ;
 
-$method = Method::make('myMethod')
+$superMethod = Method::make('myMethod')
     ->makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
     ->makeStatic() // can be cancelled with removeStatic()
     ->makeFinal() // can be cancelled with removeFinal()
 ```
 
-## 7. Class and Interface
+## 7. Constant and default values
+
+A constant or a default value can be many things: a string encapsulated between single or double quotes,
+an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. `__DIR__.'/path'`).
+
+To allow all of those in the simplest possible way, Medio let you write the raw value that will be
+printed:
+
+```php
+use Gnugat\Medio\Model\Constant;
+
+$firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
+$secondConstant = new Constant('SECOND_CONSTANT', 'null');
+```
+
+## 8. Class and Interface
 
 In PHP, `class` and `interface` are two reserved keywords. In order to be able to
 have Models describing those, Medio provides respectively `Object` and `Contract`.
@@ -224,5 +241,76 @@ Here's an example of interface generation:
 ```php
 use Gnugat\Medio\Model\Contract;
 
-$contract =
+$myMethod = new Method('myMethod')
+    ->addArgument('mixed', 'myArgument')
+);
+$myContract = Contract::make('Gnugat\Medio\MyInterface')
+    ->extend(new Contract('Gnugat\Medio\MyParentInterface'))
+    ->addConstant(new Constant('MY_CONSTANT', '42'))
+    ->addMethod($myMethod)
+;
+
+echo $prettyPrinter->generateCode($myContract);
 ```
+
+Will output:
+
+```php
+interface MyInterface extends MyParentInterface
+{
+    const MY_CONSTANT = 42;
+
+    /**
+     * @param mixed $myArgument
+     */
+    public function myMethod($myArgument);
+}
+```
+
+Objects can extend only one parent, but can implement many interfaces. Contracts
+can extend many interfaces.
+
+## 9. File
+
+Finally, we can generate a whole `File`:
+
+```php
+$myObject = Object::make('Gnugat\Medio\MyObject')
+    ->implement($myContract)
+    ->addMethod($myMethod)
+;
+$myFile = File::make('src/Gnugat/Medio/MyObject', $object)
+    ->addFullyQualifiedName($contract->getFullyQualifiedName())
+;
+
+$prettyPrinter->generateCode($myFile);
+```
+
+This will output:
+
+```php
+<?php
+
+namespace Gnugat\Medio;
+
+use Gnugat\Medio\MyInterface;
+
+class MyObject implements MyInterface
+{
+    /**
+     * @param mixed $myArgument
+     */
+    public function myMethod($myArgument)
+    {
+    }
+}
+```
+
+## Next readings
+
+* [Examples](02-examples.md)
+* [Extending](03-extending.md)
+
+Previous pages:
+
+* [README](../README.md)

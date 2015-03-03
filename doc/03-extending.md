@@ -40,7 +40,6 @@ as its first argument the model (the variable is also named after the model's cl
 
 Previous pages:
 
-* [Usage](03-usage.md)
-* [Installation](02-installation.md)
-* [Introduction](01-introduction.md)
+* [Examples](02-examples.md)
+* [Tutorial](01-tutorial.md)
 * [README](../README.md)
