@@ -3,7 +3,7 @@
 [File|filename]
 [FullyQualifiedName|fullyQualifiedName;namespace;name;alias]
 [License|projectName;authorName;authorEmail]
-[Method|name;body;visibility;staticness]
+[Method|name;body;visibility;staticness;abstractness;isFinal]
 [Object|isFinal]
 [Property|name;visibility;staticness;defaultValue]
 [<<Structure>>]

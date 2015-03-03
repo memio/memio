@@ -134,4 +134,31 @@ EOT;
         $domainException = 'Gnugat\Medio\Exception\DomainException';
         $this->shouldThrow($domainException)->duringMakeAbstract();
     }
+
+    function it_can_be_final()
+    {
+        $this->isFinal()->shouldBe(false);
+
+        $this->makeFinal();
+        $this->isFinal()->shouldBe(true);
+
+        $this->removeFinal();
+        $this->isFinal()->shouldBe(false);
+    }
+
+    function it_cannot_be_final_if_it_is_abstract()
+    {
+        $this->makeAbstract();
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringMakeFinal();
+    }
+
+    function it_cannot_be_abstract_if_it_is_final()
+    {
+        $this->makeFinal();
+
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+        $this->shouldThrow($domainException)->duringMakeAbstract();
+    }
 }

@@ -44,6 +44,11 @@ class Method
     private $isAbstract = false;
 
     /**
+     * @var bool
+     */
+    private $isFinal = false;
+
+    /**
      * @var string
      */
     private $body = '';
@@ -216,9 +221,14 @@ class Method
 
     /**
      * @return $this
+     *
+     * @api
      */
     public function makeAbstract()
     {
+        if ($this->isFinal()) {
+            throw new DomainException("You can't declare final method as abstract: ".$this->getName());
+        }
         if ($this->isStatic()) {
             throw new DomainException("You can't declare static method as abstract: ".$this->getName());
         }
@@ -232,6 +242,8 @@ class Method
 
     /**
      * @return $this
+     *
+     * @api
      */
     public function removeAbstract()
     {
@@ -246,5 +258,40 @@ class Method
     public function isAbstract()
     {
         return $this->isAbstract;
+    }
+
+    /**
+     * @return $this
+     *
+     * @api
+     */
+    public function makeFinal()
+    {
+        if ($this->isAbstract()) {
+            throw new DomainException("You can't declare abstract method as final: ".$this->getName());
+        }
+        $this->isFinal = true;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     *
+     * @api
+     */
+    public function removeFinal()
+    {
+        $this->isFinal = false;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinal()
+    {
+        return $this->isFinal;
     }
 }
