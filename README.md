@@ -3,15 +3,17 @@
 Medio allows you to describe the code you want to generate using Models:
 
 ```php
-$file = new File('src/Gnugat/Medio/MyService.php', Object::make('Gnugat\Medio\MyService')
-    ->addProperty(new Property('createdAt'))
-    ->addProperty(new Property('filename'))
+$file = File::make('src/Gnugat/Medio/MyService.php')
+    ->setStructure(Object::make('Gnugat\Medio\MyService')
+        ->addProperty(new Property('createdAt'))
+        ->addProperty(new Property('filename'))
 
-    ->addMethod(Method::make('__construct')
-        ->addArgument('DateTime', 'createdAt')
-        ->addArgument('string', 'filename')
+        ->addMethod(Method::make('__construct')
+            ->addArgument('DateTime', 'createdAt')
+            ->addArgument('string', 'filename')
+        )
     )
-);
+;
 ```
 
 These Models can be given to a `PrettyPrinter`:

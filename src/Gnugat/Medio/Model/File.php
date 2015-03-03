@@ -32,28 +32,25 @@ class File
     private $structure;
 
     /**
-     * @param string    $filename
-     * @param Structure $structure
+     * @param string $filename
      *
      * @api
      */
-    public function __construct($filename, Structure $structure)
+    public function __construct($filename)
     {
         $this->filename = $filename;
-        $this->structure = $structure;
     }
 
     /**
-     * @param string    $filename
-     * @param Structure $structure
+     * @param string $filename
      *
      * @return File
      *
      * @api
      */
-    public static function make($filename, Structure $structure)
+    public static function make($filename)
     {
-        return new self($filename, $structure);
+        return new self($filename);
     }
 
     /**
@@ -69,6 +66,10 @@ class File
      */
     public function getNamespace()
     {
+        if (null === $this->structure) {
+            return;
+        }
+
         return $this->structure->getNamespace();
     }
 
@@ -90,6 +91,20 @@ class File
     public function addFullyQualifiedName(FullyQualifiedName $fullyQualifiedName)
     {
         $this->fullyQualifiedNames[] = $fullyQualifiedName;
+
+        return $this;
+    }
+
+    /**
+     * @param Structure $structure
+     *
+     * @return File
+     *
+     * @api
+     */
+    public function setStructure(Structure $structure)
+    {
+        $this->structure = $structure;
 
         return $this;
     }

@@ -275,12 +275,12 @@ can extend many interfaces.
 Finally, we can generate a whole `File`:
 
 ```php
-$myObject = Object::make('Gnugat\Medio\MyObject')
-    ->implement($myContract)
-    ->addMethod($myMethod)
-;
-$myFile = File::make('src/Gnugat/Medio/MyObject', $object)
-    ->addFullyQualifiedName($contract->getFullyQualifiedName())
+$myFile = File::make('src/Gnugat/Medio/MyObject')
+    ->addFullyQualifiedName($myContract->getFullyQualifiedName())
+    ->setStructure(Object::make('Gnugat\Medio\MyObject')
+        ->implement($myContract)
+        ->addMethod($myMethod)
+    )
 ;
 
 $prettyPrinter->generateCode($myFile);

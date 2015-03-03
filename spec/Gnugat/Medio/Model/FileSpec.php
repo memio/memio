@@ -21,9 +21,9 @@ class FileSpec extends ObjectBehavior
     const NAMESPACE_ = 'Gnugat\\Medio';
     const CLASSNAME = 'MyClass';
 
-    function let(Structure $structure)
+    function let()
     {
-        $this->beConstructedWith(self::FILENAME, $structure);
+        $this->beConstructedWith(self::FILENAME);
     }
 
     function it_has_a_filename()
@@ -31,16 +31,14 @@ class FileSpec extends ObjectBehavior
         $this->getFilename()->shouldBe(self::FILENAME);
     }
 
-    function it_has_a_namespace(Structure $structure)
+    function it_has_a_structure(Structure $structure)
     {
         $structure->getNamespace()->willReturn(self::NAMESPACE_);
 
-        $this->getNamespace()->shouldBe(self::NAMESPACE_);
-    }
+        $this->setStructure($structure);
 
-    function it_has_a_structure(Structure $structure)
-    {
         $this->getStructure()->shouldBe($structure);
+        $this->getNamespace()->shouldBe(self::NAMESPACE_);
     }
 
     function it_has_a_collection_of_fully_qualified_name(FullyQualifiedName $fullyQualifiedName)
