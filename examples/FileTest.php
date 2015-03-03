@@ -31,7 +31,9 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $file = new File(self::FILENAME, new Object(self::FULLY_QUALIFIED_NAME));
+        $file = File::make(self::FILENAME)
+            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 
@@ -40,7 +42,9 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testWithLicense()
     {
-        $file = new File(self::FILENAME, new Object(self::FULLY_QUALIFIED_NAME));
+        $file = File::make(self::FILENAME)
+            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+        ;
         $license = new License(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
 
         $generatedCode = $this->prettyPrinter->generateCode($file, array('license' => $license));
@@ -50,21 +54,23 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $file = new File(self::FILENAME, Object::make(self::FULLY_QUALIFIED_NAME)
-            ->addConstant(new Constant('FIRST_CONSTANT', '0'))
-            ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
+        $file = File::make(self::FILENAME)
+            ->addFullyQualifiedName(new FullyQualifiedName('DateTime'))
 
-            ->addProperty(new Property('firstProperty'))
-            ->addProperty(new Property('secondProperty'))
+            ->setStructure(Object::make(self::FULLY_QUALIFIED_NAME)
+                ->addConstant(new Constant('FIRST_CONSTANT', '0'))
+                ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
-            ->addMethod(Method::make('firstMethod')
-                ->addArgument(new Argument('DateTime', 'firstArgument'))
-                ->addArgument(new Argument('array', 'secondArgument'))
-                ->addArgument(new Argument('string', 'thirdArgument'))
-            )
-            ->addMethod(new Method('secondMethod'))
+                ->addProperty(new Property('firstProperty'))
+                ->addProperty(new Property('secondProperty'))
+
+                ->addMethod(Method::make('firstMethod')
+                    ->addArgument(new Argument('DateTime', 'firstArgument'))
+                    ->addArgument(new Argument('array', 'secondArgument'))
+                    ->addArgument(new Argument('string', 'thirdArgument'))
+                )
+                ->addMethod(new Method('secondMethod'))
         );
-        $file->addFullyQualifiedName(new FullyQualifiedName('DateTime'));
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 
