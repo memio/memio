@@ -15,15 +15,12 @@ menu:
         home:
             text: Home
             relativeUrl:
-        introduction:
-            text: Introduction
-            relativeUrl: doc/01-introduction.html
-        installation:
-            text: Installation
-            relativeUrl: doc/02-installation.html
-        usage:
-            text: Usage
-            relativeUrl: doc/03-usage.html
+        tutorial:
+            text: Tutorial
+            relativeUrl: doc/01-tutorial.html
+        examples:
+            text: Examples
+            relativeUrl: doc/02-examples.html
         extending:
             text: Extending
-            relativeUrl: doc/04-extending.html
+            relativeUrl: doc/03-extending.html
