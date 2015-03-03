@@ -21,7 +21,7 @@ Sometimes the expected code is spanned on many lines, in that case we will find
 This assertion uses the current Test Class and method names to guess the location of a fixture file,
 where the expected code is.
 
-Those can be found in `examples/fixutres/<TestClassName>/<testMethodName>.txt`.
+Those can be found in `examples/fixtures/<TestClassName>/<testMethodName>.txt`.
 
 > **Note**: Fixture files always have an extra line, which is trimmed before the actual assertion.
 
