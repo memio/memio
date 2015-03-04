@@ -15,9 +15,9 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\File;
 use Gnugat\Medio\Model\FullyQualifiedName;
-use Gnugat\Medio\Model\License;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
 use Gnugat\Medio\Model\Property;
 
 class FileTest extends PrettyPrinterTestCase
@@ -43,11 +43,12 @@ class FileTest extends PrettyPrinterTestCase
     public function testWithLicense()
     {
         $file = File::make(self::FILENAME)
+            ->setLicensePhpdoc(new LicensePhpdoc(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL))
+
             ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
         ;
-        $license = new License(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
 
-        $generatedCode = $this->prettyPrinter->generateCode($file, array('license' => $license));
+        $generatedCode = $this->prettyPrinter->generateCode($file);
 
         $this->assertExpectedCode($generatedCode);
     }

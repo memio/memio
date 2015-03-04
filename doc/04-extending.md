@@ -40,6 +40,7 @@ as its first argument the model (the variable is also named after the model's cl
 
 Previous pages:
 
-* [Examples](02-examples.md)
-* [Tutorial](01-tutorial.md)
+* [Examples](03-examples.md)
+* [PHPdoc Tutorial](02-phpdoc-tutorial.md)
+* [Model Tutorial](01-model-tutorial.md)
 * [README](../README.md)

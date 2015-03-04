@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\FullyQualifiedName;
+use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
 use Gnugat\Medio\Model\Structure;
 use PhpSpec\ObjectBehavior;
 
@@ -46,5 +47,16 @@ class FileSpec extends ObjectBehavior
         $this->allFullyQualifiedNames()->shouldBe(array());
         $this->addFullyQualifiedName($fullyQualifiedName);
         $this->allFullyQualifiedNames()->shouldBe(array($fullyQualifiedName));
+    }
+
+    function it_can_have_license_phpdoc(LicensePhpdoc $licensePhpdoc)
+    {
+        $this->getLicensePhpdoc()->shouldBe(null);
+
+        $this->setLicensePhpdoc($licensePhpdoc);
+        $this->getLicensePhpdoc()->shouldBe($licensePhpdoc);
+
+        $this->removeLicensePhpdoc();
+        $this->getLicensePhpdoc()->shouldBe(null);
     }
 }

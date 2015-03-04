@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Gnugat\Medio\Model;
+namespace spec\Gnugat\Medio\Model\Phpdoc;
 
 use PhpSpec\ObjectBehavior;
 
-class LicenseSpec extends ObjectBehavior
+class LicensePhpdocSpec extends ObjectBehavior
 {
     const PROJECT_NAME = 'gnugat/medio';
     const AUTHOR_NAME = 'Loïc Chardonnet';

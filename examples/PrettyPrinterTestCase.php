@@ -37,8 +37,12 @@ class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
         $testFullyQualifiedClassname = $trace[1]['class'];
         $namespaces = explode('\\', $testFullyQualifiedClassname);
         $testClass = array_pop($namespaces);
-        if ('Collection' === end($namespaces)) {
+        $lastNameSpace = end($namespaces);
+        if ('Collection' === $lastNameSpace) {
             $testClass = 'Collection/'.$testClass;
+        }
+        if ('Phpdoc' === $lastNameSpace) {
+            $testClass = 'Phpdoc/'.$testClass;
         }
         $testMethod = $trace[1]['function'];
         $filename = __DIR__.'/fixtures/'.$testClass.'/'.$testMethod.'.txt';

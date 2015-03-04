@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Gnugat\Medio\Examples\Phpdoc;
 
-use Gnugat\Medio\Model\License;
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
+use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
 
-class LicenseTest extends PrettyPrinterTestCase
+class LicensePhpdocTest extends PrettyPrinterTestCase
 {
     const PROJECT_NAME = 'gnugat/medio';
     const AUTHOR_NAME = 'Loïc Chardonnet';
@@ -21,7 +22,7 @@ class LicenseTest extends PrettyPrinterTestCase
 
     public function testSimpleOne()
     {
-        $license = new License(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
+        $license = new LicensePhpdoc(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL);
 
         $generatedCode = $this->prettyPrinter->generateCode($license);
 

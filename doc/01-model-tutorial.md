@@ -1,9 +1,9 @@
-# Tutorial
+# Model Tutorial
 
 Medio provides a way to describe Models (classes, properties, methods etc).
 Here's a cheat sheet of those:
 
-![UML class diagram](http://yuml.me/119b08be)
+![UML class diagram](http://yuml.me/4fc6df02)
 
 In this tutorial, we'll see how to:
 
@@ -308,8 +308,9 @@ class MyObject implements MyInterface
 
 ## Next readings
 
-* [Examples](02-examples.md)
-* [Extending](03-extending.md)
+* [PHPdoc Tutorial](02-phpdoc-tutorial.md)
+* [Examples](03-examples.md)
+* [Extending](04-extending.md)
 
 Previous pages:
 
