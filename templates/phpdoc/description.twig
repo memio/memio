@@ -1,0 +1,3 @@
+{% for line in description.all %}
+    {{- line }}{{ not loop.last ? "\n" -}}
+{% endfor %}
