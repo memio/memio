@@ -1,0 +1,45 @@
+<?php
+
+/*
+ * This file is part of the Medio project.
+ *
+ * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Gnugat\Medio\Examples\Phpdoc;
+
+use Gnugat\Medio\Examples\PrettyPrinterTestCase;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+
+class DeprecationTagTest extends PrettyPrinterTestCase
+{
+    public function testTagOnly()
+    {
+        $apiTag = new DeprecationTag();
+
+        $generatedCode = $this->prettyPrinter->generateCode($apiTag);
+
+        $this->assertSame('@deprecated', $generatedCode);
+    }
+
+    public function testTagWithVersion()
+    {
+        $apiTag = new DeprecationTag('v2.1');
+
+        $generatedCode = $this->prettyPrinter->generateCode($apiTag);
+
+        $this->assertSame('@deprecated v2.1', $generatedCode);
+    }
+
+    public function testTagWithVersionAndDescription()
+    {
+        $apiTag = new DeprecationTag('v2.1', 'Use Object#method instead');
+
+        $generatedCode = $this->prettyPrinter->generateCode($apiTag);
+
+        $this->assertSame('@deprecated v2.1 Use Object#method instead', $generatedCode);
+    }
+}
