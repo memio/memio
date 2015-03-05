@@ -1,0 +1,2 @@
+[LicensePhpdoc|projectName;authorName;authorEmail]
+[File]->[LicensePhpdoc]
