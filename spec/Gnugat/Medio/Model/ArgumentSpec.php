@@ -47,4 +47,66 @@ class ArgumentSpec extends ObjectBehavior
 
         $this->isObject()->shouldBe(true);
     }
+
+    function it_has_empty_default_value()
+    {
+        $this->beConstructedWith('DateTime', 'name');
+        $this->getDefaultValue()->shouldBe(null);
+    }
+  
+    function it_should_have_only_null_and_constant_default_value_for_objects()
+    {
+        $this->beConstructedWith('DateTime', 'name');
+        $domainException = 'Gnugat\Medio\Exception\DomainException';
+      
+        $this->shouldThrow($domainException)->duringSetDefaultValue('"test"');
+    }
+  
+    
+    function it_can_be_null_default_value_for_object()
+    {
+        $this->beConstructedWith('DateTime', 'name');
+        $this->setDefaultValue('null');
+        $this->getDefaultValue()->shouldBe('null');
+    }
+  
+    function it_can_be_only_string_default_value_format()
+    {
+        $this->beConstructedWith('integer', 'name');
+      
+        $domainException = 'Gnugat\Medio\Exception\InvalidArgumentException';
+        $this->shouldThrow($domainException)->duringSetDefaultValue(false);
+    }
+  
+    function it_can_be_self_constant_reference_default_value_for_object()
+    {
+        $this->beConstructedWith('DateTime', 'name');
+        $this->setDefaultValue('self::DEFAULT_TIME');
+        $this->getDefaultValue()->shouldBe('self::DEFAULT_TIME');
+    }
+  
+    function it_can_be_constant_default_value_for_object()
+    {
+        $this->beConstructedWith('DateTime', 'name');
+        $this->setDefaultValue('DEFAULT_TIME');
+        $this->getDefaultValue()->shouldBe('DEFAULT_TIME');
+    }
+  
+    function it_cant_be_constant_default_value_for_string_type()
+    {
+        $this->beConstructedWith('string', 'name');
+        $this->setDefaultValue('DEFAULT_TIME');
+        $this->getDefaultValue()->shouldBe('DEFAULT_TIME');
+    }
+  
+    function it_can_be_removed_default_value()
+    {
+        $this->beConstructedWith('string', 'name');
+        $this->setDefaultValue('DEFAULT_TIME');
+        $this->getDefaultValue()->shouldBe('DEFAULT_TIME');
+        $this->removeDefaultValue();
+        $this->getDefaultValue()->shouldBe(null);
+    }
+  
+  
 }
