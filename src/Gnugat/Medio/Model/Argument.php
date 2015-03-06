@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Exception\DomainException;
+use Gnugat\Medio\Exception\InvalidArgumentException;
 use Gnugat\Medio\ValueObject\Type;
 
 /**
@@ -27,6 +29,11 @@ class Argument
      * @var string
      */
     private $name;
+
+    /**
+     * @var string|null
+     */
+    private $defaultValue;
 
     /**
      * @param string $type
@@ -91,5 +98,28 @@ class Argument
     public function hasTypeHint()
     {
         return $this->type->hasTypeHint();
+    }
+
+    public function setDefaultValue($value)
+    {
+        if ($value !== null and !is_string($value)) {
+            throw new InvalidArgumentException('Invalid default value. Expect string or null. Given:'.gettype($value));
+        }
+
+        if ($this->isObject()) {
+            if (!preg_match('!^(null|(static|self)::[a-z]+.*|[a-z]+.*)$!i', $value)) {
+                throw new DomainException("You can set only null and constant default value for argument: " . $this->getName());
+            }  
+        }
+
+        $this->defaultValue = $value;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
     }
 }

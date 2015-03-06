@@ -1,1 +1,4 @@
 {{ argument.hasTypeHint ? argument.type ~ ' ' }}${{ argument.name -}}
+{% if argument.defaultValue%}
+ = {{ argument.defaultValue|raw -}}     
+{% endif %}
