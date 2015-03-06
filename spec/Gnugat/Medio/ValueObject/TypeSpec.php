@@ -19,21 +19,21 @@ class TypeSpec extends ObjectBehavior
     {
         $this->beConstructedWith('\DateTime');
 
-        $this->getName()->shouldBe('\DateTime');
+        $this->getName()->shouldBe('DateTime');
         $this->isObject()->shouldBe(true);
     }
 
-    function it_prefixes_object_types_by_namespace_separator()
+    function it_strips_objects_of_their_namespace()
     {
-        $this->beConstructedWith('DateTime');
+        $this->beConstructedWith('Gnugat\Medio\MyClass');
 
-        $this->getName()->shouldBe('\DateTime');
+        $this->getName()->shouldBe('MyClass');
         $this->isObject()->shouldBe(true);
     }
 
     function it_can_have_a_type_hint_if_it_is_an_object()
     {
-        $this->beConstructedWith('\DateTime');
+        $this->beConstructedWith('DateTime');
 
         $this->hasTypeHint()->shouldBe(true);
     }

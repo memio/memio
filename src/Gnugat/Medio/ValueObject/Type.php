@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\ValueObject;
 
+use Gnugat\Medio\Model\FullyQualifiedName;
+
 /**
  * @api
  */
@@ -20,6 +22,11 @@ class Type
      * @var string
      */
     private $name;
+
+    /**
+     * @var FullyQualifiedName
+     */
+    private $fullyqualifiedName;
 
     /**
      * @var bool
@@ -43,8 +50,9 @@ class Type
 
         $this->isObject = !in_array($name, $nonObjectTypes, true);
         $this->hasTypeHint =  ($isCallableFromPhp54 || $this->isObject || 'array' === $name);
-        if ($this->isObject && '\\' !== $name[0]) {
-            $name = '\\'.$name;
+        if ($this->isObject) {
+            $this->fullyqualifiedName = new FullyqualifiedName($name);
+            $name = $this->fullyqualifiedName->getName();
         }
         $this->name = $name;
     }
