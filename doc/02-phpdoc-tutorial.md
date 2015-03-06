@@ -4,6 +4,8 @@ Medio also provides a way to document the code with [PHPdoc](http://www.phpdoc.o
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
+![UML class diagram](http://yuml.me/bc9d239b)
+
 ## 1. License
 
 `Files` can have a license header, which usually displays the name of the project,
