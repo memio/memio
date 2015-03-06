@@ -49,7 +49,7 @@ class MyClass
 
 Use [Composer](https://getcomposer.org/download) to install Medio in your project:
 
-    composer require gnugat/medio:~1.0@alpha
+    composer require gnugat/medio:~1.0@beta
 
 > **Note**: Medio is currently slightly unstable. Some BC break might happen, but we try to make those rare.
 

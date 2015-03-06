@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0-beta1: License header, Structure PHPdoc
+
+* added Structure PHPdoc generation
+* added License header generation
+
 ## 1.0.0-alpha18: Final method
 
 * added final method generation
