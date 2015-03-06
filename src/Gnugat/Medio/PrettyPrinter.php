@@ -19,6 +19,7 @@ use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
 use Gnugat\Medio\TwigExtension\Line\FileLineStrategy;
 use Gnugat\Medio\TwigExtension\Line\Line;
 use Gnugat\Medio\TwigExtension\Line\ObjectLineStrategy;
+use Gnugat\Medio\TwigExtension\Line\StructurePhpdocLineStrategy;
 use Gnugat\Medio\TwigExtension\Phpdoc;
 use Gnugat\Medio\TwigExtension\Type;
 use Gnugat\Medio\TwigExtension\Whitespace;
@@ -53,6 +54,7 @@ class PrettyPrinter
         $line->add(new ContractLineStrategy());
         $line->add(new FileLineStrategy());
         $line->add(new ObjectLineStrategy());
+        $line->add(new StructurePhpdocLineStrategy());
 
         $twig->addExtension(new Phpdoc());
         $twig->addExtension(new Type());

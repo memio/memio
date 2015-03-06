@@ -44,6 +44,54 @@ class MyClass
 }
 ```
 
+## 2. Structure's PHPdoc
+
+A `Structure` (an `Object` or a `Contract`) can have the following:
+
+* a description
+* a deprecation tag
+* an API tag
+
+Here's how to describe it:
+
+```php
+use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+
+$contract = Contract::make('Gnugat\Medio\MyInterface')
+    ->setStructurePhpdoc(StructurePhpdoc()
+        ->setDescription(Description::make('This is the first line')
+            ->addEmptyLine()
+            ->addLine('This is the third line')
+        )
+        ->setDeprecationTag(new DeprecationTag()) // Has 2 optional arguments: version, and description
+        ->setApiTag(new ApiTag('v2.0')) // The argument is optional
+    )
+;
+
+echo $prettyPrinter->generateCode($contract);
+```
+
+This will produce:
+
+```php
+/**
+ * This is the first line
+ *
+ * This is the third line
+ *
+ * @deprecated
+ *
+ * @api v2.0
+ */
+interface MyInterface
+{
+}
+```
+
 ## Next readings
 
 * [Examples](03-examples.md)

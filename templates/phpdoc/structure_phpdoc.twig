@@ -1,0 +1,12 @@
+{% set phpdoc_content %}
+{% if structure_phpdoc.description %}{% include 'phpdoc/description.twig' with { 'description': structure_phpdoc.description } only %}{% endif %}
+{{- needs_line_after(structure_phpdoc, 'description') ? "\n\n" -}}
+{% if structure_phpdoc.deprecationTag %}{% include 'phpdoc/deprecation_tag.twig' with { 'deprecation_tag': structure_phpdoc.deprecationTag } only %}{% endif %}
+{{- needs_line_after(structure_phpdoc, 'deprecation_tag') ? "\n\n" -}}
+{% if structure_phpdoc.apiTag %}{% include 'phpdoc/api_tag.twig' with { 'api_tag': structure_phpdoc.apiTag } only %}{% endif %}
+{% endset %}
+{% if not structure_phpdoc.isEmpty %}
+/**
+{{ phpdoc_content|indent(1, 'phpdoc') }}
+ */
+{%- endif %}
