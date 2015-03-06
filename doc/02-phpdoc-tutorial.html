@@ -66,88 +66,90 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Medio <a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/gnugat/medio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></h1>
-<p>Medio allows you to describe the code you want to generate using Models:</p>
-<pre><code class="language-php">$file = File::make('src/Gnugat/Medio/MyService.php')
-    -&gt;setStructure(Object::make('Gnugat\Medio\MyService')
-        -&gt;addProperty(new Property('createdAt'))
-        -&gt;addProperty(new Property('filename'))
+                    <h1>PHPdoc Tutorial</h1>
+<p>Medio also provides a way to document the code with <a href="http://www.phpdoc.org/">PHPdoc</a>.</p>
+<p>By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.</p>
+<p><img src="http://yuml.me/bc9d239b" alt="UML class diagram" /></p>
+<h2>1. License</h2>
+<p><code>Files</code> can have a license header, which usually displays the name of the project,
+the author's name and their emails:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
 
-        -&gt;addMethod(Method::make('__construct')
-            -&gt;addArgument('DateTime', 'createdAt')
-            -&gt;addArgument('string', 'filename')
-        )
-    )
-;</code></pre>
-<p>These Models can be given to a <code>PrettyPrinter</code>:</p>
-<pre><code class="language-php">echo $prettyPrinter-&gt;generateCode($file);</code></pre>
-<p>And as simply as that, you get the corresponding generated code:</p>
-<pre><code>&lt;?php
+$file = File::make('src/Gnugat/Medio/MyClass')
+    -&gt;setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
+
+    -&gt;setStructure(new Object('Gnugat\Medio\MyClass'))
+;
+
+echo $prettyPrinter-&gt;generateCode($file);</code></pre>
+<p>This will output:</p>
+<pre><code class="language-php">&lt;?php
+
+/*
+ * This file is part of the My Project project.
+ *
+ * (c) Me &lt;me@example.com&gt;
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Gnugat\Medio;
 
 class MyClass
 {
-    private $createdAt;
-
-    private $filename;
-
-    /**
-     * @param \DateTime $createdAt
-     * @param string    $filename
-     */
-    public function __construct(\DateTime $createdAt, $filename)
-    {
-    }
 }</code></pre>
-<h2>Installation</h2>
-<p>Use <a href="https://getcomposer.org/download">Composer</a> to install Medio in your project:</p>
-<pre><code>composer require gnugat/medio:~1.0@beta</code></pre>
-<blockquote>
-<p><strong>Note</strong>: Medio is currently slightly unstable. Some BC break might happen, but we try to make those rare.</p>
-</blockquote>
-<p>In order to generate the code, you'll need to create an instance of <code>PrettyPrinter</code>:</p>
-<pre><code class="language-php">&lt;?php
-
-require __DIR__.'/vendor/autoload.php';
-
-use Gnugat\Medio\PrettyPrinter;
-
-$loader = new \Twig_Loader_Filesystem(__DIR__.'/vendor/gnugat/medio/templates');
-$twig = new \Twig_Environment($loader);
-
-$prettyPrinter = new PrettyPrinter($twig);</code></pre>
-<blockquote>
-<p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
-If the coding style provided doesn't appeal to you, you can overwrite those templates easily.</p>
-</blockquote>
-<h2>Further documentation</h2>
-<p>Discover more by reading the docs:</p>
+<h2>2. Structure's PHPdoc</h2>
+<p>A <code>Structure</code> (an <code>Object</code> or a <code>Contract</code>) can have the following:</p>
 <ul>
-<li><a href="doc/01-model-tutorial.html">Model Tutorial</a></li>
-<li><a href="doc/02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
-<li><a href="doc/03-examples.html">Examples</a></li>
-<li><a href="doc/04-extending.html">Extending</a></li>
+<li>a description</li>
+<li>a deprecation tag</li>
+<li>an API tag</li>
 </ul>
-<p>You can see the current and past versions using one of the following:</p>
+<p>Here's how to describe it:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+
+$contract = Contract::make('Gnugat\Medio\MyInterface')
+    -&gt;setStructurePhpdoc(StructurePhpdoc()
+        -&gt;setDescription(Description::make('This is the first line')
+            -&gt;addEmptyLine()
+            -&gt;addLine('This is the third line')
+        )
+        -&gt;setDeprecationTag(new DeprecationTag()) // Has 2 optional arguments: version, and description
+        -&gt;setApiTag(new ApiTag('v2.0')) // The argument is optional
+    )
+;
+
+echo $prettyPrinter-&gt;generateCode($contract);</code></pre>
+<p>This will produce:</p>
+<pre><code class="language-php">/**
+ * This is the first line
+ *
+ * This is the third line
+ *
+ * @deprecated
+ *
+ * @api v2.0
+ */
+interface MyInterface
+{
+}</code></pre>
+<h2>Next readings</h2>
 <ul>
-<li>the <code>git tag</code> command</li>
-<li>the <a href="https://github.com/gnugat/medio/releases">releases page on Github</a></li>
-<li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
+<li><a href="03-examples.html">Examples</a></li>
+<li><a href="04-extending.html">Extending</a></li>
 </ul>
-<p>And finally some meta documentation:</p>
+<p>Previous pages:</p>
 <ul>
-<li><a href="LICENSE">copyright and MIT license</a></li>
-<li><a href="VERSIONING.html">versioning and branching models</a></li>
-<li><a href="CONTRIBUTING.html">contribution instructions</a></li>
+<li><a href="01-model-tutorial.html">Model Tutorial</a></li>
+<li><a href="../README.html">README</a></li>
 </ul>
-<h2>Roadmap</h2>
-<ol>
-<li>alpha: generate as much code as possible</li>
-<li>beta: generate as much PHPdoc as possible</li>
-<li>release candidate: read as much code as possible (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
-<li>stable release: Medio is able to read a file and to write it again without losing any information</li>
-</ol>
                 </section>
 
             </div>
