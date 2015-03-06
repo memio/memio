@@ -75,9 +75,10 @@ $prettyPrinter = new PrettyPrinter($twig);
 
 Discover more by reading the docs:
 
-* [Tutorial](doc/01-tutorial.md)
-* [Examples](doc/02-examples.md)
-* [Extending](doc/03-extending.md)
+* [Model Tutorial](doc/01-model-tutorial.md)
+* [PHPdoc Tutorial](doc/02-phpdoc-tutorial.md)
+* [Examples](doc/03-examples.md)
+* [Extending](doc/04-extending.md)
 
 You can see the current and past versions using one of the following:
 

@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
+
 /**
  * @api
  */
@@ -25,6 +27,11 @@ class File
      * @var array
      */
     private $fullyQualifiedNames = array();
+
+    /**
+     * @var LicensePhpdoc
+     */
+    private $licensePhpdoc;
 
     /**
      * @var Strucutre
@@ -115,5 +122,37 @@ class File
     public function getStructure()
     {
         return $this->structure;
+    }
+
+    /**
+     * @return LicensePhpdoc
+     */
+    public function getLicensePhpdoc()
+    {
+        return $this->licensePhpdoc;
+    }
+
+    /**
+     * @param LicensePhpdoc $licensePhpdoc
+     *
+     * @return File
+     *
+     * @api
+     */
+    public function setLicensePhpdoc(LicensePhpdoc $licensePhpdoc)
+    {
+        $this->licensePhpdoc = $licensePhpdoc;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     *
+     * @api
+     */
+    public function removeLicensePhpdoc()
+    {
+        $this->licensePhpdoc = null;
     }
 }

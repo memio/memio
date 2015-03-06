@@ -32,9 +32,10 @@ have been introduced:
 
 ## Next readings
 
-* [Extending](03-extending.md)
+* [Extending](04-extending.md)
 
 Previous pages:
 
-* [Tutorial](01-tutorial.md)
+* [PHPdoc Tutorial](02-phpdoc-tutorial.md)
+* [Model Tutorial](01-model-tutorial.md)
 * [README](../README.md)

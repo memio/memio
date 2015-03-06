@@ -15,12 +15,15 @@ menu:
         home:
             text: Home
             relativeUrl:
-        tutorial:
-            text: Tutorial
-            relativeUrl: doc/01-tutorial.html
+        model_tutorial:
+            text: Model Tutorial
+            relativeUrl: doc/01-model-tutorial.html
+        phpdoc_tutorial:
+            text: PHPDoc Tutorial
+            relativeUrl: doc/02-phpdoc-tutorial.html
         examples:
             text: Examples
-            relativeUrl: doc/02-examples.html
+            relativeUrl: doc/03-examples.html
         extending:
             text: Extending
-            relativeUrl: doc/03-extending.html
+            relativeUrl: doc/04-extending.html
