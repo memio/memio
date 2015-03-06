@@ -2,7 +2,7 @@
 [Description|lines]
 [DeprecationTag|version;description]
 [LicensePhpdoc|projectName;authorName;authorEmail]
-[StructurePhpdoc]
+[PropertyTag|type]
 [File]->[LicensePhpdoc]
 [<<Structure>>]->[StructurePhpdoc]
 [StructurePhpdoc]->[ApiTag]
