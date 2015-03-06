@@ -17,18 +17,11 @@ class TypeSpec extends ObjectBehavior
 {
     function it_can_be_an_object()
     {
-        $this->beConstructedWith('\DateTime');
-
-        $this->getName()->shouldBe('DateTime');
-        $this->isObject()->shouldBe(true);
-    }
-
-    function it_strips_objects_of_their_namespace()
-    {
         $this->beConstructedWith('Gnugat\Medio\MyClass');
 
         $this->getName()->shouldBe('MyClass');
         $this->isObject()->shouldBe(true);
+        $this->getFullyQualifiedName()->shouldBe('Gnugat\Medio\MyClass');
     }
 
     function it_can_have_a_type_hint_if_it_is_an_object()

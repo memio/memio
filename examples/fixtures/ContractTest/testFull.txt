@@ -4,11 +4,11 @@ interface MyInterface extends FirstContract, SecondContract
     const SECOND_CONSTANT = 'meh';
 
     /**
-     * @param \DateTime $firstArgument
-     * @param array     $secondArgument
-     * @param string    $thirdArgument
+     * @param DateTime $firstArgument
+     * @param array    $secondArgument
+     * @param string   $thirdArgument
      */
-    public function firstMethod(\DateTime $firstArgument, array $secondArgument, $thirdArgument);
+    public function firstMethod(DateTime $firstArgument, array $secondArgument, $thirdArgument);
 
     public function secondMethod();
 }

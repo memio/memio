@@ -11,10 +11,12 @@
 
 namespace Gnugat\Medio\Model\Phpdoc;
 
+use Gnugat\Medio\ValueObject\Type;
+
 class PropertyTag
 {
     /**
-     * @var string
+     * @var Type
      */
     private $type;
 
@@ -25,7 +27,7 @@ class PropertyTag
      */
     public function __construct($type)
     {
-        $this->type = $type;
+        $this->type = new Type($type);
     }
 
     /**
@@ -45,6 +47,6 @@ class PropertyTag
      */
     public function getType()
     {
-        return $this->type;
+        return $this->type->getName();
     }
 }

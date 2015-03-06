@@ -1,8 +1,8 @@
     /**
-     * @param \DateTime    $dateTime
-     * @param \ArrayObject $arrayObject
+     * @param DateTime    $dateTime
+     * @param ArrayObject $arrayObject
      */
-    public function __construct(\DateTime $dateTime, \ArrayObject $arrayObject)
+    public function __construct(DateTime $dateTime, ArrayObject $arrayObject)
     {
     }
 

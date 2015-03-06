@@ -80,6 +80,14 @@ class Type
     }
 
     /**
+     * @return string
+     */
+    public function getFullyQualifiedName()
+    {
+        return $this->fullyqualifiedName->getFullyQualifiedName();
+    }
+
+    /**
      * @return bool
      *
      * @api

@@ -39,14 +39,14 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     public function testThreeArguments()
     {
         $arguments = array(
-            new Argument('\\SplFileInfo', 'file'),
+            new Argument('SplFileInfo', 'file'),
             new Argument('string', 'newLine'),
             new Argument('int', 'lineNumber'),
         );
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
-        $this->assertSame('\\SplFileInfo $file, $newLine, $lineNumber', $generatedCode);
+        $this->assertSame('SplFileInfo $file, $newLine, $lineNumber', $generatedCode);
     }
 
     public function testTooManyArgumentsToBeOnOneLine()

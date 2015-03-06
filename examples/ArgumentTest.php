@@ -45,11 +45,11 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testObject()
     {
-        $argument = new Argument('\\DateTime', 'dateTime');
+        $argument = new Argument('DateTime', 'dateTime');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
-        $this->assertSame('\\DateTime $dateTime', $generatedCode);
+        $this->assertSame('DateTime $dateTime', $generatedCode);
     }
   
     public function testDefaultNullValueForObject()

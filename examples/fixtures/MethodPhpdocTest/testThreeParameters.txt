@@ -1,6 +1,6 @@
     /**
-     * @param \SplFileInfo $file
-     * @param string       $newLine
-     * @param int          $lineNumber
+     * @param SplFileInfo $file
+     * @param string      $newLine
+     * @param int         $lineNumber
      */
 

@@ -21,4 +21,11 @@ class PropertyTagSpec extends ObjectBehavior
 
         $this->getType()->shouldBe('string');
     }
+
+    function it_can_have_a_fully_qualified_name()
+    {
+        $this->beConstructedWith('Gnugat\Medio\MyClass');
+
+        $this->getType()->shouldBe('MyClass');
+    }
 }
