@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-alpha18: Final method
+
+* added final method generation
+
 ## 1.0.0-alpha17: Abstract method
 
 * added abstract method generation
