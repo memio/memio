@@ -17,9 +17,9 @@ namespace Gnugat\Medio\Model\Phpdoc;
 class PropertyPhpdoc
 {
     /**
-     * @var PropertyTag
+     * @var VariableTag
      */
-    private $propertyTag;
+    private $variableTag;
 
     /**
      * @return PropertyPhpdoc
@@ -32,25 +32,25 @@ class PropertyPhpdoc
     }
 
     /**
-     * @param PropertyTag $propertyTag
+     * @param VariableTag $variableTag
      *
      * @return PropertyPhpdoc
      *
      * @api
      */
-    public function setPropertyTag(PropertyTag $propertyTag)
+    public function setVariableTag(VariableTag $variableTag)
     {
-        $this->propertyTag = $propertyTag;
+        $this->variableTag = $variableTag;
 
         return $this;
     }
 
     /**
-     * @return PropertyTag
+     * @return VariableTag
      */
-    public function getPropertyTag()
+    public function getVariableTag()
     {
-        return $this->propertyTag;
+        return $this->variableTag;
     }
 
     /**
@@ -58,6 +58,6 @@ class PropertyPhpdoc
      */
     public function isEmpty()
     {
-        return (null === $this->propertyTag);
+        return (null === $this->variableTag);
     }
 }

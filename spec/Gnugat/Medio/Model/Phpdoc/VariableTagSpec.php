@@ -13,7 +13,7 @@ namespace spec\Gnugat\Medio\Model\Phpdoc;
 
 use PhpSpec\ObjectBehavior;
 
-class PropertyTagSpec extends ObjectBehavior
+class VariableTagSpec extends ObjectBehavior
 {
     function it_has_a_type()
     {

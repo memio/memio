@@ -12,7 +12,7 @@
 namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\PropertyTag;
+use Gnugat\Medio\Model\Phpdoc\VariableTag;
 use Gnugat\Medio\Model\Property;
 
 class PropertyTest extends PrettyPrinterTestCase
@@ -30,7 +30,7 @@ class PropertyTest extends PrettyPrinterTestCase
     {
         $property = Property::make('myClass')
             ->setPhpdoc(PropertyPhpdoc::make()
-                ->setPropertyTag(new PropertyTag('Gnugat\Medio\MyClass'))
+                ->setVariableTag(new VariableTag('Gnugat\Medio\MyClass'))
             )
         ;
 

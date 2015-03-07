@@ -11,7 +11,7 @@
 
 namespace spec\Gnugat\Medio\Model\Phpdoc;
 
-use Gnugat\Medio\Model\Phpdoc\PropertyTag;
+use Gnugat\Medio\Model\Phpdoc\VariableTag;
 use PhpSpec\ObjectBehavior;
 
 class PropertyPhpdocSpec extends ObjectBehavior
@@ -21,10 +21,10 @@ class PropertyPhpdocSpec extends ObjectBehavior
         $this->isEmpty()->shouldBe(true);
     }
 
-    function it_can_have_a_property_tag(PropertyTag $propertyTag)
+    function it_can_have_a_property_tag(VariableTag $variableTag)
     {
-        $this->setPropertyTag($propertyTag);
-        $this->getPropertyTag()->shouldBe($propertyTag);
+        $this->setVariableTag($variableTag);
+        $this->getVariableTag()->shouldBe($variableTag);
         $this->isEmpty(false);
     }
 }

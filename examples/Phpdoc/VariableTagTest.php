@@ -12,13 +12,13 @@
 namespace Gnugat\Medio\Examples\Phpdoc;
 
 use Gnugat\Medio\Examples\PrettyPrinterTestCase;
-use Gnugat\Medio\Model\Phpdoc\PropertyTag;
+use Gnugat\Medio\Model\Phpdoc\VariableTag;
 
-class PropertyTagTest extends PrettyPrinterTestCase
+class VariableTagTest extends PrettyPrinterTestCase
 {
     public function testType()
     {
-        $propertyTag = new PropertyTag('string');
+        $propertyTag = new VariableTag('string');
 
         $generatedCode = $this->prettyPrinter->generateCode($propertyTag);
 

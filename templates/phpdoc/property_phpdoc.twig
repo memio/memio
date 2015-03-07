@@ -1,5 +1,5 @@
 {% set phpdoc_content %}
-{% if property_phpdoc.propertyTag %}{% include 'phpdoc/property_tag.twig' with { 'property_tag': property_phpdoc.propertyTag } only %}{% endif %}
+{% if property_phpdoc.VariableTag %}{% include 'phpdoc/variable_tag.twig' with { 'variable_tag': property_phpdoc.VariableTag } only %}{% endif %}
 {% endset -%}
 
 {% if not property_phpdoc.isEmpty %}

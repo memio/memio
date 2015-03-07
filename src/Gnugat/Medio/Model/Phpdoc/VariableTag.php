@@ -13,7 +13,7 @@ namespace Gnugat\Medio\Model\Phpdoc;
 
 use Gnugat\Medio\ValueObject\Type;
 
-class PropertyTag
+class VariableTag
 {
     /**
      * @var Type
