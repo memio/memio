@@ -33,6 +33,8 @@ class StructurePhpdoc
 
     /**
      * @return StructurePhpdoc
+     *
+     * @api
      */
     public static function make()
     {

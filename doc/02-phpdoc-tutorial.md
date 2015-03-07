@@ -4,9 +4,9 @@ Medio also provides a way to document the code with [PHPdoc](http://www.phpdoc.o
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
-![UML class diagram](http://yuml.me/bc9d239b)
+![UML class diagram](http://yuml.me/94f12367)
 
-## 1. License
+## 1. Generating the License header
 
 `Files` can have a license header, which usually displays the name of the project,
 the author's name and their emails:
@@ -46,7 +46,7 @@ class MyClass
 }
 ```
 
-## 2. Structure's PHPdoc
+## 2. Generating PHPdoc for a Structure
 
 A `Structure` (an `Object` or a `Contract`) can have the following:
 
@@ -64,7 +64,7 @@ use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Gnugat\Medio\MyInterface')
-    ->setStructurePhpdoc(StructurePhpdoc()
+    ->setStructurePhpdoc(StructurePhpdoc::make()
         ->setDescription(Description::make('This is the first line')
             ->addEmptyLine()
             ->addLine('This is the third line')
@@ -92,6 +92,33 @@ This will produce:
 interface MyInterface
 {
 }
+```
+
+## 3. Generating PHPdoc for a Property
+
+A `Property` can have a property tag:
+
+```php
+use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\PropertyTag;
+
+$property = Property::make('myClass')
+    ->setPhpdoc(PropertyPhpdoc::make()
+        ->setPropertyTag(new PropertyTag('Gnugat\Medio\MyClass'))
+    )
+;
+
+echo $prettyPrinter->generateCode($property);
+```
+
+This will generate:
+
+```php
+    /**
+     * @var MyClass
+     */
+    private $myClass;
 ```
 
 ## Next readings

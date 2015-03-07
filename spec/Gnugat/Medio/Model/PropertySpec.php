@@ -11,6 +11,7 @@
 
 namespace spec\Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
 use PhpSpec\ObjectBehavior;
 
 class PropertySpec extends ObjectBehavior
@@ -74,5 +75,12 @@ class PropertySpec extends ObjectBehavior
         $this->getDefaultValue()->shouldBe(null);
         $this->setDefaultValue('null');
         $this->getDefaultValue()->shouldBe('null');
+    }
+
+    function it_can_have_phpdoc(PropertyPhpdoc $phpdoc)
+    {
+        $this->getPhpdoc()->shouldBe(null);
+        $this->setPhpdoc($phpdoc);
+        $this->getPhpdoc()->shouldBe($phpdoc);
     }
 }

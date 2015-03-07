@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Examples;
 
+use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\PropertyTag;
 use Gnugat\Medio\Model\Property;
 
 class PropertyTest extends PrettyPrinterTestCase
@@ -22,6 +24,19 @@ class PropertyTest extends PrettyPrinterTestCase
         $generatedCode = $this->prettyPrinter->generateCode($property);
 
         $this->assertSame('    private $dateTime;', $generatedCode);
+    }
+
+    public function testWithPhpdoc()
+    {
+        $property = Property::make('myClass')
+            ->setPhpdoc(PropertyPhpdoc::make()
+                ->setPropertyTag(new PropertyTag('Gnugat\Medio\MyClass'))
+            )
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($property);
+
+        $this->assertExpectedCode($generatedCode);
     }
 
     public function testPublicVisibility()

@@ -1,0 +1,9 @@
+{% set phpdoc_content %}
+{% if property_phpdoc.propertyTag %}{% include 'phpdoc/property_tag.twig' with { 'property_tag': property_phpdoc.propertyTag } only %}{% endif %}
+{% endset -%}
+
+{% if not property_phpdoc.isEmpty %}
+    /**
+    {{ phpdoc_content|indent(1, 'phpdoc') }}
+     */
+{% endif %}

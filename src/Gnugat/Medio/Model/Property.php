@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
+
 /**
  * @api
  */
@@ -35,6 +37,11 @@ class Property
      * @var bool
      */
     private $isStatic = false;
+
+    /**
+     * @var PropertyPhpdoc
+     */
+    private $propertyPhpdoc;
 
     /**
      * @param string $name
@@ -158,6 +165,28 @@ class Property
     public function setDefaultValue($defaultValue)
     {
         $this->defaultValue = $defaultValue;
+
+        return $this;
+    }
+
+    /**
+     * @return PropertyPhpdoc
+     */
+    public function getPhpdoc()
+    {
+        return $this->propertyPhpdoc;
+    }
+
+    /**
+     * @param PropertyPhpdoc $propertyPhpdoc
+     *
+     * @return Property
+     *
+     * @api
+     */
+    public function setPhpdoc(PropertyPhpdoc $propertyPhpdoc)
+    {
+        $this->propertyPhpdoc = $propertyPhpdoc;
 
         return $this;
     }
