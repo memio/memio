@@ -4,7 +4,7 @@ Medio also provides a way to document the code with [PHPdoc](http://www.phpdoc.o
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
-![UML class diagram](http://yuml.me/94f12367)
+![UML class diagram](http://yuml.me/33894c36)
 
 ## 1. Generating the License header
 
@@ -101,11 +101,11 @@ A `Property` can have a property tag:
 ```php
 use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\PropertyTag;
+use Gnugat\Medio\Model\Phpdoc\VariableTag;
 
 $property = Property::make('myClass')
     ->setPhpdoc(PropertyPhpdoc::make()
-        ->setPropertyTag(new PropertyTag('Gnugat\Medio\MyClass'))
+        ->setVariableTag(new VariableTag('Gnugat\Medio\MyClass'))
     )
 ;
 
