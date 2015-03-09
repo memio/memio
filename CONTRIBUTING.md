@@ -21,7 +21,7 @@ Here's some tips to make you the best contributor ever:
 Use [PHP CS fixer](http://cs.sensiolabs.org/) to make your code compliant with
 Medio's coding standards:
 
-    php-cs-fixer fix --config=sf23 .
+    ./vendor/bin/php-cs-fixer fix --config=sf23 .
 
 ## Specifications
 

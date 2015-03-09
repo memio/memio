@@ -35,6 +35,7 @@
         "puli/repository-manager": "~1.0@beta",
         "webmozart/glob": "~1.0@beta",
         "webmozart/json": "~1.0@beta",
-        "webmozart/key-value-store": "~1.0@beta"
+        "webmozart/key-value-store": "~1.0@beta",
+        "fabpot/php-cs-fixer": "~1.5"
     }
 }
