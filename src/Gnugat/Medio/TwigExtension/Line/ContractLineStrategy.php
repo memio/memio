@@ -17,7 +17,7 @@ use Gnugat\Medio\Model\Contract;
 class ContractLineStrategy implements LineStrategy
 {
     /**
-     * {@inheritdDoc}
+     * {@inheritDoc}
      */
     public function supports($model)
     {
@@ -25,7 +25,7 @@ class ContractLineStrategy implements LineStrategy
     }
 
     /**
-     * {@inheritdDoc}
+     * {@inheritDoc}
      */
     public function needsLineAfter($model, $block)
     {

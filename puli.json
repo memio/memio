@@ -29,6 +29,10 @@
             "install-path": "vendor/doctrine/lexer",
             "installer": "composer"
         },
+        "fabpot/php-cs-fixer": {
+            "install-path": "vendor/fabpot/php-cs-fixer",
+            "installer": "composer"
+        },
         "justinrainbow/json-schema": {
             "install-path": "vendor/justinrainbow/json-schema",
             "installer": "composer"
@@ -175,6 +179,10 @@
         },
         "symfony/process": {
             "install-path": "vendor/symfony/process/Symfony/Component/Process",
+            "installer": "composer"
+        },
+        "symfony/stopwatch": {
+            "install-path": "vendor/symfony/stopwatch/Symfony/Component/Stopwatch",
             "installer": "composer"
         },
         "symfony/yaml": {

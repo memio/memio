@@ -43,7 +43,6 @@ class Description
         return $this;
     }
 
-
     /**
      * @param string $line
      *
