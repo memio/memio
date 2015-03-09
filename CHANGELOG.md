@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-beta2: Property PHPdoc
+
+* added Property PHPdoc generation
+* added Argument default value generation
+
+> **Note**: Type#getName now returns the unqualified name. To get the fully qualified
+> name, use Type#getFullyQualifiedName.
+
 ## 1.0.0-beta1: License header, Structure PHPdoc
 
 * added Structure PHPdoc generation
