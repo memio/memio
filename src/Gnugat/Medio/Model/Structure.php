@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+
 /**
  * An abstract type which defines behavior using methods.
  *
@@ -32,4 +34,18 @@ interface Structure
      * @return string
      */
     public function getNamespace();
+
+    /**
+     * @return StructurePhpdoc
+     */
+    public function getPhpdoc();
+
+    /**
+     * @param StructurePhpdoc $structurePhpdoc
+     *
+     * @return Structure
+     *
+     * @api
+     */
+    public function setPhpdoc(StructurePhpdoc $structurePhpdoc);
 }

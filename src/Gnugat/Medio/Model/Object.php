@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+
 /**
  * A PHP Class ("class" is a reserved word and cannot be used as classname).
  *
@@ -52,6 +54,11 @@ class Object implements Structure
      * @var array
      */
     private $properties = array();
+
+    /**
+     * @var StructurePhpdoc
+     */
+    private $structurePhpdoc;
 
     /**
      * @param string $fullyQualifiedName
@@ -255,6 +262,24 @@ class Object implements Structure
     public function removeFinal()
     {
         $this->isFinal = false;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhpdoc()
+    {
+        return $this->structurePhpdoc;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPhpdoc(StructurePhpdoc $structurePhpdoc)
+    {
+        $this->structurePhpdoc = $structurePhpdoc;
 
         return $this;
     }

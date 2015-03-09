@@ -1,3 +1,4 @@
+{% if object.phpdoc %}{% include 'phpdoc/structure_phpdoc.twig' with {'structure_phpdoc': object.phpdoc} %}{% endif %}
 {{ object.isFinal ? 'final ' }}class {{ object.name }}
     {{- object.hasParent ? ' extends ' ~ object.Parent.name }}
     {{- object.allContracts is not empty ? ' implements ' }}

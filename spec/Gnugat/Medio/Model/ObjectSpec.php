@@ -15,6 +15,7 @@ use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 use Gnugat\Medio\Model\Property;
 use PhpSpec\ObjectBehavior;
 
@@ -93,5 +94,12 @@ class ObjectSpec extends ObjectBehavior
         $this->isFinal()->shouldBe(true);
         $this->removeFinal();
         $this->isFinal()->shouldBe(false);
+    }
+
+    function it_can_have_phpdoc(StructurePhpdoc $phpdoc)
+    {
+        $this->getPhpdoc()->shouldBe(null);
+        $this->setPhpdoc($phpdoc);
+        $this->getPhpdoc()->shouldBe($phpdoc);
     }
 }

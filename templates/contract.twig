@@ -1,3 +1,4 @@
+{% if contract.phpdoc %}{% include 'phpdoc/structure_phpdoc.twig' with {'structure_phpdoc': contract.phpdoc} %}{% endif %}
 interface {{ contract.name }}
     {{- contract.allContracts is not empty ? ' extends ' }}
     {%- include 'collection/contract_collection.twig' with { 'contract_collection': contract.allContracts } only %}

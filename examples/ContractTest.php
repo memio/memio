@@ -15,6 +15,10 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 class ContractTest extends PrettyPrinterTestCase
 {
@@ -25,6 +29,24 @@ class ContractTest extends PrettyPrinterTestCase
         $contract = new Contract(self::NAME);
 
         $generatedCode = $this->prettyPrinter->generateCode($contract);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithPhpdoc()
+    {
+        $object = Contract::make(self::NAME)
+            ->setPhpdoc(StructurePhpdoc::make()
+                ->setDescription(Description::make('Short description')
+                    ->addEmptyLine()
+                    ->addLine('Longer description')
+                )
+                ->setDeprecationTag(new DeprecationTag('v2.1', 'Use Object instead'))
+                ->setApiTag(new ApiTag('v2.0'))
+            )
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($object);
 
         $this->assertExpectedCode($generatedCode);
     }

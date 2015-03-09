@@ -16,6 +16,10 @@ use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 use Gnugat\Medio\Model\Property;
 
 class ObjectTest extends PrettyPrinterTestCase
@@ -25,6 +29,24 @@ class ObjectTest extends PrettyPrinterTestCase
     public function testEmpty()
     {
         $object = new Object(self::NAME);
+
+        $generatedCode = $this->prettyPrinter->generateCode($object);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithPhpdoc()
+    {
+        $object = Object::make(self::NAME)
+            ->setPhpdoc(StructurePhpdoc::make()
+                ->setDescription(Description::make('Short description')
+                    ->addEmptyLine()
+                    ->addLine('Longer description')
+                )
+                ->setDeprecationTag(new DeprecationTag('v2.1', 'Use Object instead'))
+                ->setApiTag(new ApiTag('v2.0'))
+            )
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($object);
 

@@ -14,6 +14,7 @@ namespace spec\Gnugat\Medio\Model;
 use Gnugat\Medio\Model\Constant;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 use PhpSpec\ObjectBehavior;
 
 class ContractSpec extends ObjectBehavior
@@ -66,5 +67,12 @@ class ContractSpec extends ObjectBehavior
         $this->allContracts()->shouldBe(array());
         $this->extend($contract);
         $this->allContracts()->shouldBe(array($contract));
+    }
+
+    function it_can_have_phpdoc(StructurePhpdoc $phpdoc)
+    {
+        $this->getPhpdoc()->shouldBe(null);
+        $this->setPhpdoc($phpdoc);
+        $this->getPhpdoc()->shouldBe($phpdoc);
     }
 }
