@@ -53,7 +53,7 @@ class Whitespace extends Twig_Extension
 
     /**
      * @param string $text
-     * @param int $level
+     * @param int    $level
      * @param string $type
      *
      * @return string

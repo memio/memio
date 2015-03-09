@@ -17,7 +17,7 @@ use Gnugat\Medio\Model\Object;
 class ObjectLineStrategy implements LineStrategy
 {
     /**
-     * {@inheritdDoc}
+     * {@inheritDoc}
      */
     public function supports($model)
     {
@@ -25,7 +25,7 @@ class ObjectLineStrategy implements LineStrategy
     }
 
     /**
-     * {@inheritdDoc}
+     * {@inheritDoc}
      */
     public function needsLineAfter($model, $block)
     {
