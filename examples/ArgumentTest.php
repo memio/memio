@@ -51,32 +51,37 @@ class ArgumentTest extends PrettyPrinterTestCase
 
         $this->assertSame('DateTime $dateTime', $generatedCode);
     }
-  
+
     public function testDefaultNullValueForObject()
     {
-        $argument = new Argument('\\DateTime', 'dateTime');
-        $argument->setDefaultValue('null');
-      
+        $argument = Argument::make('DateTime', 'dateTime')
+            ->setDefaultValue('null')
+        ;
+
         $generatedCode = $this->prettyPrinter->generateCode($argument);
-        $this->assertSame('\\DateTime $dateTime = null', $generatedCode);
+
+        $this->assertSame('DateTime $dateTime = null', $generatedCode);
     }
 
     public function testDefaultStringValueForObject()
     {
-        $argument = new Argument('string', 'status');
-        $argument->setDefaultValue('"A"');
-    
+        $argument = Argument::make('string', 'status')
+            ->setDefaultValue('"A"')
+        ;
+
         $generatedCode = $this->prettyPrinter->generateCode($argument);
+
         $this->assertSame('$status = "A"', $generatedCode);
     }
-  
+
     public function testDefaultConstantValueForObject()
     {
-        $argument = new Argument('string', 'status');
-        $argument->setDefaultValue('self::DEFAULT_STATUS');
-    
+        $argument = Argument::make('string', 'status')
+            ->setDefaultValue('self::DEFAULT_STATUS')
+        ;
+
         $generatedCode = $this->prettyPrinter->generateCode($argument);
+
         $this->assertSame('$status = self::DEFAULT_STATUS', $generatedCode);
     }
-  
 }
