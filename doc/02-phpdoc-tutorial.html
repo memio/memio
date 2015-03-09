@@ -69,8 +69,8 @@
                     <h1>PHPdoc Tutorial</h1>
 <p>Medio also provides a way to document the code with <a href="http://www.phpdoc.org/">PHPdoc</a>.</p>
 <p>By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.</p>
-<p><img src="http://yuml.me/bc9d239b" alt="UML class diagram" /></p>
-<h2>1. License</h2>
+<p><img src="http://yuml.me/33894c36" alt="UML class diagram" /></p>
+<h2>1. Generating the License header</h2>
 <p><code>Files</code> can have a license header, which usually displays the name of the project,
 the author's name and their emails:</p>
 <pre><code class="language-php">use Gnugat\Medio\Model\File;
@@ -101,7 +101,7 @@ namespace Gnugat\Medio;
 class MyClass
 {
 }</code></pre>
-<h2>2. Structure's PHPdoc</h2>
+<h2>2. Generating PHPdoc for a Structure</h2>
 <p>A <code>Structure</code> (an <code>Object</code> or a <code>Contract</code>) can have the following:</p>
 <ul>
 <li>a description</li>
@@ -116,7 +116,7 @@ use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Gnugat\Medio\MyInterface')
-    -&gt;setStructurePhpdoc(StructurePhpdoc()
+    -&gt;setStructurePhpdoc(StructurePhpdoc::make()
         -&gt;setDescription(Description::make('This is the first line')
             -&gt;addEmptyLine()
             -&gt;addLine('This is the third line')
@@ -140,6 +140,24 @@ echo $prettyPrinter-&gt;generateCode($contract);</code></pre>
 interface MyInterface
 {
 }</code></pre>
+<h2>3. Generating PHPdoc for a Property</h2>
+<p>A <code>Property</code> can have a property tag:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\VariableTag;
+
+$property = Property::make('myClass')
+    -&gt;setPhpdoc(PropertyPhpdoc::make()
+        -&gt;setVariableTag(new VariableTag('Gnugat\Medio\MyClass'))
+    )
+;
+
+echo $prettyPrinter-&gt;generateCode($property);</code></pre>
+<p>This will generate:</p>
+<pre><code class="language-php">    /**
+     * @var MyClass
+     */
+    private $myClass;</code></pre>
 <h2>Next readings</h2>
 <ul>
 <li><a href="03-examples.html">Examples</a></li>
