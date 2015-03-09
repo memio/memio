@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-beta3: Fixing Structure PHPdoc
+
+* fixed Structure PHPdoc generation
+
 ## 1.0.0-beta2: Property PHPdoc
 
 * added Property PHPdoc generation
