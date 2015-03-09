@@ -11,6 +11,8 @@
 
 namespace Gnugat\Medio\Model;
 
+use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+
 /**
  * A PHP Interface ("interface" is a reserved word and cannot be used as classname).
  *
@@ -37,6 +39,11 @@ class Contract implements Structure
      * @var array
      */
     private $methods = array();
+
+    /**
+     * @var StructurePhpdoc
+     */
+    private $structurePhpdoc;
 
     /**
      * @param string $fullyQualifiedName
@@ -148,5 +155,23 @@ class Contract implements Structure
     public function getNamespace()
     {
         return $this->fullyQualifiedName->getNamespace();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhpdoc()
+    {
+        return $this->structurePhpdoc;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPhpdoc(StructurePhpdoc $structurePhpdoc)
+    {
+        $this->structurePhpdoc = $structurePhpdoc;
+
+        return $this;
     }
 }
