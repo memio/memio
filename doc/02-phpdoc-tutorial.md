@@ -64,7 +64,7 @@ use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Gnugat\Medio\MyInterface')
-    ->setStructurePhpdoc(StructurePhpdoc::make()
+    ->setPhpdoc(StructurePhpdoc::make()
         ->setDescription(Description::make('This is the first line')
             ->addEmptyLine()
             ->addLine('This is the third line')
