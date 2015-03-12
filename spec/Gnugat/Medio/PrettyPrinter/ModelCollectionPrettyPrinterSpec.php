@@ -27,9 +27,12 @@ class ModelCollectionPrettyPrinterSpec extends ObjectBehavior
         $this->shouldImplement('Gnugat\\Medio\\PrettyPrinter\\PrettyPrinterStrategy');
     }
 
-    function it_supports_arrays()
+    function it_supports_array_of_models()
     {
-        $this->supports(array(), array())->shouldBe(true);
+        $argument = new Argument('string', 'filename');
+        $arguments = array($argument);
+
+        $this->supports($arguments, array())->shouldBe(true);
     }
 
     function it_generates_code_using_collection_templates(Twig_Environment $twig)

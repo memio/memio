@@ -34,7 +34,19 @@ class ModelCollectionPrettyPrinter implements PrettyPrinterStrategy
      */
     public function supports($model)
     {
-        return is_array($model);
+        if (!is_array($model)) {
+            return false;
+        }
+        if (empty($model)) {
+            return true;
+        }
+        $firstElement = current($model);
+        if (!is_object($firstElement)) {
+            return false;
+        }
+        $fqcn = get_class($firstElement);
+
+        return 1 === preg_match('/^Gnugat\\\\Medio\\\\Model\\\\/', $fqcn);
     }
 
     /**
