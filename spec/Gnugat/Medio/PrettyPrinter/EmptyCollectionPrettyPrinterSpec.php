@@ -15,7 +15,7 @@ use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
-class ModelCollectionPrettyPrinterSpec extends ObjectBehavior
+class EmptyCollectionPrettyPrinterSpec extends ObjectBehavior
 {
     function let(Twig_Environment $twig)
     {
@@ -27,21 +27,13 @@ class ModelCollectionPrettyPrinterSpec extends ObjectBehavior
         $this->shouldImplement('Gnugat\\Medio\\PrettyPrinter\\PrettyPrinterStrategy');
     }
 
-    function it_supports_array_of_models()
+    function it_supports_empty_arrays()
     {
-        $argument = new Argument('string', 'filename');
-        $arguments = array($argument);
-
-        $this->supports($arguments, array())->shouldBe(true);
+        $this->supports(array(), array())->shouldBe(true);
     }
 
-    function it_generates_code_using_collection_templates(Twig_Environment $twig)
+    function it_generates_an_empty_string(Twig_Environment $twig)
     {
-        $argument = new Argument('string', 'filename');
-        $arguments = array($argument);
-
-        $twig->render('collection/argument_collection.twig', array('argument_collection' => $arguments))->shouldBeCalled();
-
-        $this->generateCode($arguments);
+        $this->generateCode(array())->shouldBe('');
     }
 }

@@ -14,7 +14,7 @@ namespace Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Model\FullyQualifiedName;
 use Twig_Environment;
 
-class ModelCollectionPrettyPrinter implements PrettyPrinterStrategy
+class EmptyCollectionPrettyPrinter implements PrettyPrinterStrategy
 {
     /**
      * @var Twig_Environment
@@ -34,16 +34,7 @@ class ModelCollectionPrettyPrinter implements PrettyPrinterStrategy
      */
     public function supports($model)
     {
-        if (!is_array($model)) {
-            return false;
-        }
-        $firstElement = current($model);
-        if (!is_object($firstElement)) {
-            return false;
-        }
-        $fqcn = get_class($firstElement);
-
-        return 1 === preg_match('/^Gnugat\\\\Medio\\\\Model\\\\/', $fqcn);
+        return (is_array($model) && empty($model));
     }
 
     /**
@@ -51,12 +42,6 @@ class ModelCollectionPrettyPrinter implements PrettyPrinterStrategy
      */
     public function generateCode($model, array $parameters = array())
     {
-        $firstElement = current($model);
-        $fqcn = get_class($firstElement);
-        $name = FullyQualifiedName::make($fqcn)->getName();
-        $modelName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name)).'_collection';
-        $parameters[$modelName] = $model;
-
-        return $this->twig->render('collection/'.$modelName.'.twig', $parameters);
+        return '';
     }
 }
