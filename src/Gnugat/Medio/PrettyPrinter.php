@@ -26,14 +26,6 @@ use Gnugat\Medio\TwigExtension\Whitespace;
 use Twig_Environment;
 
 /**
- * Renders the template associated to the given model.
- *
- * The rules are the following:
- *
- * + the template is named after the model's class name, in snake_case
- * + the template only accepts only one parameter: the given model
- * + the parameter must be named after the model's class name, in snake_case
- *
  * @api
  */
 class PrettyPrinter
