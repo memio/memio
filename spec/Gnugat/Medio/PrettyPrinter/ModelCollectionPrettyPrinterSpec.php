@@ -15,7 +15,7 @@ use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
-class ArrayPrettyPrinterSpec extends ObjectBehavior
+class ModelCollectionPrettyPrinterSpec extends ObjectBehavior
 {
     function let(Twig_Environment $twig)
     {

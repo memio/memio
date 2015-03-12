@@ -12,7 +12,7 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Exception\InvalidArgumentException;
-use Gnugat\Medio\PrettyPrinter\ArrayPrettyPrinter;
+use Gnugat\Medio\PrettyPrinter\ModelCollectionPrettyPrinter;
 use Gnugat\Medio\PrettyPrinter\ModelPrettyPrinter;
 use Gnugat\Medio\PrettyPrinter\PhpdocPrettyPrinter;
 use Gnugat\Medio\TwigExtension\Line\ContractLineStrategy;
@@ -60,7 +60,7 @@ class PrettyPrinter
         $twig->addExtension(new Type());
         $twig->addExtension(new Whitespace($line));
 
-        $this->strategies[] = new ArrayPrettyPrinter($twig);
+        $this->strategies[] = new ModelCollectionPrettyPrinter($twig);
         $this->strategies[] = new PhpdocPrettyPrinter($twig);
         $this->strategies[] = new ModelPrettyPrinter($twig);
     }
