@@ -47,13 +47,33 @@ class Whitespace extends Twig_Extension
     public function getFilters()
     {
         return array(
+            new Twig_SimpleFilter('align', array($this, 'align')),
             new Twig_SimpleFilter('indent', array($this, 'indent')),
         );
     }
 
     /**
+     * @param string $current
+     * @param array  $collection
+     *
+     * @return string
+     */
+    public function align($current, $collection)
+    {
+        $elementLength = strlen($current);
+        $longestElement = $elementLength;
+        foreach ($collection as $element) {
+            if ('Gnugat\Medio\Model\Phpdoc\ParameterTag' === get_class($element)) {
+                $longestElement = max($longestElement, strlen($element->getType()));
+            }
+        }
+
+        return $current.str_repeat(' ', $longestElement - $elementLength);
+    }
+
+    /**
      * @param string $text
-     * @param int $level
+     * @param int    $level
      * @param string $type
      *
      * @return string
