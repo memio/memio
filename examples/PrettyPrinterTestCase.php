@@ -34,18 +34,11 @@ class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
     protected function assertExpectedCode($generatedCode)
     {
         $trace = debug_backtrace();
-        $testFullyQualifiedClassname = $trace[1]['class'];
-        $namespaces = explode('\\', $testFullyQualifiedClassname);
-        $testClass = array_pop($namespaces);
-        $lastNameSpace = end($namespaces);
-        if ('Collection' === $lastNameSpace) {
-            $testClass = 'Collection/'.$testClass;
-        }
-        if ('Phpdoc' === $lastNameSpace) {
-            $testClass = 'Phpdoc/'.$testClass;
-        }
+        $testFqcn = $trace[1]['class'];
+        $type = substr($testFqcn, strlen('Gnugat\Medio\Examples\\'));
+        $path = str_replace('\\', '/', $type);
         $testMethod = $trace[1]['function'];
-        $filename = __DIR__.'/fixtures/'.$testClass.'/'.$testMethod.'.txt';
+        $filename = __DIR__.'/fixtures/'.$path.'/'.$testMethod.'.txt';
         $expectedCode = substr(file_get_contents($filename), 0, -1);
 
         $this->assertSame($expectedCode, $generatedCode);
