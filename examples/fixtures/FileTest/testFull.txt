@@ -13,11 +13,6 @@ class MyClass
 
     private $secondProperty;
 
-    /**
-     * @param DateTime $firstArgument
-     * @param array    $secondArgument
-     * @param string   $thirdArgument
-     */
     public function firstMethod(DateTime $firstArgument, array $secondArgument, $thirdArgument)
     {
     }

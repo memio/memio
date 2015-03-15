@@ -1,7 +1,0 @@
-{% if not method_phpdoc.isEmpty %}
-    /**
-{% for parameter in method_phpdoc.parameters %}
-     * @param {{ parameter.type }}{{ indent_param(method_phpdoc, parameter) }} ${{ parameter.name }}
-{% endfor %}
-     */
-{% endif %}

@@ -52,11 +52,10 @@ echo $prettyPrinter->generateCode($createdAt);
 This will result in:
 
 ```php
-\DateTime $createdAt
+DateTime $createdAt
 ```
 
 > **Note**: The following types will trigger the type hint: object, array and callable (only for PHP >= 5.4).
-> For now object type hints are their fully qualified name (full namespace + class name), but this can change in the future.
 
 ## 2. Generating a standalone collection (e.g. many arguments)
 
@@ -76,7 +75,7 @@ echo $prettyPrinter->generateCode($handleArguments);
 With this we'll be able to see in our console:
 
 ```php
-\Symfony\Component\HttpFoundation\Request $request, $type, $catch
+Request $request, $type, $catch
 ```
 
 The concept of collection is used for the following models:
@@ -111,12 +110,7 @@ echo $prettyPrinter->generateCode($handle);
 Here's the result:
 
 ```php
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int                                       $type
-     * @param bool                                      $catch
-     */
-    public function handle(\Symfony\Component\HttpFoundation\Request $request, $type, $catch)
+    public function handle(Request $request, $type, $catch)
     {
     }
 ```
@@ -148,11 +142,7 @@ echo $prettyPrinter->generateCode($method);
 This would output:
 
 ```
-    /**
-     * @param \ArrayObject $argument1
-     * @param string       $argument2
-     */
-    public function __construct(\ArrayObject $argument1, $argument2)
+    public function __construct(ArrayObject $argument1, $argument2)
     {
     }
 ```
@@ -260,9 +250,6 @@ interface MyInterface extends MyParentInterface
 {
     const MY_CONSTANT = 42;
 
-    /**
-     * @param mixed $myArgument
-     */
     public function myMethod($myArgument);
 }
 ```
@@ -297,9 +284,6 @@ use Gnugat\Medio\MyInterface;
 
 class MyObject implements MyInterface
 {
-    /**
-     * @param mixed $myArgument
-     */
     public function myMethod($myArgument)
     {
     }

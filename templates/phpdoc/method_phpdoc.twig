@@ -6,9 +6,16 @@
 {% if method_phpdoc.deprecationTag %}{% include 'phpdoc/deprecation_tag.twig' with { 'deprecation_tag': method_phpdoc.deprecationTag } only %}{% endif %}
 {{- needs_line_after(method_phpdoc, 'deprecation_tag') ? "\n\n" -}}
 {% if method_phpdoc.apiTag %}{% include 'phpdoc/api_tag.twig' with { 'api_tag': method_phpdoc.apiTag } only %}{% endif %}
-{% endset %}
+{% endset -%}
+
+{% set phpdoc %}
 {% if not method_phpdoc.isEmpty %}
 /**
 {{ phpdoc_content|indent(1, 'phpdoc') }}
  */
+{%- endif %}
+{% endset -%}
+
+{% if not method_phpdoc.isEmpty %}
+{{ phpdoc|indent(1) }}
 {% endif %}

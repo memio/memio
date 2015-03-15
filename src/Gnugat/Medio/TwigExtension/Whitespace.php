@@ -82,6 +82,11 @@ class Whitespace extends Twig_Extension
     {
         $lines = explode("\n", $text);
         $indentedLines = array();
+        if ('code' === $type) {
+            foreach ($lines as $line) {
+                $indentedLines[] = '    '.$line;
+            }
+        }
         if ('phpdoc' === $type) {
             foreach ($lines as $line) {
                 $indent = ' *';
