@@ -28,8 +28,10 @@ class MethodPhpdocLineStrategy implements LineStrategy
      */
     public function needsLineAfter($model, $block)
     {
+        $parameterTags = $model->getParameterTags();
+
         $hasApiTag = (null !== $model->getApiTag());
-        $hasParameterTags = (!empty($model->getParameterTags()));
+        $hasParameterTags = (!empty($parameterTags));
         $hasDescription = (null !== $model->getDescription());
         $hasDeprecationTag = (null !== $model->getDeprecationTag());
         if ('description' === $block) {
