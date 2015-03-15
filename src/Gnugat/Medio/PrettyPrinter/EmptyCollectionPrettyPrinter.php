@@ -11,24 +11,8 @@
 
 namespace Gnugat\Medio\PrettyPrinter;
 
-use Gnugat\Medio\Model\FullyQualifiedName;
-use Twig_Environment;
-
 class EmptyCollectionPrettyPrinter implements PrettyPrinterStrategy
 {
-    /**
-     * @var Twig_Environment
-     */
-    private $twig;
-
-    /**
-     * @param Twig_Environment $twig_Environment
-     */
-    public function __construct(Twig_Environment $twig)
-    {
-        $this->twig = $twig;
-    }
-
     /**
      * {@inheritDoc}
      */

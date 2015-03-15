@@ -13,15 +13,9 @@ namespace spec\Gnugat\Medio\PrettyPrinter;
 
 use Gnugat\Medio\Model\Argument;
 use PhpSpec\ObjectBehavior;
-use Twig_Environment;
 
 class EmptyCollectionPrettyPrinterSpec extends ObjectBehavior
 {
-    function let(Twig_Environment $twig)
-    {
-        $this->beConstructedWith($twig);
-    }
-
     function it_is_a_pretty_printer_strategy()
     {
         $this->shouldImplement('Gnugat\\Medio\\PrettyPrinter\\PrettyPrinterStrategy');
@@ -32,7 +26,7 @@ class EmptyCollectionPrettyPrinterSpec extends ObjectBehavior
         $this->supports(array(), array())->shouldBe(true);
     }
 
-    function it_generates_an_empty_string(Twig_Environment $twig)
+    function it_generates_an_empty_string()
     {
         $this->generateCode(array())->shouldBe('');
     }

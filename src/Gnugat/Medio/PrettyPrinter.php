@@ -54,7 +54,7 @@ class PrettyPrinter
         $twig->addExtension(new Type());
         $twig->addExtension(new Whitespace($line));
 
-        $this->strategies[] = new EmptyCollectionPrettyPrinter($twig);
+        $this->strategies[] = new EmptyCollectionPrettyPrinter();
         $this->strategies[] = new PhpdocCollectionPrettyPrinter($twig);
         $this->strategies[] = new ModelCollectionPrettyPrinter($twig);
         $this->strategies[] = new PhpdocPrettyPrinter($twig);
