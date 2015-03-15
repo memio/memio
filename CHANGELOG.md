@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-beta4: Method PHPdoc
+
+* added Method PHPdoc generation
+
+> **BC breaks**:
+>
+> * removed `Gnugat\Medio\Model\MethodPhpdoc`, use `Gnugat\Medio\Model\Phpdoc\MethodPhpdoc` instead.
+
 ## 1.0.0-beta3: Fixing Structure PHPdoc
 
 * fixed Structure PHPdoc generation
