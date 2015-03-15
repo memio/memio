@@ -3,7 +3,7 @@
 Medio provides a way to describe Models (classes, properties, methods etc).
 Here's a cheat sheet of those:
 
-![UML class diagram](http://yuml.me/9e12cdbf)
+![UML class diagram](http://yuml.me/b2b8babc)
 
 In this tutorial, we'll see how to:
 
