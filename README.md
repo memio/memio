@@ -35,7 +35,7 @@ class MyClass
 
     private $filename;
 
-    public function __construct(\DateTime $createdAt, $filename)
+    public function __construct(DateTime $createdAt, $filename)
     {
     }
 }
