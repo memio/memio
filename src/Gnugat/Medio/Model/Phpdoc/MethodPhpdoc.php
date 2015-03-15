@@ -32,6 +32,11 @@ class MethodPhpdoc
     private $description;
 
     /**
+     * @var array
+     */
+    private $parameterTags = array();
+
+    /**
      * @return MethodPhpdoc
      *
      * @api
@@ -108,6 +113,28 @@ class MethodPhpdoc
     }
 
     /**
+     * @param ParameterTag $parameterTag
+     *
+     * @return MethodPhpdoc
+     *
+     * @api
+     */
+    public function addParameterTag(ParameterTag $parameterTag)
+    {
+        $this->parameterTags[] = $parameterTag;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameterTags()
+    {
+        return $this->parameterTags;
+    }
+
+    /**
      * @return bool
      */
     public function isEmpty()
@@ -116,6 +143,6 @@ class MethodPhpdoc
         $hasDescription = (null !== $this->description);
         $hasDeprecationTag = (null !== $this->deprecationTag);
 
-        return !$hasApiTag && !$hasDescription && !$hasDeprecationTag;
+        return !$hasApiTag && !$hasDescription && !$hasDeprecationTag && empty($this->parameterTags);
     }
 }

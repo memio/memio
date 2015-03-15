@@ -14,6 +14,7 @@ namespace spec\Gnugat\Medio\Model\Phpdoc;
 use Gnugat\Medio\Model\Phpdoc\ApiTag;
 use Gnugat\Medio\Model\Phpdoc\Description;
 use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\ParameterTag;
 use PhpSpec\ObjectBehavior;
 
 class MethodPhpdocSpec extends ObjectBehavior
@@ -27,6 +28,13 @@ class MethodPhpdocSpec extends ObjectBehavior
     {
         $this->setDescription($description);
         $this->getDescription()->shouldBe($description);
+        $this->isEmpty(false);
+    }
+
+    function it_can_have_parameters(ParameterTag $parameterTag)
+    {
+        $this->addParameterTag($parameterTag);
+        $this->getParameterTags()->shouldBe(array($parameterTag));
         $this->isEmpty(false);
     }
 
