@@ -1,4 +1,4 @@
-{% include 'method_phpdoc.twig' with { 'method_phpdoc': make_phpdoc(method) } only %}
+{% if method.phpdoc %}{% include 'phpdoc/method_phpdoc.twig' with {'method_phpdoc': method.phpdoc} %}{% endif %}
     {{ method.visibility ~ (method.visibility is not empty ? ' ') -}}
     function {{ method.name }}({% include 'collection/argument_collection.twig' with {
         'argument_collection': method.allArguments,

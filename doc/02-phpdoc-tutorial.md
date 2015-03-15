@@ -4,7 +4,14 @@ Medio also provides a way to document the code with [PHPdoc](http://www.phpdoc.o
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
-![UML class diagram](http://yuml.me/33894c36)
+![UML class diagram](http://yuml.me/88fc72e9)
+
+In this tutorial, we'll see how to:
+
+1. Generate a License header
+2. Generate a Structure's PHPdoc
+3. Generate a Property's PHPdoc
+4. Generate a Method's PHPdoc
 
 ## 1. Generating the License header
 
@@ -64,7 +71,7 @@ use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Gnugat\Medio\MyInterface')
-    ->setStructurePhpdoc(StructurePhpdoc::make()
+    ->setPhpdoc(StructurePhpdoc::make()
         ->setDescription(Description::make('This is the first line')
             ->addEmptyLine()
             ->addLine('This is the third line')
@@ -120,6 +127,67 @@ This will generate:
      */
     private $myClass;
 ```
+
+## 3. Generating PHPdoc for a Method
+
+A `Method` can have the following:
+
+* a description
+* 0 to many parameter tags
+* a deprecation tag
+* an API tag
+
+Here's how to describe it:
+
+```php
+use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\ParameterTag;
+
+$method = Method::make('__construct')
+    ->setPhpdoc(MethodPhpdoc::make()
+        ->setDescription(Description::make('This is the first line')
+            ->addEmptyLine()
+            ->addLine('This is the third line')
+        )
+        ->addParameterTag(new ParameterTag('string', 'filename'))
+        ->addParameterTag(new ParameterTag('bool', 'isEnabled', 'Optional description'))
+        ->setDeprecationTag(new DeprecationTag())
+        ->setApiTag(new ApiTag('v2.0'))
+    )
+
+    ->addArgument(new Argument('string', 'filename'))
+    ->addArgument(new Argument('bool', 'isEnabled'))
+;
+
+echo $prettyPrinter->generateCode($method);
+```
+
+This will produce:
+
+```php
+    /**
+     * This is the first line
+     *
+     * This is the third line
+     *
+     * @param string $filename
+     * @param bool   $isEnabled Optional description
+     *
+     * @deprecated
+     *
+     * @api v2.0
+     */
+    public function __construct($filename, $isEnabled)
+    {
+    }
+```
+
+> **Note**: Parameter names are aligned.
 
 ## Next readings
 

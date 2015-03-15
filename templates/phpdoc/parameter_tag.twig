@@ -1,0 +1,3 @@
+{% set with_collection = parameter_tag_collection is not defined ? [] : parameter_tag_collection %}
+@param {{ parameter_tag.type|align(with_collection) }} ${{ parameter_tag.name }}{{ parameter_tag.description ? ' ' ~ parameter_tag.description }}
+{#- Trimming lines -#}

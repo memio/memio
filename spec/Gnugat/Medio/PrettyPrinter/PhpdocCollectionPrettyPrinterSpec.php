@@ -11,11 +11,11 @@
 
 namespace spec\Gnugat\Medio\PrettyPrinter;
 
-use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Phpdoc\ParameterTag;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 
-class ArrayPrettyPrinterSpec extends ObjectBehavior
+class PhpdocCollectionPrettyPrinterSpec extends ObjectBehavior
 {
     function let(Twig_Environment $twig)
     {
@@ -27,23 +27,24 @@ class ArrayPrettyPrinterSpec extends ObjectBehavior
         $this->shouldImplement('Gnugat\\Medio\\PrettyPrinter\\PrettyPrinterStrategy');
     }
 
-    function it_supports_arrays()
+    function it_supports_array_of_phpdocs()
     {
-        $this->supports(array(), array())->shouldBe(true);
+        $parameterTag = new ParameterTag('string', 'filename');
+        $parameterTags = array($parameterTag);
+
+        $this->supports($parameterTags, array())->shouldBe(true);
     }
 
     function it_generates_code_using_collection_templates(Twig_Environment $twig)
     {
-        $argument = new Argument('string', 'filename');
-        $arguments = array($argument);
+        $parameterTag = new ParameterTag('string', 'filename');
+        $parameterTags = array($parameterTag);
 
-        $twig->render('collection/argument_collection.twig', array('argument_collection' => $arguments))->shouldBeCalled();
+        $twig->render(
+            'collection/phpdoc/parameter_tag_collection.twig',
+            array('parameter_tag_collection' => $parameterTags)
+        )->shouldBeCalled();
 
-        $this->generateCode($arguments);
-    }
-
-    function it_generates_code_empty_string_for_empty_arrays(Twig_Environment $twig)
-    {
-        $this->generateCode(array())->shouldBe('');
+        $this->generateCode($parameterTags);
     }
 }

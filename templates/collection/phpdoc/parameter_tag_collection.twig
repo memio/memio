@@ -1,0 +1,7 @@
+{% for parameter_tag in parameter_tag_collection -%}
+    {% include 'phpdoc/parameter_tag.twig' with {
+        'parameter_tag': parameter_tag,
+        'parameter_tag_collection': parameter_tag_collection
+    } only -%}
+    {{ not loop.last ? "\n" }}
+{%- endfor -%}

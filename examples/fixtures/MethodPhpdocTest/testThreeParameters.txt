@@ -1,6 +1,0 @@
-    /**
-     * @param SplFileInfo $file
-     * @param string      $newLine
-     * @param int         $lineNumber
-     */
-

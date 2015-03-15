@@ -1,0 +1,3 @@
+@param Request $request
+@param int     $type
+@param bool    $catch

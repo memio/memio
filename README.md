@@ -35,10 +35,6 @@ class MyClass
 
     private $filename;
 
-    /**
-     * @param \DateTime $createdAt
-     * @param string    $filename
-     */
     public function __construct(\DateTime $createdAt, $filename)
     {
     }

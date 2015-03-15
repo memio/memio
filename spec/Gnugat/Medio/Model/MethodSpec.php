@@ -12,6 +12,7 @@
 namespace spec\Gnugat\Medio\Model;
 
 use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
 use PhpSpec\ObjectBehavior;
 
 class MethodSpec extends ObjectBehavior
@@ -160,5 +161,12 @@ EOT;
 
         $domainException = 'Gnugat\Medio\Exception\DomainException';
         $this->shouldThrow($domainException)->duringMakeAbstract();
+    }
+
+    function it_can_have_phpdoc(MethodPhpdoc $phpdoc)
+    {
+        $this->getPhpdoc()->shouldBe(null);
+        $this->setPhpdoc($phpdoc);
+        $this->getPhpdoc()->shouldBe($phpdoc);
     }
 }

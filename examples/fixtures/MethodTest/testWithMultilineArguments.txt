@@ -1,11 +1,3 @@
-    /**
-     * @param string $argument1
-     * @param string $argument2
-     * @param string $argument3
-     * @param string $argument4
-     * @param string $argument5
-     * @param string $argument6
-     */
     public function it_has_too_many_argument_yeah(
         $argument1,
         $argument2,

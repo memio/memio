@@ -13,6 +13,8 @@ namespace Gnugat\Medio\Examples;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\ParameterTag;
 
 class MethodTest extends PrettyPrinterTestCase
 {
@@ -42,6 +44,27 @@ class MethodTest extends PrettyPrinterTestCase
         $method = new Method('it_has_too_many_argument_yeah');
         for ($i = 1; $i < 7; $i++) {
             $method->addArgument(new Argument('string', 'argument'.$i));
+        }
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithPhpdoc()
+    {
+        $arguments = array(
+            'Symfony\Component\HttpFoundation\Request' => 'request',
+            'int' => 'type',
+            'bool' => 'catch',
+        );
+        $phpdoc = new MethodPhpdoc();
+        $method = Method::make('handle')
+            ->setPhpdoc($phpdoc)
+        ;
+        foreach ($arguments as $type => $name) {
+            $method->addArgument(new Argument($type, $name));
+            $phpdoc->addParameterTag(new ParameterTag($type, $name));
         }
 
         $generatedCode = $this->prettyPrinter->generateCode($method);

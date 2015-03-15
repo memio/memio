@@ -12,6 +12,7 @@
 namespace Gnugat\Medio\Model;
 
 use Gnugat\Medio\Exception\DomainException;
+use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
 
 /**
  * @api
@@ -52,6 +53,11 @@ class Method
      * @var string
      */
     private $body = '';
+
+    /**
+     * @var MethodPhpdoc
+     */
+    private $methodPhpdoc;
 
     /**
      * @param string $name
@@ -293,5 +299,27 @@ class Method
     public function isFinal()
     {
         return $this->isFinal;
+    }
+
+    /**
+     * MethodPhpdoc
+     */
+    public function getPhpdoc()
+    {
+        return $this->methodPhpdoc;
+    }
+
+    /**
+     * @param MethodPhpdoc $methodPhpdoc
+     *
+     * @return Method
+     *
+     * @api
+     */
+    public function setPhpdoc(MethodPhpdoc $methodPhpdoc)
+    {
+        $this->methodPhpdoc = $methodPhpdoc;
+
+        return $this;
     }
 }

@@ -1,0 +1,12 @@
+    /**
+     * Short description
+     *
+     * Longer description
+     *
+     * @param MyClass $myClass
+     *
+     * @deprecated v2.1 Use Object instead
+     *
+     * @api v2.0
+     */
+

@@ -12,8 +12,8 @@
 namespace spec\Gnugat\Medio;
 
 use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\MethodPhpdoc;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as ProphecyArgument;
 use Twig_Environment;
@@ -37,10 +37,10 @@ class PrettyPrinterSpec extends ObjectBehavior
 
     function it_handles_many_worded_model_class_names(Twig_Environment $twig)
     {
-        $methodPhpdoc = new MethodPhpdoc(new Method('__construct'));
-        $twig->render('method_phpdoc.twig', array('method_phpdoc' => $methodPhpdoc))->shouldBeCalled();
+        $fullyQualifiedName = new FullyQualifiedName('Gnugat\Medio\MyClass');
+        $twig->render('fully_qualified_name.twig', array('fully_qualified_name' => $fullyQualifiedName))->shouldBeCalled();
 
-        $this->generateCode($methodPhpdoc);
+        $this->generateCode($fullyQualifiedName);
     }
 
     function it_passes_extra_parameters_to_template(Twig_Environment $twig)

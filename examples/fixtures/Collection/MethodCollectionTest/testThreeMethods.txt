@@ -1,7 +1,3 @@
-    /**
-     * @param DateTime    $dateTime
-     * @param ArrayObject $arrayObject
-     */
     public function __construct(DateTime $dateTime, ArrayObject $arrayObject)
     {
     }
