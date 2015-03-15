@@ -69,7 +69,7 @@
                     <h1>Model Tutorial</h1>
 <p>Medio provides a way to describe Models (classes, properties, methods etc).
 Here's a cheat sheet of those:</p>
-<p><img src="http://yuml.me/9e12cdbf" alt="UML class diagram" /></p>
+<p><img src="http://yuml.me/b2b8babc" alt="UML class diagram" /></p>
 <p>In this tutorial, we'll see how to:</p>
 <ol>
 <li>Generate a chunk of code (e.g. a single argument)</li>
@@ -102,10 +102,9 @@ If something else is given, Medio will consider it as an object.</p>
 
 echo $prettyPrinter-&gt;generateCode($createdAt);</code></pre>
 <p>This will result in:</p>
-<pre><code class="language-php">\DateTime $createdAt</code></pre>
+<pre><code class="language-php">DateTime $createdAt</code></pre>
 <blockquote>
-<p><strong>Note</strong>: The following types will trigger the type hint: object, array and callable (only for PHP &gt;= 5.4).
-For now object type hints are their fully qualified name (full namespace + class name), but this can change in the future.</p>
+<p><strong>Note</strong>: The following types will trigger the type hint: object, array and callable (only for PHP &gt;= 5.4).</p>
 </blockquote>
 <h2>2. Generating a standalone collection (e.g. many arguments)</h2>
 <p>An argument on its own is not very usefull, usually methods have a collection of arguments (0 to many).
@@ -118,7 +117,7 @@ This can be done by using arrays:</p>
 
 echo $prettyPrinter-&gt;generateCode($handleArguments);</code></pre>
 <p>With this we'll be able to see in our console:</p>
-<pre><code class="language-php">\Symfony\Component\HttpFoundation\Request $request, $type, $catch</code></pre>
+<pre><code class="language-php">Request $request, $type, $catch</code></pre>
 <p>The concept of collection is used for the following models:</p>
 <ul>
 <li>a method's <code>Arguments</code></li>
@@ -145,12 +144,7 @@ echo $prettyPrinter-&gt;generateCode($handle);</code></pre>
 The second option enable &quot;fluent interface&quot; (chaining method calls) for PHP &lt; 5.6 (from this version you can use <code>(new Model)-&gt;method()</code>).</p>
 </blockquote>
 <p>Here's the result:</p>
-<pre><code class="language-php">    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int                                       $type
-     * @param bool                                      $catch
-     */
-    public function handle(\Symfony\Component\HttpFoundation\Request $request, $type, $catch)
+<pre><code class="language-php">    public function handle(Request $request, $type, $catch)
     {
     }</code></pre>
 <h2>4. Example: phpspec's method generation</h2>
@@ -173,11 +167,7 @@ foreach ($arguments as $argument) {
 // To make this example easier directly display the generated code
 echo $prettyPrinter-&gt;generateCode($method);</code></pre>
 <p>This would output:</p>
-<pre><code>    /**
-     * @param \ArrayObject $argument1
-     * @param string       $argument2
-     */
-    public function __construct(\ArrayObject $argument1, $argument2)
+<pre><code>    public function __construct(ArrayObject $argument1, $argument2)
     {
     }</code></pre>
 <h2>5. PSR-2 and multiline arguments</h2>
@@ -254,9 +244,6 @@ echo $prettyPrinter-&gt;generateCode($myContract);</code></pre>
 {
     const MY_CONSTANT = 42;
 
-    /**
-     * @param mixed $myArgument
-     */
     public function myMethod($myArgument);
 }</code></pre>
 <p>Objects can extend only one parent, but can implement many interfaces. Contracts
@@ -281,9 +268,6 @@ use Gnugat\Medio\MyInterface;
 
 class MyObject implements MyInterface
 {
-    /**
-     * @param mixed $myArgument
-     */
     public function myMethod($myArgument)
     {
     }

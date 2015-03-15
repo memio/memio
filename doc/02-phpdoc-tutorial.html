@@ -69,7 +69,14 @@
                     <h1>PHPdoc Tutorial</h1>
 <p>Medio also provides a way to document the code with <a href="http://www.phpdoc.org/">PHPdoc</a>.</p>
 <p>By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.</p>
-<p><img src="http://yuml.me/33894c36" alt="UML class diagram" /></p>
+<p><img src="http://yuml.me/88fc72e9" alt="UML class diagram" /></p>
+<p>In this tutorial, we'll see how to:</p>
+<ol>
+<li>Generate a License header</li>
+<li>Generate a Structure's PHPdoc</li>
+<li>Generate a Property's PHPdoc</li>
+<li>Generate a Method's PHPdoc</li>
+</ol>
 <h2>1. Generating the License header</h2>
 <p><code>Files</code> can have a license header, which usually displays the name of the project,
 the author's name and their emails:</p>
@@ -116,7 +123,7 @@ use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Gnugat\Medio\MyInterface')
-    -&gt;setStructurePhpdoc(StructurePhpdoc::make()
+    -&gt;setPhpdoc(StructurePhpdoc::make()
         -&gt;setDescription(Description::make('This is the first line')
             -&gt;addEmptyLine()
             -&gt;addLine('This is the third line')
@@ -158,6 +165,59 @@ echo $prettyPrinter-&gt;generateCode($property);</code></pre>
      * @var MyClass
      */
     private $myClass;</code></pre>
+<h2>3. Generating PHPdoc for a Method</h2>
+<p>A <code>Method</code> can have the following:</p>
+<ul>
+<li>a description</li>
+<li>0 to many parameter tags</li>
+<li>a deprecation tag</li>
+<li>an API tag</li>
+</ul>
+<p>Here's how to describe it:</p>
+<pre><code class="language-php">use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Phpdoc\ApiTag;
+use Gnugat\Medio\Model\Phpdoc\Description;
+use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
+use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
+use Gnugat\Medio\Model\Phpdoc\ParameterTag;
+
+$method = Method::make('__construct')
+    -&gt;setPhpdoc(MethodPhpdoc::make()
+        -&gt;setDescription(Description::make('This is the first line')
+            -&gt;addEmptyLine()
+            -&gt;addLine('This is the third line')
+        )
+        -&gt;addParameterTag(new ParameterTag('string', 'filename'))
+        -&gt;addParameterTag(new ParameterTag('bool', 'isEnabled', 'Optional description'))
+        -&gt;setDeprecationTag(new DeprecationTag())
+        -&gt;setApiTag(new ApiTag('v2.0'))
+    )
+
+    -&gt;addArgument(new Argument('string', 'filename'))
+    -&gt;addArgument(new Argument('bool', 'isEnabled'))
+;
+
+echo $prettyPrinter-&gt;generateCode($method);</code></pre>
+<p>This will produce:</p>
+<pre><code class="language-php">    /**
+     * This is the first line
+     *
+     * This is the third line
+     *
+     * @param string $filename
+     * @param bool   $isEnabled Optional description
+     *
+     * @deprecated
+     *
+     * @api v2.0
+     */
+    public function __construct($filename, $isEnabled)
+    {
+    }</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Parameter names are aligned.</p>
+</blockquote>
 <h2>Next readings</h2>
 <ul>
 <li><a href="03-examples.html">Examples</a></li>
