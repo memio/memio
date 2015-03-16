@@ -16,17 +16,26 @@ $generatedCode = $this->prettyPrinter->generateCode($argument);
 $this->assertSame('$filename', $generatedCode);
 ```
 
-Sometimes the expected code is spanned on many lines, in that case we will find
-`$this->assertExpectedCode($generatedCode);`.
-This assertion uses the current Test Class and method names to guess the location of a fixture file,
-where the expected code is.
+Sometimes the expected code is spanned on many lines:
+
+```php
+$method = new Method('__construct');
+
+$generatedCode = $this->prettyPrinter->generateCode($method);
+
+$this->assertExpectedCode($generatedCode);
+```
+
+The `assertExpectedCode` method uses the current Test Class and method names to
+guess the location of a fixture file, where the expected code is.
 
 Those can be found in `examples/fixtures/<TestClassName>/<testMethodName>.txt`.
 
-> **Note**: Fixture files always have an extra line, which is trimmed before the actual assertion.
+> **Note**: Fixture files always have an extra line, which is trimmed before the
+> actual assertion.
 
-When changes are applied to Medio, the following command is executed to make sure no regressions
-have been introduced:
+When changes are applied to Medio, the following command is executed to make
+sure no regressions have been introduced:
 
     phpunit
 
