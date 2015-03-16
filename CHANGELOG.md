@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.0-rc1: Path
+
+* added default Path
+
+> **Note**: use `Gnugat\Medio\Config\Path::templates()` to get the templates default path.
+
 ## 1.0.0-beta4: Method PHPdoc
 
 * added Method PHPdoc generation
