@@ -56,9 +56,10 @@ In order to generate the code, you'll need to create an instance of `PrettyPrint
 
 require __DIR__.'/vendor/autoload.php';
 
+use Gnugat\Medio\Config\Path;
 use Gnugat\Medio\PrettyPrinter;
 
-$loader = new \Twig_Loader_Filesystem(__DIR__.'/vendor/gnugat/medio/templates');
+$loader = new \Twig_Loader_Filesystem(Path::templates());
 $twig = new \Twig_Environment($loader);
 
 $prettyPrinter = new PrettyPrinter($twig);
