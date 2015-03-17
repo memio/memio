@@ -91,7 +91,7 @@ And finally some meta documentation:
 
 ## Roadmap
 
-1. alpha: generate as much code as possible
-2. beta: generate as much PHPdoc as possible
-3. release candidate: read as much code as possible (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
-4. stable release: Medio is able to read a file and to write it again without losing any information
+* validator and constraint (e.g. final class cannot have abstract methods)
+* parsing existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
+* commands (e.g. injecting dependency)
+* TemplateEngine interface, to allow the choice between Twig and basic PHP templating
