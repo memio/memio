@@ -11,33 +11,33 @@
 
 namespace Gnugat\Medio;
 
-use Gnugat\Medio\Validator\ValidatorStrategy;
+use Gnugat\Medio\Validator\ModelValidator;
 
 class Validator
 {
     /**
      * @var array
      */
-    private $validatorStrategies = array();
+    private $modelValidators = array();
 
     /**
-     * @param ValidatorStrategy $validatorStrategy
+     * @param ModelValidator $modelValidator
      */
-    public function add(ValidatorStrategy $validatorStrategy)
+    public function add(ModelValidator $modelValidator)
     {
-        $this->validatorStrategies[] = $validatorStrategy;
+        $this->modelValidators[] = $modelValidator;
     }
 
     /**
      * @param mixed $model
      *
-     * @throws \Gnugat\Medio\Exception\DomainException If model violates some constraints
+     * @throws \Gnugat\Medio\Exception\InvalidModelException If model is invalid
      */
     public function validate($model)
     {
-        foreach ($this->validatorStrategies as $validatorStrategy) {
-            if ($validatorStrategy->supports($model)) {
-                $validatorStrategy->validate($model);
+        foreach ($this->modelValidators as $modelValidator) {
+            if ($modelValidator->supports($model)) {
+                $modelValidator->validate($model);
 
                 return;
             }

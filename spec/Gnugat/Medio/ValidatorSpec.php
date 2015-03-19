@@ -13,38 +13,37 @@ namespace spec\Gnugat\Medio;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Validator\ValidatorStrategy;
+use Gnugat\Medio\Validator\ModelValidator;
 use PhpSpec\ObjectBehavior;
 
 class ValidatorSpec extends ObjectBehavior
 {
-    function let(ValidatorStrategy $validatorStrategy)
+    function let(ModelValidator $modelValidator)
     {
-        $this->add($validatorStrategy);
+        $this->add($modelValidator);
     }
 
-    function it_is_silent_if_no_strategy_supports_the_given_model(Argument $model, ValidatorStrategy $validatorStrategy)
+    function it_is_silent_if_no_model_validator_supports_the_given_model(Argument $model, ModelValidator $modelValidator)
     {
-        $validatorStrategy->supports($model)->willReturn(false);
+        $modelValidator->supports($model)->willReturn(false);
 
         $this->validate($model);
     }
 
-    function it_is_silent_with_valid_models(Argument $model, ValidatorStrategy $validatorStrategy)
+    function it_is_silent_with_valid_models(Argument $model, ModelValidator $modelValidator)
     {
-        $validatorStrategy->supports($model)->willReturn(true);
-        $validatorStrategy->validate($model)->shouldBeCalled();
+        $modelValidator->supports($model)->willReturn(true);
+        $modelValidator->validate($model)->shouldBeCalled();
 
         $this->validate($model);
     }
 
-    function it_throws_an_exception_when_a_validatorStrategy_fails(Argument $model, ValidatorStrategy $validatorStrategy)
+    function it_throws_an_exception_when_a_model_validator_fails(Argument $model, ModelValidator $modelValidator)
     {
-        $modelDomainException = 'Gnugat\Medio\Exception\DomainException';
-        $validatorStrategy->supports($model)->willReturn(true);
-        $validatorStrategy->validate($model)->willThrow($modelDomainException);
+        $invalidModelException = 'Gnugat\Medio\Exception\InvalidModelException';
+        $modelValidator->supports($model)->willReturn(true);
+        $modelValidator->validate($model)->willThrow($invalidModelException);
 
-        $validatorDomainException = 'Gnugat\Medio\Exception\DomainException';
-        $this->shouldThrow($validatorDomainException)->duringValidate($model);
+        $this->shouldThrow($invalidModelException)->duringValidate($model);
     }
 }
