@@ -13,7 +13,7 @@ namespace Gnugat\Medio\Validator\Violation;
 
 use Gnugat\Medio\Validator\Violation;
 
-class OneViolation implements Violation
+class SomeViolation implements Violation
 {
     /**
      * @var string

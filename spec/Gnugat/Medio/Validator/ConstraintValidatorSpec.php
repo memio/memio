@@ -14,8 +14,8 @@ namespace spec\Gnugat\Medio\Validator;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Exception\ConstraintFailedException;
 use Gnugat\Medio\Validator\Constraint;
-use Gnugat\Medio\Validator\Violation\NoViolation;
-use Gnugat\Medio\Validator\Violation\OneViolation;
+use Gnugat\Medio\Validator\Violation\NoneViolation;
+use Gnugat\Medio\Validator\Violation\SomeViolation;
 use Gnugat\Medio\Validator\Violation\ManyViolations;
 use PhpSpec\ObjectBehavior;
 
@@ -34,40 +34,40 @@ class ConstraintValidatorSpec extends ObjectBehavior
         Argument $model,
         Constraint $firstConstraint,
         Constraint $secondConstraint,
-        NoViolation $noViolation1,
-        NoViolation $noViolation2
+        NoneViolation $noneViolation1,
+        NoneViolation $noneViolation2
     )
     {
-        $firstConstraint->validate($model)->willReturn($noViolation1);
-        $secondConstraint->validate($model)->willReturn($noViolation2);
+        $firstConstraint->validate($model)->willReturn($noneViolation1);
+        $secondConstraint->validate($model)->willReturn($noneViolation2);
 
-        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\NoViolation');
+        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\NoneViolation');
     }
 
     function it_returns_one_violation_if_one_constraint_failed(
         Argument $model,
         Constraint $firstConstraint,
         Constraint $secondConstraint,
-        NoViolation $noViolation,
-        OneViolation $oneViolation
+        NoneViolation $noneViolation,
+        SomeViolation $someViolation
     )
     {
-        $firstConstraint->validate($model)->willReturn($noViolation);
-        $secondConstraint->validate($model)->willReturn($oneViolation);
+        $firstConstraint->validate($model)->willReturn($noneViolation);
+        $secondConstraint->validate($model)->willReturn($someViolation);
 
-        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\OneViolation');
+        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\SomeViolation');
     }
 
     function it_returns_many_violations_if_many_constraints_failed(
         Argument $model,
         Constraint $firstConstraint,
         Constraint $secondConstraint,
-        OneViolation $oneViolation1,
-        OneViolation $oneViolation2
+        SomeViolation $someViolation1,
+        SomeViolation $someViolation2
     )
     {
-        $firstConstraint->validate($model)->willReturn($oneViolation1);
-        $secondConstraint->validate($model)->willReturn($oneViolation2);
+        $firstConstraint->validate($model)->willReturn($someViolation1);
+        $secondConstraint->validate($model)->willReturn($someViolation2);
 
         $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\ManyViolations');
     }

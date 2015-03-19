@@ -11,7 +11,7 @@
 
 namespace spec\Gnugat\Medio\Validator\Violation;
 
-use Gnugat\Medio\Validator\Violation\OneViolation;
+use Gnugat\Medio\Validator\Violation\SomeViolation;
 use PhpSpec\ObjectBehavior;
 
 class ManyViolationsSpec extends ObjectBehavior
@@ -26,27 +26,27 @@ class ManyViolationsSpec extends ObjectBehavior
 
     function it_can_have_no_violations()
     {
-        $this->get()->shouldHaveType('Gnugat\Medio\Validator\Violation\NoViolation');
+        $this->get()->shouldHaveType('Gnugat\Medio\Validator\Violation\NoneViolation');
         $this->getMessage()->shouldBe('');
     }
 
-    function it_can_have_one_violation(OneViolation $oneViolation)
+    function it_can_have_one_violation(SomeViolation $someViolation)
     {
-        $oneViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
+        $someViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
 
-        $this->add($oneViolation);
+        $this->add($someViolation);
 
-        $this->get()->shouldHaveType('Gnugat\Medio\Validator\Violation\OneViolation');
+        $this->get()->shouldHaveType('Gnugat\Medio\Validator\Violation\SomeViolation');
         $this->getMessage()->shouldBe(self::FIRST_MESSAGE);
     }
 
-    function it_can_have_many_violations(OneViolation $oneViolation, OneViolation $anotherViolation)
+    function it_can_have_many_violations(SomeViolation $someViolation, SomeViolation $someOtherViolation)
     {
-        $oneViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
-        $anotherViolation->getMessage()->willReturn(self::SECOND_MESSAGE);
+        $someViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
+        $someOtherViolation->getMessage()->willReturn(self::SECOND_MESSAGE);
 
-        $this->add($oneViolation);
-        $this->add($anotherViolation);
+        $this->add($someViolation);
+        $this->add($someOtherViolation);
 
         $this->get()->shouldHaveType('Gnugat\Medio\Validator\Violation\ManyViolations');
         $this->getMessage()->shouldBe(self::FIRST_MESSAGE."\n".self::SECOND_MESSAGE);

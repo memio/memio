@@ -13,7 +13,7 @@ namespace Gnugat\Medio\Validator\Violation;
 
 use Gnugat\Medio\Validator\Violation;
 
-class NoViolation implements Violation
+class NoneViolation implements Violation
 {
     /**
      * {@inheritDoc}

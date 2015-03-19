@@ -13,15 +13,22 @@ namespace spec\Gnugat\Medio\Validator\Violation;
 
 use PhpSpec\ObjectBehavior;
 
-class NoViolationSpec extends ObjectBehavior
+class SomeViolationSpec extends ObjectBehavior
 {
+    const MESSAGE = 'Model is invalid';
+
+    function let()
+    {
+        $this->beConstructedWith(self::MESSAGE);
+    }
+
     function it_is_a_violation()
     {
         $this->shouldHaveType('Gnugat\Medio\Validator\Violation');
     }
 
-    function it_never_has_a_message()
+    function it_has_a_message()
     {
-        $this->getMessage()->shouldBe('');
+        $this->getMessage()->shouldBe(self::MESSAGE);
     }
 }

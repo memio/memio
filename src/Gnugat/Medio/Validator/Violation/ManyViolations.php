@@ -25,7 +25,7 @@ class ManyViolations implements Violation
      */
     public function add(Violation $violation)
     {
-        if ($violation instanceof OneViolation) {
+        if ($violation instanceof SomeViolation) {
             $this->messages[] = $violation->getMessage();
         }
     }
@@ -36,10 +36,10 @@ class ManyViolations implements Violation
     public function get()
     {
         if (empty($this->messages)) {
-            return new NoViolation();
+            return new NoneViolation();
         }
         if (1 === count($this->messages)) {
-            return new OneViolation(current($this->messages));
+            return new SomeViolation(current($this->messages));
         }
 
         return $this;
