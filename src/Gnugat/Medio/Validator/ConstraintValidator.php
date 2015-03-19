@@ -11,10 +11,6 @@
 
 namespace Gnugat\Medio\Validator;
 
-use Gnugat\Medio\Validator\Violation\NoViolation;
-use Gnugat\Medio\Validator\Violation\OneViolation;
-use Gnugat\Medio\Validator\Violation\ManyViolations;
-
 class ConstraintValidator
 {
     /**
@@ -33,15 +29,15 @@ class ConstraintValidator
     /**
      * @param mixed $model
      *
-     * @return Violation
+     * @return ViolationCollection
      */
     public function validate($model)
     {
-        $violations = new ManyViolations();
+        $violationCollection = new ViolationCollection();
         foreach ($this->constraints as $constraint) {
-            $violations->add($constraint->validate($model));
+            $violationCollection->add($constraint->validate($model));
         }
 
-        return $violations->get();
+        return $violationCollection;
     }
 }

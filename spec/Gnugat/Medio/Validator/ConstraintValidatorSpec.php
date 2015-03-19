@@ -41,7 +41,7 @@ class ConstraintValidatorSpec extends ObjectBehavior
         $firstConstraint->validate($model)->willReturn($noneViolation1);
         $secondConstraint->validate($model)->willReturn($noneViolation2);
 
-        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\NoneViolation');
+        $this->validate($model)->all()->shouldBe(array());
     }
 
     function it_returns_one_violation_if_one_constraint_failed(
@@ -52,10 +52,11 @@ class ConstraintValidatorSpec extends ObjectBehavior
         SomeViolation $someViolation
     )
     {
+        $someViolation->getMessage()->willReturn(self::FIRST_VIOLATION);
         $firstConstraint->validate($model)->willReturn($noneViolation);
         $secondConstraint->validate($model)->willReturn($someViolation);
 
-        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\SomeViolation');
+        $this->validate($model)->all()->shouldBe(array(self::FIRST_VIOLATION));
     }
 
     function it_returns_many_violations_if_many_constraints_failed(
@@ -66,9 +67,11 @@ class ConstraintValidatorSpec extends ObjectBehavior
         SomeViolation $someViolation2
     )
     {
+        $someViolation1->getMessage()->willReturn(self::FIRST_VIOLATION);
+        $someViolation2->getMessage()->willReturn(self::SECOND_VIOLATION);
         $firstConstraint->validate($model)->willReturn($someViolation1);
         $secondConstraint->validate($model)->willReturn($someViolation2);
 
-        $this->validate($model)->shouldHaveType('Gnugat\Medio\Validator\Violation\ManyViolations');
+        $this->validate($model)->all()->shouldBe(array(self::FIRST_VIOLATION, self::SECOND_VIOLATION));
     }
 }
