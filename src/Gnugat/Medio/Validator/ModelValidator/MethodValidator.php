@@ -56,7 +56,6 @@ class MethodValidator implements ModelValidator
         $violations = $violationCollection->all();
         if (!empty($violations)) {
             throw new InvalidModelException($violations);
-
         }
     }
 }

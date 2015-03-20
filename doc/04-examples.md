@@ -41,10 +41,11 @@ sure no regressions have been introduced:
 
 ## Next readings
 
-* [Extending](04-extending.md)
+* [Extending](05-extending.md)
 
 Previous pages:
 
+* [Validation Tutorial](03-validation-tutorial.md)
 * [PHPdoc Tutorial](02-phpdoc-tutorial.md)
 * [Model Tutorial](01-model-tutorial.md)
 * [README](../README.md)

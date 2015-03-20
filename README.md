@@ -16,6 +16,12 @@ $file = File::make('src/Gnugat/Medio/MyService.php')
 ;
 ```
 
+Optionally you can validate them:
+
+```php
+$validator->validate($file); // @throws Gnugat\Medio\Exception\InvalidModelException
+```
+
 These Models can be given to a `PrettyPrinter`:
 
 ```php
@@ -58,11 +64,13 @@ require __DIR__.'/vendor/autoload.php';
 
 use Gnugat\Medio\Config\Path;
 use Gnugat\Medio\PrettyPrinter;
+use Gnugat\Medio\Validator;
 
 $loader = new \Twig_Loader_Filesystem(Path::templates());
 $twig = new \Twig_Environment($loader);
 
 $prettyPrinter = new PrettyPrinter($twig);
+$validate = new Validator();
 ```
 
 > **Note**: The actual generation logic is hold by [Twig templates](http://twig.sensiolabs.org/).
@@ -74,8 +82,9 @@ Discover more by reading the docs:
 
 * [Model Tutorial](doc/01-model-tutorial.md)
 * [PHPdoc Tutorial](doc/02-phpdoc-tutorial.md)
-* [Examples](doc/03-examples.md)
-* [Extending](doc/04-extending.md)
+* [Validation Tutorial](doc/03-validation-tutorial.md)
+* [Examples](doc/04-examples.md)
+* [Extending](doc/05-extending.md)
 
 You can see the current and past versions using one of the following:
 

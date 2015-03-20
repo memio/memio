@@ -293,8 +293,9 @@ class MyObject implements MyInterface
 ## Next readings
 
 * [PHPdoc Tutorial](02-phpdoc-tutorial.md)
-* [Examples](03-examples.md)
-* [Extending](04-extending.md)
+* [Validation Tutorial](03-validation-tutorial.md)
+* [Examples](04-examples.md)
+* [Extending](05-extending.md)
 
 Previous pages:
 

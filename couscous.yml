@@ -21,9 +21,12 @@ menu:
         phpdoc_tutorial:
             text: PHPDoc Tutorial
             relativeUrl: doc/02-phpdoc-tutorial.html
+        validation_tutorial:
+            text: Validation Tutorial
+            relativeUrl: doc/03-validation-tutorial.html
         examples:
             text: Examples
-            relativeUrl: doc/03-examples.html
+            relativeUrl: doc/04-examples.html
         extending:
             text: Extending
-            relativeUrl: doc/04-extending.html
+            relativeUrl: doc/05-extending.html
