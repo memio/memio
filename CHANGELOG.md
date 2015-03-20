@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0-rc2: Validator
+
+* added Validator
+* added MethodCannotBeBothAbstractAndFinal constraint
+
 ## 1.0.0-rc1: Path
 
 * added default Path
