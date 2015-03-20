@@ -51,12 +51,17 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
+                                    <a href="http://gnugat.github.io/medio/doc/03-validation-tutorial.html">
+                                        Validation Tutorial
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-examples.html">
                                         Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                    <a href="http://gnugat.github.io/medio/doc/05-extending.html">
                                         Extending
                                     </a>
                                 </li>
@@ -66,36 +71,109 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Examples</h1>
-<p>In the <code>examples</code> directory we can find tests written with <a href="https://phpunit.de/">PHPUnit</a>,
-they have been designed to also be used as living examples.</p>
-<p>Each test method is structured in a similar way:</p>
-<pre><code class="language-php">// Describing the model
-$argument = new Argument('string', 'filename');
+                    <h1>Validation Tutorial</h1>
+<p>Programming languages follow rules, and PHP is no exception: defining a method
+as being both abstract and final will result in a Fatal Error.</p>
+<p>To avoid generating invalid code, Medio provides a <code>Validator</code>:</p>
+<pre><code class="language-php">use Gnugat\Medio\Validator;
 
-// Generating the code
-$generatedCode = $this-&gt;prettyPrinter-&gt;generateCode($argument);
+Method::make('myMethod')
+    -&gt;makeAbstract()
+    -&gt;makeFinal()
+;
 
-// Checking it against what's expected
-$this-&gt;assertSame('$filename', $generatedCode);</code></pre>
-<p>Sometimes the expected code is spanned on many lines, in that case we will find
-<code>$this-&gt;assertExpectedCode($generatedCode);</code>.
-This assertion uses the current Test Class and method names to guess the location of a fixture file,
-where the expected code is.</p>
-<p>Those can be found in <code>examples/fixtures/&lt;TestClassName&gt;/&lt;testMethodName&gt;.txt</code>.</p>
+$validator = new Validator();
+$validator-&gt;validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
+<h2>Under the hood</h2>
+<p><code>Validator</code> throws an exception containing all the error messages (one per line).
+It collects them from <code>ModelValidator</code>, a validator specialised in a specific model.
+<code>ModelValidators</code> also collect the error messages, from <code>Constraints</code>: a class representing
+a single rule.</p>
+<h2>Default Constraints</h2>
+<p>Out of the box, <code>Validator</code> provides the following <code>Constraints</code>:</p>
+<ul>
+<li>Method cannot be both abstract and final</li>
+</ul>
+<h2>Providing new Constraints</h2>
+<p>To add new rules to the validator, we first need to create a new <code>Constraint</code>:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Vendor\Project\Validator\Constraint;
+
+use Gnugat\Medio\Validator\Constraint;
+use Gnugat\Medio\Validator\Violation\NoneViolation;
+use Gnugat\Medio\Validator\Violation\SomeViolation;
+
+class ArgumentCannotBeScalar implements Constraint
+{
+    public function validate($model)
+    {
+        if (!$model-&gt;isObject()) {
+            return new SomeViolation(sprintf('Argument "%s" cannot be scalar', $model-&gt;getName()));
+        }
+
+        return new NoneViolation();
+    }
+}</code></pre>
 <blockquote>
-<p><strong>Note</strong>: Fixture files always have an extra line, which is trimmed before the actual assertion.</p>
+<p><strong>Note</strong>: In Medio all <code>Constraints</code> are named after their error message, but
+this is not mandatory.</p>
 </blockquote>
-<p>When changes are applied to Medio, the following command is executed to make sure no regressions
-have been introduced:</p>
-<pre><code>phpunit</code></pre>
+<p>We then need to create a <code>ModelValidator</code> specialized in <code>Arguments</code>:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Vendor\Project\Validator;
+
+use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Validator\Constraint;
+use Gnugat\Medio\Validator\ConstraintValidator;
+use Gnugat\Medio\Validator\ModelValidator;
+use Vendor\Project\Validator\Constraint\ArgumentCannotBeScalar;
+
+class ArgumentValidator implements ModelValidator
+{
+    private $constraints;
+    private $constraintValidator;
+
+    public function __construct()
+    {
+        $this-&gt;constraintValidator = new ConstraintValidator();
+        $this-&gt;constraintValidator-&gt;add(new ArgumentCannotBeScalar());
+    }
+
+    public function add(Constraint $constraint)
+    {
+        $this-&gt;constraintValidator-&gt;add($constraint);
+    }
+
+    public function supports($model)
+    {
+        return $model instanceof Argument;
+    }
+
+    public function validate($model)
+    {
+        return $this-&gt;constraintValidator-&gt;validate($model);
+    }
+}</code></pre>
+<blockquote>
+<p><strong>Note</strong>: <code>ConstraintValidator</code> takes care of executing all the constraints and
+aggregating all error messages.</p>
+</blockquote>
+<p>Finally we can register everything in the <code>Validator</code>:</p>
+<pre><code class="language-php">use Vendor\Project\Validator\ArgumentValidator;
+
+$validator-&gt;add(new ArgumentValidator());
+
+$validator-&gt;validate(new Argument('string', 'scalar')); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
 <h2>Next readings</h2>
 <ul>
-<li><a href="04-extending.html">Extending</a></li>
+<li><a href="04-examples.html">Examples</a></li>
+<li><a href="05-extending.html">Extending</a></li>
 </ul>
 <p>Previous pages:</p>
 <ul>
-<li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
+<li><a href="02-phpdoc-tutorial.html">Model Tutorial</a></li>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
 <li><a href="../README.html">README</a></li>
 </ul>

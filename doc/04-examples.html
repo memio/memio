@@ -51,12 +51,17 @@
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-examples.html">
+                                    <a href="http://gnugat.github.io/medio/doc/03-validation-tutorial.html">
+                                        Validation Tutorial
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://gnugat.github.io/medio/doc/04-examples.html">
                                         Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-extending.html">
+                                    <a href="http://gnugat.github.io/medio/doc/05-extending.html">
                                         Extending
                                     </a>
                                 </li>
@@ -66,41 +71,41 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Extending</h1>
-<p>Medio uses <a href="http://twig.sensiolabs.org/">Twig templates</a> to actualy generate the
-code.</p>
+                    <h1>Examples</h1>
+<p>In the <code>examples</code> directory we can find tests written with <a href="https://phpunit.de/">PHPUnit</a>,
+they have been designed to also be used as living examples.</p>
+<p>Each test method is structured in a similar way:</p>
+<pre><code class="language-php">// Describing the model
+$argument = new Argument('string', 'filename');
+
+// Generating the code
+$generatedCode = $this-&gt;prettyPrinter-&gt;generateCode($argument);
+
+// Checking it against what's expected
+$this-&gt;assertSame('$filename', $generatedCode);</code></pre>
+<p>Sometimes the expected code is spanned on many lines:</p>
+<pre><code class="language-php">$method = new Method('__construct');
+
+$generatedCode = $this-&gt;prettyPrinter-&gt;generateCode($method);
+
+$this-&gt;assertExpectedCode($generatedCode);</code></pre>
+<p>The <code>assertExpectedCode</code> method uses the current Test Class and method names to
+guess the location of a fixture file, where the expected code is.</p>
+<p>Those can be found in <code>examples/fixtures/&lt;TestClassName&gt;/&lt;testMethodName&gt;.txt</code>.</p>
 <blockquote>
-<p>Keep in mind that the templates provided out of the box are highly opinionated,
-but they can be extended / over wrote.</p>
+<p><strong>Note</strong>: Fixture files always have an extra line, which is trimmed before the
+actual assertion.</p>
 </blockquote>
-<ul>
-<li><a href="#overwriting-templates">Overwriting templates</a></li>
-<li><a href="#conventions">Conventions</a></li>
-</ul>
-<p>See also <a href="#next-readings">next readings</a>.</p>
-<h2>Overwriting templates</h2>
-<p>In order to change how a specific model is rendered, you need to:</p>
-<ol>
-<li>create your own template</li>
-<li>add the path to your templates to Twig's loader</li>
-</ol>
-<p>Here's an example:</p>
-<pre><code class="language-php">$loader-&gt;addPath(__DIR__.'/my-templates');</code></pre>
-<h2>Conventions</h2>
-<p>A model's templates is named after its class name, in snake_case. It always takes
-as its first argument the model (the variable is also named after the model's class anme in snake_case).</p>
-<blockquote>
-<p>For instance, <code>MethodPhpdoc</code> should have a template named <code>method_phpdoc.twig</code>.
-The template should receive the model, in the <code>method_phpdoc</code> parameter.</p>
-</blockquote>
-<p>&quot;Sub-templates&quot; should be prefixed with an underscore.</p>
-<blockquote>
-<p>For example: <code>_inline_argument_collection.twig</code>.</p>
-</blockquote>
+<p>When changes are applied to Medio, the following command is executed to make
+sure no regressions have been introduced:</p>
+<pre><code>phpunit</code></pre>
 <h2>Next readings</h2>
+<ul>
+<li><a href="05-extending.html">Extending</a></li>
+</ul>
 <p>Previous pages:</p>
 <ul>
-<li><a href="03-examples.html">Examples</a></li>
+<li><a href="03-validation-tutorial.html">Validation Tutorial</a></li>
 <li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
 <li><a href="../README.html">README</a></li>
