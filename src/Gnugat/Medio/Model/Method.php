@@ -232,9 +232,6 @@ class Method
      */
     public function makeAbstract()
     {
-        if ($this->isFinal()) {
-            throw new DomainException("You can't declare final method as abstract: ".$this->getName());
-        }
         if ($this->isStatic()) {
             throw new DomainException("You can't declare static method as abstract: ".$this->getName());
         }
@@ -273,9 +270,6 @@ class Method
      */
     public function makeFinal()
     {
-        if ($this->isAbstract()) {
-            throw new DomainException("You can't declare abstract method as final: ".$this->getName());
-        }
         $this->isFinal = true;
 
         return $this;

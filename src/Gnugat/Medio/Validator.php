@@ -12,6 +12,7 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
 
 class Validator
 {
@@ -19,6 +20,11 @@ class Validator
      * @var array
      */
     private $modelValidators = array();
+
+    public function __construct()
+    {
+        $this->modelValidators[] = new MethodValidator();
+    }
 
     /**
      * @param ModelValidator $modelValidator

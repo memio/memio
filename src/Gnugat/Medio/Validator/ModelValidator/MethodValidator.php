@@ -15,6 +15,7 @@ use Gnugat\Medio\Exception\InvalidModelException;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
+use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
 use Gnugat\Medio\Validator\ModelValidator;
 
 class MethodValidator implements ModelValidator
@@ -27,6 +28,7 @@ class MethodValidator implements ModelValidator
     public function __construct()
     {
         $this->constraintValidator = new ConstraintValidator();
+        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
     }
 
     /**
