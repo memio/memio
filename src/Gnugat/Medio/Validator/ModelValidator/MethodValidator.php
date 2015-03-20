@@ -52,10 +52,6 @@ class MethodValidator implements ModelValidator
      */
     public function validate($model)
     {
-        $violationCollection = $this->constraintValidator->validate($model);
-        $violations = $violationCollection->all();
-        if (!empty($violations)) {
-            throw new InvalidModelException($violations);
-        }
+        return $this->constraintValidator->validate($model);
     }
 }

@@ -21,12 +21,7 @@ class ViolationCollectionSpec extends ObjectBehavior
     const FIRST_MESSAGE = 'Model is invalid';
     const SECOND_MESSAGE = 'Model is wrong';
 
-    function it_can_be_empty()
-    {
-        $this->all()->shouldBe(array());
-    }
-
-    function it_can_have_violations(SomeViolation $someViolation, SomeViolation $someOtherViolation)
+    function it_raises_exception_if_it_has_any_violations(SomeViolation $someViolation, SomeViolation $someOtherViolation)
     {
         $someViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
         $someOtherViolation->getMessage()->willReturn(self::SECOND_MESSAGE);
@@ -34,14 +29,20 @@ class ViolationCollectionSpec extends ObjectBehavior
         $this->add($someViolation);
         $this->add($someOtherViolation);
 
-        $this->all()->shouldBe(array(self::FIRST_MESSAGE, self::SECOND_MESSAGE));
+        $invalidModelException = 'Gnugat\Medio\Exception\InvalidModelException';
+        $this->shouldThrow($invalidModelException)->duringRaise();
+    }
+
+    function it_does_not_raise_exception_if_it_has_no_violations()
+    {
+        $this->raise();
     }
 
     function it_ignores_none_violations(NoneViolation $noneViolation)
     {
         $this->add($noneViolation);
 
-        $this->all()->shouldBe(array());
+        $this->raise();
     }
 
     function it_can_be_merged_with_other_collections(
@@ -50,11 +51,11 @@ class ViolationCollectionSpec extends ObjectBehavior
     )
     {
         $someViolation->getMessage()->willReturn(self::FIRST_MESSAGE);
-        $violationCollection->all()->willReturn(array(self::SECOND_MESSAGE));
 
         $this->add($someViolation);
         $this->merge($violationCollection);
 
-        $this->all()->shouldBe(array(self::FIRST_MESSAGE, self::SECOND_MESSAGE));
+        $invalidModelException = 'Gnugat\Medio\Exception\InvalidModelException';
+        $this->shouldThrow($invalidModelException)->duringRaise();
     }
 }

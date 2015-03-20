@@ -28,7 +28,7 @@ interface ModelValidator
     /**
      * @param mixed $model
      *
-     * @throws \Gnugat\Medio\Exception\InvalidModelException If the model is invalid
+     * @return ViolationCollection
      */
     public function validate($model);
 }

@@ -13,6 +13,7 @@ namespace Gnugat\Medio;
 
 use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
 
 class Validator
 {
@@ -41,12 +42,12 @@ class Validator
      */
     public function validate($model)
     {
+        $violations = new ViolationCollection();
         foreach ($this->modelValidators as $modelValidator) {
             if ($modelValidator->supports($model)) {
-                $modelValidator->validate($model);
-
-                return;
+                $violations->merge($modelValidator->validate($model));
             }
         }
+        $violations->raise();
     }
 }

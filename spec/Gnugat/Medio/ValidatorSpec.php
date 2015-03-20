@@ -14,6 +14,8 @@ namespace spec\Gnugat\Medio;
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
+use Gnugat\Medio\Validator\Violation\SomeViolation;
 use PhpSpec\ObjectBehavior;
 
 class ValidatorSpec extends ObjectBehavior
@@ -32,17 +34,22 @@ class ValidatorSpec extends ObjectBehavior
 
     function it_is_silent_with_valid_models(Argument $model, ModelValidator $modelValidator)
     {
+        $violationCollection = new ViolationCollection();
+
         $modelValidator->supports($model)->willReturn(true);
-        $modelValidator->validate($model)->shouldBeCalled();
+        $modelValidator->validate($model)->willReturn($violationCollection);
 
         $this->validate($model);
     }
 
     function it_throws_an_exception_when_a_model_validator_fails(Argument $model, ModelValidator $modelValidator)
     {
+        $violationCollection = new ViolationCollection();
+        $violationCollection->add(new SomeViolation('Invalid model'));
+
         $invalidModelException = 'Gnugat\Medio\Exception\InvalidModelException';
         $modelValidator->supports($model)->willReturn(true);
-        $modelValidator->validate($model)->willThrow($invalidModelException);
+        $modelValidator->validate($model)->willReturn($violationCollection);
 
         $this->shouldThrow($invalidModelException)->duringValidate($model);
     }
