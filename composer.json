@@ -13,7 +13,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Gnugat\\Medio\\": "src/Gnugat/Medio" }
+        "psr-4": {
+            "Gnugat\\Medio\\": "src/Gnugat/Medio",
+            "Gnugat\\Medio\\Config\\": "config"
+        }
     },
     "autoload-dev": {
         "psr-4": { "Gnugat\\Medio\\Examples\\": "examples" }
