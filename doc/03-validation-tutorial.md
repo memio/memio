@@ -28,6 +28,7 @@ a single rule.
 
 Out of the box, `Validator` provides the following `Constraints`:
 
+* Method cannot be abstract and have a body
 * Method cannot be both abstract and final
 
 ## Providing new Constraints

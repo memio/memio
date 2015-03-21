@@ -26,6 +26,20 @@ class MethodTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedExceptionMessage Method "__construct" cannot be abstract and have a body
+     */
+    public function testCannotBeAbstractAndHaveBody()
+    {
+        $method = Method::make('__construct')
+            ->makeAbstract()
+            ->setBody('echo "Nobody expects the spanish inquisition";')
+        ;
+
+        $this->validator->validate($method);
+    }
+
+    /**
+     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
      * @expectedExceptionMessage Method "__construct" cannot be both abstract and final
      */
     public function testCannotBeBothAbstractAndFinal()
