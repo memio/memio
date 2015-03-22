@@ -24,9 +24,18 @@ class ContractValidator implements ModelValidator
      */
     private $constraintValidator;
 
-    public function __construct()
+    /**
+     * @var MethodValidator
+     */
+    private $methodValidator;
+
+    /**
+     * @param MethodValidator $methodValidator
+     */
+    public function __construct(MethodValidator $methodValidator)
     {
         $this->constraintValidator = new ConstraintValidator();
+        $this->methodValidator = $methodValidator;
     }
 
     /**
@@ -50,6 +59,11 @@ class ContractValidator implements ModelValidator
      */
     public function validate($model)
     {
-        return $this->constraintValidator->validate($model);
+        $violationCollection = $this->constraintValidator->validate($model);
+        foreach ($model->allMethods() as $method) {
+            $violationCollection->merge($this->methodValidator->validate($method));
+        }
+
+        return $violationCollection;
     }
 }
