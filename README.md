@@ -9,8 +9,8 @@ $file = File::make('src/Gnugat/Medio/MyService.php')
         ->addProperty(new Property('filename'))
 
         ->addMethod(Method::make('__construct')
-            ->addArgument('DateTime', 'createdAt')
-            ->addArgument('string', 'filename')
+            ->addArgument(Argument::make('DateTime', 'createdAt'))
+            ->addArgument(Argument::make('string', 'filename'))
         )
     )
 ;
@@ -65,16 +65,43 @@ require __DIR__.'/vendor/autoload.php';
 use Gnugat\Medio\Config\Path;
 use Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Validator;
+use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Argument;
 
 $loader = new \Twig_Loader_Filesystem(Path::templates());
 $twig = new \Twig_Environment($loader);
 
 $prettyPrinter = new PrettyPrinter($twig);
+
+$file = File::make('src/Gnugat/Medio/MyService.php')
+    ->setStructure(
+        Object::make('Gnugat\Medio\MyService')
+            ->addProperty(new Property('createdAt'))
+            ->addProperty(new Property('filename'))
+            ->addMethod(
+                Method::make('__construct')
+                    ->addArgument(Argument::make('DateTime', 'createdAt'))
+                    ->addArgument(Argument::make('string', 'filename'))
+            )
+    );
+
+// Optional validation
 $validate = new Validator();
+$validate->validate($file);
+
+// Output in console
+echo $prettyPrinter->generateCode($file);
 ```
 
 > **Note**: The actual generation logic is hold by [Twig templates](http://twig.sensiolabs.org/).
 > If the coding style provided doesn't appeal to you, you can overwrite those templates easily.
+
+> **Note**: If you want to see the output through your browser you need to escape your generated code.
+> By using the [escape filter](http://twig.sensiolabs.org/doc/filters/escape.html) in your twig template or using the
+> htmlspecialchars() method along with html `<pre>` tags to keep indentation.
 
 ## Further documentation
 
