@@ -16,6 +16,7 @@ use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
 use Gnugat\Medio\Validator\Constraint\MethodCannotBeAbstractAndHaveBody;
+use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndPrivate;
 use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
 use Gnugat\Medio\Validator\ModelValidator;
 
@@ -29,8 +30,9 @@ class MethodValidator implements ModelValidator
     public function __construct()
     {
         $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
         $this->constraintValidator->add(new MethodCannotBeAbstractAndHaveBody());
+        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
+        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndPrivate());
     }
 
     /**

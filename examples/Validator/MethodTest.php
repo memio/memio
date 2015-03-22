@@ -51,4 +51,18 @@ class MethodTest extends PHPUnit_Framework_TestCase
 
         $this->validator->validate($method);
     }
+
+    /**
+     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedExceptionMessage Method "__construct" cannot be both abstract and private
+     */
+    public function testCannotBeBothAbstractAndPrivate()
+    {
+        $method = Method::make('__construct')
+            ->makeAbstract()
+            ->makePrivate()
+        ;
+
+        $this->validator->validate($method);
+    }
 }
