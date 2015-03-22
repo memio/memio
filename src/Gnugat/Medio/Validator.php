@@ -25,10 +25,8 @@ class Validator
 
     public function __construct()
     {
-        $methodValidator = new MethodValidator();
-
-        $this->modelValidators[] = new ContractValidator($methodValidator);
-        $this->modelValidators[] = $methodValidator;
+        $this->modelValidators[] = new ContractValidator();
+        $this->modelValidators[] = new MethodValidator();
     }
 
     /**
