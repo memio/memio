@@ -15,6 +15,7 @@ use Gnugat\Medio\Exception\InvalidModelException;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
+use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeStatic;
 use Gnugat\Medio\Validator\ModelValidator;
 
 class ContractValidator implements ModelValidator
@@ -27,6 +28,7 @@ class ContractValidator implements ModelValidator
     public function __construct()
     {
         $this->constraintValidator = new ConstraintValidator();
+        $this->constraintValidator->add(new ContractMethodsCannotBeStatic());
     }
 
     /**
