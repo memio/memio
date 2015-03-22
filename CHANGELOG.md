@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.0-rc3: Method Validator
+
+* fixed autoloading
+* added MethodCannotBeAbstractAndHaveBody constraint
+* added MethodCannotBeBothAbstractAndPrivate constraint
+
 ## 1.0.0-rc2: Validator
 
 * added Validator
