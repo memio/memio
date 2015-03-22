@@ -79,8 +79,8 @@
         -&gt;addProperty(new Property('filename'))
 
         -&gt;addMethod(Method::make('__construct')
-            -&gt;addArgument('DateTime', 'createdAt')
-            -&gt;addArgument('string', 'filename')
+            -&gt;addArgument(Argument::make('DateTime', 'createdAt'))
+            -&gt;addArgument(Argument::make('string', 'filename'))
         )
     )
 ;</code></pre>
@@ -117,15 +117,41 @@ require __DIR__.'/vendor/autoload.php';
 use Gnugat\Medio\Config\Path;
 use Gnugat\Medio\PrettyPrinter;
 use Gnugat\Medio\Validator;
+use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Object;
+use Gnugat\Medio\Model\Property;
+use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Argument;
 
 $loader = new \Twig_Loader_Filesystem(Path::templates());
 $twig = new \Twig_Environment($loader);
 
 $prettyPrinter = new PrettyPrinter($twig);
-$validate = new Validator();</code></pre>
+
+$file = File::make('src/Gnugat/Medio/MyService.php')
+    -&gt;setStructure(
+        Object::make('Gnugat\Medio\MyService')
+            -&gt;addProperty(new Property('createdAt'))
+            -&gt;addProperty(new Property('filename'))
+            -&gt;addMethod(
+                Method::make('__construct')
+                    -&gt;addArgument(Argument::make('DateTime', 'createdAt'))
+                    -&gt;addArgument(Argument::make('string', 'filename'))
+            )
+    );
+
+// Optional validation
+$validate = new Validator();
+$validate-&gt;validate($file);
+
+// Output in console
+echo $prettyPrinter-&gt;generateCode($file);</code></pre>
 <blockquote>
 <p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
 If the coding style provided doesn't appeal to you, you can overwrite those templates easily.</p>
+<p><strong>Note</strong>: If you want to see the output through your browser you need to escape your generated code.
+By using the <a href="http://twig.sensiolabs.org/doc/filters/escape.html">escape filter</a> in your twig template or using the
+htmlspecialchars() method along with html <code>&lt;pre&gt;</code> tags to keep indentation.</p>
 </blockquote>
 <h2>Further documentation</h2>
 <p>Discover more by reading the docs:</p>
