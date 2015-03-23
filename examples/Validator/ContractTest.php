@@ -27,6 +27,21 @@ class ContractTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" can only be public
+     */
+    public function testMethodsCanOnlyBePublic()
+    {
+        $contract = Contract::make('HttpKernelInterface')
+            ->addMethod(Method::make('handle')
+                ->makeProtected()
+            )
+        ;
+
+        $this->validator->validate($contract);
+    }
+
+    /**
+     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
      * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" cannot be static
      */
     public function testMethodsCannotBeStatic()
@@ -42,13 +57,13 @@ class ContractTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Gnugat\Medio\Exception\InvalidModelException
-     * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" can only be public
+     * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" cannot have a body
      */
-    public function testMethodsCanOnlyBePublic()
+    public function testMethodsCannotHaveBody()
     {
         $contract = Contract::make('HttpKernelInterface')
             ->addMethod(Method::make('handle')
-                ->makeProtected()
+                ->setBody('echo "nobody expects the spanish inquisition";')
             )
         ;
 
