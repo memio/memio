@@ -11,7 +11,6 @@
 
 namespace Gnugat\Medio\Validator\ModelValidator;
 
-use Gnugat\Medio\Exception\InvalidModelException;
 use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
