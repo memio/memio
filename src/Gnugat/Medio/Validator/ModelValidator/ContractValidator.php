@@ -16,6 +16,7 @@ use Gnugat\Medio\Model\Contract;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
 use Gnugat\Medio\Validator\Constraint\ContractMethodsCanOnlyBePublic;
+use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeFinal;
 use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeStatic;
 use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotHaveBody;
 use Gnugat\Medio\Validator\ModelValidator;
@@ -31,6 +32,7 @@ class ContractValidator implements ModelValidator
     {
         $this->constraintValidator = new ConstraintValidator();
         $this->constraintValidator->add(new ContractMethodsCanOnlyBePublic());
+        $this->constraintValidator->add(new ContractMethodsCannotBeFinal());
         $this->constraintValidator->add(new ContractMethodsCannotBeStatic());
         $this->constraintValidator->add(new ContractMethodsCannotHaveBody());
     }

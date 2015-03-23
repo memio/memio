@@ -42,6 +42,21 @@ class ContractTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" cannot be final
+     */
+    public function testMethodsCannotBeFinal()
+    {
+        $contract = Contract::make('HttpKernelInterface')
+            ->addMethod(Method::make('handle')
+                ->makeFinal()
+            )
+        ;
+
+        $this->validator->validate($contract);
+    }
+
+    /**
+     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
      * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" cannot be static
      */
     public function testMethodsCannotBeStatic()
