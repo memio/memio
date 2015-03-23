@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.0.0-rc4: Contract Validator
+
+* added ContractMethodsCanOnlyBePublic constraint
+* added ContractMethodsCannotBeFinal constraint
+* added ContractMethodsCannotBeStatic constraint
+* added ContractMethodsCannotHaveBody constraint
+
 ## 1.0.0-rc3: Method Validator
 
 * fixed autoloading
