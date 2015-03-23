@@ -39,4 +39,19 @@ class ContractTest extends PHPUnit_Framework_TestCase
 
         $this->validator->validate($contract);
     }
+
+    /**
+     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedExceptionMessage Contract "HttpKernelInterface" Method "handle" can only be public
+     */
+    public function testMethodsCanOnlyBePublic()
+    {
+        $contract = Contract::make('HttpKernelInterface')
+            ->addMethod(Method::make('handle')
+                ->makeProtected()
+            )
+        ;
+
+        $this->validator->validate($contract);
+    }
 }

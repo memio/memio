@@ -29,6 +29,7 @@ a single rule.
 Out of the box, `Validator` provides the following `Constraints`:
 
 * Contract Methods cannot be static
+* Contract Methods can only be public
 * Method cannot be abstract and have a body
 * Method cannot be both abstract and final
 * Method cannot be both abstract and private
