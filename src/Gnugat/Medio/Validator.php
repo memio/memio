@@ -12,6 +12,7 @@
 namespace Gnugat\Medio;
 
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ModelValidator\CollectionValidator;
 use Gnugat\Medio\Validator\ModelValidator\ContractValidator;
 use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
@@ -25,6 +26,7 @@ class Validator
 
     public function __construct()
     {
+        $this->modelValidators[] = new CollectionValidator();
         $this->modelValidators[] = new ContractValidator();
         $this->modelValidators[] = new MethodValidator();
     }
