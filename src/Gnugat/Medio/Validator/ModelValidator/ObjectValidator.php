@@ -84,6 +84,7 @@ class ObjectValidator implements ModelValidator
         $violationCollection = $this->constraintValidator->validate($model);
         $violationCollection->merge($this->collectionValidator->validate($model->allConstants()));
         $violationCollection->merge($this->collectionValidator->validate($model->allContracts()));
+        $violationCollection->merge($this->collectionValidator->validate($model->allProperties()));
         $methods = $model->allMethods();
         $violationCollection->merge($this->collectionValidator->validate($methods));
         foreach ($methods as $method) {
