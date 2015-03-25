@@ -42,14 +42,18 @@ class ContractValidatorSpec extends ObjectBehavior
         Method $method
     )
     {
+        $constants = array();
         $methods = array($method);
         $violationCollection1 = new ViolationCollection();
         $violationCollection2 = new ViolationCollection();
+        $violationCollection3 = new ViolationCollection();
 
         $model->getName()->willReturn('Symfony\Component\HttpKernel\HttpKernelInterface');
+        $model->allConstants()->willReturn($constants);
         $model->allMethods()->willReturn($methods);
-        $collectionValidator->validate($methods)->willReturn($violationCollection1);
-        $methodValidator->validate($method)->willReturn($violationCollection2);
+        $collectionValidator->validate($constants)->willReturn($violationCollection1);
+        $collectionValidator->validate($methods)->willReturn($violationCollection2);
+        $methodValidator->validate($method)->willReturn($violationCollection3);
 
         $this->validate($model);
     }

@@ -82,6 +82,7 @@ class ContractValidator implements ModelValidator
             return new ViolationCollection();
         }
         $violationCollection = $this->constraintValidator->validate($model);
+        $violationCollection->merge($this->collectionValidator->validate($model->allConstants()));
         $methods = $model->allMethods();
         $violationCollection->merge($this->collectionValidator->validate($methods));
         foreach ($methods as $method) {
