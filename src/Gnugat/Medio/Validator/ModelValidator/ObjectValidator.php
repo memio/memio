@@ -14,10 +14,6 @@ namespace Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCanOnlyBePublic;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeFinal;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeStatic;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotHaveBody;
 use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 
@@ -51,10 +47,6 @@ class ObjectValidator implements ModelValidator
         $this->methodValidator = $methodValidator;
 
         $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new ContractMethodsCanOnlyBePublic());
-        $this->constraintValidator->add(new ContractMethodsCannotBeFinal());
-        $this->constraintValidator->add(new ContractMethodsCannotBeStatic());
-        $this->constraintValidator->add(new ContractMethodsCannotHaveBody());
     }
 
     /**
