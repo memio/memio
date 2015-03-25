@@ -15,6 +15,7 @@ use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ModelValidator\CollectionValidator;
 use Gnugat\Medio\Validator\ModelValidator\ContractValidator;
 use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
+use Gnugat\Medio\Validator\ModelValidator\ObjectValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 
 class Validator
@@ -29,10 +30,12 @@ class Validator
         $collectionValidator = new CollectionValidator();
         $methodValidator = new MethodValidator($collectionValidator);
         $contractValidator = new ContractValidator($collectionValidator, $methodValidator);
+        $objectValidator = new ObjectValidator($collectionValidator, $methodValidator);
 
         $this->modelValidators[] = $collectionValidator;
         $this->modelValidators[] = $contractValidator;
         $this->modelValidators[] = $methodValidator;
+        $this->modelValidators[] = $objectValidator;
     }
 
     /**
