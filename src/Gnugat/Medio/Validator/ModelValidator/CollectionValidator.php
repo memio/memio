@@ -11,38 +11,28 @@
 
 namespace Gnugat\Medio\Validator\ModelValidator;
 
+use Gnugat\Medio\Model\Argument;
+use Gnugat\Medio\Model\Constant;
+use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeAbstractAndHaveBody;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndPrivate;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
+use Gnugat\Medio\Validator\Constraint\CollectionCannotHaveNameDuplicates;
 use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 
-class MethodValidator implements ModelValidator
+class CollectionValidator implements ModelValidator
 {
-    /**
-     * @var CollectionValidator
-     */
-    private $collectionValidator;
-
     /**
      * @var ConstraintValidator
      */
     private $constraintValidator;
 
-    /**
-     * @param CollectionValidator $collectionValidator
-     */
-    public function __construct(CollectionValidator $collectionValidator)
+    public function __construct()
     {
-        $this->collectionValidator = $collectionValidator;
-
         $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new MethodCannotBeAbstractAndHaveBody());
-        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
-        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndPrivate());
+        $this->constraintValidator->add(new CollectionCannotHaveNameDuplicates());
     }
 
     /**
@@ -58,7 +48,15 @@ class MethodValidator implements ModelValidator
      */
     public function supports($model)
     {
-        return $model instanceof Method;
+        if (!is_array($model) || empty($model)) {
+            return false;
+        }
+        $firstElement = current($model);
+
+        return (
+            $firstElement instanceof Argument || $firstElement instanceof Constant
+            || $firstElement instanceof Method || $firstElement instanceof Property
+        );
     }
 
     /**
@@ -69,9 +67,7 @@ class MethodValidator implements ModelValidator
         if (!$this->supports($model)) {
             return new ViolationCollection();
         }
-        $violationCollection = $this->constraintValidator->validate($model);
-        $violationCollection->merge($this->collectionValidator->validate($model->allArguments()));
 
-        return $violationCollection;
+        return $this->constraintValidator->validate($model);
     }
 }

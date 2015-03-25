@@ -11,16 +11,15 @@
 
 namespace Gnugat\Medio\Validator\ModelValidator;
 
-use Gnugat\Medio\Model\Method;
+use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\File;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeAbstractAndHaveBody;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndPrivate;
-use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
 use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 
-class MethodValidator implements ModelValidator
+class FileValidator implements ModelValidator
 {
     /**
      * @var CollectionValidator
@@ -28,21 +27,28 @@ class MethodValidator implements ModelValidator
     private $collectionValidator;
 
     /**
-     * @var ConstraintValidator
+     * @var ContractValidator
      */
-    private $constraintValidator;
+    private $contractValidator;
 
     /**
-     * @param CollectionValidator $collectionValidator
+     * @var ObjectValidator
      */
-    public function __construct(CollectionValidator $collectionValidator)
+    private $objectValidator;
+
+    /**
+     * @param ContractValidator $contractValidator
+     * @param ObjectValidator   $objectValidator
+     */
+    public function __construct(
+        ContractValidator $contractValidator,
+        ObjectValidator $objectValidator
+    )
     {
-        $this->collectionValidator = $collectionValidator;
+        $this->contractValidator = $contractValidator;
+        $this->objectValidator = $objectValidator;
 
         $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new MethodCannotBeAbstractAndHaveBody());
-        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
-        $this->constraintValidator->add(new MethodCannotBeBothAbstractAndPrivate());
     }
 
     /**
@@ -58,7 +64,7 @@ class MethodValidator implements ModelValidator
      */
     public function supports($model)
     {
-        return $model instanceof Method;
+        return $model instanceof File;
     }
 
     /**
@@ -70,7 +76,13 @@ class MethodValidator implements ModelValidator
             return new ViolationCollection();
         }
         $violationCollection = $this->constraintValidator->validate($model);
-        $violationCollection->merge($this->collectionValidator->validate($model->allArguments()));
+        $structure = $model->getStructure();
+        if ($structure instanceof Contract) {
+            $violationCollection->merge($this->contractValidator->validate($structure));
+        }
+        if ($structure instanceof Object) {
+            $violationCollection->merge($this->objectValidator->validate($structure));
+        }
 
         return $violationCollection;
     }

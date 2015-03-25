@@ -28,6 +28,7 @@ a single rule.
 
 Out of the box, `Validator` provides the following `Constraints`:
 
+* Collection cannot have name duplicates
 * Contract Methods can only be public
 * Contract Methods cannot be final
 * Contract Methods cannot be static

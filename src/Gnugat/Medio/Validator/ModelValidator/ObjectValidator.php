@@ -11,17 +11,13 @@
 
 namespace Gnugat\Medio\Validator\ModelValidator;
 
-use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCanOnlyBePublic;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeFinal;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeStatic;
-use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotHaveBody;
 use Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 
-class ContractValidator implements ModelValidator
+class ObjectValidator implements ModelValidator
 {
     /**
      * @var CollectionValidator
@@ -51,10 +47,6 @@ class ContractValidator implements ModelValidator
         $this->methodValidator = $methodValidator;
 
         $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new ContractMethodsCanOnlyBePublic());
-        $this->constraintValidator->add(new ContractMethodsCannotBeFinal());
-        $this->constraintValidator->add(new ContractMethodsCannotBeStatic());
-        $this->constraintValidator->add(new ContractMethodsCannotHaveBody());
     }
 
     /**
@@ -70,7 +62,7 @@ class ContractValidator implements ModelValidator
      */
     public function supports($model)
     {
-        return $model instanceof Contract;
+        return $model instanceof Object;
     }
 
     /**
@@ -84,6 +76,7 @@ class ContractValidator implements ModelValidator
         $violationCollection = $this->constraintValidator->validate($model);
         $violationCollection->merge($this->collectionValidator->validate($model->allConstants()));
         $violationCollection->merge($this->collectionValidator->validate($model->allContracts()));
+        $violationCollection->merge($this->collectionValidator->validate($model->allProperties()));
         $methods = $model->allMethods();
         $violationCollection->merge($this->collectionValidator->validate($methods));
         foreach ($methods as $method) {

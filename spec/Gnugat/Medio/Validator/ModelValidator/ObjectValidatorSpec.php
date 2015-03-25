@@ -14,11 +14,11 @@ namespace spec\Gnugat\Medio\Validator\ModelValidator;
 use Gnugat\Medio\Validator\ViolationCollection;
 use Gnugat\Medio\Validator\ModelValidator\CollectionValidator;
 use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
-use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Object;
 use Gnugat\Medio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
-class ContractValidatorSpec extends ObjectBehavior
+class ObjectValidatorSpec extends ObjectBehavior
 {
     function let(CollectionValidator $collectionValidator, MethodValidator $methodValidator)
     {
@@ -30,7 +30,7 @@ class ContractValidatorSpec extends ObjectBehavior
         $this->shouldImplement('Gnugat\Medio\Validator\ModelValidator');
     }
 
-    function it_supports_contracts(Contract $model)
+    function it_supports_objects(Object $model)
     {
         $this->supports($model)->shouldBe(true);
     }
@@ -38,26 +38,30 @@ class ContractValidatorSpec extends ObjectBehavior
     function it_also_validates_methods(
         CollectionValidator $collectionValidator,
         MethodValidator $methodValidator,
-        Contract $model,
+        Object $model,
         Method $method
     )
     {
         $constants = array();
         $contracts = array();
         $methods = array($method);
+        $properties = array();
         $violationCollection1 = new ViolationCollection();
         $violationCollection2 = new ViolationCollection();
         $violationCollection3 = new ViolationCollection();
         $violationCollection4 = new ViolationCollection();
+        $violationCollection5 = new ViolationCollection();
 
         $model->getName()->willReturn('Symfony\Component\HttpKernel\HttpKernelInterface');
         $model->allConstants()->willReturn($constants);
         $model->allContracts()->willReturn($contracts);
         $model->allMethods()->willReturn($methods);
+        $model->allProperties()->willReturn($properties);
         $collectionValidator->validate($constants)->willReturn($violationCollection1);
         $collectionValidator->validate($contracts)->willReturn($violationCollection2);
-        $collectionValidator->validate($methods)->willReturn($violationCollection3);
-        $methodValidator->validate($method)->willReturn($violationCollection4);
+        $collectionValidator->validate($properties)->willReturn($violationCollection3);
+        $collectionValidator->validate($methods)->willReturn($violationCollection4);
+        $methodValidator->validate($method)->willReturn($violationCollection5);
 
         $this->validate($model);
     }
