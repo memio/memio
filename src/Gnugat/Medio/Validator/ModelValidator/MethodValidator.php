@@ -18,6 +18,7 @@ use Gnugat\Medio\Validator\Constraint\MethodCannotBeAbstractAndHaveBody;
 use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndPrivate;
 use Gnugat\Medio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
 
 class MethodValidator implements ModelValidator
 {
@@ -65,6 +66,9 @@ class MethodValidator implements ModelValidator
      */
     public function validate($model)
     {
+        if (!$this->supports($model)) {
+            return new ViolationCollection();
+        }
         $violationCollection = $this->constraintValidator->validate($model);
         $violationCollection->merge($this->collectionValidator->validate($model->allArguments()));
 

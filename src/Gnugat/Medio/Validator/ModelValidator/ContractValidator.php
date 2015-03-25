@@ -19,6 +19,7 @@ use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeFinal;
 use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotBeStatic;
 use Gnugat\Medio\Validator\Constraint\ContractMethodsCannotHaveBody;
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
 
 class ContractValidator implements ModelValidator
 {
@@ -77,6 +78,9 @@ class ContractValidator implements ModelValidator
      */
     public function validate($model)
     {
+        if (!$this->supports($model)) {
+            return new ViolationCollection();
+        }
         $violationCollection = $this->constraintValidator->validate($model);
         $methods = $model->allMethods();
         $violationCollection->merge($this->collectionValidator->validate($methods));

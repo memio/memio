@@ -20,6 +20,7 @@ use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
 use Gnugat\Medio\Validator\Constraint\CollectionCannotHaveNameDuplicates;
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
 
 class CollectionValidator implements ModelValidator
 {
@@ -63,6 +64,10 @@ class CollectionValidator implements ModelValidator
      */
     public function validate($model)
     {
+        if (!$this->supports($model)) {
+            return new ViolationCollection();
+        }
+
         return $this->constraintValidator->validate($model);
     }
 }
