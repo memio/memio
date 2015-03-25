@@ -22,12 +22,22 @@ use Gnugat\Medio\Validator\ModelValidator;
 class MethodValidator implements ModelValidator
 {
     /**
+     * @var CollectionValidator
+     */
+    private $collectionValidator;
+
+    /**
      * @var ConstraintValidator
      */
     private $constraintValidator;
 
-    public function __construct()
+    /**
+     * @param CollectionValidator $collectionValidator
+     */
+    public function __construct(CollectionValidator $collectionValidator)
     {
+        $this->collectionValidator = $collectionValidator;
+
         $this->constraintValidator = new ConstraintValidator();
         $this->constraintValidator->add(new MethodCannotBeAbstractAndHaveBody());
         $this->constraintValidator->add(new MethodCannotBeBothAbstractAndFinal());
@@ -55,6 +65,9 @@ class MethodValidator implements ModelValidator
      */
     public function validate($model)
     {
-        return $this->constraintValidator->validate($model);
+        $violationCollection = $this->constraintValidator->validate($model);
+        $violationCollection->merge($this->collectionValidator->validate($model->allArguments()));
+
+        return $violationCollection;
     }
 }
