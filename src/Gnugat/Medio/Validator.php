@@ -28,9 +28,10 @@ class Validator
     {
         $collectionValidator = new CollectionValidator();
         $methodValidator = new MethodValidator($collectionValidator);
+        $contractValidator = new ContractValidator($collectionValidator, $methodValidator);
 
         $this->modelValidators[] = $collectionValidator;
-        $this->modelValidators[] = new ContractValidator();
+        $this->modelValidators[] = $contractValidator;
         $this->modelValidators[] = $methodValidator;
     }
 

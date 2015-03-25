@@ -78,6 +78,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             $this->assertSame(array(
                 'Contract "HttpKernelInterface" Method "handle" can only be public',
                 'Contract "HttpKernelInterface" Method "handle" cannot have a body',
+                'Collection "Argument" cannot have name "request" duplicates (3 occurences)',
             ), $messages);
         }
     }

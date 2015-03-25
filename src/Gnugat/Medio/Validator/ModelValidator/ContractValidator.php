@@ -23,12 +23,32 @@ use Gnugat\Medio\Validator\ModelValidator;
 class ContractValidator implements ModelValidator
 {
     /**
+     * @var CollectionValidator
+     */
+    private $collectionValidator;
+
+    /**
      * @var ConstraintValidator
      */
     private $constraintValidator;
 
-    public function __construct()
+    /**
+     * @var MethodValidator
+     */
+    private $methodValidator;
+
+    /**
+     * @param CollectionValidator $collectionValidator
+     * @param MethodValidator     $methodValidator
+     */
+    public function __construct(
+        CollectionValidator $collectionValidator,
+        MethodValidator $methodValidator
+    )
     {
+        $this->collectionValidator = $collectionValidator;
+        $this->methodValidator = $methodValidator;
+
         $this->constraintValidator = new ConstraintValidator();
         $this->constraintValidator->add(new ContractMethodsCanOnlyBePublic());
         $this->constraintValidator->add(new ContractMethodsCannotBeFinal());
@@ -57,6 +77,13 @@ class ContractValidator implements ModelValidator
      */
     public function validate($model)
     {
-        return $this->constraintValidator->validate($model);
+        $violationCollection = $this->constraintValidator->validate($model);
+        $methods = $model->allMethods();
+        $violationCollection->merge($this->collectionValidator->validate($methods));
+        foreach ($methods as $method) {
+            $violationCollection->merge($this->methodValidator->validate($method));
+        }
+
+        return $violationCollection;
     }
 }

@@ -11,11 +11,20 @@
 
 namespace spec\Gnugat\Medio\Validator\ModelValidator;
 
+use Gnugat\Medio\Validator\ViolationCollection;
+use Gnugat\Medio\Validator\ModelValidator\CollectionValidator;
+use Gnugat\Medio\Validator\ModelValidator\MethodValidator;
 use Gnugat\Medio\Model\Contract;
+use Gnugat\Medio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class ContractValidatorSpec extends ObjectBehavior
 {
+    function let(CollectionValidator $collectionValidator, MethodValidator $methodValidator)
+    {
+        $this->beConstructedWith($collectionValidator, $methodValidator);
+    }
+
     function it_is_a_model_validator()
     {
         $this->shouldImplement('Gnugat\Medio\Validator\ModelValidator');
@@ -24,5 +33,24 @@ class ContractValidatorSpec extends ObjectBehavior
     function it_supports_contracts(Contract $model)
     {
         $this->supports($model)->shouldBe(true);
+    }
+
+    function it_also_validates_methods(
+        CollectionValidator $collectionValidator,
+        MethodValidator $methodValidator,
+        Contract $model,
+        Method $method
+    )
+    {
+        $methods = array($method);
+        $violationCollection1 = new ViolationCollection();
+        $violationCollection2 = new ViolationCollection();
+
+        $model->getName()->willReturn('Symfony\Component\HttpKernel\HttpKernelInterface');
+        $model->allMethods()->willReturn($methods);
+        $collectionValidator->validate($methods)->willReturn($violationCollection1);
+        $methodValidator->validate($method)->willReturn($violationCollection2);
+
+        $this->validate($model);
     }
 }
