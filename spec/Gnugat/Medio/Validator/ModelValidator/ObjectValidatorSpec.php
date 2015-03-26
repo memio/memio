@@ -53,6 +53,7 @@ class ObjectValidatorSpec extends ObjectBehavior
         $violationCollection5 = new ViolationCollection();
 
         $model->getName()->willReturn('Symfony\Component\HttpKernel\HttpKernelInterface');
+        $model->isAbstract()->willReturn(true);
         $model->allConstants()->willReturn($constants);
         $model->allContracts()->willReturn($contracts);
         $model->allMethods()->willReturn($methods);

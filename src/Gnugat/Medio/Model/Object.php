@@ -38,6 +38,11 @@ class Object implements Structure
     /**
      * @var bool
      */
+    private $isAbstract = false;
+
+    /**
+     * @var bool
+     */
     private $isFinal = false;
 
     /**
@@ -232,6 +237,38 @@ class Object implements Structure
     public function removeParent()
     {
         $this->parent = null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbstract()
+    {
+        return $this->isAbstract;
+    }
+
+    /**
+     * @return Object
+     *
+     * @api
+     */
+    public function makeAbstract()
+    {
+        $this->isAbstract = true;
+
+        return $this;
+    }
+
+    /**
+     * @return Object
+     *
+     * @api
+     */
+    public function removeAbstract()
+    {
+        $this->isAbstract = false;
+
+        return $this;
     }
 
     /**

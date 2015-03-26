@@ -187,13 +187,15 @@ Medio assumes a few things by default:
 
 * properties are private, not static, not abstract
 * methods are public, not static, not abstract, not final
-* classes are not final
+* classes are not final, not abstract
 
 This can be customized:
 
 ```php
-$finalObject = Object::make()
+$superObject = Object::make()
+    ->makeAbstract()  // can be cancelled with removeAbstract()
     ->makeFinal()  // can be cancelled with removeFinal()
+;
 
 $publicStaticProperty = Property::make('myProperty')
     ->makePublic() // also available: makeProtected() and makePrivate()
@@ -201,9 +203,11 @@ $publicStaticProperty = Property::make('myProperty')
 ;
 
 $superMethod = Method::make('myMethod')
+    ->makeAbstract()  // can be cancelled with removeAbstract()
+    ->makeFinal() // can be cancelled with removeFinal()
     ->makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
     ->makeStatic() // can be cancelled with removeStatic()
-    ->makeFinal() // can be cancelled with removeFinal()
+;
 ```
 
 ## 7. Constant and default values
