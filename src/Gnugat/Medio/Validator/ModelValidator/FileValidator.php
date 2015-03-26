@@ -22,11 +22,6 @@ use Gnugat\Medio\Validator\ViolationCollection;
 class FileValidator implements ModelValidator
 {
     /**
-     * @var CollectionValidator
-     */
-    private $collectionValidator;
-
-    /**
      * @var ContractValidator
      */
     private $contractValidator;
