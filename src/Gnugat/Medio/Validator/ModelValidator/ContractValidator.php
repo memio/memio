@@ -45,8 +45,7 @@ class ContractValidator implements ModelValidator
     public function __construct(
         CollectionValidator $collectionValidator,
         MethodValidator $methodValidator
-    )
-    {
+    ) {
         $this->collectionValidator = $collectionValidator;
         $this->methodValidator = $methodValidator;
 

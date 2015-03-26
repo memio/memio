@@ -22,11 +22,6 @@ use Gnugat\Medio\Validator\ViolationCollection;
 class FileValidator implements ModelValidator
 {
     /**
-     * @var CollectionValidator
-     */
-    private $collectionValidator;
-
-    /**
      * @var ContractValidator
      */
     private $contractValidator;
@@ -43,8 +38,7 @@ class FileValidator implements ModelValidator
     public function __construct(
         ContractValidator $contractValidator,
         ObjectValidator $objectValidator
-    )
-    {
+    ) {
         $this->contractValidator = $contractValidator;
         $this->objectValidator = $objectValidator;
 
