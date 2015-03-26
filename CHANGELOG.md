@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-rc5: Collection Validator and Deep Validation
+
+* added deep validation
+* added CollectionCannotHaveNameDuplicates constraint
+
+> **Note**: Validator now validates the structure in a file, constants/methods/properties
+> in a structure and arguments in a method.
+
 ## 1.0.0-rc4: Contract Validator
 
 * added ContractMethodsCanOnlyBePublic constraint
