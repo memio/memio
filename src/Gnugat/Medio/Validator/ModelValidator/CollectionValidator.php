@@ -13,7 +13,6 @@ namespace Gnugat\Medio\Validator\ModelValidator;
 
 use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\FullyQualifiedName;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Validator\Constraint;
