@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-rc6: Argument Validator
+
+* added ObjectArgumentCanOnlyDefaultToNull constraint
+
 ## 1.0.0-rc5: Collection Validator and Deep Validation
 
 * added deep validation
