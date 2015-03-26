@@ -87,6 +87,15 @@ class ObjectSpec extends ObjectBehavior
         $this->allContracts()->shouldBe(array($contract));
     }
 
+    function it_can_be_abstract()
+    {
+        $this->isAbstract()->shouldBe(false);
+        $this->makeAbstract();
+        $this->isAbstract()->shouldBe(true);
+        $this->removeAbstract();
+        $this->isAbstract()->shouldBe(false);
+    }
+
     function it_can_be_final()
     {
         $this->isFinal()->shouldBe(false);

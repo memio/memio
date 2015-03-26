@@ -11,7 +11,6 @@
 
 namespace Gnugat\Medio\Model;
 
-use Gnugat\Medio\Exception\DomainException;
 use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
 
 /**
@@ -182,9 +181,6 @@ class Method
      */
     public function makeStatic()
     {
-        if ($this->isAbstract()) {
-            throw new DomainException("You can't declare abstract method as static: ".$this->getName());
-        }
         $this->isStatic = true;
 
         return $this;
@@ -229,9 +225,6 @@ class Method
      */
     public function makeAbstract()
     {
-        if ($this->isStatic()) {
-            throw new DomainException("You can't declare static method as abstract: ".$this->getName());
-        }
         $this->isAbstract = true;
 
         return $this;

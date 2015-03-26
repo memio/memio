@@ -17,18 +17,12 @@ $validator = new Validator();
 $validator->validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException
 ```
 
-## Under the hood
-
-`Validator` throws an exception containing all the error messages (one per line).
-It collects them from `ModelValidator`, a validator specialised in a specific model.
-`ModelValidators` also collect the error messages, from `Constraints`: a class representing
-a single rule.
-
 ## Default Constraints
 
 Out of the box, `Validator` provides the following `Constraints`:
 
 * Collection cannot have name duplicates
+* Concrete Object Methods cannot be abstract
 * Contract Methods can only be public
 * Contract Methods cannot be final
 * Contract Methods cannot be static
@@ -36,6 +30,7 @@ Out of the box, `Validator` provides the following `Constraints`:
 * Method cannot be abstract and have a body
 * Method cannot be both abstract and final
 * Method cannot be both abstract and private
+* Method cannot be both abstract and static
 
 ## Providing new Constraints
 
@@ -119,6 +114,18 @@ $validator->add(new ArgumentValidator());
 
 $validator->validate(new Argument('string', 'scalar')); // @throws Gnugat\Medio\Exception\InvalidModelException
 ```
+
+## Under the hood
+
+`Validator`'s role is to find a `ModelValidator` that supports the given model.
+`ModelValidators` own many `Constraints`, it applies all of them to the given model.
+A `Constraint` returns `NoneViolation` if everything is fine, or esle a `SomeViolation`
+containing a message. `ModelValidator` adds those `Violations` to a `ViolationCollection`
+and returns it to `Validator`. Finally, `Validator` throws an `InvalidModelException` if the
+returned `ViolationCollection` contains at least one violation.
+
+The `InvalidModelException`'s message is composed of the `ViolationCollection` messages
+(it separates those by a line break).
 
 ## Next readings
 
