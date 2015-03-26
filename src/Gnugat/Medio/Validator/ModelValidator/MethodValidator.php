@@ -24,6 +24,11 @@ use Gnugat\Medio\Validator\ViolationCollection;
 class MethodValidator implements ModelValidator
 {
     /**
+     * @var ArgumentValidator
+     */
+    private $argumentValidator;
+
+    /**
      * @var CollectionValidator
      */
     private $collectionValidator;
@@ -34,10 +39,12 @@ class MethodValidator implements ModelValidator
     private $constraintValidator;
 
     /**
+     * @param ArgumentValidator   $argumentValidator
      * @param CollectionValidator $collectionValidator
      */
-    public function __construct(CollectionValidator $collectionValidator)
+    public function __construct(ArgumentValidator $argumentValidator, CollectionValidator $collectionValidator)
     {
+        $this->argumentValidator = $argumentValidator;
         $this->collectionValidator = $collectionValidator;
 
         $this->constraintValidator = new ConstraintValidator();
@@ -72,7 +79,11 @@ class MethodValidator implements ModelValidator
             return new ViolationCollection();
         }
         $violationCollection = $this->constraintValidator->validate($model);
-        $violationCollection->merge($this->collectionValidator->validate($model->allArguments()));
+        $arguments = $model->allArguments();
+        $violationCollection->merge($this->collectionValidator->validate($arguments));
+        foreach ($arguments as $argument) {
+            $violationCollection->merge($this->argumentValidator->validate($argument));
+        }
 
         return $violationCollection;
     }

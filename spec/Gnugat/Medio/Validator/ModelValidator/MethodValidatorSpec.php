@@ -12,15 +12,16 @@
 namespace spec\Gnugat\Medio\Validator\ModelValidator;
 
 use Gnugat\Medio\Validator\ViolationCollection;
+use Gnugat\Medio\Validator\ModelValidator\ArgumentValidator;
 use Gnugat\Medio\Validator\ModelValidator\CollectionValidator;
 use Gnugat\Medio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class MethodValidatorSpec extends ObjectBehavior
 {
-    function let(CollectionValidator $collectionValidator)
+    function let(ArgumentValidator $argumentValidator, CollectionValidator $collectionValidator)
     {
-        $this->beConstructedWith($collectionValidator);
+        $this->beConstructedWith($argumentValidator, $collectionValidator);
     }
 
     function it_is_a_model_validator()
@@ -33,14 +34,20 @@ class MethodValidatorSpec extends ObjectBehavior
         $this->supports($model)->shouldBe(true);
     }
 
-    function it_also_validates_arguments(CollectionValidator $collectionValidator, Method $model)
+    function it_also_validates_arguments(
+        ArgumentValidator $argumentValidator,
+        CollectionValidator $collectionValidator,
+        Method $model
+    )
     {
         $arguments = array();
-        $violationCollection = new ViolationCollection();
+        $violationCollection1 = new ViolationCollection();
+        $violationCollection2 = new ViolationCollection();
 
         $model->isAbstract()->willReturn(false);
         $model->allArguments()->willReturn($arguments);
-        $collectionValidator->validate($arguments)->willReturn($violationCollection);
+        $collectionValidator->validate($arguments)->willReturn($violationCollection1);
+        $argumentValidator->validate($arguments)->willReturn($violationCollection2);
 
         $this->validate($model);
     }
