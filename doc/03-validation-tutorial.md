@@ -31,6 +31,7 @@ Out of the box, `Validator` provides the following `Constraints`:
 * Method cannot be both abstract and final
 * Method cannot be both abstract and private
 * Method cannot be both abstract and static
+* Object Argument can only default to null
 
 ## Providing new Constraints
 
