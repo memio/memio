@@ -109,9 +109,6 @@ class Argument
      */
     public function setDefaultValue($value)
     {
-        if (!is_string($value)) {
-            throw new InvalidArgumentException('Invalid default value. Expect string or null. Given:'.gettype($value));
-        }
         if ($this->isObject()) {
             if (!preg_match('!^(null|(static|self)::[a-z]+.*|[a-z]+.*)$!i', $value)) {
                 throw new DomainException("You can set only null and constant default value for argument: ".$this->getName());

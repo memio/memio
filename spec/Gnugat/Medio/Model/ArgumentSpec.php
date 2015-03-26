@@ -69,14 +69,6 @@ class ArgumentSpec extends ObjectBehavior
         $this->getDefaultValue()->shouldBe('null');
     }
 
-    function it_can_be_only_string_default_value_format()
-    {
-        $this->beConstructedWith('integer', 'name');
-
-        $domainException = 'Gnugat\Medio\Exception\InvalidArgumentException';
-        $this->shouldThrow($domainException)->duringSetDefaultValue(false);
-    }
-
     function it_can_be_self_constant_reference_default_value_for_object()
     {
         $this->beConstructedWith('DateTime', 'name');
