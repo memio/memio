@@ -84,14 +84,11 @@ Method::make('myMethod')
 
 $validator = new Validator();
 $validator-&gt;validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
-<h2>Under the hood</h2>
-<p><code>Validator</code> throws an exception containing all the error messages (one per line).
-It collects them from <code>ModelValidator</code>, a validator specialised in a specific model.
-<code>ModelValidators</code> also collect the error messages, from <code>Constraints</code>: a class representing
-a single rule.</p>
 <h2>Default Constraints</h2>
 <p>Out of the box, <code>Validator</code> provides the following <code>Constraints</code>:</p>
 <ul>
+<li>Collection cannot have name duplicates</li>
+<li>Concrete Object Methods cannot be abstract</li>
 <li>Contract Methods can only be public</li>
 <li>Contract Methods cannot be final</li>
 <li>Contract Methods cannot be static</li>
@@ -99,6 +96,7 @@ a single rule.</p>
 <li>Method cannot be abstract and have a body</li>
 <li>Method cannot be both abstract and final</li>
 <li>Method cannot be both abstract and private</li>
+<li>Method cannot be both abstract and static</li>
 </ul>
 <h2>Providing new Constraints</h2>
 <p>To add new rules to the validator, we first need to create a new <code>Constraint</code>:</p>
@@ -172,6 +170,15 @@ aggregating all error messages.</p>
 $validator-&gt;add(new ArgumentValidator());
 
 $validator-&gt;validate(new Argument('string', 'scalar')); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
+<h2>Under the hood</h2>
+<p><code>Validator</code>'s role is to find a <code>ModelValidator</code> that supports the given model.
+<code>ModelValidators</code> own many <code>Constraints</code>, it applies all of them to the given model.
+A <code>Constraint</code> returns <code>NoneViolation</code> if everything is fine, or esle a <code>SomeViolation</code>
+containing a message. <code>ModelValidator</code> adds those <code>Violations</code> to a <code>ViolationCollection</code>
+and returns it to <code>Validator</code>. Finally, <code>Validator</code> throws an <code>InvalidModelException</code> if the
+returned <code>ViolationCollection</code> contains at least one violation.</p>
+<p>The <code>InvalidModelException</code>'s message is composed of the <code>ViolationCollection</code> messages
+(it separates those by a line break).</p>
 <h2>Next readings</h2>
 <ul>
 <li><a href="04-examples.html">Examples</a></li>

@@ -204,11 +204,13 @@ echo $prettyPrinter-&gt;generateCode($specification);</code></pre>
 <ul>
 <li>properties are private, not static, not abstract</li>
 <li>methods are public, not static, not abstract, not final</li>
-<li>classes are not final</li>
+<li>classes are not final, not abstract</li>
 </ul>
 <p>This can be customized:</p>
-<pre><code class="language-php">$finalObject = Object::make()
+<pre><code class="language-php">$superObject = Object::make()
+    -&gt;makeAbstract()  // can be cancelled with removeAbstract()
     -&gt;makeFinal()  // can be cancelled with removeFinal()
+;
 
 $publicStaticProperty = Property::make('myProperty')
     -&gt;makePublic() // also available: makeProtected() and makePrivate()
@@ -216,9 +218,11 @@ $publicStaticProperty = Property::make('myProperty')
 ;
 
 $superMethod = Method::make('myMethod')
+    -&gt;makeAbstract()  // can be cancelled with removeAbstract()
+    -&gt;makeFinal() // can be cancelled with removeFinal()
     -&gt;makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
     -&gt;makeStatic() // can be cancelled with removeStatic()
-    -&gt;makeFinal() // can be cancelled with removeFinal()</code></pre>
+;</code></pre>
 <h2>7. Constant and default values</h2>
 <p>A constant or a default value can be many things: a string encapsulated between single or double quotes,
 an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. <code>__DIR__.'/path'</code>).</p>
