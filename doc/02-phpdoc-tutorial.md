@@ -19,14 +19,14 @@ In this tutorial, we'll see how to:
 the author's name and their emails:
 
 ```php
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Object;
-use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
+use Vendor\Project\Model\File;
+use Vendor\Project\Model\Object;
+use Vendor\Project\Model\Phpdoc\LicensePhpdoc;
 
-$file = File::make('src/Gnugat/Medio/MyClass')
+$file = File::make('src/Vendor/Project/MyClass')
     ->setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
 
-    ->setStructure(new Object('Gnugat\Medio\MyClass'))
+    ->setStructure(new Object('Vendor\Project\MyClass'))
 ;
 
 echo $prettyPrinter->generateCode($file);
@@ -46,7 +46,7 @@ This will output:
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
 class MyClass
 {
@@ -70,7 +70,7 @@ use Gnugat\Medio\Model\Phpdoc\Description;
 use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
 use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
 
-$contract = Contract::make('Gnugat\Medio\MyInterface')
+$contract = Contract::make('Vendor\Project\MyInterface')
     ->setPhpdoc(StructurePhpdoc::make()
         ->setDescription(Description::make('This is the first line')
             ->addEmptyLine()
@@ -112,7 +112,7 @@ use Gnugat\Medio\Model\Phpdoc\VariableTag;
 
 $property = Property::make('myClass')
     ->setPhpdoc(PropertyPhpdoc::make()
-        ->setVariableTag(new VariableTag('Gnugat\Medio\MyClass'))
+        ->setVariableTag(new VariableTag('Vendor\Project\MyClass'))
     )
 ;
 
