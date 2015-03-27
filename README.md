@@ -1,61 +1,20 @@
 # Medio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
 
-Medio allows you to describe the code you want to generate using Models:
+Medio is a library, it allows you to describe PHP code by initializing "Model" classes
+(e.g. `new Method('__construct')`) and then to generate it using a `PrettyPrinter`!
 
-```php
-$file = File::make('src/Gnugat/Medio/MyService.php')
-    ->setStructure(Object::make('Gnugat\Medio\MyService')
-        ->addProperty(new Property('createdAt'))
-        ->addProperty(new Property('filename'))
-
-        ->addMethod(Method::make('__construct')
-            ->addArgument(Argument::make('DateTime', 'createdAt'))
-            ->addArgument(Argument::make('string', 'filename'))
-        )
-    )
-;
-```
-
-Optionally you can validate them:
-
-```php
-$validator->validate($file); // @throws Gnugat\Medio\Exception\InvalidModelException
-```
-
-These Models can be given to a `PrettyPrinter`:
-
-```php
-echo $prettyPrinter->generateCode($file);
-```
-
-And as simply as that, you get the corresponding generated code:
-
-```
-<?php
-
-namespace Gnugat\Medio;
-
-class MyClass
-{
-    private $createdAt;
-
-    private $filename;
-
-    public function __construct(DateTime $createdAt, $filename)
-    {
-    }
-}
-```
+> **Note**: The actual generation logic is hold by [Twig templates](http://twig.sensiolabs.org/).
+> If the coding style provided doesn't appeal to you, you can overwrite those templates easily.
 
 ## Installation
 
-Use [Composer](https://getcomposer.org/download) to install Medio in your project:
+Install it using [Composer](https://getcomposer.org/download):
 
-    composer require gnugat/medio:~1.0@beta
+    composer require gnugat/medio:~1.0
 
-> **Note**: Medio is currently slightly unstable. Some BC break might happen, but we try to make those rare.
+## Full example
 
-In order to generate the code, you'll need to create an instance of `PrettyPrinter`:
+We're going to generate a class with a constructor and two attributes:
 
 ```php
 <?php
@@ -71,41 +30,58 @@ use Gnugat\Medio\Model\Property;
 use Gnugat\Medio\Model\Method;
 use Gnugat\Medio\Model\Argument;
 
+// Initialize the code generator
 $loader = new \Twig_Loader_Filesystem(Path::templates());
 $twig = new \Twig_Environment($loader);
-
 $prettyPrinter = new PrettyPrinter($twig);
 
-$file = File::make('src/Gnugat/Medio/MyService.php')
+// Describe the code you want to generate using "Models"
+$file = File::make('src/Vendor/Project/MyService.php')
     ->setStructure(
-        Object::make('Gnugat\Medio\MyService')
+        Object::make('Vendor\Project\MyService')
             ->addProperty(new Property('createdAt'))
             ->addProperty(new Property('filename'))
             ->addMethod(
                 Method::make('__construct')
-                    ->addArgument(Argument::make('DateTime', 'createdAt'))
-                    ->addArgument(Argument::make('string', 'filename'))
+                    ->addArgument(new Argument('DateTime', 'createdAt'))
+                    ->addArgument(new Argument('string', 'filename'))
             )
-    );
+    )
+;
 
-// Optional validation
+// Optionally check that you didn't create any syntax error
 $validate = new Validator();
-$validate->validate($file);
+$validate->validate($file); // @throws Gnugat\Medio\Exception\InvalidModelException
 
-// Output in console
+// Generate the code and display in the console
 echo $prettyPrinter->generateCode($file);
+
+// Or display it in a browser
+// echo '<pre>'.htmlspecialchars($prettyPrinter->generateCode($file)).'</pre>';
 ```
 
-> **Note**: The actual generation logic is hold by [Twig templates](http://twig.sensiolabs.org/).
-> If the coding style provided doesn't appeal to you, you can overwrite those templates easily.
+With this simple example, we get the following output:
 
-> **Note**: If you want to see the output through your browser you need to escape your generated code.
-> By using the [escape filter](http://twig.sensiolabs.org/doc/filters/escape.html) in your twig template or using the
-> htmlspecialchars() method along with html `<pre>` tags to keep indentation.
+```
+<?php
 
-## Further documentation
+namespace Vendor\Project;
 
-Discover more by reading the docs:
+class MyService
+{
+    private $createdAt;
+
+    private $filename;
+
+    public function __construct(DateTime $createdAt, $filename)
+    {
+    }
+}
+```
+
+## Want to know more?
+
+Medio can be quite powerful, discover how by reading the docs:
 
 * [Model Tutorial](doc/01-model-tutorial.md)
 * [PHPdoc Tutorial](doc/02-phpdoc-tutorial.md)
@@ -127,7 +103,6 @@ And finally some meta documentation:
 
 ## Roadmap
 
-* validator and constraint (e.g. final class cannot have abstract methods)
+* commands (e.g. add use statement, add PHPdoc, injecting dependency, etc)
 * parsing existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
-* commands (e.g. injecting dependency)
 * TemplateEngine interface, to allow the choice between Twig and basic PHP templating
