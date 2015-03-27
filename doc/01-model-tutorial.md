@@ -252,8 +252,8 @@ use Gnugat\Medio\Model\Contract;
 $myMethod = new Method('myMethod')
     ->addArgument('mixed', 'myArgument')
 );
-$myContract = Contract::make('Gnugat\Medio\MyInterface')
-    ->extend(new Contract('Gnugat\Medio\MyParentInterface'))
+$myContract = Contract::make('Vendor\Project\MyInterface')
+    ->extend(new Contract('Vendor\Project\MyParentInterface'))
     ->addConstant(new Constant('MY_CONSTANT', '42'))
     ->addMethod($myMethod)
 ;
@@ -280,9 +280,9 @@ can extend many interfaces.
 Finally, we can generate a whole `File`:
 
 ```php
-$myFile = File::make('src/Gnugat/Medio/MyObject')
+$myFile = File::make('src/Vendor/Project/MyObject')
     ->addFullyQualifiedName($myContract->getFullyQualifiedName())
-    ->setStructure(Object::make('Gnugat\Medio\MyObject')
+    ->setStructure(Object::make('Vendor\Project\MyObject')
         ->implement($myContract)
         ->addMethod($myMethod)
     )
@@ -296,9 +296,9 @@ This will output:
 ```php
 <?php
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
-use Gnugat\Medio\MyInterface;
+use Vendor\Project\MyInterface;
 
 class MyObject implements MyInterface
 {
