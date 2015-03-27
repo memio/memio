@@ -17,9 +17,10 @@ $validator = new Validator();
 $validator->validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException
 ```
 
-## Default Constraints
+## Linting Constraints
 
-Out of the box, `Validator` provides the following `Constraints`:
+Out of the box, `Validator` provides "linting" `Constraints` that will check if the
+generating code can be run without raising PHP Fatal Errors:
 
 * Collection cannot have name duplicates
 * Concrete Object Methods cannot be abstract
@@ -60,7 +61,7 @@ class ArgumentCannotBeScalar implements Constraint
 ```
 
 > **Note**: In Medio all `Constraints` are named after their error message, but
-> this is not mandatory.
+> this is not mandatory. They check a single specific rule.
 
 We then need to create a `ModelValidator` specialized in `Arguments`:
 
@@ -73,6 +74,7 @@ use Gnugat\Medio\Model\Argument;
 use Gnugat\Medio\Validator\Constraint;
 use Gnugat\Medio\Validator\ConstraintValidator;
 use Gnugat\Medio\Validator\ModelValidator;
+use Gnugat\Medio\Validator\ViolationCollection;
 use Vendor\Project\Validator\Constraint\ArgumentCannotBeScalar;
 
 class ArgumentValidator implements ModelValidator
@@ -98,13 +100,17 @@ class ArgumentValidator implements ModelValidator
 
     public function validate($model)
     {
+        if (!$this->supports($model)) {
+            return new ViolationCollection(); // An empty ViolationCollection means no errors
+        }
+
         return $this->constraintValidator->validate($model);
     }
 }
 ```
 
-> **Note**: `ConstraintValidator` takes care of executing all the constraints and
-> aggregating all error messages.
+> **Note**: In this case, our `ModelValidator` delegates the work to `ConstraintValidator`
+> which takes care of executing all the constraints and aggregating all error messages.
 
 Finally we can register everything in the `Validator`:
 
