@@ -193,7 +193,7 @@ This will produce:
 
 * [Validation Tutorial](03-validation-tutorial.md)
 * [Examples](04-examples.md)
-* [Extending](05-extending.md)
+* [Templates](05-templates.md)
 
 Previous pages:
 

@@ -1,0 +1,6 @@
+[Validator]<>-0..*>[ModelValidator]
+[Validator]-throws->[InvalidModelException]
+[ModelValidator]<>-0..*>[Constraint]
+[ModelValidator]-returns->[ViolationCollection]
+[ViolationCollection]<>-0..*>[Violation]
+[Constraint]->[Violation]

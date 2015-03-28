@@ -87,7 +87,7 @@ Medio can be quite powerful, discover how by reading the docs:
 * [PHPdoc Tutorial](doc/02-phpdoc-tutorial.md)
 * [Validation Tutorial](doc/03-validation-tutorial.md)
 * [Examples](doc/04-examples.md)
-* [Extending](doc/05-extending.md)
+* [Templates](doc/05-templates.md)
 
 You can see the current and past versions using one of the following:
 

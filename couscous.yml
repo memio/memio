@@ -27,6 +27,6 @@ menu:
         examples:
             text: Examples
             relativeUrl: doc/04-examples.html
-        extending:
-            text: Extending
-            relativeUrl: doc/05-extending.html
+        templates:
+            text: Templates
+            relativeUrl: doc/05-templates.html

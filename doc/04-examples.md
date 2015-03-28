@@ -100,7 +100,7 @@ sure no regressions have been introduced:
 
 ## Next readings
 
-* [Extending](05-extending.md)
+* [Templates](05-templates.md)
 
 Previous pages:
 

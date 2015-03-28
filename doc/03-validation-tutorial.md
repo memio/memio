@@ -137,7 +137,7 @@ The `InvalidModelException`'s message is composed of the `ViolationCollection` m
 ## Next readings
 
 * [Examples](04-examples.md)
-* [Extending](05-extending.md)
+* [Templates](05-templates.md)
 
 Previous pages:
 
