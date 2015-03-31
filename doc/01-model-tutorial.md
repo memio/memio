@@ -1,6 +1,6 @@
 # Model Tutorial
 
-Medio provides a way to describe Models (classes, properties, methods etc).
+Medio provides a way to describe Models (classes, properties, methods, etc).
 Here's a cheat sheet of those:
 
 ![UML class diagram](http://yuml.me/b2b8babc)
@@ -11,11 +11,11 @@ In this tutorial, we'll see how to:
 2. Generate a standalone collection (e.g. many arguments)
 3. Generate a collection in a Model (e.g. method's arguments)
 4. Example: phpspec's method generation
-5. PSR-2 and multiline arguments
-6. Visibility, staticness, virtual, etc...
-7. Constant and default values
-8. Class and Interface
-9. File
+5. Generate multiline arguments (e.g. PSR-2 compliant)
+6. Generate visibility, staticness, virtualness, etc...
+7. Generate Constant and default values
+8. Generate Class and Interface
+9. Generate File
 
 ## 1. Generating a chunk of code (e.g. a single argument)
 
@@ -55,7 +55,8 @@ This will result in:
 DateTime $createdAt
 ```
 
-> **Note**: The following types will trigger the type hint: object, array and callable (only for PHP >= 5.4).
+> **Note**: The following types are type hinted: object, array and callable
+> (only if Medio is ran using PHP >= 5.4).
 
 ## 2. Generating a standalone collection (e.g. many arguments)
 
@@ -65,64 +66,67 @@ This can be done by using arrays:
 ```php
 $handleArguments = array(
     new Argument('Symfony\Component\HttpFoundation\Request', 'request'),
-    new Argument('int', 'type'),
-    new Argument('bool', 'catch'),
+    Argument::make('int', 'type')
+        ->setDefaultValue('self::MASTER_REQUEST')
+    ,
+    Argument::make('bool', 'catch')
+        ->setDefaultValue('true')
+    ,
 );
 
 echo $prettyPrinter->generateCode($handleArguments);
 ```
 
+> **Note**: All models can either be instanciated using `new` or the static method `make`.
+> The second option enable "fluent interface" (chaining method calls), when using PHP 5.6
+> this becomes unnecessary as we can use `(new Argument('bool', 'catch'))->setDefaultValue('true')`.
+
 With this we'll be able to see in our console:
 
 ```php
-Request $request, $type, $catch
+Request $request, $type = self::MASTER_REQUEST, $catch = true
 ```
 
-The concept of collection is used for the following models:
-
-* a method's `Arguments`
-* a class/interface's `Constants`
-* a class/interface's parents `Contracts`
-* a file's `FullyQualifiedNames` (use statements)
-* a class/interface's `Methods`
-* a class's `Properties`
+> **Note**: The following Models can be in a collection:
+> `Argument`, `Constant`, `Contract` (class/interface parents), `FullyQualifiedName` (use statements), `Method` and `Property`.
 
 ## 3. Generating a collection in a Model (e.g. method's arguments)
 
 As explained above, a `Method` can have a collection of `Arguments` (0 to many).
-In order to describe this method, we don't need to prepare an array before hand:
+In order to describe this method, we don't need to prepare an array beforehand:
 
 ```php
 use Gnugat\Medio\Model\Method;
 
 $handle = Method::make('handle')
     ->addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
-    ->addArgument(new Argument('int', 'type'))
-    ->addArgument(new Argument('bool', 'catch'))
+    ->addArgument(Argument::make('int', 'type')
+        ->setDefaultValue('self::MASTER_REQUEST')
+    )
+    ->addArgument(Argument::make('bool', 'catch')
+        ->setDefaultValue('true')
+    )
 ;
 
 echo $prettyPrinter->generateCode($handle);
 ```
 
-> **Note**: All models can either be instanciated using `new` or the static method `make`.
-> The second option enable "fluent interface" (chaining method calls) for PHP < 5.6 (from this version you can use `(new Model)->method()`).
-
 Here's the result:
 
 ```php
-    public function handle(Request $request, $type, $catch)
+    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
     }
 ```
 
 ## 4. Example: phpspec's method generation
 
-Let's take the [phpspec](https://phpspec.net) example: when running your tests, it
-is able to generate missing methods. If it were using Medio, it would use the following
-snippet:
+When running the test suite, [phpspec](https://phpspec.net) generates missing methods
+in your code (amongst many other nice things). To put into practice what we've
+seen so far, we're going to recreate this feature using Medio:
 
 ```php
-// Those are the parameters phpspec gathers from your tests
+// Those are the parameters phpspec gathers from the tests
 $methodName = '__construct';
 $arguments = array(new ArrayObject(), 'Nobody expects the spanish inquisition!');
 
@@ -135,7 +139,7 @@ foreach ($arguments as $argument) {
     $method->addArgument(new Argument($type, $argumentName));
 }
 
-// To make this example easier directly display the generated code
+// Let's display the generated code in the console
 echo $prettyPrinter->generateCode($method);
 ```
 
@@ -147,7 +151,7 @@ This would output:
     }
 ```
 
-## 5. PSR-2 and multiline arguments
+## 5. Generating multiline arguments (e.g. PSR-2 compliant)
 
 The [PSR-2 Coding Standard](http://www.php-fig.org/psr/psr-2/) advises us to avoid
 lines longer than 120 characters.
@@ -181,7 +185,7 @@ This will output:
     }
 ```
 
-## 6. Visibility, staticness, virtual, etc...
+## 6. Generating visibility, staticness, virtualness, etc...
 
 Medio assumes a few things by default:
 
@@ -210,12 +214,12 @@ $superMethod = Method::make('myMethod')
 ;
 ```
 
-## 7. Constant and default values
+## 7. Generating Constant and default values
 
 A constant or a default value can be many things: a string encapsulated between single or double quotes,
 an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. `__DIR__.'/path'`).
 
-To allow all of those in the simplest possible way, Medio let you write the raw value that will be
+To allow all of those in the simplest possible way, Medio let us write the raw value that will be
 printed:
 
 ```php
@@ -223,9 +227,19 @@ use Gnugat\Medio\Model\Constant;
 
 $firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
 $secondConstant = new Constant('SECOND_CONSTANT', 'null');
+
+echo $prettyPrinter->generateCode($firstConstant);
+echo $prettyPrinter->generateCode($secondConstant);
 ```
 
-## 8. Class and Interface
+This will output:
+
+```php
+    const FIRST_CONSTANT = "string in double quotes";
+    const SECOND_CONSTANT = null;
+```
+
+## 8. Generating Class and Interface
 
 In PHP, `class` and `interface` are two reserved keywords. In order to be able to
 have Models describing those, Medio provides respectively `Object` and `Contract`.
@@ -238,8 +252,8 @@ use Gnugat\Medio\Model\Contract;
 $myMethod = new Method('myMethod')
     ->addArgument('mixed', 'myArgument')
 );
-$myContract = Contract::make('Gnugat\Medio\MyInterface')
-    ->extend(new Contract('Gnugat\Medio\MyParentInterface'))
+$myContract = Contract::make('Vendor\Project\MyInterface')
+    ->extend(new Contract('Vendor\Project\MyParentInterface'))
     ->addConstant(new Constant('MY_CONSTANT', '42'))
     ->addMethod($myMethod)
 ;
@@ -261,14 +275,14 @@ interface MyInterface extends MyParentInterface
 Objects can extend only one parent, but can implement many interfaces. Contracts
 can extend many interfaces.
 
-## 9. File
+## 9. Generating File
 
 Finally, we can generate a whole `File`:
 
 ```php
-$myFile = File::make('src/Gnugat/Medio/MyObject')
+$myFile = File::make('src/Vendor/Project/MyObject')
     ->addFullyQualifiedName($myContract->getFullyQualifiedName())
-    ->setStructure(Object::make('Gnugat\Medio\MyObject')
+    ->setStructure(Object::make('Vendor\Project\MyObject')
         ->implement($myContract)
         ->addMethod($myMethod)
     )
@@ -282,9 +296,9 @@ This will output:
 ```php
 <?php
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
-use Gnugat\Medio\MyInterface;
+use Vendor\Project\MyInterface;
 
 class MyObject implements MyInterface
 {
@@ -299,7 +313,7 @@ class MyObject implements MyInterface
 * [PHPdoc Tutorial](02-phpdoc-tutorial.md)
 * [Validation Tutorial](03-validation-tutorial.md)
 * [Examples](04-examples.md)
-* [Extending](05-extending.md)
+* [Templates](05-templates.md)
 
 Previous pages:
 
