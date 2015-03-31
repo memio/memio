@@ -3,10 +3,10 @@
 Programming languages follow rules, and PHP is no exception: defining a method
 as being both abstract and final will result in a Fatal Error.
 
-To avoid generating invalid code, Medio provides a `Validator`:
+To avoid generating invalid code, Memio provides a `Validator`:
 
 ```php
-use Gnugat\Medio\Validator;
+use Memio\Memio\Validator;
 
 Method::make('myMethod')
     ->makeAbstract()
@@ -14,10 +14,10 @@ Method::make('myMethod')
 ;
 
 $validator = new Validator();
-$validator->validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException
+$validator->validate($method); // @throws Memio\Memio\Exception\InvalidModelException
 ```
 
-## Linting Constraints
+## Syntax checking Constraints
 
 Out of the box, `Validator` provides "linting" `Constraints` that will check if the
 generating code can be run without raising PHP Fatal Errors:
@@ -43,9 +43,9 @@ To add new rules to the validator, we first need to create a new `Constraint`:
 
 namespace Vendor\Project\Validator\Constraint;
 
-use Gnugat\Medio\Validator\Constraint;
-use Gnugat\Medio\Validator\Violation\NoneViolation;
-use Gnugat\Medio\Validator\Violation\SomeViolation;
+use Memio\Memio\Validator\Constraint;
+use Memio\Memio\Validator\Violation\NoneViolation;
+use Memio\Memio\Validator\Violation\SomeViolation;
 
 class ArgumentCannotBeScalar implements Constraint
 {
@@ -60,7 +60,7 @@ class ArgumentCannotBeScalar implements Constraint
 }
 ```
 
-> **Note**: In Medio all `Constraints` are named after their error message, but
+> **Note**: In Memio all `Constraints` are named after their error message, but
 > this is not mandatory. They check a single specific rule.
 
 We then need to create a `ModelValidator` specialized in `Arguments`:
@@ -70,11 +70,11 @@ We then need to create a `ModelValidator` specialized in `Arguments`:
 
 namespace Vendor\Project\Validator;
 
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Validator\Constraint;
-use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\ModelValidator;
-use Gnugat\Medio\Validator\ViolationCollection;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Validator\Constraint;
+use Memio\Memio\Validator\ConstraintValidator;
+use Memio\Memio\Validator\ModelValidator;
+use Memio\Memio\Validator\ViolationCollection;
 use Vendor\Project\Validator\Constraint\ArgumentCannotBeScalar;
 
 class ArgumentValidator implements ModelValidator
@@ -119,7 +119,7 @@ use Vendor\Project\Validator\ArgumentValidator;
 
 $validator->add(new ArgumentValidator());
 
-$validator->validate(new Argument('string', 'scalar')); // @throws Gnugat\Medio\Exception\InvalidModelException
+$validator->validate(new Argument('string', 'scalar')); // @throws Memio\Memio\Exception\InvalidModelException
 ```
 
 ## Under the hood

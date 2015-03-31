@@ -1,6 +1,8 @@
-# Medio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
+# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
 
-Medio is a library, it allows you to describe PHP code by initializing "Model" classes
+> **Caution**: Memio is being renamed (previously gnugat/medio) and split into smaller packages.
+
+Memio is a library, it allows you to describe PHP code by initializing "Model" classes
 (e.g. `new Method('__construct')`) and then to generate it using a `PrettyPrinter`!
 
 > **Note**: The actual generation logic is hold by [Twig templates](http://twig.sensiolabs.org/).
@@ -10,7 +12,7 @@ Medio is a library, it allows you to describe PHP code by initializing "Model" c
 
 Install it using [Composer](https://getcomposer.org/download):
 
-    composer require gnugat/medio:~1.0
+    composer require gnugat/medio:~1.0@rc
 
 ## Full example
 
@@ -21,14 +23,14 @@ We're going to generate a class with a constructor and two attributes:
 
 require __DIR__.'/vendor/autoload.php';
 
-use Gnugat\Medio\Config\Path;
-use Gnugat\Medio\PrettyPrinter;
-use Gnugat\Medio\Validator;
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Object;
-use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Argument;
+use Memio\Memio\Config\Path;
+use Memio\Memio\PrettyPrinter;
+use Memio\Memio\Validator;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\Object;
+use Memio\Memio\Model\Property;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Model\Argument;
 
 // Initialize the code generator
 $loader = new \Twig_Loader_Filesystem(Path::templates());
@@ -51,7 +53,7 @@ $file = File::make('src/Vendor/Project/MyService.php')
 
 // Optionally check that you didn't create any syntax error
 $validate = new Validator();
-$validate->validate($file); // @throws Gnugat\Medio\Exception\InvalidModelException
+$validate->validate($file); // @throws Memio\Memio\Exception\InvalidModelException
 
 // Generate the code and display in the console
 echo $prettyPrinter->generateCode($file);
@@ -81,7 +83,7 @@ class MyService
 
 ## Want to know more?
 
-Medio can be quite powerful, discover how by reading the docs:
+Memio can be quite powerful, discover how by reading the docs:
 
 * [Model Tutorial](doc/01-model-tutorial.md)
 * [PHPdoc Tutorial](doc/02-phpdoc-tutorial.md)
@@ -92,7 +94,7 @@ Medio can be quite powerful, discover how by reading the docs:
 You can see the current and past versions using one of the following:
 
 * the `git tag` command
-* the [releases page on Github](https://github.com/gnugat/medio/releases)
+* the [releases page on Github](https://github.com/memio/memio/releases)
 * the file listing the [changes between versions](CHANGELOG.md)
 
 And finally some meta documentation:

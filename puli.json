@@ -1,8 +1,8 @@
 {
     "version": "1.0",
-    "name": "gnugat/medio",
+    "name": "memio/memio",
     "resources": {
-        "/gnugat/medio/templates": "templates"
+        "/memio/memio/templates": "templates"
     },
     "packages": {
         "ciaranmcnulty/phpspec-typehintedmethods": {

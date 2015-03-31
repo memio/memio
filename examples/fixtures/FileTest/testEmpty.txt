@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
 class MyClass
 {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Memio\Memio\Examples;
 
-use Gnugat\Medio\Model\Constant;
+use Memio\Memio\Model\Constant;
 
 class ConstantTest extends PrettyPrinterTestCase
 {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Memio\Memio\Examples;
 
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\ParameterTag;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Memio\Model\Phpdoc\ParameterTag;
 
 class MethodTest extends PrettyPrinterTestCase
 {

@@ -3,7 +3,7 @@
 Everybody should be able to help. Here's how you can make this project more
 awesome:
 
-1. [Fork it](https://github.com/gnugat/medio/fork_select)
+1. [Fork it](https://github.com/memio/memio/fork_select)
 2. improve it
 3. submit a [pull request](https://help.github.com/articles/creating-a-pull-request)
 
@@ -46,7 +46,7 @@ Medio drives its development using [phpspec](http://www.phpspec.net/):
 To keep your fork up-to-date, you should track the upstream (original) one
 using the following command:
 
-    git remote add upstream https://github.com/gnugat/medio.git
+    git remote add upstream https://github.com/memio/memio.git
 
 Then get the upstream changes:
 

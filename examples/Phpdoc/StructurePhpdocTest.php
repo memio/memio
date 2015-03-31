@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples\Phpdoc;
+namespace Memio\Memio\Examples\Phpdoc;
 
-use Gnugat\Medio\Examples\PrettyPrinterTestCase;
-use Gnugat\Medio\Model\Phpdoc\ApiTag;
-use Gnugat\Medio\Model\Phpdoc\Description;
-use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
-use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+use Memio\Memio\Examples\PrettyPrinterTestCase;
+use Memio\Memio\Model\Phpdoc\ApiTag;
+use Memio\Memio\Model\Phpdoc\Description;
+use Memio\Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
 
 class StructurePhpdocTest extends PrettyPrinterTestCase
 {

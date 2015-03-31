@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Memio\Memio\Examples;
 
-use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\VariableTag;
-use Gnugat\Medio\Model\Property;
+use Memio\Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Memio\Model\Phpdoc\VariableTag;
+use Memio\Memio\Model\Property;
 
 class PropertyTest extends PrettyPrinterTestCase
 {
@@ -30,7 +30,7 @@ class PropertyTest extends PrettyPrinterTestCase
     {
         $property = Property::make('myClass')
             ->setPhpdoc(PropertyPhpdoc::make()
-                ->setVariableTag(new VariableTag('Gnugat\Medio\MyClass'))
+                ->setVariableTag(new VariableTag('Memio\Memio\MyClass'))
             )
         ;
 

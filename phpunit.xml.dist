@@ -9,7 +9,7 @@
     >
 
     <testsuites>
-        <testsuite name="Medio Test Suite">
+        <testsuite name="Memio Test Suite">
             <directory>./examples</directory>
         </testsuite>
     </testsuites>
