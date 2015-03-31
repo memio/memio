@@ -6,7 +6,7 @@ Tests are used as living usage examples as well as regression checks.
 
 > **TL;DR**: run `./vendor/bin/phpspec run --format=pretty` to list the behavior of each classes.
 
-Medio uses [phpspec](http://www.phpspec.net/), a framework that forces us to write
+Memio uses [phpspec](http://www.phpspec.net/), a framework that forces us to write
 documentative tests. Those are called specifications and can be found in `spec`.
 
 Let's have a look at `MethodCannotBeBothAbstractAndStatic`'s specification:
@@ -14,16 +14,16 @@ Let's have a look at `MethodCannotBeBothAbstractAndStatic`'s specification:
 ```php
 <?php
 
-namespace spec\Gnugat\Medio\Validator\Constraint;
+namespace spec\Memio\Memio\Validator\Constraint;
 
-use Gnugat\Medio\Model\Method;
+use Memio\Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
 {
     function it_is_a_constraint()
     {
-        $this->shouldImplement('Gnugat\Medio\Validator\Constraint');
+        $this->shouldImplement('Memio\Memio\Validator\Constraint');
     }
 
     function it_is_fine_with_non_static_abstract_methods(Method $method)
@@ -31,7 +31,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method->isAbstract()->willReturn(true);
         $method->isStatic()->willReturn(false);
 
-        $this->validate($method)->shouldHaveType('Gnugat\Medio\Validator\Violation\NoneViolation');
+        $this->validate($method)->shouldHaveType('Memio\Memio\Validator\Violation\NoneViolation');
     }
 
     function it_is_not_fine_with_abstract_and_static_methods(Method $method)
@@ -40,7 +40,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method->isStatic()->willReturn(true);
         $method->getName()->willReturn('__construct');
 
-        $this->validate($method)->shouldHaveType('Gnugat\Medio\Validator\Violation\SomeViolation');
+        $this->validate($method)->shouldHaveType('Memio\Memio\Validator\Violation\SomeViolation');
     }
 }
 ```
@@ -93,7 +93,7 @@ Those can be found in `examples/fixtures/<TestClassName>/<testMethodName>.txt`.
 > **Note**: Fixture files always have an extra line, which is trimmed before the
 > actual assertion.
 
-When changes are applied to Medio, the following command is executed to make
+When changes are applied to Memio, the following command is executed to make
 sure no regressions have been introduced:
 
     phpunit

@@ -1,6 +1,6 @@
 # Model Tutorial
 
-Medio provides a way to describe Models (classes, properties, methods, etc).
+Memio provides a way to describe Models (classes, properties, methods, etc).
 Here's a cheat sheet of those:
 
 ![UML class diagram](http://yuml.me/b2b8babc)
@@ -25,7 +25,7 @@ But it is also possible to only generate a chunk of code, like a method's argume
 We can describe it by providing the type and the name:
 
 ```php
-use Gnugat\Medio\Model\Argument;
+use Memio\Memio\Model\Argument;
 
 $filename = new Argument('string', 'filename');
 
@@ -33,7 +33,7 @@ echo $prettyPrinter->generateCode($filename);
 ```
 
 > **Note**: the following types are accepted: string, bool, int, double, callable, resource, array, null, mixed.
-> If something else is given, Medio will consider it as an object.
+> If something else is given, Memio will consider it as an object.
 
 This should print the following:
 
@@ -41,7 +41,7 @@ This should print the following:
 $filename
 ```
 
-Medio is able to automatically type hint an argument, when necessary:
+Memio is able to automatically type hint an argument, when necessary:
 
 ```php
 $createdAt = new Argument('DateTime', 'createdAt');
@@ -56,7 +56,7 @@ DateTime $createdAt
 ```
 
 > **Note**: The following types are type hinted: object, array and callable
-> (only if Medio is ran using PHP >= 5.4).
+> (only if Memio is ran using PHP >= 5.4).
 
 ## 2. Generating a standalone collection (e.g. many arguments)
 
@@ -96,7 +96,7 @@ As explained above, a `Method` can have a collection of `Arguments` (0 to many).
 In order to describe this method, we don't need to prepare an array beforehand:
 
 ```php
-use Gnugat\Medio\Model\Method;
+use Memio\Memio\Model\Method;
 
 $handle = Method::make('handle')
     ->addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
@@ -123,7 +123,7 @@ Here's the result:
 
 When running the test suite, [phpspec](https://phpspec.net) generates missing methods
 in your code (amongst many other nice things). To put into practice what we've
-seen so far, we're going to recreate this feature using Medio:
+seen so far, we're going to recreate this feature using Memio:
 
 ```php
 // Those are the parameters phpspec gathers from the tests
@@ -155,7 +155,7 @@ This would output:
 
 The [PSR-2 Coding Standard](http://www.php-fig.org/psr/psr-2/) advises us to avoid
 lines longer than 120 characters.
-Medio takes care of this when generating a method's arguments by checking the length:
+Memio takes care of this when generating a method's arguments by checking the length:
 if it's going to be too long it'll put each arguments on their own line.
 
 Here's a code sample:
@@ -187,7 +187,7 @@ This will output:
 
 ## 6. Generating visibility, staticness, virtualness, etc...
 
-Medio assumes a few things by default:
+Memio assumes a few things by default:
 
 * properties are private, not static, not abstract
 * methods are public, not static, not abstract, not final
@@ -219,11 +219,11 @@ $superMethod = Method::make('myMethod')
 A constant or a default value can be many things: a string encapsulated between single or double quotes,
 an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. `__DIR__.'/path'`).
 
-To allow all of those in the simplest possible way, Medio let us write the raw value that will be
+To allow all of those in the simplest possible way, Memio let us write the raw value that will be
 printed:
 
 ```php
-use Gnugat\Medio\Model\Constant;
+use Memio\Memio\Model\Constant;
 
 $firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
 $secondConstant = new Constant('SECOND_CONSTANT', 'null');
@@ -242,12 +242,12 @@ This will output:
 ## 8. Generating Class and Interface
 
 In PHP, `class` and `interface` are two reserved keywords. In order to be able to
-have Models describing those, Medio provides respectively `Object` and `Contract`.
+have Models describing those, Memio provides respectively `Object` and `Contract`.
 
 Here's an example of interface generation:
 
 ```php
-use Gnugat\Medio\Model\Contract;
+use Memio\Memio\Model\Contract;
 
 $myMethod = new Method('myMethod')
     ->addArgument('mixed', 'myArgument')

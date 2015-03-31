@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples\Validator;
+namespace Memio\Memio\Examples\Validator;
 
-use Gnugat\Medio\Exception\InvalidModelException;
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Contract;
-use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Validator;
+use Memio\Memio\Exception\InvalidModelException;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Model\Contract;
+use Memio\Memio\Model\Constant;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Validator;
 use PHPUnit_Framework_TestCase;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
@@ -47,7 +47,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Gnugat\Medio\Exception\InvalidModelException
+     * @expectedException \Memio\Memio\Exception\InvalidModelException
      * @expectedExceptionMessage Collection "Argument" cannot have name "filename" duplicates (2 occurences)
      */
     public function testOneViolation()

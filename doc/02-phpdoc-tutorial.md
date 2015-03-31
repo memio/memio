@@ -1,6 +1,6 @@
 # PHPdoc Tutorial
 
-Medio also provides a way to document the code with [PHPdoc](http://www.phpdoc.org/).
+Memio also provides a way to document the code with [PHPdoc](http://www.phpdoc.org/).
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
@@ -19,9 +19,9 @@ In this tutorial, we'll see how to:
 the author's name and their emails:
 
 ```php
-use Vendor\Project\Model\File;
-use Vendor\Project\Model\Object;
-use Vendor\Project\Model\Phpdoc\LicensePhpdoc;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\Object;
+use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
 
 $file = File::make('src/Vendor/Project/MyClass')
     ->setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
@@ -64,11 +64,11 @@ A `Structure` (an `Object` or a `Contract`) can have the following:
 Here's how to describe it:
 
 ```php
-use Gnugat\Medio\Model\Contract;
-use Gnugat\Medio\Model\Phpdoc\ApiTag;
-use Gnugat\Medio\Model\Phpdoc\Description;
-use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
-use Gnugat\Medio\Model\Phpdoc\StructurePhpdoc;
+use Memio\Memio\Model\Contract;
+use Memio\Memio\Model\Phpdoc\ApiTag;
+use Memio\Memio\Model\Phpdoc\Description;
+use Memio\Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Vendor\Project\MyInterface')
     ->setPhpdoc(StructurePhpdoc::make()
@@ -106,9 +106,9 @@ interface MyInterface
 A `Property` can have a property tag:
 
 ```php
-use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\Phpdoc\PropertyPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\VariableTag;
+use Memio\Memio\Model\Property;
+use Memio\Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Memio\Model\Phpdoc\VariableTag;
 
 $property = Property::make('myClass')
     ->setPhpdoc(PropertyPhpdoc::make()
@@ -140,13 +140,13 @@ A `Method` can have the following:
 Here's how to describe it:
 
 ```php
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Phpdoc\ApiTag;
-use Gnugat\Medio\Model\Phpdoc\Description;
-use Gnugat\Medio\Model\Phpdoc\DeprecationTag;
-use Gnugat\Medio\Model\Phpdoc\MethodPhpdoc;
-use Gnugat\Medio\Model\Phpdoc\ParameterTag;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Model\Phpdoc\ApiTag;
+use Memio\Memio\Model\Phpdoc\Description;
+use Memio\Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Memio\Model\Phpdoc\ParameterTag;
 
 $method = Method::make('__construct')
     ->setPhpdoc(MethodPhpdoc::make()

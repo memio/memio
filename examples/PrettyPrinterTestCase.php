@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Memio\Memio\Examples;
 
 use DI\ContainerBuilder;
 use Inject;
@@ -18,7 +18,7 @@ use PHPUnit_Framework_TestCase;
 class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Gnugat\Medio\PrettyPrinter
+     * @var \Memio\Memio\PrettyPrinter
      * @Inject
      */
     protected $prettyPrinter;
@@ -35,7 +35,7 @@ class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
     {
         $trace = debug_backtrace();
         $testFqcn = $trace[1]['class'];
-        $type = substr($testFqcn, strlen('Gnugat\Medio\Examples\\'));
+        $type = substr($testFqcn, strlen('Memio\Memio\Examples\\'));
         $path = str_replace('\\', '/', $type);
         $testMethod = $trace[1]['function'];
         $filename = __DIR__.'/fixtures/'.$path.'/'.$testMethod.'.txt';

@@ -1,14 +1,14 @@
 template:
     url: https://github.com/CouscousPHP/Template-Light.git
 
-baseUrl: http://gnugat.github.io/medio
+baseUrl: http://memio.github.io/memio
 
-title: Medio
+title: Memio
 subTitle: A highly opinionated PHP code generator library
 
 github:
-    user: gnugat
-    repo: medio
+    user: memio
+    repo: memio
 
 menu:
     items:

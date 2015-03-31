@@ -1,6 +1,6 @@
 # Templates
 
-Medio uses [Twig templates](http://twig.sensiolabs.org/) to actualy generate the
+Memio uses [Twig templates](http://twig.sensiolabs.org/) to actualy generate the
 code, they can be found in `templates`.
 
 ## Overriding templates
@@ -56,8 +56,8 @@ used by our `PrettyPrinter` (must be loaded first):
 
 require __DIR__.'/vendor/autoload.php';
 
-use Gnugat\Medio\Config\Path;
-use Gnugat\Medio\PrettyPrinter;
+use Memio\Memio\Config\Path;
+use Memio\Memio\PrettyPrinter;
 
 $loader = new \Twig_Loader_Filesystem(__DIR__.'/my_templates');
 $loader->addPath(Path::templates());
@@ -72,8 +72,8 @@ Let's check the result:
 ```php
 // File: my_medio.php
 
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Object;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\Object;
 
 $file = File::make('src/Vendor/Project/MyClass.php')
     ->setStructure(new Object('Vendor\Project\MyClass'))

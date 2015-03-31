@@ -1,9 +1,10 @@
 {
-    "name": "gnugat/medio",
+    "name": "memio/memio",
     "license": "MIT",
     "type": "library",
     "description": "A highly opinionated PHP code generator library",
     "keywords": ["generator", "PHP", "code"],
+    "homepage": "http://memio.github.io/memio",
     "authors": [
         {
             "name": "Loïc Chardonnet",
@@ -14,12 +15,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Gnugat\\Medio\\": "src/Gnugat/Medio",
-            "Gnugat\\Medio\\Config\\": "config"
+            "Memio\\Memio\\": "src/Memio/Memio",
+            "Memio\\Memio\\Config\\": "config"
         }
     },
     "autoload-dev": {
-        "psr-4": { "Gnugat\\Medio\\Examples\\": "examples" }
+        "psr-4": { "Memio\\Memio\\Examples\\": "examples" }
     },
     "require": {
         "php": ">=5.3.3",
@@ -27,9 +28,10 @@
     },
     "require-dev": {
         "ciaranmcnulty/phpspec-typehintedmethods": "~1.1",
+        "fabpot/php-cs-fixer": "~1.6",
         "mnapoli/php-di": "~4.4",
-        "phpunit/phpunit": "~4.4",
-        "phpspec/phpspec": "~2.1",
+        "phpunit/phpunit": "~4.5",
+        "phpspec/phpspec": "~2.2@beta",
         "puli/cli": "~1.0@beta",
         "puli/composer-plugin": "~1.0@beta",
         "puli/discovery": "~1.0@beta",
@@ -38,7 +40,6 @@
         "puli/repository-manager": "~1.0@beta",
         "webmozart/glob": "~1.0@beta",
         "webmozart/json": "~1.0@beta",
-        "webmozart/key-value-store": "~1.0@beta",
-        "fabpot/php-cs-fixer": "~1.5"
+        "webmozart/key-value-store": "~1.0@beta"
     }
 }

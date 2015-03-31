@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the gnugat/medio project.
+ * This file is part of the vendor/project project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
 class MyClass
 {

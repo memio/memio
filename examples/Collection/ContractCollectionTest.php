@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples\Collection;
+namespace Memio\Memio\Examples\Collection;
 
-use Gnugat\Medio\Examples\PrettyPrinterTestCase;
-use Gnugat\Medio\Model\Contract;
+use Memio\Memio\Examples\PrettyPrinterTestCase;
+use Memio\Memio\Model\Contract;
 
 class ContractCollectionTest extends PrettyPrinterTestCase
 {
@@ -28,7 +28,7 @@ class ContractCollectionTest extends PrettyPrinterTestCase
     public function testOneContract()
     {
         $contracts = array(
-            new Contract('Gnugat\\Medio\\MyContract'),
+            new Contract('Memio\\Memio\\MyContract'),
         );
 
         $generatedCode = $this->prettyPrinter->generateCode($contracts);
@@ -39,9 +39,9 @@ class ContractCollectionTest extends PrettyPrinterTestCase
     public function testThreeContracts()
     {
         $contracts = array(
-            new Contract('Gnugat\\Medio\\MyFirstContract'),
-            new Contract('Gnugat\\Medio\\MySecondContract'),
-            new Contract('Gnugat\\Medio\\MyThirdContract'),
+            new Contract('Memio\\Memio\\MyFirstContract'),
+            new Contract('Memio\\Memio\\MySecondContract'),
+            new Contract('Memio\\Memio\\MyThirdContract'),
         );
 
         $generatedCode = $this->prettyPrinter->generateCode($contracts);

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples\Collection;
+namespace Memio\Memio\Examples\Collection;
 
-use Gnugat\Medio\Examples\PrettyPrinterTestCase;
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Method;
+use Memio\Memio\Examples\PrettyPrinterTestCase;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Model\Method;
 
 class MethodCollectionTest extends PrettyPrinterTestCase
 {

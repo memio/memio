@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples;
+namespace Memio\Memio\Examples;
 
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Model\Constant;
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\FullyQualifiedName;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Object;
-use Gnugat\Medio\Model\Phpdoc\LicensePhpdoc;
-use Gnugat\Medio\Model\Property;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Model\Constant;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\FullyQualifiedName;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Model\Object;
+use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
+use Memio\Memio\Model\Property;
 
 class FileTest extends PrettyPrinterTestCase
 {
-    const FILENAME = '/tmp/medio/src/Gnugat/Medio/MyClass.php';
-    const FULLY_QUALIFIED_NAME = 'Gnugat\\Medio\\MyClass';
+    const FILENAME = 'src/Vendor/Project/MyClass.php';
+    const FULLY_QUALIFIED_NAME = 'Vendor\\Project\\MyClass';
 
-    const PROJECT_NAME = 'gnugat/medio';
+    const PROJECT_NAME = 'vendor/project';
     const AUTHOR_NAME = 'Loïc Chardonnet';
     const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
 

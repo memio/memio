@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Medio project.
+ * This file is part of the Memio project.
  *
  * (c) Loïc Chardonnet <loic.chardonnet@gmail.com>
  *
@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Gnugat\Medio\Examples\Phpdoc;
+namespace Memio\Memio\Examples\Phpdoc;
 
-use Gnugat\Medio\Examples\PrettyPrinterTestCase;
-use Gnugat\Medio\Model\Phpdoc\ParameterTag;
+use Memio\Memio\Examples\PrettyPrinterTestCase;
+use Memio\Memio\Model\Phpdoc\ParameterTag;
 
 class ParameterTagTest extends PrettyPrinterTestCase
 {
     public function testSimple()
     {
-        $parameterTag = new ParameterTag('Gnugat\Medio\MyClass', 'myClass');
+        $parameterTag = new ParameterTag('Memio\Memio\MyClass', 'myClass');
 
         $generatedCode = $this->prettyPrinter->generateCode($parameterTag);
 
@@ -27,7 +27,7 @@ class ParameterTagTest extends PrettyPrinterTestCase
 
     public function testWithDescription()
     {
-        $parameterTag = new ParameterTag('Gnugat\Medio\MyClass', 'myClass', 'description');
+        $parameterTag = new ParameterTag('Memio\Memio\MyClass', 'myClass', 'description');
 
         $generatedCode = $this->prettyPrinter->generateCode($parameterTag);
 

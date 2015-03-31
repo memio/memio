@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0-rc7: Memio and Documentation
+
+* renamed gnugat/medio into memio/memio
+* completed documentation
+
 ## 1.0.0-rc6: Argument Validator
 
 * added ObjectArgumentCanOnlyDefaultToNull constraint
