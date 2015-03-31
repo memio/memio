@@ -1,4 +1,4 @@
-# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png)](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/memio/memio)
+# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png)](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf) [![Travis CI](https://travis-ci.org/memio/memio.png)](https://travis-ci.org/memio/memio)
 
 > **Caution**: Memio is being renamed (previously gnugat/medio) and split into smaller packages.
 
@@ -12,7 +12,7 @@ Memio is a library, it allows you to describe PHP code by initializing "Model" c
 
 Install it using [Composer](https://getcomposer.org/download):
 
-    composer require gnugat/medio:~1.0@rc
+    composer require memio/memio:~1.0@rc
 
 ## Full example
 
