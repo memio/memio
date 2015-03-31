@@ -1,4 +1,4 @@
-# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png)](https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/gnugat/medio)
+# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png)](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf) [![Travis CI](https://travis-ci.org/gnugat/medio.png)](https://travis-ci.org/memio/memio)
 
 > **Caution**: Memio is being renamed (previously gnugat/medio) and split into smaller packages.
 
