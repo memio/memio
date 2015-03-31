@@ -4,25 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Medio</title>
+        <title>Memio</title>
 
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
-                Medio
+            <a class="navbar-brand" href="http://memio.github.io/memio/">
+                Memio
                 <small class="hidden-xs hidden-sm">
                     A highly opinionated PHP code generator library
                 </small>
             </a>
 
-                            <a href="https://github.com/gnugat/medio">
+                            <a href="https://github.com/memio/memio">
                     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
                 </a>
             
@@ -36,33 +36,33 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/">
+                                    <a href="http://memio.github.io/memio/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/01-model-tutorial.html">
                                         Model Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-phpdoc-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/02-phpdoc-tutorial.html">
                                         PHPDoc Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-validation-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/03-validation-tutorial.html">
                                         Validation Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-examples.html">
+                                    <a href="http://memio.github.io/memio/doc/04-examples.html">
                                         Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/05-extending.html">
-                                        Extending
+                                    <a href="http://memio.github.io/memio/doc/05-templates.html">
+                                        Templates
                                     </a>
                                 </li>
                                                     </ul>
@@ -71,29 +71,68 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Medio <a href="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592"><img src="https://insight.sensiolabs.com/projects/87bf291f-affa-4383-b281-c0dc5aa7d592/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/gnugat/medio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></h1>
-<p>Medio allows you to describe the code you want to generate using Models:</p>
-<pre><code class="language-php">$file = File::make('src/Gnugat/Medio/MyService.php')
-    -&gt;setStructure(Object::make('Gnugat\Medio\MyService')
-        -&gt;addProperty(new Property('createdAt'))
-        -&gt;addProperty(new Property('filename'))
+                    <h1>Memio <a href="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf"><img src="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/memio/memio"><img src="https://travis-ci.org/gnugat/medio.png" alt="Travis CI" /></a></h1>
+<blockquote>
+<p><strong>Caution</strong>: Memio is being renamed (previously gnugat/medio) and split into smaller packages.</p>
+</blockquote>
+<p>Memio is a library, it allows you to describe PHP code by initializing &quot;Model&quot; classes
+(e.g. <code>new Method('__construct')</code>) and then to generate it using a <code>PrettyPrinter</code>!</p>
+<blockquote>
+<p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
+If the coding style provided doesn't appeal to you, you can overwrite those templates easily.</p>
+</blockquote>
+<h2>Installation</h2>
+<p>Install it using <a href="https://getcomposer.org/download">Composer</a>:</p>
+<pre><code>composer require gnugat/medio:~1.0@rc</code></pre>
+<h2>Full example</h2>
+<p>We're going to generate a class with a constructor and two attributes:</p>
+<pre><code class="language-php">&lt;?php
 
-        -&gt;addMethod(Method::make('__construct')
-            -&gt;addArgument(Argument::make('DateTime', 'createdAt'))
-            -&gt;addArgument(Argument::make('string', 'filename'))
-        )
+require __DIR__.'/vendor/autoload.php';
+
+use Memio\Memio\Config\Path;
+use Memio\Memio\PrettyPrinter;
+use Memio\Memio\Validator;
+use Memio\Memio\Model\File;
+use Memio\Memio\Model\Object;
+use Memio\Memio\Model\Property;
+use Memio\Memio\Model\Method;
+use Memio\Memio\Model\Argument;
+
+// Initialize the code generator
+$loader = new \Twig_Loader_Filesystem(Path::templates());
+$twig = new \Twig_Environment($loader);
+$prettyPrinter = new PrettyPrinter($twig);
+
+// Describe the code you want to generate using "Models"
+$file = File::make('src/Vendor/Project/MyService.php')
+    -&gt;setStructure(
+        Object::make('Vendor\Project\MyService')
+            -&gt;addProperty(new Property('createdAt'))
+            -&gt;addProperty(new Property('filename'))
+            -&gt;addMethod(
+                Method::make('__construct')
+                    -&gt;addArgument(new Argument('DateTime', 'createdAt'))
+                    -&gt;addArgument(new Argument('string', 'filename'))
+            )
     )
-;</code></pre>
-<p>Optionally you can validate them:</p>
-<pre><code class="language-php">$validator-&gt;validate($file); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
-<p>These Models can be given to a <code>PrettyPrinter</code>:</p>
-<pre><code class="language-php">echo $prettyPrinter-&gt;generateCode($file);</code></pre>
-<p>And as simply as that, you get the corresponding generated code:</p>
+;
+
+// Optionally check that you didn't create any syntax error
+$validate = new Validator();
+$validate-&gt;validate($file); // @throws Memio\Memio\Exception\InvalidModelException
+
+// Generate the code and display in the console
+echo $prettyPrinter-&gt;generateCode($file);
+
+// Or display it in a browser
+// echo '&lt;pre&gt;'.htmlspecialchars($prettyPrinter-&gt;generateCode($file)).'&lt;/pre&gt;';</code></pre>
+<p>With this simple example, we get the following output:</p>
 <pre><code>&lt;?php
 
-namespace Gnugat\Medio;
+namespace Vendor\Project;
 
-class MyClass
+class MyService
 {
     private $createdAt;
 
@@ -103,69 +142,19 @@ class MyClass
     {
     }
 }</code></pre>
-<h2>Installation</h2>
-<p>Use <a href="https://getcomposer.org/download">Composer</a> to install Medio in your project:</p>
-<pre><code>composer require gnugat/medio:~1.0@beta</code></pre>
-<blockquote>
-<p><strong>Note</strong>: Medio is currently slightly unstable. Some BC break might happen, but we try to make those rare.</p>
-</blockquote>
-<p>In order to generate the code, you'll need to create an instance of <code>PrettyPrinter</code>:</p>
-<pre><code class="language-php">&lt;?php
-
-require __DIR__.'/vendor/autoload.php';
-
-use Gnugat\Medio\Config\Path;
-use Gnugat\Medio\PrettyPrinter;
-use Gnugat\Medio\Validator;
-use Gnugat\Medio\Model\File;
-use Gnugat\Medio\Model\Object;
-use Gnugat\Medio\Model\Property;
-use Gnugat\Medio\Model\Method;
-use Gnugat\Medio\Model\Argument;
-
-$loader = new \Twig_Loader_Filesystem(Path::templates());
-$twig = new \Twig_Environment($loader);
-
-$prettyPrinter = new PrettyPrinter($twig);
-
-$file = File::make('src/Gnugat/Medio/MyService.php')
-    -&gt;setStructure(
-        Object::make('Gnugat\Medio\MyService')
-            -&gt;addProperty(new Property('createdAt'))
-            -&gt;addProperty(new Property('filename'))
-            -&gt;addMethod(
-                Method::make('__construct')
-                    -&gt;addArgument(Argument::make('DateTime', 'createdAt'))
-                    -&gt;addArgument(Argument::make('string', 'filename'))
-            )
-    );
-
-// Optional validation
-$validate = new Validator();
-$validate-&gt;validate($file);
-
-// Output in console
-echo $prettyPrinter-&gt;generateCode($file);</code></pre>
-<blockquote>
-<p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
-If the coding style provided doesn't appeal to you, you can overwrite those templates easily.</p>
-<p><strong>Note</strong>: If you want to see the output through your browser you need to escape your generated code.
-By using the <a href="http://twig.sensiolabs.org/doc/filters/escape.html">escape filter</a> in your twig template or using the
-htmlspecialchars() method along with html <code>&lt;pre&gt;</code> tags to keep indentation.</p>
-</blockquote>
-<h2>Further documentation</h2>
-<p>Discover more by reading the docs:</p>
+<h2>Want to know more?</h2>
+<p>Memio can be quite powerful, discover how by reading the docs:</p>
 <ul>
 <li><a href="doc/01-model-tutorial.html">Model Tutorial</a></li>
 <li><a href="doc/02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="doc/03-validation-tutorial.html">Validation Tutorial</a></li>
 <li><a href="doc/04-examples.html">Examples</a></li>
-<li><a href="doc/05-extending.html">Extending</a></li>
+<li><a href="doc/05-templates.html">Templates</a></li>
 </ul>
 <p>You can see the current and past versions using one of the following:</p>
 <ul>
 <li>the <code>git tag</code> command</li>
-<li>the <a href="https://github.com/gnugat/medio/releases">releases page on Github</a></li>
+<li>the <a href="https://github.com/memio/memio/releases">releases page on Github</a></li>
 <li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
 </ul>
 <p>And finally some meta documentation:</p>
@@ -176,9 +165,8 @@ htmlspecialchars() method along with html <code>&lt;pre&gt;</code> tags to keep 
 </ul>
 <h2>Roadmap</h2>
 <ul>
-<li>validator and constraint (e.g. final class cannot have abstract methods)</li>
+<li>commands (e.g. add use statement, add PHPdoc, injecting dependency, etc)</li>
 <li>parsing existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
-<li>commands (e.g. injecting dependency)</li>
 <li>TemplateEngine interface, to allow the choice between Twig and basic PHP templating</li>
 </ul>
                 </section>

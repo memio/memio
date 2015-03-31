@@ -4,25 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Medio</title>
+        <title>Memio</title>
 
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
-                Medio
+            <a class="navbar-brand" href="http://memio.github.io/memio/">
+                Memio
                 <small class="hidden-xs hidden-sm">
                     A highly opinionated PHP code generator library
                 </small>
             </a>
 
-                            <a href="https://github.com/gnugat/medio">
+                            <a href="https://github.com/memio/memio">
                     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
                 </a>
             
@@ -36,33 +36,33 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/">
+                                    <a href="http://memio.github.io/memio/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/01-model-tutorial.html">
                                         Model Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-phpdoc-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/02-phpdoc-tutorial.html">
                                         PHPDoc Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-validation-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/03-validation-tutorial.html">
                                         Validation Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-examples.html">
+                                    <a href="http://memio.github.io/memio/doc/04-examples.html">
                                         Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/05-extending.html">
-                                        Extending
+                                    <a href="http://memio.github.io/memio/doc/05-templates.html">
+                                        Templates
                                     </a>
                                 </li>
                                                     </ul>
@@ -74,8 +74,8 @@
                     <h1>Validation Tutorial</h1>
 <p>Programming languages follow rules, and PHP is no exception: defining a method
 as being both abstract and final will result in a Fatal Error.</p>
-<p>To avoid generating invalid code, Medio provides a <code>Validator</code>:</p>
-<pre><code class="language-php">use Gnugat\Medio\Validator;
+<p>To avoid generating invalid code, Memio provides a <code>Validator</code>:</p>
+<pre><code class="language-php">use Memio\Memio\Validator;
 
 Method::make('myMethod')
     -&gt;makeAbstract()
@@ -83,9 +83,10 @@ Method::make('myMethod')
 ;
 
 $validator = new Validator();
-$validator-&gt;validate($method); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
-<h2>Default Constraints</h2>
-<p>Out of the box, <code>Validator</code> provides the following <code>Constraints</code>:</p>
+$validator-&gt;validate($method); // @throws Memio\Memio\Exception\InvalidModelException</code></pre>
+<h2>Syntax checking Constraints</h2>
+<p>Out of the box, <code>Validator</code> provides &quot;linting&quot; <code>Constraints</code> that will check if the
+generating code can be run without raising PHP Fatal Errors:</p>
 <ul>
 <li>Collection cannot have name duplicates</li>
 <li>Concrete Object Methods cannot be abstract</li>
@@ -105,9 +106,9 @@ $validator-&gt;validate($method); // @throws Gnugat\Medio\Exception\InvalidModel
 
 namespace Vendor\Project\Validator\Constraint;
 
-use Gnugat\Medio\Validator\Constraint;
-use Gnugat\Medio\Validator\Violation\NoneViolation;
-use Gnugat\Medio\Validator\Violation\SomeViolation;
+use Memio\Memio\Validator\Constraint;
+use Memio\Memio\Validator\Violation\NoneViolation;
+use Memio\Memio\Validator\Violation\SomeViolation;
 
 class ArgumentCannotBeScalar implements Constraint
 {
@@ -121,18 +122,19 @@ class ArgumentCannotBeScalar implements Constraint
     }
 }</code></pre>
 <blockquote>
-<p><strong>Note</strong>: In Medio all <code>Constraints</code> are named after their error message, but
-this is not mandatory.</p>
+<p><strong>Note</strong>: In Memio all <code>Constraints</code> are named after their error message, but
+this is not mandatory. They check a single specific rule.</p>
 </blockquote>
 <p>We then need to create a <code>ModelValidator</code> specialized in <code>Arguments</code>:</p>
 <pre><code class="language-php">&lt;?php
 
 namespace Vendor\Project\Validator;
 
-use Gnugat\Medio\Model\Argument;
-use Gnugat\Medio\Validator\Constraint;
-use Gnugat\Medio\Validator\ConstraintValidator;
-use Gnugat\Medio\Validator\ModelValidator;
+use Memio\Memio\Model\Argument;
+use Memio\Memio\Validator\Constraint;
+use Memio\Memio\Validator\ConstraintValidator;
+use Memio\Memio\Validator\ModelValidator;
+use Memio\Memio\Validator\ViolationCollection;
 use Vendor\Project\Validator\Constraint\ArgumentCannotBeScalar;
 
 class ArgumentValidator implements ModelValidator
@@ -158,19 +160,23 @@ class ArgumentValidator implements ModelValidator
 
     public function validate($model)
     {
+        if (!$this-&gt;supports($model)) {
+            return new ViolationCollection(); // An empty ViolationCollection means no errors
+        }
+
         return $this-&gt;constraintValidator-&gt;validate($model);
     }
 }</code></pre>
 <blockquote>
-<p><strong>Note</strong>: <code>ConstraintValidator</code> takes care of executing all the constraints and
-aggregating all error messages.</p>
+<p><strong>Note</strong>: In this case, our <code>ModelValidator</code> delegates the work to <code>ConstraintValidator</code>
+which takes care of executing all the constraints and aggregating all error messages.</p>
 </blockquote>
 <p>Finally we can register everything in the <code>Validator</code>:</p>
 <pre><code class="language-php">use Vendor\Project\Validator\ArgumentValidator;
 
 $validator-&gt;add(new ArgumentValidator());
 
-$validator-&gt;validate(new Argument('string', 'scalar')); // @throws Gnugat\Medio\Exception\InvalidModelException</code></pre>
+$validator-&gt;validate(new Argument('string', 'scalar')); // @throws Memio\Memio\Exception\InvalidModelException</code></pre>
 <h2>Under the hood</h2>
 <p><code>Validator</code>'s role is to find a <code>ModelValidator</code> that supports the given model.
 <code>ModelValidators</code> own many <code>Constraints</code>, it applies all of them to the given model.
@@ -183,7 +189,7 @@ returned <code>ViolationCollection</code> contains at least one violation.</p>
 <h2>Next readings</h2>
 <ul>
 <li><a href="04-examples.html">Examples</a></li>
-<li><a href="05-extending.html">Extending</a></li>
+<li><a href="05-templates.html">Templates</a></li>
 </ul>
 <p>Previous pages:</p>
 <ul>

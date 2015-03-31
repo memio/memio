@@ -4,25 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Medio</title>
+        <title>Memio</title>
 
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://gnugat.github.io/medio/css/main.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://memio.github.io/memio/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://gnugat.github.io/medio/">
-                Medio
+            <a class="navbar-brand" href="http://memio.github.io/memio/">
+                Memio
                 <small class="hidden-xs hidden-sm">
                     A highly opinionated PHP code generator library
                 </small>
             </a>
 
-                            <a href="https://github.com/gnugat/medio">
+                            <a href="https://github.com/memio/memio">
                     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
                 </a>
             
@@ -36,33 +36,33 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/">
+                                    <a href="http://memio.github.io/memio/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/01-model-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/01-model-tutorial.html">
                                         Model Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/02-phpdoc-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/02-phpdoc-tutorial.html">
                                         PHPDoc Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/03-validation-tutorial.html">
+                                    <a href="http://memio.github.io/memio/doc/03-validation-tutorial.html">
                                         Validation Tutorial
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/04-examples.html">
+                                    <a href="http://memio.github.io/memio/doc/04-examples.html">
                                         Examples
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://gnugat.github.io/medio/doc/05-extending.html">
-                                        Extending
+                                    <a href="http://memio.github.io/memio/doc/05-templates.html">
+                                        Templates
                                     </a>
                                 </li>
                                                     </ul>
@@ -72,6 +72,58 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Examples</h1>
+<p>Tests are used as living usage examples as well as regression checks.</p>
+<h2>Specifications</h2>
+<blockquote>
+<p><strong>TL;DR</strong>: run <code>./vendor/bin/phpspec run --format=pretty</code> to list the behavior of each classes.</p>
+</blockquote>
+<p>Memio uses <a href="http://www.phpspec.net/">phpspec</a>, a framework that forces us to write
+documentative tests. Those are called specifications and can be found in <code>spec</code>.</p>
+<p>Let's have a look at <code>MethodCannotBeBothAbstractAndStatic</code>'s specification:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace spec\Memio\Memio\Validator\Constraint;
+
+use Memio\Memio\Model\Method;
+use PhpSpec\ObjectBehavior;
+
+class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
+{
+    function it_is_a_constraint()
+    {
+        $this-&gt;shouldImplement('Memio\Memio\Validator\Constraint');
+    }
+
+    function it_is_fine_with_non_static_abstract_methods(Method $method)
+    {
+        $method-&gt;isAbstract()-&gt;willReturn(true);
+        $method-&gt;isStatic()-&gt;willReturn(false);
+
+        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Memio\Validator\Violation\NoneViolation');
+    }
+
+    function it_is_not_fine_with_abstract_and_static_methods(Method $method)
+    {
+        $method-&gt;isAbstract()-&gt;willReturn(true);
+        $method-&gt;isStatic()-&gt;willReturn(true);
+        $method-&gt;getName()-&gt;willReturn('__construct');
+
+        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Memio\Validator\Violation\SomeViolation');
+    }
+}</code></pre>
+<p>As we can see:</p>
+<ul>
+<li>Our System Under Test (<a href="http://en.wikipedia.org/wiki/System_under_test">SUT</a>, the tested class) is specified in as much edge cases as possible</li>
+<li>tests methods name describes the behavior (rather than the tested method name like <code>testValidate</code>)</li>
+<li>tests depict all interractions involved with Collaborators (classes used by our SUT)</li>
+</ul>
+<p>The suite can be run using the following <code>./vendor/bin/phpsepc run</code>, and by adding the
+<code>--format=pretty</code> option we can get a readable list of test methods per class.</p>
+<h2>Code generation examples</h2>
+<blockquote>
+<p><strong>TL;DR</strong>: <code>examples/*Test.php</code> contains examples of Model construction,
+<code>examples/fixtures/*Test/test*.txt</code> contains expected generated code.</p>
+</blockquote>
 <p>In the <code>examples</code> directory we can find tests written with <a href="https://phpunit.de/">PHPUnit</a>,
 they have been designed to also be used as living examples.</p>
 <p>Each test method is structured in a similar way:</p>
@@ -96,12 +148,12 @@ guess the location of a fixture file, where the expected code is.</p>
 <p><strong>Note</strong>: Fixture files always have an extra line, which is trimmed before the
 actual assertion.</p>
 </blockquote>
-<p>When changes are applied to Medio, the following command is executed to make
+<p>When changes are applied to Memio, the following command is executed to make
 sure no regressions have been introduced:</p>
 <pre><code>phpunit</code></pre>
 <h2>Next readings</h2>
 <ul>
-<li><a href="05-extending.html">Extending</a></li>
+<li><a href="05-templates.html">Templates</a></li>
 </ul>
 <p>Previous pages:</p>
 <ul>
