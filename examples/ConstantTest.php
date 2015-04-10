@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Constant;
+use Memio\Model\Constant;
 
 class ConstantTest extends PrettyPrinterTestCase
 {

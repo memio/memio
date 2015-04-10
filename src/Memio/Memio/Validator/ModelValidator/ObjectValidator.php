@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Validator\ModelValidator;
 
-use Memio\Memio\Model\Object;
+use Memio\Model\Object;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\Constraint\ConcreteObjectMethodsCannotBeAbstract;
 use Memio\Memio\Validator\ConstraintValidator;

@@ -11,9 +11,9 @@
 
 namespace Memio\Memio\Validator\ModelValidator;
 
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
+use Memio\Model\Contract;
+use Memio\Model\File;
+use Memio\Model\Object;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\ConstraintValidator;
 use Memio\Memio\Validator\ModelValidator;

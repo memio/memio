@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\Validator\Constraint;
 
-use Memio\Memio\Model\Method;
+use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior

@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\FullyQualifiedName;
+use Memio\Model\FullyQualifiedName;
 
 class FullyQualifiedNameTest extends PrettyPrinterTestCase
 {

@@ -11,9 +11,9 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Phpdoc\PropertyPhpdoc;
-use Memio\Memio\Model\Phpdoc\VariableTag;
-use Memio\Memio\Model\Property;
+use Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Model\Phpdoc\VariableTag;
+use Memio\Model\Property;
 
 class PropertyTest extends PrettyPrinterTestCase
 {

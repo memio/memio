@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\PrettyPrinter;
 
-use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
+use Memio\Model\Phpdoc\LicensePhpdoc;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 

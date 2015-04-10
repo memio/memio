@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\PrettyPrinter;
 
-use Memio\Memio\Model\FullyQualifiedName;
+use Memio\Model\FullyQualifiedName;
 use Twig_Environment;
 
 class PhpdocPrettyPrinter implements PrettyPrinterStrategy
@@ -39,7 +39,7 @@ class PhpdocPrettyPrinter implements PrettyPrinterStrategy
         }
         $fqcn = get_class($model);
 
-        return 1 === preg_match('/^Memio\\\\Memio\\\\Model\\\\Phpdoc\\\\/', $fqcn);
+        return 1 === preg_match('/^Memio\\\\Model\\\\Phpdoc\\\\/', $fqcn);
     }
 
     /**

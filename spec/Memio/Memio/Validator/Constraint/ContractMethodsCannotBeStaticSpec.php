@@ -11,8 +11,8 @@
 
 namespace spec\Memio\Memio\Validator\Constraint;
 
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\Method;
+use Memio\Model\Contract;
+use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class ContractMethodsCannotBeStaticSpec extends ObjectBehavior

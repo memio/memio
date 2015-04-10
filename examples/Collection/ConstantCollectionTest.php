@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Collection;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Constant;
+use Memio\Model\Constant;
 
 class ConstantCollectionTest extends PrettyPrinterTestCase
 {

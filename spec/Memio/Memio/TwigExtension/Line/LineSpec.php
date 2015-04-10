@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\TwigExtension\Line;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use Memio\Memio\TwigExtension\Line\LineStrategy;
 use PhpSpec\ObjectBehavior;
 

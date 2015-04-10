@@ -12,10 +12,10 @@
 namespace Memio\Memio\Examples\Phpdoc;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\StructurePhpdoc;
 
 class StructurePhpdocTest extends PrettyPrinterTestCase
 {

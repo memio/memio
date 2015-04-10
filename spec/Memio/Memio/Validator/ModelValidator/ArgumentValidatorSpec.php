@@ -12,7 +12,7 @@
 namespace spec\Memio\Memio\Validator\ModelValidator;
 
 use Memio\Memio\Validator\ViolationCollection;
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 
 class ArgumentValidatorSpec extends ObjectBehavior

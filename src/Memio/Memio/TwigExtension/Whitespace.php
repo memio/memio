@@ -63,7 +63,7 @@ class Whitespace extends Twig_Extension
         $elementLength = strlen($current);
         $longestElement = $elementLength;
         foreach ($collection as $element) {
-            if ('Memio\Memio\Model\Phpdoc\ParameterTag' === get_class($element)) {
+            if ('Memio\Model\Phpdoc\ParameterTag' === get_class($element)) {
                 $longestElement = max($longestElement, strlen($element->getType()));
             }
         }

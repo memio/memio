@@ -14,7 +14,7 @@ namespace spec\Memio\Memio\Validator\ModelValidator;
 use Memio\Memio\Validator\ViolationCollection;
 use Memio\Memio\Validator\ModelValidator\ArgumentValidator;
 use Memio\Memio\Validator\ModelValidator\CollectionValidator;
-use Memio\Memio\Model\Method;
+use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class MethodValidatorSpec extends ObjectBehavior

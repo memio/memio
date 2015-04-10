@@ -12,11 +12,11 @@
 namespace Memio\Memio\Examples\Validator;
 
 use Memio\Memio\Exception\InvalidModelException;
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\Constant;
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Method;
+use Memio\Model\Argument;
+use Memio\Model\Contract;
+use Memio\Model\Constant;
+use Memio\Model\File;
+use Memio\Model\Method;
 use Memio\Memio\Validator;
 use PHPUnit_Framework_TestCase;
 

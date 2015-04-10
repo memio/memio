@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\Validator;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use Memio\Memio\Exception\ConstraintFailedException;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\Violation\NoneViolation;
