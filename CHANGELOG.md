@@ -1,9 +1,21 @@
 # CHANGELOG
 
+## 1.0.0-rc-8: Model extraction
+
+* extracted Models to their own package
+
+> **BC breaks**:
+>
+> * removed `Memio\Memio\Model` namespace, use `Memio\Model` instead.
+
 ## 1.0.0-rc7: Memio and Documentation
 
 * renamed gnugat/medio into memio/memio
 * completed documentation
+
+> **BC breaks**:
+>
+> * removed `Gnugat\Medio` namespace, use `Memio\Memio` instead.
 
 ## 1.0.0-rc6: Argument Validator
 
