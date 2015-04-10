@@ -14,9 +14,9 @@ namespace spec\Memio\Memio\Validator\ModelValidator;
 use Memio\Memio\Validator\ViolationCollection;
 use Memio\Memio\Validator\ModelValidator\ContractValidator;
 use Memio\Memio\Validator\ModelValidator\ObjectValidator;
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
+use Memio\Model\Contract;
+use Memio\Model\File;
+use Memio\Model\Object;
 use PhpSpec\ObjectBehavior;
 
 class FileValidatorSpec extends ObjectBehavior

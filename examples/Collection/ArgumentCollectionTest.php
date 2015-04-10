@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Collection;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 
 class ArgumentCollectionTest extends PrettyPrinterTestCase
 {

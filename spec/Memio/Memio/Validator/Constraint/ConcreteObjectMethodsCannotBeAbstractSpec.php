@@ -11,8 +11,8 @@
 
 namespace spec\Memio\Memio\Validator\Constraint;
 
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Method;
+use Memio\Model\Object;
+use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 
 class ConcreteObjectMethodsCannotBeAbstractSpec extends ObjectBehavior

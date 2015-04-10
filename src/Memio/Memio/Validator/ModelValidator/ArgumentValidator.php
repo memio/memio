@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Validator\ModelValidator;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\ConstraintValidator;
 use Memio\Memio\Validator\Constraint\ObjectArgumentCanOnlyDefaultToNull;

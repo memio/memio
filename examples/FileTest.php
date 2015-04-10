@@ -11,14 +11,14 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Constant;
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\FullyQualifiedName;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
-use Memio\Memio\Model\Property;
+use Memio\Model\Argument;
+use Memio\Model\Constant;
+use Memio\Model\File;
+use Memio\Model\FullyQualifiedName;
+use Memio\Model\Method;
+use Memio\Model\Object;
+use Memio\Model\Phpdoc\LicensePhpdoc;
+use Memio\Model\Property;
 
 class FileTest extends PrettyPrinterTestCase
 {

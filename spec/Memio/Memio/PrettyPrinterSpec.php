@@ -11,9 +11,9 @@
 
 namespace spec\Memio\Memio;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\FullyQualifiedName;
-use Memio\Memio\Model\Method;
+use Memio\Model\Argument;
+use Memio\Model\FullyQualifiedName;
+use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as ProphecyArgument;
 use Twig_Environment;

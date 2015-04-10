@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Phpdoc;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
+use Memio\Model\Phpdoc\LicensePhpdoc;
 
 class LicensePhpdocTest extends PrettyPrinterTestCase
 {

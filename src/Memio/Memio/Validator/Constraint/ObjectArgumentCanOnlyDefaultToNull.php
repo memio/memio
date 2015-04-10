@@ -11,6 +11,7 @@
 
 namespace Memio\Memio\Validator\Constraint;
 
+use Memio\Model\Type;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\Violation\NoneViolation;
 use Memio\Memio\Validator\Violation\SomeViolation;
@@ -22,8 +23,9 @@ class ObjectArgumentCanOnlyDefaultToNull implements Constraint
      */
     public function validate($model)
     {
+        $type = new Type($model->getType());
         $defaultValue = $model->getDefaultValue();
-        if (!$model->isObject() || null === $defaultValue || 'null' === $defaultValue) {
+        if (!$type->isObject() || null === $defaultValue || 'null' === $defaultValue) {
             return new NoneViolation();
         }
 

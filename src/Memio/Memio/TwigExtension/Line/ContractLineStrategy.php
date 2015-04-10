@@ -12,7 +12,7 @@
 namespace Memio\Memio\TwigExtension\Line;
 
 use Memio\Memio\Exception\InvalidArgumentException;
-use Memio\Memio\Model\Contract;
+use Memio\Model\Contract;
 
 class ContractLineStrategy implements LineStrategy
 {

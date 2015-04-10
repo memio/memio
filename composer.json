@@ -23,6 +23,7 @@
         "psr-4": { "Memio\\Memio\\Examples\\": "examples" }
     },
     "require": {
+        "memio/model": "~1.0",
         "php": ">=5.3.3",
         "twig/twig": "~1.18"
     },

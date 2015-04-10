@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Phpdoc;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Phpdoc\ParameterTag;
+use Memio\Model\Phpdoc\ParameterTag;
 
 class ParameterTagTest extends PrettyPrinterTestCase
 {

@@ -11,8 +11,8 @@
 
 namespace spec\Memio\Memio;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Method;
+use Memio\Model\Argument;
+use Memio\Model\Method;
 use Memio\Memio\Validator\ModelValidator;
 use Memio\Memio\Validator\ViolationCollection;
 use Memio\Memio\Validator\Violation\SomeViolation;

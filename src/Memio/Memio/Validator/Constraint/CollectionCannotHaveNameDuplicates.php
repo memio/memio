@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Validator\Constraint;
 
-use Memio\Memio\Model\FullyQualifiedName;
+use Memio\Model\FullyQualifiedName;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\Violation\NoneViolation;
 use Memio\Memio\Validator\Violation\SomeViolation;

@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Phpdoc;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\DeprecationTag;
 
 class DeprecationTagTest extends PrettyPrinterTestCase
 {

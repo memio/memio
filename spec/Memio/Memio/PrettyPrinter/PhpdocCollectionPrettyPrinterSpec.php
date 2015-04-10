@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\PrettyPrinter;
 
-use Memio\Memio\Model\Phpdoc\ParameterTag;
+use Memio\Model\Phpdoc\ParameterTag;
 use PhpSpec\ObjectBehavior;
 use Twig_Environment;
 

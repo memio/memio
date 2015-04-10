@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 
 class ArgumentTest extends PrettyPrinterTestCase
 {

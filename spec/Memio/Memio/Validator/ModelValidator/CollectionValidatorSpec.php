@@ -11,10 +11,10 @@
 
 namespace spec\Memio\Memio\Validator\ModelValidator;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Constant;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Property;
+use Memio\Model\Argument;
+use Memio\Model\Constant;
+use Memio\Model\Method;
+use Memio\Model\Property;
 use PhpSpec\ObjectBehavior;
 
 class CollectionValidatorSpec extends ObjectBehavior

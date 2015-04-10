@@ -12,8 +12,8 @@
 namespace Memio\Memio\Examples\Collection;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Method;
+use Memio\Model\Argument;
+use Memio\Model\Method;
 
 class MethodCollectionTest extends PrettyPrinterTestCase
 {

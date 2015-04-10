@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Collection;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Contract;
+use Memio\Model\Contract;
 
 class ContractCollectionTest extends PrettyPrinterTestCase
 {

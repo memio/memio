@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\PrettyPrinter;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use PhpSpec\ObjectBehavior;
 
 class EmptyCollectionPrettyPrinterSpec extends ObjectBehavior

@@ -11,7 +11,7 @@
 
 namespace spec\Memio\Memio\TwigExtension\Line;
 
-use Memio\Memio\Model\File;
+use Memio\Model\File;
 use PhpSpec\ObjectBehavior;
 
 class FileLineStrategySpec extends ObjectBehavior

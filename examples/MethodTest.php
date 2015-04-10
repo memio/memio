@@ -11,10 +11,10 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
-use Memio\Memio\Model\Phpdoc\ParameterTag;
+use Memio\Model\Argument;
+use Memio\Model\Method;
+use Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Model\Phpdoc\ParameterTag;
 
 class MethodTest extends PrettyPrinterTestCase
 {

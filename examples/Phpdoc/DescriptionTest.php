@@ -12,7 +12,7 @@
 namespace Memio\Memio\Examples\Phpdoc;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
-use Memio\Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\Description;
 
 class DescriptionTest extends PrettyPrinterTestCase
 {

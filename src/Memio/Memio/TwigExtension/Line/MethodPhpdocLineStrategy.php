@@ -11,7 +11,7 @@
 
 namespace Memio\Memio\TwigExtension\Line;
 
-use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Model\Phpdoc\MethodPhpdoc;
 
 class MethodPhpdocLineStrategy implements LineStrategy
 {

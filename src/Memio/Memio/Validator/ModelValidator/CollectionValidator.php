@@ -11,10 +11,10 @@
 
 namespace Memio\Memio\Validator\ModelValidator;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Constant;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Property;
+use Memio\Model\Argument;
+use Memio\Model\Constant;
+use Memio\Model\Method;
+use Memio\Model\Property;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\ConstraintValidator;
 use Memio\Memio\Validator\Constraint\CollectionCannotHaveNameDuplicates;

@@ -11,16 +11,16 @@
 
 namespace Memio\Memio\Examples;
 
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Constant;
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
-use Memio\Memio\Model\Property;
+use Memio\Model\Argument;
+use Memio\Model\Constant;
+use Memio\Model\Contract;
+use Memio\Model\Method;
+use Memio\Model\Object;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\StructurePhpdoc;
+use Memio\Model\Property;
 
 class ObjectTest extends PrettyPrinterTestCase
 {
