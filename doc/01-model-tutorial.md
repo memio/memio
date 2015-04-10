@@ -25,7 +25,7 @@ But it is also possible to only generate a chunk of code, like a method's argume
 We can describe it by providing the type and the name:
 
 ```php
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 
 $filename = new Argument('string', 'filename');
 
@@ -96,7 +96,7 @@ As explained above, a `Method` can have a collection of `Arguments` (0 to many).
 In order to describe this method, we don't need to prepare an array beforehand:
 
 ```php
-use Memio\Memio\Model\Method;
+use Memio\Model\Method;
 
 $handle = Method::make('handle')
     ->addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
@@ -223,7 +223,7 @@ To allow all of those in the simplest possible way, Memio let us write the raw v
 printed:
 
 ```php
-use Memio\Memio\Model\Constant;
+use Memio\Model\Constant;
 
 $firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
 $secondConstant = new Constant('SECOND_CONSTANT', 'null');
@@ -247,7 +247,7 @@ have Models describing those, Memio provides respectively `Object` and `Contract
 Here's an example of interface generation:
 
 ```php
-use Memio\Memio\Model\Contract;
+use Memio\Model\Contract;
 
 $myMethod = new Method('myMethod')
     ->addArgument('mixed', 'myArgument')

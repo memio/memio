@@ -70,7 +70,7 @@ We then need to create a `ModelValidator` specialized in `Arguments`:
 
 namespace Vendor\Project\Validator;
 
-use Memio\Memio\Model\Argument;
+use Memio\Model\Argument;
 use Memio\Memio\Validator\Constraint;
 use Memio\Memio\Validator\ConstraintValidator;
 use Memio\Memio\Validator\ModelValidator;

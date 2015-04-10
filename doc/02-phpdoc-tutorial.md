@@ -19,9 +19,9 @@ In this tutorial, we'll see how to:
 the author's name and their emails:
 
 ```php
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
+use Memio\Model\File;
+use Memio\Model\Object;
+use Memio\Model\Phpdoc\LicensePhpdoc;
 
 $file = File::make('src/Vendor/Project/MyClass')
     ->setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
@@ -64,11 +64,11 @@ A `Structure` (an `Object` or a `Contract`) can have the following:
 Here's how to describe it:
 
 ```php
-use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
+use Memio\Model\Contract;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Vendor\Project\MyInterface')
     ->setPhpdoc(StructurePhpdoc::make()
@@ -106,9 +106,9 @@ interface MyInterface
 A `Property` can have a property tag:
 
 ```php
-use Memio\Memio\Model\Property;
-use Memio\Memio\Model\Phpdoc\PropertyPhpdoc;
-use Memio\Memio\Model\Phpdoc\VariableTag;
+use Memio\Model\Property;
+use Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Model\Phpdoc\VariableTag;
 
 $property = Property::make('myClass')
     ->setPhpdoc(PropertyPhpdoc::make()
@@ -140,13 +140,13 @@ A `Method` can have the following:
 Here's how to describe it:
 
 ```php
-use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
-use Memio\Memio\Model\Phpdoc\ParameterTag;
+use Memio\Model\Argument;
+use Memio\Model\Method;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Model\Phpdoc\ParameterTag;
 
 $method = Method::make('__construct')
     ->setPhpdoc(MethodPhpdoc::make()

@@ -26,11 +26,11 @@ require __DIR__.'/vendor/autoload.php';
 use Memio\Memio\Config\Path;
 use Memio\Memio\PrettyPrinter;
 use Memio\Memio\Validator;
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Property;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Argument;
+use Memio\Model\File;
+use Memio\Model\Object;
+use Memio\Model\Property;
+use Memio\Model\Method;
+use Memio\Model\Argument;
 
 // Initialize the code generator
 $loader = new \Twig_Loader_Filesystem(Path::templates());

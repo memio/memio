@@ -72,8 +72,8 @@ Let's check the result:
 ```php
 // File: my_medio.php
 
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
+use Memio\Model\File;
+use Memio\Model\Object;
 
 $file = File::make('src/Vendor/Project/MyClass.php')
     ->setStructure(new Object('Vendor\Project\MyClass'))
