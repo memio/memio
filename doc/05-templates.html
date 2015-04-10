@@ -122,8 +122,8 @@ $prettyPrinter = new PrettyPrinter($twig);</code></pre>
 <p>Let's check the result:</p>
 <pre><code class="language-php">// File: my_medio.php
 
-use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
+use Memio\Model\File;
+use Memio\Model\Object;
 
 $file = File::make('src/Vendor/Project/MyClass.php')
     -&gt;setStructure(new Object('Vendor\Project\MyClass'))

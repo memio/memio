@@ -91,7 +91,7 @@ Here's a cheat sheet of those:</p>
 <p>The code sample in the <a href="../README.html">README</a> demonstrates how to generate a complete file.
 But it is also possible to only generate a chunk of code, like a method's argument.</p>
 <p>We can describe it by providing the type and the name:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Argument;
+<pre><code class="language-php">use Memio\Model\Argument;
 
 $filename = new Argument('string', 'filename');
 
@@ -140,7 +140,7 @@ this becomes unnecessary as we can use <code>(new Argument('bool', 'catch'))-&gt
 <h2>3. Generating a collection in a Model (e.g. method's arguments)</h2>
 <p>As explained above, a <code>Method</code> can have a collection of <code>Arguments</code> (0 to many).
 In order to describe this method, we don't need to prepare an array beforehand:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Method;
+<pre><code class="language-php">use Memio\Model\Method;
 
 $handle = Method::make('handle')
     -&gt;addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
@@ -233,7 +233,7 @@ $superMethod = Method::make('myMethod')
 an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. <code>__DIR__.'/path'</code>).</p>
 <p>To allow all of those in the simplest possible way, Memio let us write the raw value that will be
 printed:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Constant;
+<pre><code class="language-php">use Memio\Model\Constant;
 
 $firstConstant = new Constant('FIRST_CONSTANT', '"string in double quotes"');
 $secondConstant = new Constant('SECOND_CONSTANT', 'null');
@@ -247,7 +247,7 @@ echo $prettyPrinter-&gt;generateCode($secondConstant);</code></pre>
 <p>In PHP, <code>class</code> and <code>interface</code> are two reserved keywords. In order to be able to
 have Models describing those, Memio provides respectively <code>Object</code> and <code>Contract</code>.</p>
 <p>Here's an example of interface generation:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Contract;
+<pre><code class="language-php">use Memio\Model\Contract;
 
 $myMethod = new Method('myMethod')
     -&gt;addArgument('mixed', 'myArgument')

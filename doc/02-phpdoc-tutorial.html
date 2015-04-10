@@ -85,9 +85,9 @@
 <h2>1. Generating the License header</h2>
 <p><code>Files</code> can have a license header, which usually displays the name of the project,
 the author's name and their emails:</p>
-<pre><code class="language-php">use Memio\Memio\Model\File;
-use Memio\Memio\Model\Object;
-use Memio\Memio\Model\Phpdoc\LicensePhpdoc;
+<pre><code class="language-php">use Memio\Model\File;
+use Memio\Model\Object;
+use Memio\Model\Phpdoc\LicensePhpdoc;
 
 $file = File::make('src/Vendor/Project/MyClass')
     -&gt;setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
@@ -121,11 +121,11 @@ class MyClass
 <li>an API tag</li>
 </ul>
 <p>Here's how to describe it:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Contract;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\StructurePhpdoc;
+<pre><code class="language-php">use Memio\Model\Contract;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\StructurePhpdoc;
 
 $contract = Contract::make('Vendor\Project\MyInterface')
     -&gt;setPhpdoc(StructurePhpdoc::make()
@@ -154,9 +154,9 @@ interface MyInterface
 }</code></pre>
 <h2>3. Generating PHPdoc for a Property</h2>
 <p>A <code>Property</code> can have a property tag:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Property;
-use Memio\Memio\Model\Phpdoc\PropertyPhpdoc;
-use Memio\Memio\Model\Phpdoc\VariableTag;
+<pre><code class="language-php">use Memio\Model\Property;
+use Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Model\Phpdoc\VariableTag;
 
 $property = Property::make('myClass')
     -&gt;setPhpdoc(PropertyPhpdoc::make()
@@ -179,13 +179,13 @@ echo $prettyPrinter-&gt;generateCode($property);</code></pre>
 <li>an API tag</li>
 </ul>
 <p>Here's how to describe it:</p>
-<pre><code class="language-php">use Memio\Memio\Model\Argument;
-use Memio\Memio\Model\Method;
-use Memio\Memio\Model\Phpdoc\ApiTag;
-use Memio\Memio\Model\Phpdoc\Description;
-use Memio\Memio\Model\Phpdoc\DeprecationTag;
-use Memio\Memio\Model\Phpdoc\MethodPhpdoc;
-use Memio\Memio\Model\Phpdoc\ParameterTag;
+<pre><code class="language-php">use Memio\Model\Argument;
+use Memio\Model\Method;
+use Memio\Model\Phpdoc\ApiTag;
+use Memio\Model\Phpdoc\Description;
+use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\MethodPhpdoc;
+use Memio\Model\Phpdoc\ParameterTag;
 
 $method = Method::make('__construct')
     -&gt;setPhpdoc(MethodPhpdoc::make()

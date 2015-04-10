@@ -72,11 +72,27 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>CHANGELOG</h1>
+<h2>1.0.0-rc-8: Model extraction</h2>
+<ul>
+<li>extracted Models to their own package</li>
+</ul>
+<blockquote>
+<p><strong>BC breaks</strong>:</p>
+<ul>
+<li>removed <code>Memio\Memio\Model</code> namespace, use <code>Memio\Model</code> instead.</li>
+</ul>
+</blockquote>
 <h2>1.0.0-rc7: Memio and Documentation</h2>
 <ul>
 <li>renamed gnugat/medio into memio/memio</li>
 <li>completed documentation</li>
 </ul>
+<blockquote>
+<p><strong>BC breaks</strong>:</p>
+<ul>
+<li>removed <code>Gnugat\Medio</code> namespace, use <code>Memio\Memio</code> instead.</li>
+</ul>
+</blockquote>
 <h2>1.0.0-rc6: Argument Validator</h2>
 <ul>
 <li>added ObjectArgumentCanOnlyDefaultToNull constraint</li>
