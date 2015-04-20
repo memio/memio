@@ -24,6 +24,7 @@
     },
     "require": {
         "memio/model": "~1.0",
+        "memio/validator": "~1.0@rc",
         "php": ">=5.3.3",
         "twig/twig": "~1.18"
     },

@@ -25,7 +25,6 @@ require __DIR__.'/vendor/autoload.php';
 
 use Memio\Memio\Config\Path;
 use Memio\Memio\PrettyPrinter;
-use Memio\Memio\Validator;
 use Memio\Model\File;
 use Memio\Model\Object;
 use Memio\Model\Property;
@@ -50,10 +49,6 @@ $file = File::make('src/Vendor/Project/MyService.php')
             )
     )
 ;
-
-// Optionally check that you didn't create any syntax error
-$validate = new Validator();
-$validate->validate($file); // @throws Memio\Memio\Exception\InvalidModelException
 
 // Generate the code and display in the console
 echo $prettyPrinter->generateCode($file);

@@ -1,26 +1,8 @@
 # Validation Tutorial
 
-Programming languages follow rules, and PHP is no exception: defining a method
-as being both abstract and final will result in a Fatal Error.
-
-To avoid generating invalid code, Memio provides a `Validator`:
-
-```php
-use Memio\Memio\Validator;
-
-Method::make('myMethod')
-    ->makeAbstract()
-    ->makeFinal()
-;
-
-$validator = new Validator();
-$validator->validate($method); // @throws Memio\Memio\Exception\InvalidModelException
-```
-
-## Syntax checking Constraints
-
-Out of the box, `Validator` provides "linting" `Constraints` that will check if the
-generating code can be run without raising PHP Fatal Errors:
+Memio provides a `Validator` component that allows us to define Model constraints.
+It also provides a `Linter` package, which is a collection of constraints that aims
+at checking syntax errors and the like:
 
 * Collection cannot have name duplicates
 * Concrete Object Methods cannot be abstract
@@ -34,6 +16,21 @@ generating code can be run without raising PHP Fatal Errors:
 * Method cannot be both abstract and static
 * Object Argument can only default to null
 
+Here's how to ue the linter:
+
+```php
+use Memio\Memio\Config\Build;
+use Memio\Model\Method;
+
+Method::make('myMethod')
+    ->makeAbstract()
+    ->makeFinal()
+;
+
+$linter = Build::linter();
+$linter->validate($method); // @throws Memio\Validator\Exception\InvalidModelException
+```
+
 ## Providing new Constraints
 
 To add new rules to the validator, we first need to create a new `Constraint`:
@@ -43,9 +40,9 @@ To add new rules to the validator, we first need to create a new `Constraint`:
 
 namespace Vendor\Project\Validator\Constraint;
 
-use Memio\Memio\Validator\Constraint;
-use Memio\Memio\Validator\Violation\NoneViolation;
-use Memio\Memio\Validator\Violation\SomeViolation;
+use Memio\Validator\Constraint;
+use Memio\Validator\Violation\NoneViolation;
+use Memio\Validator\Violation\SomeViolation;
 
 class ArgumentCannotBeScalar implements Constraint
 {
@@ -60,79 +57,61 @@ class ArgumentCannotBeScalar implements Constraint
 }
 ```
 
-> **Note**: In Memio all `Constraints` are named after their error message, but
-> this is not mandatory. They check a single specific rule.
+> **Note**: We've named the constraint after its error message.
+> This isn't mandatory, but this way it clearly express its purpose.
 
-We then need to create a `ModelValidator` specialized in `Arguments`:
-
-```php
-<?php
-
-namespace Vendor\Project\Validator;
-
-use Memio\Model\Argument;
-use Memio\Memio\Validator\Constraint;
-use Memio\Memio\Validator\ConstraintValidator;
-use Memio\Memio\Validator\ModelValidator;
-use Memio\Memio\Validator\ViolationCollection;
-use Vendor\Project\Validator\Constraint\ArgumentCannotBeScalar;
-
-class ArgumentValidator implements ModelValidator
-{
-    private $constraints;
-    private $constraintValidator;
-
-    public function __construct()
-    {
-        $this->constraintValidator = new ConstraintValidator();
-        $this->constraintValidator->add(new ArgumentCannotBeScalar());
-    }
-
-    public function add(Constraint $constraint)
-    {
-        $this->constraintValidator->add($constraint);
-    }
-
-    public function supports($model)
-    {
-        return $model instanceof Argument;
-    }
-
-    public function validate($model)
-    {
-        if (!$this->supports($model)) {
-            return new ViolationCollection(); // An empty ViolationCollection means no errors
-        }
-
-        return $this->constraintValidator->validate($model);
-    }
-}
-```
-
-> **Note**: In this case, our `ModelValidator` delegates the work to `ConstraintValidator`
-> which takes care of executing all the constraints and aggregating all error messages.
-
-Finally we can register everything in the `Validator`:
+We then need to register our rule in an `ArgumentValidator`:
 
 ```php
-use Vendor\Project\Validator\ArgumentValidator;
+// ...
 
-$validator->add(new ArgumentValidator());
+use Memio\Validator\ModelValidator\ArgumentValidator;
 
-$validator->validate(new Argument('string', 'scalar')); // @throws Memio\Memio\Exception\InvalidModelException
+$argumentValidator = new ArgumentValidator();
+$argumentValidator->add(new ArgumentCannotBeScalar());
 ```
 
-## Under the hood
+For each model Memio provides a `ModelValidator`. When providing `Validator` with
+an `Argument`, it will call `ArgumentValidator`.
 
-`Validator`'s role is to find a `ModelValidator` that supports the given model.
-`ModelValidators` own many `Constraints`, it applies all of them to the given model.
-A `Constraint` returns `NoneViolation` if everything is fine, or esle a `SomeViolation`
-containing a message. `ModelValidator` adds those `Violations` to a `ViolationCollection`
-and returns it to `Validator`. Finally, `Validator` throws an `InvalidModelException` if the
-returned `ViolationCollection` contains at least one violation.
+This isn't enough: if we provide a `Method` to `Validator`, we'd like it to also
+check its `Arguments`. To do so, we need to assemble `ModelValidators` as follow:
 
-The `InvalidModelException`'s message is composed of the `ViolationCollection` messages
-(it separates those by a line break).
+```php
+// ...
+
+use Memio\Validator\ModelValidator\CollectionValidator;
+use Memio\Validator\ModelValidator\MethodValidator;
+use Memio\Validator\ModelValidator\ContractValidator;
+use Memio\Validator\ModelValidator\ObjectValidator;
+use Memio\Validator\ModelValidator\FileValidator;
+
+$collectionValidator = new CollectionValidator();
+$methodValidator = new MethodValidator($argumentValidator, $collectionValidator);
+$contractValidator = new ContractValidator($collectionValidator, $methodValidator);
+$objectValidator = new ObjectValidator($collectionValidator, $methodValidator);
+$fileValidator = new FileValidator($contractValidator, $objectValidator);
+```
+
+Finally, we need to create a validator and register our `ModelValidators` in it:
+
+```php
+// ...
+//
+$myValidator = new Validator();
+$myValidator->add($argumentValidator);
+$myValidator->add($collectionValidator);
+$myValidator->add($methodValidator);
+$myValidator->add($contractValidator);
+$myValidator->add($objectValidator);
+$myValidator->add($fileValidator);
+```
+
+We'll be able to use it like this:
+
+```php
+$myValidator->validate($myModel);
+```
 
 ## Next readings
 
