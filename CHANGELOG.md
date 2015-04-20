@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-rc-9: Validator extraction
+
+* extracted Validators to their own package
+
+> **BC breaks**:
+>
+> * removed `Memio\Memio\Validator` namespace, use `Memio\Validator` instead.
+
 ## 1.0.0-rc-8: Model extraction
 
 * extracted Models to their own package
