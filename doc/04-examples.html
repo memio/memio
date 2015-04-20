@@ -82,7 +82,7 @@ documentative tests. Those are called specifications and can be found in <code>s
 <p>Let's have a look at <code>MethodCannotBeBothAbstractAndStatic</code>'s specification:</p>
 <pre><code class="language-php">&lt;?php
 
-namespace spec\Memio\Memio\Validator\Constraint;
+namespace spec\Memio\Validator\Constraint;
 
 use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
@@ -91,7 +91,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
 {
     function it_is_a_constraint()
     {
-        $this-&gt;shouldImplement('Memio\Memio\Validator\Constraint');
+        $this-&gt;shouldImplement('Memio\Validator\Constraint');
     }
 
     function it_is_fine_with_non_static_abstract_methods(Method $method)
@@ -99,7 +99,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method-&gt;isAbstract()-&gt;willReturn(true);
         $method-&gt;isStatic()-&gt;willReturn(false);
 
-        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Memio\Validator\Violation\NoneViolation');
+        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Validator\Violation\NoneViolation');
     }
 
     function it_is_not_fine_with_abstract_and_static_methods(Method $method)
@@ -108,7 +108,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method-&gt;isStatic()-&gt;willReturn(true);
         $method-&gt;getName()-&gt;willReturn('__construct');
 
-        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Memio\Validator\Violation\SomeViolation');
+        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Validator\Violation\SomeViolation');
     }
 }</code></pre>
 <p>As we can see:</p>
