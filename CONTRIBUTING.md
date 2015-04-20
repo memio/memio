@@ -19,25 +19,25 @@ Here's some tips to make you the best contributor ever:
 ## Standard code
 
 Use [PHP CS fixer](http://cs.sensiolabs.org/) to make your code compliant with
-Medio's coding standards:
+Memio's coding standards:
 
     ./vendor/bin/php-cs-fixer fix --config=sf23 .
 
 ## Specifications
 
-Medio drives its development using [phpspec](http://www.phpspec.net/):
+Memio drives its development using [phpspec](http://www.phpspec.net/):
 
     # Generate the specification class:
-    phpspec describe 'Gnugat\Medio\MyNewClass'
+    phpspec describe 'Memio\Memio\MyNewClass'
 
     # Customize the specification class:
-    $EDITOR tests/spec/Gnugat/Medio/MyNewClass.php
+    $EDITOR tests/spec/Memio/Memio/MyNewClass.php
 
     # Generate the specified class:
     phpspec run
 
     # Customize the class:
-    $EDITOR src/Gnugat/Medio/MyNewClass.php
+    $EDITOR src/Memio/Memio/MyNewClass.php
 
     phpspec run # Should be green!
 

@@ -14,7 +14,7 @@ Let's have a look at `MethodCannotBeBothAbstractAndStatic`'s specification:
 ```php
 <?php
 
-namespace spec\Memio\Memio\Validator\Constraint;
+namespace spec\Memio\Validator\Constraint;
 
 use Memio\Model\Method;
 use PhpSpec\ObjectBehavior;
@@ -23,7 +23,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
 {
     function it_is_a_constraint()
     {
-        $this->shouldImplement('Memio\Memio\Validator\Constraint');
+        $this->shouldImplement('Memio\Validator\Constraint');
     }
 
     function it_is_fine_with_non_static_abstract_methods(Method $method)
@@ -31,7 +31,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method->isAbstract()->willReturn(true);
         $method->isStatic()->willReturn(false);
 
-        $this->validate($method)->shouldHaveType('Memio\Memio\Validator\Violation\NoneViolation');
+        $this->validate($method)->shouldHaveType('Memio\Validator\Violation\NoneViolation');
     }
 
     function it_is_not_fine_with_abstract_and_static_methods(Method $method)
@@ -40,7 +40,7 @@ class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
         $method->isStatic()->willReturn(true);
         $method->getName()->willReturn('__construct');
 
-        $this->validate($method)->shouldHaveType('Memio\Memio\Validator\Violation\SomeViolation');
+        $this->validate($method)->shouldHaveType('Memio\Validator\Violation\SomeViolation');
     }
 }
 ```
