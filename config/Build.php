@@ -2,18 +2,18 @@
 
 namespace Memio\Memio\Config;
 
-use Memio\Validator\Constraint\ArgumentCannotBeScalar;
-use Memio\Validator\Constraint\CollectionCannotHaveNameDuplicates;
-use Memio\Validator\Constraint\ConcreteObjectMethodsCannotBeAbstract;
-use Memio\Validator\Constraint\ContractMethodsCanOnlyBePublic;
-use Memio\Validator\Constraint\ContractMethodsCannotBeFinal;
-use Memio\Validator\Constraint\ContractMethodsCannotBeStatic;
-use Memio\Validator\Constraint\ContractMethodsCannotHaveBody;
-use Memio\Validator\Constraint\MethodCannotBeAbstractAndHaveBody;
-use Memio\Validator\Constraint\MethodCannotBeBothAbstractAndFinal;
-use Memio\Validator\Constraint\MethodCannotBeBothAbstractAndPrivate;
-use Memio\Validator\Constraint\MethodCannotBeBothAbstractAndStatic;
-use Memio\Validator\Constraint\ObjectArgumentCanOnlyDefaultToNull;
+use Memio\Linter\ArgumentCannotBeScalar;
+use Memio\Linter\CollectionCannotHaveNameDuplicates;
+use Memio\Linter\ConcreteObjectMethodsCannotBeAbstract;
+use Memio\Linter\ContractMethodsCanOnlyBePublic;
+use Memio\Linter\ContractMethodsCannotBeFinal;
+use Memio\Linter\ContractMethodsCannotBeStatic;
+use Memio\Linter\ContractMethodsCannotHaveBody;
+use Memio\Linter\MethodCannotBeAbstractAndHaveBody;
+use Memio\Linter\MethodCannotBeBothAbstractAndFinal;
+use Memio\Linter\MethodCannotBeBothAbstractAndPrivate;
+use Memio\Linter\MethodCannotBeBothAbstractAndStatic;
+use Memio\Linter\ObjectArgumentCanOnlyDefaultToNull;
 use Memio\Validator\ModelValidator\ArgumentValidator;
 use Memio\Validator\ModelValidator\CollectionValidator;
 use Memio\Validator\ModelValidator\MethodValidator;
