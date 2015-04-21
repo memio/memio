@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.0-rc-10: Linter exctraction
+
+* extracted Linter in its own package
+
+> **BC breaks**:
+>
+> * removed `Memio\Validator\Constraint` namespace, use `Memio\Linter` instead.
+
 ## 1.0.0-rc-9: Validator extraction
 
 * extracted Validators to their own package
