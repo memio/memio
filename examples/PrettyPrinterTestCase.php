@@ -11,24 +11,19 @@
 
 namespace Memio\Memio\Examples;
 
-use DI\ContainerBuilder;
-use Inject;
+use Memio\Memio\Config\Build;
 use PHPUnit_Framework_TestCase;
 
 class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \Memio\Memio\PrettyPrinter
-     * @Inject
      */
     protected $prettyPrinter;
 
     protected function setUp()
     {
-        $containerBuilder = new ContainerBuilder();
-        $containerBuilder->addDefinitions(__DIR__.'/../config/phpdi.php');
-        $container = $containerBuilder->build();
-        $container->injectOn($this);
+        $this->prettyPrinter = Build::prettyPrinter();
     }
 
     protected function assertExpectedCode($generatedCode)

@@ -1,3 +1,0 @@
-{% for property in property_collection -%}
-    {% include 'property.twig' with { 'property': property } only %}{{ loop.last ? "\n" : "\n\n" }}
-{%- endfor -%}

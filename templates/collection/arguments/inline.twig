@@ -1,4 +1,0 @@
-{% for argument in argument_collection %}
-    {%- include 'argument.twig' with { 'argument': argument } only -%}
-    {% if not loop.last %}, {% endif %}
-{% endfor %}

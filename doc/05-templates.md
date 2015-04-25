@@ -56,11 +56,11 @@ used by our `PrettyPrinter` (must be loaded first):
 
 require __DIR__.'/vendor/autoload.php';
 
-use Memio\Memio\Config\Path;
-use Memio\Memio\PrettyPrinter;
+use Memio\PrettyPrinter\Config\Locate;
+use Memio\PrettyPrinter\PrettyPrinter;
 
 $loader = new \Twig_Loader_Filesystem(__DIR__.'/my_templates');
-$loader->addPath(Path::templates());
+$loader->addPath(Locate::templates());
 $twig = new \Twig_Environment($loader);
 $prettyPrinter = new PrettyPrinter($twig);
 ```

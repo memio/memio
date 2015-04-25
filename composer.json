@@ -25,6 +25,7 @@
     "require": {
         "memio/linter": "~1.0",
         "memio/model": "~1.0",
+        "memio/pretty-printer": "~1.0@rc",
         "memio/validator": "~1.0",
         "php": ">=5.3.3",
         "twig/twig": "~1.18"
@@ -32,8 +33,7 @@
     "require-dev": {
         "ciaranmcnulty/phpspec-typehintedmethods": "~1.1",
         "fabpot/php-cs-fixer": "~1.6",
-        "mnapoli/php-di": "~4.4",
-        "phpunit/phpunit": "~4.5",
+        "phpunit/phpunit": "~4.6",
         "phpspec/phpspec": "~2.2"
     }
 }

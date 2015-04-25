@@ -1,7 +1,0 @@
-{% if method.phpdoc %}{% include 'phpdoc/method_phpdoc.twig' with {'method_phpdoc': method.phpdoc} %}{% endif %}
-    {{ method.visibility ~ (method.visibility is not empty ? ' ') -}}
-    function {{ method.name }}({% include 'collection/argument_collection.twig' with {
-        'argument_collection': method.allArguments,
-        'length_restriction': 22 + method.name | length
-    } only %});
-{#- Trimming lines -#}

@@ -1,7 +1,0 @@
-{% if property.phpdoc %}{% include 'phpdoc/property_phpdoc.twig' with {'property_phpdoc': property.phpdoc} %}{% endif %}
-{#- Trimming lines #}
-    {{ property.visibility ~ ' ' }}
-    {{- property.isStatic ? 'static ' -}}
-    ${{ property.name -}}
-    {{ property.defaultValue ? (' = ' ~ property.defaultValue)|raw }};
-{#- Trimming lines -#}
