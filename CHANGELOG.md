@@ -1,6 +1,14 @@
 # CHANGELOG
 
-## 1.0.0-rc-10: Linter exctraction
+## 1.0.0-rc-11: PrettyPrinter extraction
+
+* extracted PrettyPrinter in its own package
+
+> **BC breaks**:
+>
+> * removed `Memio\Memio\PrettyPrinter` namespace, use `Memio\PrettyPrinter` instead.
+
+## 1.0.0-rc-10: Linter extraction
 
 * extracted Linter in its own package
 
