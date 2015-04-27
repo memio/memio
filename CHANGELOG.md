@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 1.0.0-rc-11: PrettyPrinter extraction
+## 1.0.0-rc12: PrettyPrinter with TemplateEngine
+
+* updated `Build` for new `PrettyPrinter` constructor
+
+## 1.0.0-rc11: PrettyPrinter extraction
 
 * extracted PrettyPrinter in its own package
 
@@ -8,7 +12,7 @@
 >
 > * removed `Memio\Memio\PrettyPrinter` namespace, use `Memio\PrettyPrinter` instead.
 
-## 1.0.0-rc-10: Linter extraction
+## 1.0.0-rc10: Linter extraction
 
 * extracted Linter in its own package
 
@@ -16,7 +20,7 @@
 >
 > * removed `Memio\Validator\Constraint` namespace, use `Memio\Linter` instead.
 
-## 1.0.0-rc-9: Validator extraction
+## 1.0.0-rc9: Validator extraction
 
 * extracted Validators to their own package
 
@@ -24,7 +28,7 @@
 >
 > * removed `Memio\Memio\Validator` namespace, use `Memio\Validator` instead.
 
-## 1.0.0-rc-8: Model extraction
+## 1.0.0-rc8: Model extraction
 
 * extracted Models to their own package
 
