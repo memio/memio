@@ -54,7 +54,19 @@ class Build
     {
         $loader = new \Twig_Loader_Filesystem(\Memio\PrettyPrinter\Config\Locate::templates());
         $twig = new \Twig_Environment($loader);
-        $prettyPrinter = new PrettyPrinter($twig);
+
+        $line = new \Memio\PrettyPrinter\TwigExtension\Line\Line();
+        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\ContractLineStrategy());
+        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\FileLineStrategy());
+        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\MethodPhpdocLineStrategy());
+        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\ObjectLineStrategy());
+        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\StructurePhpdocLineStrategy());
+
+        $twig->addExtension(new \Memio\PrettyPrinter\TwigExtension\Type());
+        $twig->addExtension(new \Memio\PrettyPrinter\TwigExtension\Whitespace($line));
+
+        $templateEngine = new \Memio\PrettyPrinter\TwigTemplateEngine($twig);
+        $prettyPrinter = new PrettyPrinter($templateEngine);
 
         return $prettyPrinter;
     }
