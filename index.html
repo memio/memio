@@ -75,7 +75,7 @@
 <blockquote>
 <p><strong>Caution</strong>: Memio is being renamed (previously gnugat/medio) and split into smaller packages.</p>
 </blockquote>
-<p>Memio is a library, it allows you to describe PHP code by initializing &quot;Model&quot; classes
+<p>Memio is a library, it allows you to describe PHP code by building &quot;Model&quot; classes
 (e.g. <code>new Method('__construct')</code>) and then to generate it using a <code>PrettyPrinter</code>!</p>
 <blockquote>
 <p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
@@ -90,18 +90,12 @@ If the coding style provided doesn't appeal to you, you can overwrite those temp
 
 require __DIR__.'/vendor/autoload.php';
 
-use Memio\Memio\Config\Path;
-use Memio\Memio\PrettyPrinter;
+use Memio\Memio\Config\Build;
 use Memio\Model\File;
 use Memio\Model\Object;
 use Memio\Model\Property;
 use Memio\Model\Method;
 use Memio\Model\Argument;
-
-// Initialize the code generator
-$loader = new \Twig_Loader_Filesystem(Path::templates());
-$twig = new \Twig_Environment($loader);
-$prettyPrinter = new PrettyPrinter($twig);
 
 // Describe the code you want to generate using "Models"
 $file = File::make('src/Vendor/Project/MyService.php')
@@ -118,6 +112,7 @@ $file = File::make('src/Vendor/Project/MyService.php')
 ;
 
 // Generate the code and display in the console
+$prettyPrinter = Build::prettyPrinter();
 echo $prettyPrinter-&gt;generateCode($file);
 
 // Or display it in a browser

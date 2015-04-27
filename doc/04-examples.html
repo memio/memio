@@ -73,52 +73,6 @@
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Examples</h1>
 <p>Tests are used as living usage examples as well as regression checks.</p>
-<h2>Specifications</h2>
-<blockquote>
-<p><strong>TL;DR</strong>: run <code>./vendor/bin/phpspec run --format=pretty</code> to list the behavior of each classes.</p>
-</blockquote>
-<p>Memio uses <a href="http://www.phpspec.net/">phpspec</a>, a framework that forces us to write
-documentative tests. Those are called specifications and can be found in <code>spec</code>.</p>
-<p>Let's have a look at <code>MethodCannotBeBothAbstractAndStatic</code>'s specification:</p>
-<pre><code class="language-php">&lt;?php
-
-namespace spec\Memio\Validator\Constraint;
-
-use Memio\Model\Method;
-use PhpSpec\ObjectBehavior;
-
-class MethodCannotBeBothAbstractAndStaticSpec extends ObjectBehavior
-{
-    function it_is_a_constraint()
-    {
-        $this-&gt;shouldImplement('Memio\Validator\Constraint');
-    }
-
-    function it_is_fine_with_non_static_abstract_methods(Method $method)
-    {
-        $method-&gt;isAbstract()-&gt;willReturn(true);
-        $method-&gt;isStatic()-&gt;willReturn(false);
-
-        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Validator\Violation\NoneViolation');
-    }
-
-    function it_is_not_fine_with_abstract_and_static_methods(Method $method)
-    {
-        $method-&gt;isAbstract()-&gt;willReturn(true);
-        $method-&gt;isStatic()-&gt;willReturn(true);
-        $method-&gt;getName()-&gt;willReturn('__construct');
-
-        $this-&gt;validate($method)-&gt;shouldHaveType('Memio\Validator\Violation\SomeViolation');
-    }
-}</code></pre>
-<p>As we can see:</p>
-<ul>
-<li>Our System Under Test (<a href="http://en.wikipedia.org/wiki/System_under_test">SUT</a>, the tested class) is specified in as much edge cases as possible</li>
-<li>tests methods name describes the behavior (rather than the tested method name like <code>testValidate</code>)</li>
-<li>tests depict all interractions involved with Collaborators (classes used by our SUT)</li>
-</ul>
-<p>The suite can be run using the following <code>./vendor/bin/phpsepc run</code>, and by adding the
-<code>--format=pretty</code> option we can get a readable list of test methods per class.</p>
 <h2>Code generation examples</h2>
 <blockquote>
 <p><strong>TL;DR</strong>: <code>examples/*Test.php</code> contains examples of Model construction,
