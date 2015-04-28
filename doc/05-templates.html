@@ -72,15 +72,23 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Templates</h1>
-<p>Memio uses <a href="http://twig.sensiolabs.org/">Twig templates</a> to actualy generate the
-code, they can be found in <code>templates</code>.</p>
+<p>The actual code generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>,
+which an be found in <a href="http://github.com/memio/twig-template-engine">memio/twig-template-engine</a>.</p>
+<p>Those templates enforce a highly opinionated coding style based on <a href="http://www.php-fig.org/">PHP standards</a>,
+but they can be easily over loaded with custom ones.</p>
+<blockquote>
+<p><strong>Note</strong>: Memio isn't tied to Twig, we can provide alternative template engines
+by creating a package that would depend on <a href="http://github.com/memio/pretty-printer">memio/pretty-printer</a>
+and by rewriting all the templates.</p>
+</blockquote>
 <h2>Overriding templates</h2>
-<p>The templates provided out of the box put an empty line between the PHP opening
-tag and the namespace statement:</p>
+<p>In this example, we'll over load the <code>file</code> template to remove the empty line
+between PHP opening tag and the namespace statement.</p>
+<p>Before:</p>
 <pre><code class="language-php">&lt;?php
 
 namespace Vendor\Project;</code></pre>
-<p>In this example we're going to change the template to remove the empty line:</p>
+<p>After:</p>
 <pre><code class="language-php">&lt;?php
 namespace Vendor\Project;</code></pre>
 <p>To do so we'll need to copy the <code>file.twig</code> template in our project:</p>
@@ -104,23 +112,13 @@ namespace {{ file.namespace }};
 {% include 'object.twig' with { 'object': file.structure } only %}
 {% endif %}</code></pre>
 <p>We've removed the line between <code>{% endif %}</code> and <code>namespace {{ file.namespace }};</code>.</p>
-<p>In order for our template to be used, we'll need to add it to the <code>Twig_Loader_Filesystem</code>
-used by our <code>PrettyPrinter</code> (must be loaded first):</p>
-<pre><code class="language-php">&lt;?php
-// File: my_medio.php
+<p>In order for our custom template to be used, we'll need to add its directory path to <code>PrettyPrinter</code>:</p>
+<pre><code class="language-php">// ...
 
-require __DIR__.'/vendor/autoload.php';
-
-use Memio\PrettyPrinter\Config\Locate;
-use Memio\PrettyPrinter\PrettyPrinter;
-
-$loader = new \Twig_Loader_Filesystem(__DIR__.'/my_templates');
-$loader-&gt;addPath(Locate::templates());
-$twig = new \Twig_Environment($loader);
-$prettyPrinter = new PrettyPrinter($twig);</code></pre>
+$prettyPrinter-&gt;addTemplatePath(__DIR__.'/my_templates');</code></pre>
 <p>And we're done!</p>
 <p>Let's check the result:</p>
-<pre><code class="language-php">// File: my_medio.php
+<pre><code class="language-php">// ...
 
 use Memio\Model\File;
 use Memio\Model\Object;
