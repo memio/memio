@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-rc13: Template documentation
+
+* updated Template documentation for `pretty-printer` 1.0.0-rc5
+
 ## 1.0.0-rc12: PrettyPrinter with TemplateEngine
 
 * updated `Build` for new `PrettyPrinter` constructor
