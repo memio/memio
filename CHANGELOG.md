@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0-rc14: TwigTemplateEngine extraction
+
+* extracted TwigTemplateEngine in its own package
+
 ## 1.0.0-rc13: Template documentation
 
 * updated Template documentation for `pretty-printer` 1.0.0-rc5
