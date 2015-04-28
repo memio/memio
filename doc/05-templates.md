@@ -1,12 +1,21 @@
 # Templates
 
-Memio uses [Twig templates](http://twig.sensiolabs.org/) to actualy generate the
-code, they can be found in `templates`.
+The actual code generation logic is hold by [Twig templates](http://twig.sensiolabs.org/),
+which an be found in [memio/twig-template-engine](http://github.com/memio/twig-template-engine).
+
+Those templates enforce a highly opinionated coding style based on [PHP standards](http://www.php-fig.org/),
+but they can be easily over loaded with custom ones.
+
+> **Note**: Memio isn't tied to Twig, we can provide alternative template engines
+> by creating a package that would depend on [memio/pretty-printer](http://github.com/memio/pretty-printer)
+> and by rewriting all the templates.
 
 ## Overriding templates
 
-The templates provided out of the box put an empty line between the PHP opening
-tag and the namespace statement:
+In this example, we'll over load the `file` template to remove the empty line
+between PHP opening tag and the namespace statement.
+
+Before:
 
 ```php
 <?php
@@ -14,7 +23,7 @@ tag and the namespace statement:
 namespace Vendor\Project;
 ```
 
-In this example we're going to change the template to remove the empty line:
+After:
 
 ```php
 <?php
@@ -47,22 +56,12 @@ namespace {{ file.namespace }};
 
 We've removed the line between `{% endif %}` and `namespace {{ file.namespace }};`.
 
-In order for our template to be used, we'll need to add it to the `Twig_Loader_Filesystem`
-used by our `PrettyPrinter` (must be loaded first):
+In order for our custom template to be used, we'll need to add its directory path to `PrettyPrinter`:
 
 ```php
-<?php
-// File: my_medio.php
+// ...
 
-require __DIR__.'/vendor/autoload.php';
-
-use Memio\PrettyPrinter\Config\Locate;
-use Memio\PrettyPrinter\PrettyPrinter;
-
-$loader = new \Twig_Loader_Filesystem(__DIR__.'/my_templates');
-$loader->addPath(Locate::templates());
-$twig = new \Twig_Environment($loader);
-$prettyPrinter = new PrettyPrinter($twig);
+$prettyPrinter->addTemplatePath(__DIR__.'/my_templates');
 ```
 
 And we're done!
@@ -70,7 +69,7 @@ And we're done!
 Let's check the result:
 
 ```php
-// File: my_medio.php
+// ...
 
 use Memio\Model\File;
 use Memio\Model\Object;
