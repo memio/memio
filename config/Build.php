@@ -52,20 +52,20 @@ class Build
      */
     public static function prettyPrinter()
     {
-        $loader = new \Twig_Loader_Filesystem(\Memio\PrettyPrinter\Config\Locate::templates());
+        $loader = new \Twig_Loader_Filesystem(\Memio\TwigTemplateEngine\Config\Locate::templates());
         $twig = new \Twig_Environment($loader);
 
-        $line = new \Memio\PrettyPrinter\TwigExtension\Line\Line();
-        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\ContractLineStrategy());
-        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\FileLineStrategy());
-        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\MethodPhpdocLineStrategy());
-        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\ObjectLineStrategy());
-        $line->add(new \Memio\PrettyPrinter\TwigExtension\Line\StructurePhpdocLineStrategy());
+        $line = new \Memio\TwigTemplateEngine\TwigExtension\Line\Line();
+        $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\ContractLineStrategy());
+        $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\FileLineStrategy());
+        $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\MethodPhpdocLineStrategy());
+        $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\ObjectLineStrategy());
+        $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\StructurePhpdocLineStrategy());
 
-        $twig->addExtension(new \Memio\PrettyPrinter\TwigExtension\Type());
-        $twig->addExtension(new \Memio\PrettyPrinter\TwigExtension\Whitespace($line));
+        $twig->addExtension(new \Memio\TwigTemplateEngine\TwigExtension\Type());
+        $twig->addExtension(new \Memio\TwigTemplateEngine\TwigExtension\Whitespace($line));
 
-        $templateEngine = new \Memio\PrettyPrinter\TwigTemplateEngine($twig);
+        $templateEngine = new \Memio\TwigTemplateEngine\TwigTemplateEngine($twig);
         $prettyPrinter = new PrettyPrinter($templateEngine);
 
         return $prettyPrinter;
