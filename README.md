@@ -1,7 +1,5 @@
 # Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png)](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf) [![Travis CI](https://travis-ci.org/memio/memio.png)](https://travis-ci.org/memio/memio)
 
-> **Caution**: Memio is being renamed (previously gnugat/medio) and split into smaller packages.
-
 Memio is a library, it allows you to describe PHP code by building "Model" classes
 (e.g. `new Method('__construct')`) and then to generate it using a `PrettyPrinter`!
 
@@ -12,7 +10,7 @@ Memio is a library, it allows you to describe PHP code by building "Model" class
 
 Install it using [Composer](https://getcomposer.org/download):
 
-    composer require memio/memio:~1.0@rc
+    composer require memio/memio:~1.0
 
 ## Full example
 
@@ -46,7 +44,8 @@ $file = File::make('src/Vendor/Project/MyService.php')
 
 // Generate the code and display in the console
 $prettyPrinter = Build::prettyPrinter();
-echo $prettyPrinter->generateCode($file);
+$generatedCode = $prettyPrinter->generateCode($file);
+echo $generatedCode;
 
 // Or display it in a browser
 // echo '<pre>'.htmlspecialchars($prettyPrinter->generateCode($file)).'</pre>';
@@ -97,4 +96,3 @@ And finally some meta documentation:
 
 * commands (e.g. add use statement, add PHPdoc, injecting dependency, etc)
 * parsing existing code (using [nikic](http://nikic.github.io/aboutMe.html)'s [PHP-Parser](https://github.com/nikic/PHP-Parser))
-* TemplateEngine interface, to allow the choice between Twig and basic PHP templating
