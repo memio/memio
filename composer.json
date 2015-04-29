@@ -26,10 +26,9 @@
         "memio/linter": "~1.0",
         "memio/model": "~1.0",
         "memio/pretty-printer": "~1.0",
-        "memio/twig-template-engine": "~1.0@rc",
+        "memio/twig-template-engine": "~1.0",
         "memio/validator": "~1.0",
-        "php": ">=5.3.3",
-        "twig/twig": "~1.18"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "~1.6",
