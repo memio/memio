@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0: Stabilised
+
+* fixed TwigTemplateEngine\Config\Locate
+
 ## 1.0.0-rc14: TwigTemplateEngine extraction
 
 * extracted TwigTemplateEngine in its own package
