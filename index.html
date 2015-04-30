@@ -72,9 +72,6 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Memio <a href="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf"><img src="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/memio/memio"><img src="https://travis-ci.org/memio/memio.png" alt="Travis CI" /></a></h1>
-<blockquote>
-<p><strong>Caution</strong>: Memio is being renamed (previously gnugat/medio) and split into smaller packages.</p>
-</blockquote>
 <p>Memio is a library, it allows you to describe PHP code by building &quot;Model&quot; classes
 (e.g. <code>new Method('__construct')</code>) and then to generate it using a <code>PrettyPrinter</code>!</p>
 <blockquote>
@@ -83,7 +80,7 @@ If the coding style provided doesn't appeal to you, you can overwrite those temp
 </blockquote>
 <h2>Installation</h2>
 <p>Install it using <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require memio/memio:~1.0@rc</code></pre>
+<pre><code>composer require memio/memio:~1.0</code></pre>
 <h2>Full example</h2>
 <p>We're going to generate a class with a constructor and two attributes:</p>
 <pre><code class="language-php">&lt;?php
@@ -113,7 +110,8 @@ $file = File::make('src/Vendor/Project/MyService.php')
 
 // Generate the code and display in the console
 $prettyPrinter = Build::prettyPrinter();
-echo $prettyPrinter-&gt;generateCode($file);
+$generatedCode = $prettyPrinter-&gt;generateCode($file);
+echo $generatedCode;
 
 // Or display it in a browser
 // echo '&lt;pre&gt;'.htmlspecialchars($prettyPrinter-&gt;generateCode($file)).'&lt;/pre&gt;';</code></pre>
@@ -157,7 +155,6 @@ class MyService
 <ul>
 <li>commands (e.g. add use statement, add PHPdoc, injecting dependency, etc)</li>
 <li>parsing existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
-<li>TemplateEngine interface, to allow the choice between Twig and basic PHP templating</li>
 </ul>
                 </section>
 
