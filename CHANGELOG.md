@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1: Package Documentation
+
+* added documentation for packages
+
 ## 1.0.0: Stabilised
 
 * fixed TwigTemplateEngine\Config\Locate
