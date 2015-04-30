@@ -30,3 +30,6 @@ menu:
         templates:
             text: Templates
             relativeUrl: doc/05-templates.html
+        packages:
+            text: Packages
+            relativeUrl: doc/06-packages.html

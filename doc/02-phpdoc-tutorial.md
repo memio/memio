@@ -4,7 +4,7 @@ Memio also provides a way to document the code with [PHPdoc](http://www.phpdoc.o
 
 By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.
 
-![UML class diagram](http://yuml.me/88fc72e9)
+![UML class diagram](http://yuml.me/b8570257)
 
 In this tutorial, we'll see how to:
 
@@ -194,6 +194,7 @@ This will produce:
 * [Validation Tutorial](03-validation-tutorial.md)
 * [Examples](04-examples.md)
 * [Templates](05-templates.md)
+* [Packages](06-packages.md)
 
 Previous pages:
 

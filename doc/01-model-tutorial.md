@@ -3,7 +3,7 @@
 Memio provides a way to describe Models (classes, properties, methods, etc).
 Here's a cheat sheet of those:
 
-![UML class diagram](http://yuml.me/12acc61b)
+![UML class diagram](http://yuml.me/b124406d)
 
 In this tutorial, we'll see how to:
 
@@ -314,6 +314,7 @@ class MyObject implements MyInterface
 * [Validation Tutorial](03-validation-tutorial.md)
 * [Examples](04-examples.md)
 * [Templates](05-templates.md)
+* [Packages](06-packages.md)
 
 Previous pages:
 

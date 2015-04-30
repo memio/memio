@@ -31,6 +31,8 @@ $linter = Build::linter();
 $linter->validate($method); // @throws Memio\Validator\Exception\InvalidModelException
 ```
 
+![UML class diagram](http://yuml.me/b6df7b4a)
+
 ## Providing new Constraints
 
 To add new rules to the validator, we first need to create a new `Constraint`:
@@ -117,6 +119,7 @@ $myValidator->validate($myModel);
 
 * [Examples](04-examples.md)
 * [Templates](05-templates.md)
+* [Packages](06-packages.md)
 
 Previous pages:
 

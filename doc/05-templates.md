@@ -94,6 +94,8 @@ class MyClass
 
 ## Next readings
 
+* [Packages](06-packages.md)
+
 Previous pages:
 
 * [Examples](04-examples.md)

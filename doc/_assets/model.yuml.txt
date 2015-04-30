@@ -1,3 +1,6 @@
+// Model: http://yuml.me/b124406d
+
+// Classes
 [Argument|name;defaultValue]
 [Constant|name;value]
 [File|filename]
@@ -6,6 +9,8 @@
 [Object|isFinal();isAbstract()]
 [Property|isStatic()|name;visibility;defaultValue]
 [<<Structure>>]
+
+// Relationship
 [File]<>-0..*>[FullyQualifiedName]
 [File]<>-0..1>[<<Structure>>]
 [<<Structure>>]^-.-[Contract]

@@ -1,3 +1,6 @@
+// PHPdoc: http://yuml.me/b8570257
+
+// Classes
 [ApiTag|since]
 [DeprecationTag|version;description]
 [Description|lines]
@@ -7,6 +10,8 @@
 [PropertyPhpdoc|isEmpty()]
 [StructurePhpdoc|isEmpty()]
 [VariableTag|type]
+
+// Relationship
 [File]->[LicensePhpdoc]
 [Property]->[PropertyPhpdoc]
 [PropertyPhpdoc]->[VariableTag]

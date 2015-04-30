@@ -49,6 +49,7 @@ sure no regressions have been introduced:
 ## Next readings
 
 * [Templates](05-templates.md)
+* [Packages](06-packages.md)
 
 Previous pages:
 
