@@ -13,7 +13,6 @@ changes, improvements or alternatives may be given).
 Here's some tips to make you the best contributor ever:
 
 * [Standard code](#standard-code)
-* [Specifications](#specifications)
 * [Keeping your fork up-to-date](#keeping-your-fork-up-to-date)
 
 ## Standard code
@@ -22,24 +21,6 @@ Use [PHP CS fixer](http://cs.sensiolabs.org/) to make your code compliant with
 Memio's coding standards:
 
     ./vendor/bin/php-cs-fixer fix --config=sf23 .
-
-## Specifications
-
-Memio drives its development using [phpspec](http://www.phpspec.net/):
-
-    # Generate the specification class:
-    phpspec describe 'Memio\Memio\MyNewClass'
-
-    # Customize the specification class:
-    $EDITOR tests/spec/Memio/Memio/MyNewClass.php
-
-    # Generate the specified class:
-    phpspec run
-
-    # Customize the class:
-    $EDITOR src/Memio/Memio/MyNewClass.php
-
-    phpspec run # Should be green!
 
 ## Keeping your fork up-to-date
 
