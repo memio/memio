@@ -78,7 +78,7 @@ echo $prettyPrinter->generateCode($handleArguments);
 ```
 
 > **Note**: All models can either be instanciated using `new` or the static method `make`.
-> The second option enable "fluent interface" (chaining method calls), when using PHP 5.6
+> The second option enable "fluent interface" (chaining method calls), when using PHP 5.4
 > this becomes unnecessary as we can use `(new Argument('bool', 'catch'))->setDefaultValue('true')`.
 
 With this we'll be able to see in our console:
