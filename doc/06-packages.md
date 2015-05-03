@@ -21,7 +21,7 @@ The main repository, [memio/memio](http://github.com/memio/memio), is a standard
 selection of those packages with some helpers to make their usage easy (e.g. the
 `Builder` class).
 
-## Next readings
+Previous pages:
 
 * [Templates](05-templates.md)
 * [Examples](04-examples.md)
