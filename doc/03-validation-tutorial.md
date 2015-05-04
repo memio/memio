@@ -123,6 +123,6 @@ $myValidator->validate($myModel);
 
 Previous pages:
 
-* [Model Tutorial](02-phpdoc-tutorial.md)
+* [PHPdoc Tutorial](02-phpdoc-tutorial.md)
 * [Model Tutorial](01-model-tutorial.md)
 * [README](../README.md)
