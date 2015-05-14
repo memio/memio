@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0: @return and @throws PHPdoc tags
+
+* added abstract class generation
+* added `return` PHPdoc tag generation
+* added `throws` PHPdoc tag generation
+
 ## 1.0.1: Package Documentation
 
 * added documentation for packages
