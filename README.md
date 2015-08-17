@@ -53,7 +53,7 @@ echo $generatedCode;
 
 With this simple example, we get the following output:
 
-```
+```php
 <?php
 
 namespace Vendor\Project;
