@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1: Updated dependencies
+
+* added support for PHP 7
+
 ## 1.1.0: @return and @throws PHPdoc tags
 
 * added abstract class generation
