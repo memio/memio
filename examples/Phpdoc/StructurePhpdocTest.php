@@ -30,7 +30,7 @@ class StructurePhpdocTest extends PrettyPrinterTestCase
 
     public function testOneTag()
     {
-        $structurePhpdoc = StructurePhpdoc::make()
+        $structurePhpdoc = (new StructurePhpdoc())
             ->setApiTag(new ApiTag())
         ;
 

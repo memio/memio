@@ -3,6 +3,6 @@
      * @param int     $type
      * @param bool    $catch
      */
-    public function handle(Request $request, $type, $catch)
+    public function handle(Request $request, int $type, bool $catch)
     {
     }

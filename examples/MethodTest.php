@@ -30,9 +30,8 @@ class MethodTest extends PrettyPrinterTestCase
     public function testWithInlineArguments()
     {
         $method = new Method('it_has_too_many_argument_yes');
-        for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument('string', 'argument'.$i));
-        }
+        $method->addArgument(new Argument('int', 'argument1'));
+        $method->addArgument(new Argument('int', 'argument2'));
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
@@ -42,9 +41,8 @@ class MethodTest extends PrettyPrinterTestCase
     public function testWithMultilineArguments()
     {
         $method = new Method('it_has_too_many_argument_yeah');
-        for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument('string', 'argument'.$i));
-        }
+        $method->addArgument(new Argument('int', 'argument1'));
+        $method->addArgument(new Argument('int', 'argument2'));
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 

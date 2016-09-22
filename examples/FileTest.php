@@ -68,7 +68,7 @@ class FileTest extends PrettyPrinterTestCase
                 ->addMethod((new Method('firstMethod'))
                     ->addArgument(new Argument('DateTime', 'firstArgument'))
                     ->addArgument(new Argument('array', 'secondArgument'))
-                    ->addArgument(new Argument('string', 'thirdArgument'))
+                    ->addArgument(new Argument('mixed', 'thirdArgument'))
                 )
                 ->addMethod(new Method('secondMethod'))
         );

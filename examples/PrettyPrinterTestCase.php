@@ -12,9 +12,9 @@
 namespace Memio\Memio\Examples;
 
 use Memio\Memio\Config\Build;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
+class PrettyPrinterTestCase extends TestCase
 {
     protected $prettyPrinter;
 

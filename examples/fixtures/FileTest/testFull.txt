@@ -10,11 +10,13 @@ class MyClass
     const SECOND_CONSTANT = 'meh';
 
     private $firstProperty;
-
     private $secondProperty;
 
-    public function firstMethod(DateTime $firstArgument, array $secondArgument, $thirdArgument)
-    {
+    public function firstMethod(
+        DateTime $firstArgument,
+        array $secondArgument,
+        $thirdArgument
+    ) {
     }
 
     public function secondMethod()

@@ -17,7 +17,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 {
     public function testNonTypeHinted()
     {
-        $argument = new Argument('string', 'filename');
+        $argument = new Argument('mixed', 'filename');
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
@@ -70,7 +70,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
-        $this->assertSame('$status = "A"', $generatedCode);
+        $this->assertSame('string $status = "A"', $generatedCode);
     }
 
     public function testDefaultConstantValueForObject()
@@ -81,6 +81,6 @@ class ArgumentTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
-        $this->assertSame('$status = self::DEFAULT_STATUS', $generatedCode);
+        $this->assertSame('string $status = self::DEFAULT_STATUS', $generatedCode);
     }
 }

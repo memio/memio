@@ -33,7 +33,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
-        $this->assertSame('$isObject', $generatedCode);
+        $this->assertSame('bool $isObject', $generatedCode);
     }
 
     public function testThreeArguments()
@@ -46,7 +46,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
-        $this->assertSame('SplFileInfo $file, $newLine, $lineNumber', $generatedCode);
+        $this->assertSame('SplFileInfo $file, string $newLine, int $lineNumber', $generatedCode);
     }
 
     public function testTooManyArgumentsToBeOnOneLine()

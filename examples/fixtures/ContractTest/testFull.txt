@@ -3,7 +3,11 @@ interface MyInterface extends FirstContract, SecondContract
     const FIRST_CONSTANT = 0;
     const SECOND_CONSTANT = 'meh';
 
-    public function firstMethod(DateTime $firstArgument, array $secondArgument, $thirdArgument);
+    public function firstMethod(
+        DateTime $firstArgument,
+        array $secondArgument,
+        $thirdArgument
+    );
 
     public function secondMethod();
 }
