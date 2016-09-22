@@ -29,13 +29,13 @@ use Memio\Model\Method;
 use Memio\Model\Argument;
 
 // Describe the code you want to generate using "Models"
-$file = File::make('src/Vendor/Project/MyService.php')
+$file = (new File('src/Vendor/Project/MyService.php'))
     ->setStructure(
-        Object::make('Vendor\Project\MyService')
+        (new Object('Vendor\Project\MyService'))
             ->addProperty(new Property('createdAt'))
             ->addProperty(new Property('filename'))
             ->addMethod(
-                Method::make('__construct')
+                (new Method('__construct'))
                     ->addArgument(new Argument('DateTime', 'createdAt'))
                     ->addArgument(new Argument('string', 'filename'))
             )

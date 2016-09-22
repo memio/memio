@@ -59,7 +59,7 @@ class MethodTest extends PrettyPrinterTestCase
             'bool' => 'catch',
         );
         $phpdoc = new MethodPhpdoc();
-        $method = Method::make('handle')
+        $method = (new Method('handle'))
             ->setPhpdoc($phpdoc)
         ;
         foreach ($arguments as $type => $name) {

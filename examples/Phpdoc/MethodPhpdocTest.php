@@ -31,7 +31,7 @@ class MethodPhpdocTest extends PrettyPrinterTestCase
 
     public function testOneTag()
     {
-        $methodPhpdoc = MethodPhpdoc::make()
+        $methodPhpdoc = (new MethodPhpdoc())
             ->setApiTag(new ApiTag())
         ;
 
@@ -42,8 +42,8 @@ class MethodPhpdocTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $methodPhpdoc = MethodPhpdoc::make()
-            ->setDescription(Description::make('Short description')
+        $methodPhpdoc = (new MethodPhpdoc())
+            ->setDescription((new Description('Short description'))
                 ->addEmptyLine()
                 ->addLine('Longer description')
             )

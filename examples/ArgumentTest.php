@@ -39,8 +39,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
         $generatedCode = $this->prettyPrinter->generateCode($argument);
 
-        $expectedCode = (version_compare(PHP_VERSION, '5.4.0') >= 0 ? 'callable $factory' : '$factory');
-        $this->assertSame($expectedCode, $generatedCode);
+        $this->assertSame('callable $factory', $generatedCode);
     }
 
     public function testObject()
@@ -54,7 +53,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testDefaultNullValueForObject()
     {
-        $argument = Argument::make('DateTime', 'dateTime')
+        $argument = (new Argument('DateTime', 'dateTime'))
             ->setDefaultValue('null')
         ;
 
@@ -65,7 +64,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testDefaultStringValueForObject()
     {
-        $argument = Argument::make('string', 'status')
+        $argument = (new Argument('string', 'status'))
             ->setDefaultValue('"A"')
         ;
 
@@ -76,7 +75,7 @@ class ArgumentTest extends PrettyPrinterTestCase
 
     public function testDefaultConstantValueForObject()
     {
-        $argument = Argument::make('string', 'status')
+        $argument = (new Argument('string', 'status'))
             ->setDefaultValue('self::DEFAULT_STATUS')
         ;
 

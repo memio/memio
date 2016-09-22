@@ -18,7 +18,7 @@ class FullyQualifiedNameCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroFullyQualifiedNames()
     {
-        $fullyQualifiedNames = array();
+        $fullyQualifiedNames = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($fullyQualifiedNames);
 
@@ -27,9 +27,9 @@ class FullyQualifiedNameCollectionTest extends PrettyPrinterTestCase
 
     public function testOneFullyQualifiedName()
     {
-        $fullyQualifiedNames = array(
+        $fullyQualifiedNames = [
             new FullyQualifiedName('DateTime'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($fullyQualifiedNames);
 
@@ -38,11 +38,11 @@ class FullyQualifiedNameCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeFullyQualifiedNames()
     {
-        $fullyQualifiedNames = array(
+        $fullyQualifiedNames = [
             new FullyQualifiedName('DateTime'),
             new FullyQualifiedName('ArrayObject'),
             new FullyQualifiedName('stdClass'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($fullyQualifiedNames);
 

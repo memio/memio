@@ -18,7 +18,7 @@ class ConstantCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroConstants()
     {
-        $constants = array();
+        $constants = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($constants);
 
@@ -27,9 +27,9 @@ class ConstantCollectionTest extends PrettyPrinterTestCase
 
     public function testOneConstant()
     {
-        $constants = array(
+        $constants = [
             new Constant('MY_CONSTANT', '0'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($constants);
 
@@ -38,11 +38,11 @@ class ConstantCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeConstants()
     {
-        $constants = array(
+        $constants = [
             new Constant('FIRST_CONSTANT', '0'),
             new Constant('SECOND_CONSTANT', '1'),
             new Constant('THIRD_CONSTANT', '2'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($constants);
 

@@ -16,9 +16,6 @@ use PHPUnit_Framework_TestCase;
 
 class PrettyPrinterTestCase extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var \Memio\Memio\PrettyPrinter
-     */
     protected $prettyPrinter;
 
     protected function setUp()

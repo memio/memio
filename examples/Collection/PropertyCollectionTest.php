@@ -18,7 +18,7 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroProperties()
     {
-        $properties = array();
+        $properties = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 
@@ -27,9 +27,9 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testOneProperty()
     {
-        $properties = array(
+        $properties = [
             new Property('dateTime'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 
@@ -38,11 +38,11 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeProperties()
     {
-        $properties = array(
+        $properties = [
             new Property('dateTime'),
             new Property('arrayObject'),
             new Property('isEnabled'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 

@@ -31,7 +31,7 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $file = File::make(self::FILENAME)
+        $file = (new File(self::FILENAME))
             ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
         ;
 
@@ -42,7 +42,7 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testWithLicense()
     {
-        $file = File::make(self::FILENAME)
+        $file = (new File(self::FILENAME))
             ->setLicensePhpdoc(new LicensePhpdoc(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL))
 
             ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
@@ -55,17 +55,17 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $file = File::make(self::FILENAME)
+        $file = (new File(self::FILENAME))
             ->addFullyQualifiedName(new FullyQualifiedName('DateTime'))
 
-            ->setStructure(Object::make(self::FULLY_QUALIFIED_NAME)
+            ->setStructure((new Object(self::FULLY_QUALIFIED_NAME))
                 ->addConstant(new Constant('FIRST_CONSTANT', '0'))
                 ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
                 ->addProperty(new Property('firstProperty'))
                 ->addProperty(new Property('secondProperty'))
 
-                ->addMethod(Method::make('firstMethod')
+                ->addMethod((new Method('firstMethod'))
                     ->addArgument(new Argument('DateTime', 'firstArgument'))
                     ->addArgument(new Argument('array', 'secondArgument'))
                     ->addArgument(new Argument('string', 'thirdArgument'))

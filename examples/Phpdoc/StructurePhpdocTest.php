@@ -41,8 +41,8 @@ class StructurePhpdocTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $structurePhpdoc = StructurePhpdoc::make()
-            ->setDescription(Description::make('Short description')
+        $structurePhpdoc = (new StructurePhpdoc())
+            ->setDescription((new Description('Short description'))
                 ->addEmptyLine()
                 ->addLine('Longer description')
             )

@@ -37,9 +37,9 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testWithPhpdoc()
     {
-        $object = Object::make(self::NAME)
-            ->setPhpdoc(StructurePhpdoc::make()
-                ->setDescription(Description::make('Short description')
+        $object = (new Object(self::NAME))
+            ->setPhpdoc((new StructurePhpdoc())
+                ->setDescription((new Description('Short description'))
                     ->addEmptyLine()
                     ->addLine('Longer description')
                 )
@@ -55,7 +55,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFinal()
     {
-        $object = Object::make(self::NAME)
+        $object = (new Object(self::NAME))
             ->makeFinal()
         ;
 
@@ -66,7 +66,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $object = Object::make(self::NAME)
+        $object = (new Object(self::NAME))
             ->extend(new Object('MyParent'))
 
             ->implement(new Contract('FirstContract'))
@@ -78,7 +78,7 @@ class ObjectTest extends PrettyPrinterTestCase
             ->addProperty(new Property('firstProperty'))
             ->addProperty(new Property('secondProperty'))
 
-            ->addMethod(Method::make('firstMethod')
+            ->addMethod((new Method('firstMethod'))
                 ->addArgument(new Argument('DateTime', 'firstArgument'))
                 ->addArgument(new Argument('array', 'secondArgument'))
                 ->addArgument(new Argument('string', 'thirdArgument'))
