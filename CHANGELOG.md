@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2.0.0-alpha1, 2.0.0-alpha2: PHP 7
+
+Dropped support for PHP < 7.
+
+This means we now can use:
+
+* scalar type hints
+* return type hints
+* callable type hint, without having to check PHP version
+
+All `make` static constructor were created for PHP < 5.6, they're
+now deprecated. Here's an example of what to use instead:
+
+```
+(new Method('sayHello'))
+    ->addArgument(new Argument('string', 'name')))
+;
+```
+
+### BC breaks:
+
+* changed maximum method argument line length from 120 to 80
+* changed opening curly brace to be on the same line as the method closing
+  parenthesis, when arguments are on many lines
+* changed properties to not have empty lines between them,
+  except if they have PHPdoc
+
 ## 1.1.1: Updated dependencies
 
 * added support for PHP 7
