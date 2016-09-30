@@ -76,9 +76,9 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Examples</h1>
+                    <h1 id="examples">Examples</h1>
 <p>Tests are used as living usage examples as well as regression checks.</p>
-<h2>Code generation examples</h2>
+<h2 id="code-generation-examples">Code generation examples</h2>
 <blockquote>
 <p><strong>TL;DR</strong>: <code>examples/*Test.php</code> contains examples of Model construction,
 <code>examples/fixtures/*Test/test*.txt</code> contains expected generated code.</p>
@@ -93,7 +93,7 @@ $argument = new Argument('string', 'filename');
 $generatedCode = $this-&gt;prettyPrinter-&gt;generateCode($argument);
 
 // Checking it against what's expected
-$this-&gt;assertSame('$filename', $generatedCode);</code></pre>
+$this-&gt;assertSame('string $filename', $generatedCode);</code></pre>
 <p>Sometimes the expected code is spanned on many lines:</p>
 <pre><code class="language-php">$method = new Method('__construct');
 
@@ -110,7 +110,7 @@ actual assertion.</p>
 <p>When changes are applied to Memio, the following command is executed to make
 sure no regressions have been introduced:</p>
 <pre><code>phpunit</code></pre>
-<h2>Next readings</h2>
+<h2 id="next-readings">Next readings</h2>
 <ul>
 <li><a href="05-templates.html">Templates</a></li>
 <li><a href="06-packages.html">Packages</a></li>
@@ -120,7 +120,7 @@ sure no regressions have been introduced:</p>
 <li><a href="03-validation-tutorial.html">Validation Tutorial</a></li>
 <li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
-<li><a href="../README.html">README</a></li>
+<li><a href="../index.html">README</a></li>
 </ul>
                 </section>
 
@@ -137,7 +137,7 @@ sure no regressions have been introduced:</p>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

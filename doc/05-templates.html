@@ -76,7 +76,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Templates</h1>
+                    <h1 id="templates">Templates</h1>
 <p>The actual code generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>,
 which an be found in <a href="http://github.com/memio/twig-template-engine">memio/twig-template-engine</a>.</p>
 <p>Those templates enforce a highly opinionated coding style based on <a href="http://www.php-fig.org/">PHP standards</a>,
@@ -86,7 +86,7 @@ but they can be easily over loaded with custom ones.</p>
 by creating a package that would depend on <a href="http://github.com/memio/pretty-printer">memio/pretty-printer</a>
 and by rewriting all the templates.</p>
 </blockquote>
-<h2>Overriding templates</h2>
+<h2 id="overriding-templates">Overriding templates</h2>
 <p>In this example, we'll over load the <code>file</code> template to remove the empty line
 between PHP opening tag and the namespace statement.</p>
 <p>Before:</p>
@@ -128,7 +128,7 @@ $prettyPrinter-&gt;addTemplatePath(__DIR__.'/my_templates');</code></pre>
 use Memio\Model\File;
 use Memio\Model\Object;
 
-$file = File::make('src/Vendor/Project/MyClass.php')
+$file = (new File('src/Vendor/Project/MyClass.php'))
     -&gt;setStructure(new Object('Vendor\Project\MyClass'))
 ;
 
@@ -140,7 +140,7 @@ namespace Vendor\Project;
 class MyClass
 {
 }</code></pre>
-<h2>Next readings</h2>
+<h2 id="next-readings">Next readings</h2>
 <ul>
 <li><a href="06-packages.html">Packages</a></li>
 </ul>
@@ -150,7 +150,7 @@ class MyClass
 <li><a href="03-validation-tutorial.html">Validation Tutorial</a></li>
 <li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
-<li><a href="../README.html">README</a></li>
+<li><a href="../index.html">README</a></li>
 </ul>
                 </section>
 
@@ -167,7 +167,7 @@ class MyClass
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

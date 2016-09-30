@@ -76,7 +76,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Model Tutorial</h1>
+                    <h1 id="model-tutorial">Model Tutorial</h1>
 <p>Memio provides a way to describe Models (classes, properties, methods, etc).
 Here's a cheat sheet of those:</p>
 <p><img src="http://yuml.me/b124406d" alt="UML class diagram" /></p>
@@ -92,8 +92,8 @@ Here's a cheat sheet of those:</p>
 <li>Generate Class and Interface</li>
 <li>Generate File</li>
 </ol>
-<h2>1. Generating a chunk of code (e.g. a single argument)</h2>
-<p>The code sample in the <a href="../README.html">README</a> demonstrates how to generate a complete file.
+<h2 id="1-generating-a-chunk-of-code-eg-a-single-argument">1. Generating a chunk of code (e.g. a single argument)</h2>
+<p>The code sample in the <a href="../index.html">README</a> demonstrates how to generate a complete file.
 But it is also possible to only generate a chunk of code, like a method's argument.</p>
 <p>We can describe it by providing the type and the name:</p>
 <pre><code class="language-php">use Memio\Model\Argument;
@@ -106,7 +106,7 @@ echo $prettyPrinter-&gt;generateCode($filename);</code></pre>
 If something else is given, Memio will consider it as an object.</p>
 </blockquote>
 <p>This should print the following:</p>
-<pre><code class="language-php">$filename</code></pre>
+<pre><code class="language-php">string $filename</code></pre>
 <p>Memio is able to automatically type hint an argument, when necessary:</p>
 <pre><code class="language-php">$createdAt = new Argument('DateTime', 'createdAt');
 
@@ -117,52 +117,50 @@ echo $prettyPrinter-&gt;generateCode($createdAt);</code></pre>
 <p><strong>Note</strong>: The following types are type hinted: object, array and callable
 (only if Memio is ran using PHP &gt;= 5.4).</p>
 </blockquote>
-<h2>2. Generating a standalone collection (e.g. many arguments)</h2>
+<h2 id="2-generating-a-standalone-collection-eg-many-arguments">2. Generating a standalone collection (e.g. many arguments)</h2>
 <p>An argument on its own is not very usefull, usually methods have a collection of arguments (0 to many).
 This can be done by using arrays:</p>
 <pre><code class="language-php">$handleArguments = array(
     new Argument('Symfony\Component\HttpFoundation\Request', 'request'),
-    Argument::make('int', 'type')
+    (new Argument('int', 'type'))
         -&gt;setDefaultValue('self::MASTER_REQUEST')
     ,
-    Argument::make('bool', 'catch')
+    (new Argument('bool', 'catch'))
         -&gt;setDefaultValue('true')
     ,
 );
 
 echo $prettyPrinter-&gt;generateCode($handleArguments);</code></pre>
-<blockquote>
-<p><strong>Note</strong>: All models can either be instanciated using <code>new</code> or the static method <code>make</code>.
-The second option enable &quot;fluent interface&quot; (chaining method calls), when using PHP 5.6
-this becomes unnecessary as we can use <code>(new Argument('bool', 'catch'))-&gt;setDefaultValue('true')</code>.</p>
-</blockquote>
 <p>With this we'll be able to see in our console:</p>
 <pre><code class="language-php">Request $request, $type = self::MASTER_REQUEST, $catch = true</code></pre>
 <blockquote>
 <p><strong>Note</strong>: The following Models can be in a collection:
 <code>Argument</code>, <code>Constant</code>, <code>Contract</code> (class/interface parents), <code>FullyQualifiedName</code> (use statements), <code>Method</code> and <code>Property</code>.</p>
 </blockquote>
-<h2>3. Generating a collection in a Model (e.g. method's arguments)</h2>
+<h2 id="3-generating-a-collection-in-a-model-eg-methods-arguments">3. Generating a collection in a Model (e.g. method's arguments)</h2>
 <p>As explained above, a <code>Method</code> can have a collection of <code>Arguments</code> (0 to many).
 In order to describe this method, we don't need to prepare an array beforehand:</p>
 <pre><code class="language-php">use Memio\Model\Method;
 
-$handle = Method::make('handle')
+$handle = (new Method('handle'))
     -&gt;addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
-    -&gt;addArgument(Argument::make('int', 'type')
+    -&gt;addArgument((new Argument('int', 'type'))
         -&gt;setDefaultValue('self::MASTER_REQUEST')
     )
-    -&gt;addArgument(Argument::make('bool', 'catch')
+    -&gt;addArgument((new Argument('bool', 'catch'))
         -&gt;setDefaultValue('true')
     )
 ;
 
 echo $prettyPrinter-&gt;generateCode($handle);</code></pre>
 <p>Here's the result:</p>
-<pre><code class="language-php">    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
-    {
+<pre><code class="language-php">    public function handle(
+        Request $request,
+        int $type = self::MASTER_REQUEST,
+        bool $catch = true
+    ) {
     }</code></pre>
-<h2>4. Example: phpspec's method generation</h2>
+<h2 id="4-example-phpspecs-method-generation">4. Example: phpspec's method generation</h2>
 <p>When running the test suite, <a href="https://phpspec.net">phpspec</a> generates missing methods
 in your code (amongst many other nice things). To put into practice what we've
 seen so far, we're going to recreate this feature using Memio:</p>
@@ -182,14 +180,14 @@ foreach ($arguments as $argument) {
 // Let's display the generated code in the console
 echo $prettyPrinter-&gt;generateCode($method);</code></pre>
 <p>This would output:</p>
-<pre><code>    public function __construct(ArrayObject $argument1, $argument2)
+<pre><code>    public function __construct(ArrayObject $argument1, string $argument2)
     {
     }</code></pre>
-<h2>5. Generating multiline arguments (e.g. PSR-2 compliant)</h2>
+<h2 id="5-generating-multiline-arguments-eg-psr-2-compliant">5. Generating multiline arguments (e.g. PSR-2 compliant)</h2>
 <p>The <a href="http://www.php-fig.org/psr/psr-2/">PSR-2 Coding Standard</a> advises us to avoid
 lines longer than 120 characters.
 Memio takes care of this when generating a method's arguments by checking the length:
-if it's going to be too long it'll put each arguments on their own line.</p>
+if it's going to be longer than 80 characters it'll put each arguments on their own line.</p>
 <p>Here's a code sample:</p>
 <pre><code class="language-php">$specification = new Method('it_is_a_very_long_method');
 for ($i = 1; $i &lt;= 7; $i++) {
@@ -206,10 +204,9 @@ echo $prettyPrinter-&gt;generateCode($specification);</code></pre>
         $argument5,
         $argument6,
         $argument7
-    )
-    {
+    ) {
     }</code></pre>
-<h2>6. Generating visibility, staticness, virtualness, etc...</h2>
+<h2 id="6-generating-visibility-staticness-virtualness-etc">6. Generating visibility, staticness, virtualness, etc...</h2>
 <p>Memio assumes a few things by default:</p>
 <ul>
 <li>properties are private, not static, not abstract</li>
@@ -217,23 +214,23 @@ echo $prettyPrinter-&gt;generateCode($specification);</code></pre>
 <li>classes are not final, not abstract</li>
 </ul>
 <p>This can be customized:</p>
-<pre><code class="language-php">$superObject = Object::make()
-    -&gt;makeAbstract()  // can be cancelled with removeAbstract()
-    -&gt;makeFinal()  // can be cancelled with removeFinal()
+<pre><code class="language-php">$superObject = (new Object())
+    -&gt;makeAbstract() // can be cancelled with removeAbstract()
+    -&gt;makeFinal() // can be cancelled with removeFinal()
 ;
 
-$publicStaticProperty = Property::make('myProperty')
+$publicStaticProperty = (new Property('myProperty'))
     -&gt;makePublic() // also available: makeProtected() and makePrivate()
     -&gt;makeStatic() // can be cancelled with removeStatic()
 ;
 
-$superMethod = Method::make('myMethod')
+$superMethod = (new Method('myMethod'))
     -&gt;makeAbstract()  // can be cancelled with removeAbstract()
     -&gt;makeFinal() // can be cancelled with removeFinal()
     -&gt;makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
     -&gt;makeStatic() // can be cancelled with removeStatic()
 ;</code></pre>
-<h2>7. Generating Constant and default values</h2>
+<h2 id="7-generating-constant-and-default-values">7. Generating Constant and default values</h2>
 <p>A constant or a default value can be many things: a string encapsulated between single or double quotes,
 an integer, null... Since PHP 5.6 it can even be a numeric or string literal (e.g. <code>__DIR__.'/path'</code>).</p>
 <p>To allow all of those in the simplest possible way, Memio let us write the raw value that will be
@@ -248,7 +245,7 @@ echo $prettyPrinter-&gt;generateCode($secondConstant);</code></pre>
 <p>This will output:</p>
 <pre><code class="language-php">    const FIRST_CONSTANT = "string in double quotes";
     const SECOND_CONSTANT = null;</code></pre>
-<h2>8. Generating Class and Interface</h2>
+<h2 id="8-generating-class-and-interface">8. Generating Class and Interface</h2>
 <p>In PHP, <code>class</code> and <code>interface</code> are two reserved keywords. In order to be able to
 have Models describing those, Memio provides respectively <code>Object</code> and <code>Contract</code>.</p>
 <p>Here's an example of interface generation:</p>
@@ -257,7 +254,7 @@ have Models describing those, Memio provides respectively <code>Object</code> an
 $myMethod = new Method('myMethod')
     -&gt;addArgument('mixed', 'myArgument')
 );
-$myContract = Contract::make('Vendor\Project\MyInterface')
+$myContract = (new Contract('Vendor\Project\MyInterface'))
     -&gt;extend(new Contract('Vendor\Project\MyParentInterface'))
     -&gt;addConstant(new Constant('MY_CONSTANT', '42'))
     -&gt;addMethod($myMethod)
@@ -273,11 +270,11 @@ echo $prettyPrinter-&gt;generateCode($myContract);</code></pre>
 }</code></pre>
 <p>Objects can extend only one parent, but can implement many interfaces. Contracts
 can extend many interfaces.</p>
-<h2>9. Generating File</h2>
+<h2 id="9-generating-file">9. Generating File</h2>
 <p>Finally, we can generate a whole <code>File</code>:</p>
-<pre><code class="language-php">$myFile = File::make('src/Vendor/Project/MyObject')
+<pre><code class="language-php">$myFile = (new File('src/Vendor/Project/MyObject'))
     -&gt;addFullyQualifiedName($myContract-&gt;getFullyQualifiedName())
-    -&gt;setStructure(Object::make('Vendor\Project\MyObject')
+    -&gt;setStructure((new Object('Vendor\Project\MyObject'))
         -&gt;implement($myContract)
         -&gt;addMethod($myMethod)
     )
@@ -297,7 +294,7 @@ class MyObject implements MyInterface
     {
     }
 }</code></pre>
-<h2>Next readings</h2>
+<h2 id="next-readings">Next readings</h2>
 <ul>
 <li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="03-validation-tutorial.html">Validation Tutorial</a></li>
@@ -307,7 +304,7 @@ class MyObject implements MyInterface
 </ul>
 <p>Previous pages:</p>
 <ul>
-<li><a href="../README.html">README</a></li>
+<li><a href="../index.html">README</a></li>
 </ul>
                 </section>
 
@@ -324,7 +321,7 @@ class MyObject implements MyInterface
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

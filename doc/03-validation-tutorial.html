@@ -76,7 +76,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Validation Tutorial</h1>
+                    <h1 id="validation-tutorial">Validation Tutorial</h1>
 <p>Memio provides a <code>Validator</code> component that allows us to define Model constraints.
 It also provides a <code>Linter</code> package, which is a collection of constraints that aims
 at checking syntax errors and the like:</p>
@@ -97,7 +97,7 @@ at checking syntax errors and the like:</p>
 <pre><code class="language-php">use Memio\Memio\Config\Build;
 use Memio\Model\Method;
 
-Method::make('myMethod')
+(new Method('myMethod'))
     -&gt;makeAbstract()
     -&gt;makeFinal()
 ;
@@ -105,7 +105,7 @@ Method::make('myMethod')
 $linter = Build::linter();
 $linter-&gt;validate($method); // @throws Memio\Validator\Exception\InvalidModelException</code></pre>
 <p><img src="http://yuml.me/b6df7b4a" alt="UML class diagram" /></p>
-<h2>Providing new Constraints</h2>
+<h2 id="providing-new-constraints">Providing new Constraints</h2>
 <p>To add new rules to the validator, we first need to create a new <code>Constraint</code>:</p>
 <pre><code class="language-php">&lt;?php
 
@@ -166,7 +166,7 @@ $myValidator-&gt;add($objectValidator);
 $myValidator-&gt;add($fileValidator);</code></pre>
 <p>We'll be able to use it like this:</p>
 <pre><code class="language-php">$myValidator-&gt;validate($myModel);</code></pre>
-<h2>Next readings</h2>
+<h2 id="next-readings">Next readings</h2>
 <ul>
 <li><a href="04-examples.html">Examples</a></li>
 <li><a href="05-templates.html">Templates</a></li>
@@ -174,9 +174,9 @@ $myValidator-&gt;add($fileValidator);</code></pre>
 </ul>
 <p>Previous pages:</p>
 <ul>
-<li><a href="02-phpdoc-tutorial.html">Model Tutorial</a></li>
+<li><a href="02-phpdoc-tutorial.html">PHPdoc Tutorial</a></li>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
-<li><a href="../README.html">README</a></li>
+<li><a href="../index.html">README</a></li>
 </ul>
                 </section>
 
@@ -193,7 +193,7 @@ $myValidator-&gt;add($fileValidator);</code></pre>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

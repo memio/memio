@@ -76,17 +76,17 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Memio <a href="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf"><img src="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/memio/memio"><img src="https://travis-ci.org/memio/memio.png" alt="Travis CI" /></a></h1>
+                    <h1 id="memio">Memio <a href="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf"><img src="https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png" alt="SensioLabsInsight" /></a> <a href="https://travis-ci.org/memio/memio"><img src="https://travis-ci.org/memio/memio.png" alt="Travis CI" /></a></h1>
 <p>Memio is a library, it allows you to describe PHP code by building &quot;Model&quot; classes
 (e.g. <code>new Method('__construct')</code>) and then to generate it using a <code>PrettyPrinter</code>!</p>
 <blockquote>
-<p><strong>Note</strong>: The actual generation logic is hold by <a href="http://twig.sensiolabs.org/">Twig templates</a>.
+<p><strong>Note</strong>: The actual generation logic is held in <a href="http://twig.sensiolabs.org/">Twig templates</a>.
 If the coding style provided doesn't appeal to you, you can overwrite those templates easily.</p>
 </blockquote>
-<h2>Installation</h2>
-<p>Install it using <a href="https://getcomposer.org/download">Composer</a>:</p>
-<pre><code>composer require memio/memio:~1.0</code></pre>
-<h2>Full example</h2>
+<h2 id="installation">Installation</h2>
+<p>Install using <a href="https://getcomposer.org/download">Composer</a>:</p>
+<pre><code>composer require memio/memio:^2.0@alpha</code></pre>
+<h2 id="full-example">Full example</h2>
 <p>We're going to generate a class with a constructor and two attributes:</p>
 <pre><code class="language-php">&lt;?php
 
@@ -100,13 +100,13 @@ use Memio\Model\Method;
 use Memio\Model\Argument;
 
 // Describe the code you want to generate using "Models"
-$file = File::make('src/Vendor/Project/MyService.php')
+$file = (new File('src/Vendor/Project/MyService.php'))
     -&gt;setStructure(
-        Object::make('Vendor\Project\MyService')
+        (new Object('Vendor\Project\MyService'))
             -&gt;addProperty(new Property('createdAt'))
             -&gt;addProperty(new Property('filename'))
             -&gt;addMethod(
-                Method::make('__construct')
+                (new Method('__construct'))
                     -&gt;addArgument(new Argument('DateTime', 'createdAt'))
                     -&gt;addArgument(new Argument('string', 'filename'))
             )
@@ -121,21 +121,20 @@ echo $generatedCode;
 // Or display it in a browser
 // echo '&lt;pre&gt;'.htmlspecialchars($prettyPrinter-&gt;generateCode($file)).'&lt;/pre&gt;';</code></pre>
 <p>With this simple example, we get the following output:</p>
-<pre><code>&lt;?php
+<pre><code class="language-php">&lt;?php
 
 namespace Vendor\Project;
 
 class MyService
 {
     private $createdAt;
-
     private $filename;
 
-    public function __construct(DateTime $createdAt, $filename)
+    public function __construct(DateTime $createdAt, string $filename)
     {
     }
 }</code></pre>
-<h2>Want to know more?</h2>
+<h2 id="want-to-know-more">Want to know more?</h2>
 <p>Memio can be quite powerful, discover how by reading the docs:</p>
 <ul>
 <li><a href="doc/01-model-tutorial.html">Model Tutorial</a></li>
@@ -149,15 +148,15 @@ class MyService
 <ul>
 <li>the <code>git tag</code> command</li>
 <li>the <a href="https://github.com/memio/memio/releases">releases page on Github</a></li>
-<li>the file listing the <a href="CHANGELOG.html">changes between versions</a></li>
+<li>the file listing the <a href="changelog.html">changes between versions</a></li>
 </ul>
 <p>And finally some meta documentation:</p>
 <ul>
 <li><a href="LICENSE">copyright and MIT license</a></li>
-<li><a href="VERSIONING.html">versioning and branching models</a></li>
-<li><a href="CONTRIBUTING.html">contribution instructions</a></li>
+<li><a href="versioning.html">versioning and branching models</a></li>
+<li><a href="contributing.html">contribution instructions</a></li>
 </ul>
-<h2>Roadmap</h2>
+<h2 id="roadmap">Roadmap</h2>
 <ul>
 <li>commands (e.g. add use statement, add PHPdoc, injecting dependency, etc)</li>
 <li>parsing existing code (using <a href="http://nikic.github.io/aboutMe.html">nikic</a>'s <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a>)</li>
@@ -177,7 +176,7 @@ class MyService
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

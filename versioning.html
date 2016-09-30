@@ -76,38 +76,31 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>How to contribute</h1>
-<p>Everybody should be able to help. Here's how you can make this project more
-awesome:</p>
+                    <h1 id="versioning-and-branching-models">Versioning and branching models</h1>
+<p>This file explains the versioning and branching models of this project.</p>
+<h2 id="versioning">Versioning</h2>
+<p>The versioning is inspired by <a href="http://semver.org/">Semantic Versioning</a>:</p>
+<blockquote>
+<p>Given a version number MAJOR.MINOR.PATCH, increment the:</p>
 <ol>
-<li><a href="https://github.com/memio/memio/fork_select">Fork it</a></li>
-<li>improve it</li>
-<li>submit a <a href="https://help.github.com/articles/creating-a-pull-request">pull request</a></li>
+<li>MAJOR version when you make incompatible API changes</li>
+<li>MINOR version when you add functionality in a backwards-compatible manner</li>
+<li>PATCH version when you make backwards-compatible bug fixes</li>
 </ol>
-<p>Your work will then be reviewed as soon as possible (suggestions about some
-changes, improvements or alternatives may be given).</p>
-<p>Here's some tips to make you the best contributor ever:</p>
-<ul>
-<li><a href="#standard-code">Standard code</a></li>
-<li><a href="#keeping-your-fork-up-to-date">Keeping your fork up-to-date</a></li>
-</ul>
-<h2>Standard code</h2>
-<p>Use <a href="http://cs.sensiolabs.org/">PHP CS fixer</a> to make your code compliant with
-Memio's coding standards:</p>
-<pre><code>./vendor/bin/php-cs-fixer fix --config=sf23 .</code></pre>
-<h2>Keeping your fork up-to-date</h2>
-<p>To keep your fork up-to-date, you should track the upstream (original) one
-using the following command:</p>
-<pre><code>git remote add upstream https://github.com/memio/memio.git</code></pre>
-<p>Then get the upstream changes:</p>
-<pre><code>git checkout master
-git pull --rebase origin master
-git pull --rebase upstream master
-git checkout &lt;your-branch&gt;
-git rebase master</code></pre>
-<p>Finally, publish your changes:</p>
-<pre><code>git push -f origin &lt;your-branch&gt;</code></pre>
-<p>Your pull request will be automatically updated.</p>
+</blockquote>
+<h3 id="public-api">Public API</h3>
+<p>Classes and methods marked with the <code>@api</code> tag are considered to be the public
+API of this project.</p>
+<h2 id="branching-model">Branching Model</h2>
+<p>The branching is inspired by <a href="https://github.com/jbenet">@jbenet</a>
+<a href="https://gist.github.com/jbenet/ee6c9ac48068889b0912">simple git branching model</a>:</p>
+<blockquote>
+<ol>
+<li><code>master</code> must always be deployable.</li>
+<li><strong>all changes</strong> are made through feature branches (pull-request + merge)</li>
+<li>rebase to avoid/resolve conflicts; merge in to <code>master</code></li>
+</ol>
+</blockquote>
                 </section>
 
             </div>
@@ -123,7 +116,7 @@ git rebase master</code></pre>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

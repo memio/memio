@@ -76,7 +76,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>PHPdoc Tutorial</h1>
+                    <h1 id="phpdoc-tutorial">PHPdoc Tutorial</h1>
 <p>Memio also provides a way to document the code with <a href="http://www.phpdoc.org/">PHPdoc</a>.</p>
 <p>By default no PHPdoc is generated, this must be triggered by setting a PHPdoc object in the model.</p>
 <p><img src="http://yuml.me/b8570257" alt="UML class diagram" /></p>
@@ -87,14 +87,14 @@
 <li>Generate a Property's PHPdoc</li>
 <li>Generate a Method's PHPdoc</li>
 </ol>
-<h2>1. Generating the License header</h2>
+<h2 id="1-generating-the-license-header">1. Generating the License header</h2>
 <p><code>Files</code> can have a license header, which usually displays the name of the project,
 the author's name and their emails:</p>
 <pre><code class="language-php">use Memio\Model\File;
 use Memio\Model\Object;
 use Memio\Model\Phpdoc\LicensePhpdoc;
 
-$file = File::make('src/Vendor/Project/MyClass')
+$file = (new File('src/Vendor/Project/MyClass'))
     -&gt;setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
 
     -&gt;setStructure(new Object('Vendor\Project\MyClass'))
@@ -118,7 +118,7 @@ namespace Vendor\Project;
 class MyClass
 {
 }</code></pre>
-<h2>2. Generating PHPdoc for a Structure</h2>
+<h2 id="2-generating-phpdoc-for-a-structure">2. Generating PHPdoc for a Structure</h2>
 <p>A <code>Structure</code> (an <code>Object</code> or a <code>Contract</code>) can have the following:</p>
 <ul>
 <li>a description</li>
@@ -132,9 +132,9 @@ use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
 use Memio\Model\Phpdoc\StructurePhpdoc;
 
-$contract = Contract::make('Vendor\Project\MyInterface')
-    -&gt;setPhpdoc(StructurePhpdoc::make()
-        -&gt;setDescription(Description::make('This is the first line')
+$contract = (new Contract('Vendor\Project\MyInterface'))
+    -&gt;setPhpdoc((new StructurePhpdoc())
+        -&gt;setDescription((new Description('This is the first line'))
             -&gt;addEmptyLine()
             -&gt;addLine('This is the third line')
         )
@@ -157,14 +157,14 @@ echo $prettyPrinter-&gt;generateCode($contract);</code></pre>
 interface MyInterface
 {
 }</code></pre>
-<h2>3. Generating PHPdoc for a Property</h2>
+<h2 id="3-generating-phpdoc-for-a-property">3. Generating PHPdoc for a Property</h2>
 <p>A <code>Property</code> can have a property tag:</p>
 <pre><code class="language-php">use Memio\Model\Property;
 use Memio\Model\Phpdoc\PropertyPhpdoc;
 use Memio\Model\Phpdoc\VariableTag;
 
-$property = Property::make('myClass')
-    -&gt;setPhpdoc(PropertyPhpdoc::make()
+$property = (new Property('myClass'))
+    -&gt;setPhpdoc((new PropertyPhpdoc())
         -&gt;setVariableTag(new VariableTag('Vendor\Project\MyClass'))
     )
 ;
@@ -175,7 +175,7 @@ echo $prettyPrinter-&gt;generateCode($property);</code></pre>
      * @var MyClass
      */
     private $myClass;</code></pre>
-<h2>3. Generating PHPdoc for a Method</h2>
+<h2 id="3-generating-phpdoc-for-a-method">3. Generating PHPdoc for a Method</h2>
 <p>A <code>Method</code> can have the following:</p>
 <ul>
 <li>a description</li>
@@ -192,9 +192,9 @@ use Memio\Model\Phpdoc\DeprecationTag;
 use Memio\Model\Phpdoc\MethodPhpdoc;
 use Memio\Model\Phpdoc\ParameterTag;
 
-$method = Method::make('__construct')
-    -&gt;setPhpdoc(MethodPhpdoc::make()
-        -&gt;setDescription(Description::make('This is the first line')
+$method = (new Method('__construct'))
+    -&gt;setPhpdoc((new MethodPhpdoc())
+        -&gt;setDescription((new Description('This is the first line'))
             -&gt;addEmptyLine()
             -&gt;addLine('This is the third line')
         )
@@ -222,13 +222,13 @@ echo $prettyPrinter-&gt;generateCode($method);</code></pre>
      *
      * @api v2.0
      */
-    public function __construct($filename, $isEnabled)
+    public function __construct(string $filename, bool $isEnabled)
     {
     }</code></pre>
 <blockquote>
 <p><strong>Note</strong>: Parameter names are aligned.</p>
 </blockquote>
-<h2>Next readings</h2>
+<h2 id="next-readings">Next readings</h2>
 <ul>
 <li><a href="03-validation-tutorial.html">Validation Tutorial</a></li>
 <li><a href="04-examples.html">Examples</a></li>
@@ -238,7 +238,7 @@ echo $prettyPrinter-&gt;generateCode($method);</code></pre>
 <p>Previous pages:</p>
 <ul>
 <li><a href="01-model-tutorial.html">Model Tutorial</a></li>
-<li><a href="../README.html">README</a></li>
+<li><a href="../index.html">README</a></li>
 </ul>
                 </section>
 
@@ -255,7 +255,7 @@ echo $prettyPrinter-&gt;generateCode($method);</code></pre>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {

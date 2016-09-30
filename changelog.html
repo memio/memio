@@ -76,28 +76,59 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>CHANGELOG</h1>
-<h2>1.0.1: Package Documentation</h2>
+                    <h1 id="changelog">CHANGELOG</h1>
+<h2 id="200-alpha1-200-alpha2-php-7">2.0.0-alpha1, 2.0.0-alpha2: PHP 7</h2>
+<p>Dropped support for PHP &lt; 7.</p>
+<p>This means we now can use:</p>
+<ul>
+<li>scalar type hints</li>
+<li>return type hints</li>
+<li>callable type hint, without having to check PHP version</li>
+</ul>
+<p>All <code>make</code> static constructor were created for PHP &lt; 5.6, they're
+now deprecated. Here's an example of what to use instead:</p>
+<pre><code>(new Method('sayHello'))
+    -&gt;addArgument(new Argument('string', 'name')))
+;</code></pre>
+<h3 id="bc-breaks">BC breaks:</h3>
+<ul>
+<li>changed maximum method argument line length from 120 to 80</li>
+<li>changed opening curly brace to be on the same line as the method closing
+parenthesis, when arguments are on many lines</li>
+<li>changed properties to not have empty lines between them,
+except if they have PHPdoc</li>
+</ul>
+<h2 id="111-updated-dependencies">1.1.1: Updated dependencies</h2>
+<ul>
+<li>added support for PHP 7</li>
+</ul>
+<h2 id="110-return-and-throws-phpdoc-tags">1.1.0: @return and @throws PHPdoc tags</h2>
+<ul>
+<li>added abstract class generation</li>
+<li>added <code>return</code> PHPdoc tag generation</li>
+<li>added <code>throws</code> PHPdoc tag generation</li>
+</ul>
+<h2 id="101-package-documentation">1.0.1: Package Documentation</h2>
 <ul>
 <li>added documentation for packages</li>
 </ul>
-<h2>1.0.0: Stabilised</h2>
+<h2 id="100-stabilised">1.0.0: Stabilised</h2>
 <ul>
 <li>fixed TwigTemplateEngine\Config\Locate</li>
 </ul>
-<h2>1.0.0-rc14: TwigTemplateEngine extraction</h2>
+<h2 id="100-rc14-twigtemplateengine-extraction">1.0.0-rc14: TwigTemplateEngine extraction</h2>
 <ul>
 <li>extracted TwigTemplateEngine in its own package</li>
 </ul>
-<h2>1.0.0-rc13: Template documentation</h2>
+<h2 id="100-rc13-template-documentation">1.0.0-rc13: Template documentation</h2>
 <ul>
 <li>updated Template documentation for <code>pretty-printer</code> 1.0.0-rc5</li>
 </ul>
-<h2>1.0.0-rc12: PrettyPrinter with TemplateEngine</h2>
+<h2 id="100-rc12-prettyprinter-with-templateengine">1.0.0-rc12: PrettyPrinter with TemplateEngine</h2>
 <ul>
 <li>updated <code>Build</code> for new <code>PrettyPrinter</code> constructor</li>
 </ul>
-<h2>1.0.0-rc11: PrettyPrinter extraction</h2>
+<h2 id="100-rc11-prettyprinter-extraction">1.0.0-rc11: PrettyPrinter extraction</h2>
 <ul>
 <li>extracted PrettyPrinter in its own package</li>
 </ul>
@@ -107,7 +138,7 @@
 <li>removed <code>Memio\Memio\PrettyPrinter</code> namespace, use <code>Memio\PrettyPrinter</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-rc10: Linter extraction</h2>
+<h2 id="100-rc10-linter-extraction">1.0.0-rc10: Linter extraction</h2>
 <ul>
 <li>extracted Linter in its own package</li>
 </ul>
@@ -117,7 +148,7 @@
 <li>removed <code>Memio\Validator\Constraint</code> namespace, use <code>Memio\Linter</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-rc9: Validator extraction</h2>
+<h2 id="100-rc9-validator-extraction">1.0.0-rc9: Validator extraction</h2>
 <ul>
 <li>extracted Validators to their own package</li>
 </ul>
@@ -127,7 +158,7 @@
 <li>removed <code>Memio\Memio\Validator</code> namespace, use <code>Memio\Validator</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-rc8: Model extraction</h2>
+<h2 id="100-rc8-model-extraction">1.0.0-rc8: Model extraction</h2>
 <ul>
 <li>extracted Models to their own package</li>
 </ul>
@@ -137,7 +168,7 @@
 <li>removed <code>Memio\Memio\Model</code> namespace, use <code>Memio\Model</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-rc7: Memio and Documentation</h2>
+<h2 id="100-rc7-memio-and-documentation">1.0.0-rc7: Memio and Documentation</h2>
 <ul>
 <li>renamed gnugat/medio into memio/memio</li>
 <li>completed documentation</li>
@@ -148,11 +179,11 @@
 <li>removed <code>Gnugat\Medio</code> namespace, use <code>Memio\Memio</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-rc6: Argument Validator</h2>
+<h2 id="100-rc6-argument-validator">1.0.0-rc6: Argument Validator</h2>
 <ul>
 <li>added ObjectArgumentCanOnlyDefaultToNull constraint</li>
 </ul>
-<h2>1.0.0-rc5: Collection Validator and Deep Validation</h2>
+<h2 id="100-rc5-collection-validator-and-deep-validation">1.0.0-rc5: Collection Validator and Deep Validation</h2>
 <ul>
 <li>added deep validation</li>
 <li>added CollectionCannotHaveNameDuplicates constraint</li>
@@ -161,32 +192,32 @@
 <p><strong>Note</strong>: Validator now validates the structure in a file, constants/methods/properties
 in a structure and arguments in a method.</p>
 </blockquote>
-<h2>1.0.0-rc4: Contract Validator</h2>
+<h2 id="100-rc4-contract-validator">1.0.0-rc4: Contract Validator</h2>
 <ul>
 <li>added ContractMethodsCanOnlyBePublic constraint</li>
 <li>added ContractMethodsCannotBeFinal constraint</li>
 <li>added ContractMethodsCannotBeStatic constraint</li>
 <li>added ContractMethodsCannotHaveBody constraint</li>
 </ul>
-<h2>1.0.0-rc3: Method Validator</h2>
+<h2 id="100-rc3-method-validator">1.0.0-rc3: Method Validator</h2>
 <ul>
 <li>fixed autoloading</li>
 <li>added MethodCannotBeAbstractAndHaveBody constraint</li>
 <li>added MethodCannotBeBothAbstractAndPrivate constraint</li>
 </ul>
-<h2>1.0.0-rc2: Validator</h2>
+<h2 id="100-rc2-validator">1.0.0-rc2: Validator</h2>
 <ul>
 <li>added Validator</li>
 <li>added MethodCannotBeBothAbstractAndFinal constraint</li>
 </ul>
-<h2>1.0.0-rc1: Path</h2>
+<h2 id="100-rc1-path">1.0.0-rc1: Path</h2>
 <ul>
 <li>added default Path</li>
 </ul>
 <blockquote>
 <p><strong>Note</strong>: use <code>Gnugat\Medio\Config\Path::templates()</code> to get the templates default path.</p>
 </blockquote>
-<h2>1.0.0-beta4: Method PHPdoc</h2>
+<h2 id="100-beta4-method-phpdoc">1.0.0-beta4: Method PHPdoc</h2>
 <ul>
 <li>added Method PHPdoc generation</li>
 </ul>
@@ -196,11 +227,11 @@ in a structure and arguments in a method.</p>
 <li>removed <code>Gnugat\Medio\Model\MethodPhpdoc</code>, use <code>Gnugat\Medio\Model\Phpdoc\MethodPhpdoc</code> instead.</li>
 </ul>
 </blockquote>
-<h2>1.0.0-beta3: Fixing Structure PHPdoc</h2>
+<h2 id="100-beta3-fixing-structure-phpdoc">1.0.0-beta3: Fixing Structure PHPdoc</h2>
 <ul>
 <li>fixed Structure PHPdoc generation</li>
 </ul>
-<h2>1.0.0-beta2: Property PHPdoc</h2>
+<h2 id="100-beta2-property-phpdoc">1.0.0-beta2: Property PHPdoc</h2>
 <ul>
 <li>added Property PHPdoc generation</li>
 <li>added Argument default value generation</li>
@@ -209,16 +240,16 @@ in a structure and arguments in a method.</p>
 <p><strong>Note</strong>: Type#getName now returns the unqualified name. To get the fully qualified
 name, use Type#getFullyQualifiedName.</p>
 </blockquote>
-<h2>1.0.0-beta1: License header, Structure PHPdoc</h2>
+<h2 id="100-beta1-license-header-structure-phpdoc">1.0.0-beta1: License header, Structure PHPdoc</h2>
 <ul>
 <li>added Structure PHPdoc generation</li>
 <li>added License header generation</li>
 </ul>
-<h2>1.0.0-alpha18: Final method</h2>
+<h2 id="100-alpha18-final-method">1.0.0-alpha18: Final method</h2>
 <ul>
 <li>added final method generation</li>
 </ul>
-<h2>1.0.0-alpha17: Abstract method</h2>
+<h2 id="100-alpha17-abstract-method">1.0.0-alpha17: Abstract method</h2>
 <ul>
 <li>added abstract method generation</li>
 <li>added tutorial documentation</li>
@@ -229,17 +260,17 @@ name, use Type#getFullyQualifiedName.</p>
 <li>moved structure from File constructor to setter</li>
 </ul>
 </blockquote>
-<h2>1.0.0-alpha16: Final class</h2>
+<h2 id="100-alpha16-final-class">1.0.0-alpha16: Final class</h2>
 <ul>
 <li>added final class generation</li>
 <li>added property default value generation</li>
 <li>fixed FullyQualifiedName</li>
 </ul>
-<h2>1.0.0-alpha15: Fixed File</h2>
+<h2 id="100-alpha15-fixed-file">1.0.0-alpha15: Fixed File</h2>
 <ul>
 <li>fixed File constructor</li>
 </ul>
-<h2>1.0.0-alpha14: Parents</h2>
+<h2 id="100-alpha14-parents">1.0.0-alpha14: Parents</h2>
 <ul>
 <li>added interface parents generation</li>
 <li>added class interfaces generation</li>
@@ -254,7 +285,7 @@ name, use Type#getFullyQualifiedName.</p>
 </ul>
 <p><strong>Note</strong>: PrettyPrinter now builds the TwigExtension (makes instanciation easier).</p>
 </blockquote>
-<h2>1.0.0-alpha13: Contract, Object</h2>
+<h2 id="100-alpha13-contract-object">1.0.0-alpha13: Contract, Object</h2>
 <ul>
 <li>added interface generation</li>
 <li>added class (standalone) generation</li>
@@ -270,7 +301,7 @@ name, use Type#getFullyQualifiedName.</p>
 <li>removed Type from Argument constructor parameters (give directly the type as a string)</li>
 </ul>
 </blockquote>
-<h2>1.0.0-alpha12: Collection, FullyQualifiedClassname</h2>
+<h2 id="100-alpha12-collection-fullyqualifiedclassname">1.0.0-alpha12: Collection, FullyQualifiedClassname</h2>
 <ul>
 <li>refactored fully qualified classname management</li>
 <li>refactored collection management</li>
@@ -281,41 +312,41 @@ name, use Type#getFullyQualifiedName.</p>
 <li>removed Argument, Constant, Import, Method and Property collections</li>
 </ul>
 </blockquote>
-<h2>1.0.0-alpha11: Imports, Method body and doc</h2>
+<h2 id="100-alpha11-imports-method-body-and-doc">1.0.0-alpha11: Imports, Method body and doc</h2>
 <ul>
 <li>added Imports (use statement) generation</li>
 <li>added Method's body generation</li>
 <li>improved documentation (introduction, installation, usage, cheat sheet and extending)</li>
 </ul>
-<h2>1.0.0-alpha10: License, visibility and staticness</h2>
+<h2 id="100-alpha10-license-visibility-and-staticness">1.0.0-alpha10: License, visibility and staticness</h2>
 <ul>
 <li>added License header generation</li>
 <li>added Method and Property visibility</li>
 <li>added Method and Property staticness</li>
 </ul>
-<h2>1.0.0-alpha9: Constants</h2>
+<h2 id="100-alpha9-constants">1.0.0-alpha9: Constants</h2>
 <ul>
 <li>added Constants generation</li>
 </ul>
-<h2>1.0.0-alpha8: Properties</h2>
+<h2 id="100-alpha8-properties">1.0.0-alpha8: Properties</h2>
 <ul>
 <li>added Properties generation</li>
 </ul>
-<h2>1.0.0-alpha7: Method's PHPdoc, static constructors</h2>
+<h2 id="100-alpha7-methods-phpdoc-static-constructors">1.0.0-alpha7: Method's PHPdoc, static constructors</h2>
 <ul>
 <li>added Method's PHPdoc generation</li>
 <li>added static constructors to all Models</li>
 </ul>
-<h2>1.0.0-alpha6: File</h2>
+<h2 id="100-alpha6-file">1.0.0-alpha6: File</h2>
 <ul>
 <li>added File (namespace, class, etc) generation</li>
 </ul>
-<h2>1.0.0-alpha5: Methods, fixtures refactoring</h2>
+<h2 id="100-alpha5-methods-fixtures-refactoring">1.0.0-alpha5: Methods, fixtures refactoring</h2>
 <ul>
 <li>added Methods generation</li>
 <li>moved fixtures in <code>examples/fixtures</code></li>
 </ul>
-<h2>1.0.0-alpha4: Method</h2>
+<h2 id="100-alpha4-method">1.0.0-alpha4: Method</h2>
 <ul>
 <li>added Method generation</li>
 </ul>
@@ -325,11 +356,11 @@ name, use Type#getFullyQualifiedName.</p>
 <li>removed VariableArgumentCollectionFactory</li>
 </ul>
 </blockquote>
-<h2>1.0.0-alpha3: Puli</h2>
+<h2 id="100-alpha3-puli">1.0.0-alpha3: Puli</h2>
 <ul>
 <li>added <code>/gnugat/medio/templates</code> Puli's path</li>
 </ul>
-<h2>1.0.0-alpha2: PrettyPrinter parameters</h2>
+<h2 id="100-alpha2-prettyprinter-parameters">1.0.0-alpha2: PrettyPrinter parameters</h2>
 <ul>
 <li>added parameters argument to PrettyPrinter#generateCode</li>
 </ul>
@@ -340,7 +371,7 @@ name, use Type#getFullyQualifiedName.</p>
 <li>removed InlineArgumentCollectionPrinter</li>
 </ul>
 </blockquote>
-<h2>1.0.0-alpha1: PrettyPrinter, Twig templates and Arguments</h2>
+<h2 id="100-alpha1-prettyprinter-twig-templates-and-arguments">1.0.0-alpha1: PrettyPrinter, Twig templates and Arguments</h2>
 <ul>
 <li>added PrettyPrinter</li>
 <li>added Arguments generation</li>
@@ -348,13 +379,13 @@ name, use Type#getFullyQualifiedName.</p>
 <blockquote>
 <p><strong>Note</strong>: Usage of single pretty printer (Model specific generation is done in Twig templates)</p>
 </blockquote>
-<h2>0.4.0: Type, Method refactoring, executable examples</h2>
+<h2 id="040-type-method-refactoring-executable-examples">0.4.0: Type, Method refactoring, executable examples</h2>
 <ul>
 <li>added Type construction from variable</li>
 <li>added executable examples</li>
 <li>refactored Method (removed visibility, Arguments from constructor parameters)</li>
 </ul>
-<h2>0.3.0: Method, typehints and PHPdoc generation</h2>
+<h2 id="030-method-typehints-and-phpdoc-generation">0.3.0: Method, typehints and PHPdoc generation</h2>
 <ul>
 <li>added Method generation</li>
 <li>added Method's PHPDoc generation</li>
@@ -368,11 +399,11 @@ name, use Type#getFullyQualifiedName.</p>
 </ul>
 <p><strong>Note</strong>: Usage of specialized pretty printers (each Model has its own generator)</p>
 </blockquote>
-<h2>0.2.0: Missing Constructor generation</h2>
+<h2 id="020-missing-constructor-generation">0.2.0: Missing Constructor generation</h2>
 <ul>
 <li>added Missing Constructor generation</li>
 </ul>
-<h2>0.1.0: DependencyInjectionCommand</h2>
+<h2 id="010-dependencyinjectioncommand">0.1.0: DependencyInjectionCommand</h2>
 <ul>
 <li>added DependencyInjectionCommand:
 <ul>
@@ -400,7 +431,7 @@ name, use Type#getFullyQualifiedName.</p>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
 
         <script>
             $(function() {
