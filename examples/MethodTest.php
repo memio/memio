@@ -18,6 +18,21 @@ use Memio\Model\Phpdoc\ParameterTag;
 
 class MethodTest extends PrettyPrinterTestCase
 {
+    public function testWithReturnType()
+    {
+        $body = <<<'EOT'
+        return [];
+EOT;
+        $method = (new Method('returnsSomething'))
+            ->setReturnType('array')
+            ->setBody($body)
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
     public function testWithoutArguments()
     {
         $method = new Method('isEnabled');
@@ -43,6 +58,23 @@ class MethodTest extends PrettyPrinterTestCase
         $method = new Method('it_has_too_many_argument_yeah');
         $method->addArgument(new Argument('int', 'argument1'));
         $method->addArgument(new Argument('int', 'argument2'));
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithMultilineArgumentsAndReturnType()
+    {
+        $body = <<<'EOT'
+        return [];
+EOT;
+        $method = (new Method('it_has_too_many_argument_yeah_yeah'))
+            ->addArgument(new Argument('int', 'argument1'))
+            ->addArgument(new Argument('int', 'argument2'))
+            ->setReturnType('array')
+            ->setBody($body)
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
