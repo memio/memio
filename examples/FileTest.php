@@ -16,7 +16,7 @@ use Memio\Model\Constant;
 use Memio\Model\File;
 use Memio\Model\FullyQualifiedName;
 use Memio\Model\Method;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 use Memio\Model\Phpdoc\LicensePhpdoc;
 use Memio\Model\Property;
 
@@ -32,7 +32,7 @@ class FileTest extends PrettyPrinterTestCase
     public function testEmpty()
     {
         $file = (new File(self::FILENAME))
-            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+            ->setStructure(new Objekt(self::FULLY_QUALIFIED_NAME))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
@@ -45,7 +45,7 @@ class FileTest extends PrettyPrinterTestCase
         $file = (new File(self::FILENAME))
             ->setLicensePhpdoc(new LicensePhpdoc(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL))
 
-            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+            ->setStructure(new Objekt(self::FULLY_QUALIFIED_NAME))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
@@ -58,7 +58,7 @@ class FileTest extends PrettyPrinterTestCase
         $file = (new File(self::FILENAME))
             ->addFullyQualifiedName(new FullyQualifiedName('DateTime'))
 
-            ->setStructure((new Object(self::FULLY_QUALIFIED_NAME))
+            ->setStructure((new Objekt(self::FULLY_QUALIFIED_NAME))
                 ->addConstant(new Constant('FIRST_CONSTANT', '0'))
                 ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 

@@ -15,7 +15,7 @@ use Memio\Model\Argument;
 use Memio\Model\Constant;
 use Memio\Model\Contract;
 use Memio\Model\Method;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 use Memio\Model\Phpdoc\ApiTag;
 use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
@@ -28,7 +28,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $object = new Object(self::NAME);
+        $object = new Objekt(self::NAME);
 
         $generatedCode = $this->prettyPrinter->generateCode($object);
 
@@ -37,7 +37,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testWithPhpdoc()
     {
-        $object = (new Object(self::NAME))
+        $object = (new Objekt(self::NAME))
             ->setPhpdoc((new StructurePhpdoc())
                 ->setDescription((new Description('Short description'))
                     ->addEmptyLine()
@@ -55,7 +55,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFinal()
     {
-        $object = (new Object(self::NAME))
+        $object = (new Objekt(self::NAME))
             ->makeFinal()
         ;
 
@@ -66,8 +66,8 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $object = (new Object(self::NAME))
-            ->extend(new Object('MyParent'))
+        $object = (new Objekt(self::NAME))
+            ->extend(new Objekt('MyParent'))
 
             ->implement(new Contract('FirstContract'))
             ->implement(new Contract('SecondContract'))
