@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 2.0.1: Fixed Objekt
+
+* Renamed Object references to Objeckt (Thanks Maciej Kobus)
+
 # 2.0.0-alpha3: Return type hints
 
 * added return type hints
