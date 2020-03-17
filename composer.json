@@ -22,11 +22,14 @@
     "autoload-dev": {
         "psr-4": { "Memio\\Memio\\Examples\\": "examples" }
     },
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/webhdx/twig-template-engine.git"}
+    ],
     "require": {
         "memio/linter": "^2.0@alpha",
         "memio/model": "^2.0@alpha",
         "memio/pretty-printer": "^2.0@alpha",
-        "memio/twig-template-engine": "^2.0@alpha",
+        "memio/twig-template-engine": "dev-twig3 as 2.0.x-dev",
         "memio/validator": "^2.0@alpha",
         "php": "^7.0"
     },
