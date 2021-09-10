@@ -23,7 +23,7 @@ require __DIR__.'/vendor/autoload.php';
 
 use Memio\Memio\Config\Build;
 use Memio\Model\File;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 use Memio\Model\Property;
 use Memio\Model\Method;
 use Memio\Model\Argument;
@@ -31,7 +31,7 @@ use Memio\Model\Argument;
 // Describe the code you want to generate using "Models"
 $file = (new File('src/Vendor/Project/MyService.php'))
     ->setStructure(
-        (new Object('Vendor\Project\MyService'))
+        (new Objekt('Vendor\Project\MyService'))
             ->addProperty(new Property('createdAt'))
             ->addProperty(new Property('filename'))
             ->addMethod(
