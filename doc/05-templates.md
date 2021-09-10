@@ -72,10 +72,10 @@ Let's check the result:
 // ...
 
 use Memio\Model\File;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 
 $file = File::make('src/Vendor/Project/MyClass.php')
-    ->setStructure(new Object('Vendor\Project\MyClass'))
+    ->setStructure(new Objekt('Vendor\Project\MyClass'))
 ;
 
 echo $prettyPrinter->generateCode($file);
