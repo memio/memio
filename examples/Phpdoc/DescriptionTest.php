@@ -27,7 +27,7 @@ class DescriptionTest extends PrettyPrinterTestCase
 
     public function testLongDescription()
     {
-        $description = Description::make('Long descriptions are put on many lines')
+        $description = (new Description('Long descriptions are put on many lines'))
             ->addEmptyLine()
             ->addLine('It can also have empty lines')
         ;

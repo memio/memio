@@ -23,7 +23,7 @@ use Memio\Model\File;
 use Memio\Model\Object;
 use Memio\Model\Phpdoc\LicensePhpdoc;
 
-$file = File::make('src/Vendor/Project/MyClass')
+$file = (new File('src/Vendor/Project/MyClass'))
     ->setLicensePhpdoc(new LicensePhpdoc('MyProject', 'Me', 'me@example.com'))
 
     ->setStructure(new Object('Vendor\Project\MyClass'))
@@ -70,9 +70,9 @@ use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
 use Memio\Model\Phpdoc\StructurePhpdoc;
 
-$contract = Contract::make('Vendor\Project\MyInterface')
-    ->setPhpdoc(StructurePhpdoc::make()
-        ->setDescription(Description::make('This is the first line')
+$contract = (new Contract('Vendor\Project\MyInterface'))
+    ->setPhpdoc((new StructurePhpdoc())
+        ->setDescription((new Description('This is the first line'))
             ->addEmptyLine()
             ->addLine('This is the third line')
         )
@@ -110,8 +110,8 @@ use Memio\Model\Property;
 use Memio\Model\Phpdoc\PropertyPhpdoc;
 use Memio\Model\Phpdoc\VariableTag;
 
-$property = Property::make('myClass')
-    ->setPhpdoc(PropertyPhpdoc::make()
+$property = (new Property('myClass'))
+    ->setPhpdoc((new PropertyPhpdoc())
         ->setVariableTag(new VariableTag('Vendor\Project\MyClass'))
     )
 ;
@@ -148,9 +148,9 @@ use Memio\Model\Phpdoc\DeprecationTag;
 use Memio\Model\Phpdoc\MethodPhpdoc;
 use Memio\Model\Phpdoc\ParameterTag;
 
-$method = Method::make('__construct')
-    ->setPhpdoc(MethodPhpdoc::make()
-        ->setDescription(Description::make('This is the first line')
+$method = (new Method('__construct'))
+    ->setPhpdoc((new MethodPhpdoc())
+        ->setDescription((new Description('This is the first line'))
             ->addEmptyLine()
             ->addLine('This is the third line')
         )
@@ -182,7 +182,7 @@ This will produce:
      *
      * @api v2.0
      */
-    public function __construct($filename, $isEnabled)
+    public function __construct(string $filename, bool $isEnabled)
     {
     }
 ```

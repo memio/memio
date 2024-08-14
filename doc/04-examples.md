@@ -20,7 +20,7 @@ $argument = new Argument('string', 'filename');
 $generatedCode = $this->prettyPrinter->generateCode($argument);
 
 // Checking it against what's expected
-$this->assertSame('$filename', $generatedCode);
+$this->assertSame('string $filename', $generatedCode);
 ```
 
 Sometimes the expected code is spanned on many lines:

@@ -38,7 +38,7 @@ echo $prettyPrinter->generateCode($filename);
 This should print the following:
 
 ```php
-$filename
+string $filename
 ```
 
 Memio is able to automatically type hint an argument, when necessary:
@@ -66,20 +66,16 @@ This can be done by using arrays:
 ```php
 $handleArguments = array(
     new Argument('Symfony\Component\HttpFoundation\Request', 'request'),
-    Argument::make('int', 'type')
+    (new Argument('int', 'type'))
         ->setDefaultValue('self::MASTER_REQUEST')
     ,
-    Argument::make('bool', 'catch')
+    (new Argument('bool', 'catch'))
         ->setDefaultValue('true')
     ,
 );
 
 echo $prettyPrinter->generateCode($handleArguments);
 ```
-
-> **Note**: All models can either be instanciated using `new` or the static method `make`.
-> The second option enable "fluent interface" (chaining method calls), when using PHP 5.4
-> this becomes unnecessary as we can use `(new Argument('bool', 'catch'))->setDefaultValue('true')`.
 
 With this we'll be able to see in our console:
 
@@ -98,12 +94,12 @@ In order to describe this method, we don't need to prepare an array beforehand:
 ```php
 use Memio\Model\Method;
 
-$handle = Method::make('handle')
+$handle = (new Method('handle'))
     ->addArgument(new Argument('Symfony\Component\HttpFoundation\Request', 'request'))
-    ->addArgument(Argument::make('int', 'type')
+    ->addArgument((new Argument('int', 'type'))
         ->setDefaultValue('self::MASTER_REQUEST')
     )
-    ->addArgument(Argument::make('bool', 'catch')
+    ->addArgument((new Argument('bool', 'catch'))
         ->setDefaultValue('true')
     )
 ;
@@ -114,8 +110,11 @@ echo $prettyPrinter->generateCode($handle);
 Here's the result:
 
 ```php
-    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
-    {
+    public function handle(
+        Request $request,
+        int $type = self::MASTER_REQUEST,
+        bool $catch = true
+    ) {
     }
 ```
 
@@ -146,7 +145,7 @@ echo $prettyPrinter->generateCode($method);
 This would output:
 
 ```
-    public function __construct(ArrayObject $argument1, $argument2)
+    public function __construct(ArrayObject $argument1, string $argument2)
     {
     }
 ```
@@ -156,7 +155,7 @@ This would output:
 The [PSR-2 Coding Standard](http://www.php-fig.org/psr/psr-2/) advises us to avoid
 lines longer than 120 characters.
 Memio takes care of this when generating a method's arguments by checking the length:
-if it's going to be too long it'll put each arguments on their own line.
+if it's going to be longer than 80 characters it'll put each arguments on their own line.
 
 Here's a code sample:
 
@@ -180,8 +179,7 @@ This will output:
         $argument5,
         $argument6,
         $argument7
-    )
-    {
+    ) {
     }
 ```
 
@@ -196,17 +194,17 @@ Memio assumes a few things by default:
 This can be customized:
 
 ```php
-$superObject = Object::make()
-    ->makeAbstract()  // can be cancelled with removeAbstract()
-    ->makeFinal()  // can be cancelled with removeFinal()
+$superObject = (new Object())
+    ->makeAbstract() // can be cancelled with removeAbstract()
+    ->makeFinal() // can be cancelled with removeFinal()
 ;
 
-$publicStaticProperty = Property::make('myProperty')
+$publicStaticProperty = (new Property('myProperty'))
     ->makePublic() // also available: makeProtected() and makePrivate()
     ->makeStatic() // can be cancelled with removeStatic()
 ;
 
-$superMethod = Method::make('myMethod')
+$superMethod = (new Method('myMethod'))
     ->makeAbstract()  // can be cancelled with removeAbstract()
     ->makeFinal() // can be cancelled with removeFinal()
     ->makePrivate() // also available: makeProtected(), makePublic() and removeVisibility()
@@ -252,7 +250,7 @@ use Memio\Model\Contract;
 $myMethod = new Method('myMethod')
     ->addArgument('mixed', 'myArgument')
 );
-$myContract = Contract::make('Vendor\Project\MyInterface')
+$myContract = (new Contract('Vendor\Project\MyInterface'))
     ->extend(new Contract('Vendor\Project\MyParentInterface'))
     ->addConstant(new Constant('MY_CONSTANT', '42'))
     ->addMethod($myMethod)
@@ -280,9 +278,9 @@ can extend many interfaces.
 Finally, we can generate a whole `File`:
 
 ```php
-$myFile = File::make('src/Vendor/Project/MyObject')
+$myFile = (new File('src/Vendor/Project/MyObject'))
     ->addFullyQualifiedName($myContract->getFullyQualifiedName())
-    ->setStructure(Object::make('Vendor\Project\MyObject')
+    ->setStructure((new Object('Vendor\Project\MyObject'))
         ->implement($myContract)
         ->addMethod($myMethod)
     )

@@ -61,8 +61,8 @@ class Build
      */
     public static function prettyPrinter()
     {
-        $loader = new \Twig_Loader_Filesystem(\Memio\TwigTemplateEngine\Config\Locate::templates());
-        $twig = new \Twig_Environment($loader);
+        $loader = new \Twig\Loader\FilesystemLoader(\Memio\TwigTemplateEngine\Config\Locate::templates());
+        $twig = new \Twig\Environment($loader);
 
         $line = new \Memio\TwigTemplateEngine\TwigExtension\Line\Line();
         $line->add(new \Memio\TwigTemplateEngine\TwigExtension\Line\ContractLineStrategy());

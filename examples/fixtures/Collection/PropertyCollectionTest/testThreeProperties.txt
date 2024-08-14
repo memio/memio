@@ -1,6 +1,4 @@
     private $dateTime;
-
     private $arrayObject;
-
     private $isEnabled;
 

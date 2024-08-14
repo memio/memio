@@ -22,16 +22,19 @@
     "autoload-dev": {
         "psr-4": { "Memio\\Memio\\Examples\\": "examples" }
     },
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/webhdx/twig-template-engine.git"}
+    ],
     "require": {
-        "memio/linter": "^1.0",
-        "memio/model": "^1.3",
-        "memio/pretty-printer": "^1.0",
-        "memio/twig-template-engine": "^1.2",
-        "memio/validator": "^1.0",
-        "php": "^5.3|^7.0"
+        "memio/linter": "^2.0@alpha",
+        "memio/model": "^2.0@alpha",
+        "memio/pretty-printer": "^2.0@alpha",
+        "memio/twig-template-engine": "dev-twig3 as 2.0.x-dev",
+        "memio/validator": "^2.0@alpha",
+        "php": "^7.0"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "^1.6",
-        "phpunit/phpunit": "^4.6|^5.0"
+        "friendsofphp/php-cs-fixer": "^1.6",
+        "phpunit/phpunit": "^5.4"
     }
 }

@@ -13,12 +13,14 @@ namespace Memio\Memio\Examples\Collection;
 
 use Memio\Memio\Examples\PrettyPrinterTestCase;
 use Memio\Model\Property;
+use Memio\Model\Phpdoc\PropertyPhpdoc;
+use Memio\Model\Phpdoc\VariableTag;
 
 class PropertyCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroProperties()
     {
-        $properties = array();
+        $properties = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 
@@ -27,9 +29,9 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testOneProperty()
     {
-        $properties = array(
+        $properties = [
             new Property('dateTime'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 
@@ -38,11 +40,33 @@ class PropertyCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeProperties()
     {
-        $properties = array(
+        $properties = [
             new Property('dateTime'),
             new Property('arrayObject'),
             new Property('isEnabled'),
-        );
+        ];
+
+        $generatedCode = $this->prettyPrinter->generateCode($properties);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testPhpdocProperties()
+    {
+        $properties = [
+            (new Property('myString'))
+                ->setPhpdoc((new PropertyPhpdoc())
+                    ->setVariableTag(new VariableTag('string'))
+                )
+            ,
+            new Property('dateTime'),
+            (new Property('arrayObject'))
+                ->setPhpdoc((new PropertyPhpdoc())
+                    ->setVariableTag(new VariableTag('array'))
+                )
+            ,
+            new Property('isEnabled'),
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($properties);
 

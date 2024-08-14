@@ -1,0 +1,6 @@
+    public function it_has_too_many_argument_yeah_yeah(
+        int $argument1,
+        int $argument2
+    ) : array {
+        return [];
+    }

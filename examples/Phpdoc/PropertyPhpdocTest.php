@@ -28,7 +28,7 @@ class PropertyPhpdocTest extends PrettyPrinterTestCase
 
     public function testOneTag()
     {
-        $propertyPhpdoc = PropertyPhpdoc::make()
+        $propertyPhpdoc = (new PropertyPhpdoc())
             ->setVariableTag(new VariableTag('Memio\Memio\MyClass'))
         ;
 

@@ -1,0 +1,12 @@
+    /**
+     * @var string
+     */
+    private $myString;
+    private $dateTime;
+
+    /**
+     * @var array
+     */
+    private $arrayObject;
+    private $isEnabled;
+

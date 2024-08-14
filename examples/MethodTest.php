@@ -18,6 +18,21 @@ use Memio\Model\Phpdoc\ParameterTag;
 
 class MethodTest extends PrettyPrinterTestCase
 {
+    public function testWithReturnType()
+    {
+        $body = <<<'EOT'
+        return [];
+EOT;
+        $method = (new Method('returnsSomething'))
+            ->setReturnType('array')
+            ->setBody($body)
+        ;
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
     public function testWithoutArguments()
     {
         $method = new Method('isEnabled');
@@ -30,9 +45,8 @@ class MethodTest extends PrettyPrinterTestCase
     public function testWithInlineArguments()
     {
         $method = new Method('it_has_too_many_argument_yes');
-        for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument('string', 'argument'.$i));
-        }
+        $method->addArgument(new Argument('int', 'argument1'));
+        $method->addArgument(new Argument('int', 'argument2'));
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
@@ -42,9 +56,25 @@ class MethodTest extends PrettyPrinterTestCase
     public function testWithMultilineArguments()
     {
         $method = new Method('it_has_too_many_argument_yeah');
-        for ($i = 1; $i < 7; $i++) {
-            $method->addArgument(new Argument('string', 'argument'.$i));
-        }
+        $method->addArgument(new Argument('int', 'argument1'));
+        $method->addArgument(new Argument('int', 'argument2'));
+
+        $generatedCode = $this->prettyPrinter->generateCode($method);
+
+        $this->assertExpectedCode($generatedCode);
+    }
+
+    public function testWithMultilineArgumentsAndReturnType()
+    {
+        $body = <<<'EOT'
+        return [];
+EOT;
+        $method = (new Method('it_has_too_many_argument_yeah_yeah'))
+            ->addArgument(new Argument('int', 'argument1'))
+            ->addArgument(new Argument('int', 'argument2'))
+            ->setReturnType('array')
+            ->setBody($body)
+        ;
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 
@@ -59,7 +89,7 @@ class MethodTest extends PrettyPrinterTestCase
             'bool' => 'catch',
         );
         $phpdoc = new MethodPhpdoc();
-        $method = Method::make('handle')
+        $method = (new Method('handle'))
             ->setPhpdoc($phpdoc)
         ;
         foreach ($arguments as $type => $name) {

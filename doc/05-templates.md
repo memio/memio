@@ -74,7 +74,7 @@ Let's check the result:
 use Memio\Model\File;
 use Memio\Model\Object;
 
-$file = File::make('src/Vendor/Project/MyClass.php')
+$file = (new File('src/Vendor/Project/MyClass.php'))
     ->setStructure(new Object('Vendor\Project\MyClass'))
 ;
 

@@ -22,7 +22,7 @@ Here's how to ue the linter:
 use Memio\Memio\Config\Build;
 use Memio\Model\Method;
 
-Method::make('myMethod')
+(new Method('myMethod'))
     ->makeAbstract()
     ->makeFinal()
 ;

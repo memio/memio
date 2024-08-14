@@ -35,9 +35,9 @@ class ContractTest extends PrettyPrinterTestCase
 
     public function testWithPhpdoc()
     {
-        $object = Contract::make(self::NAME)
-            ->setPhpdoc(StructurePhpdoc::make()
-                ->setDescription(Description::make('Short description')
+        $object = (new Contract(self::NAME))
+            ->setPhpdoc((new StructurePhpdoc())
+                ->setDescription((new Description('Short description'))
                     ->addEmptyLine()
                     ->addLine('Longer description')
                 )
@@ -53,17 +53,17 @@ class ContractTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $contract = Contract::make(self::NAME)
+        $contract = (new Contract(self::NAME))
             ->extend(new Contract('FirstContract'))
             ->extend(new Contract('SecondContract'))
 
             ->addConstant(new Constant('FIRST_CONSTANT', '0'))
             ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
-            ->addMethod(Method::make('firstMethod')
+            ->addMethod((new Method('firstMethod'))
                 ->addArgument(new Argument('DateTime', 'firstArgument'))
                 ->addArgument(new Argument('array', 'secondArgument'))
-                ->addArgument(new Argument('string', 'thirdArgument'))
+                ->addArgument(new Argument('mixed', 'thirdArgument'))
             )
             ->addMethod(new Method('secondMethod'))
         ;

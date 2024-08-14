@@ -18,7 +18,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroArguments()
     {
-        $arguments = array();
+        $arguments = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
@@ -27,31 +27,31 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testOneArgument()
     {
-        $arguments = array(
+        $arguments = [
             new Argument('bool', 'isObject'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
-        $this->assertSame('$isObject', $generatedCode);
+        $this->assertSame('bool $isObject', $generatedCode);
     }
 
     public function testThreeArguments()
     {
-        $arguments = array(
+        $arguments = [
             new Argument('SplFileInfo', 'file'),
             new Argument('string', 'newLine'),
             new Argument('int', 'lineNumber'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($arguments);
 
-        $this->assertSame('SplFileInfo $file, $newLine, $lineNumber', $generatedCode);
+        $this->assertSame('SplFileInfo $file, string $newLine, int $lineNumber', $generatedCode);
     }
 
     public function testTooManyArgumentsToBeOnOneLine()
     {
-        $arguments = array();
+        $arguments = [];
         for ($i = 1; $i < 12; $i++) {
             $arguments[] = new Argument('mixed', 'argument'.$i);
         }
@@ -63,13 +63,13 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
 
     public function testRestrictInlineLength()
     {
-        $arguments = array();
+        $arguments = [];
         for ($i = 1; $i < 9; $i++) {
             $arguments[] = new Argument('mixed', 'argument'.$i);
         }
-        $generatedCode = $this->prettyPrinter->generateCode($arguments, array(
+        $generatedCode = $this->prettyPrinter->generateCode($arguments, [
             'length_restriction' => strlen('    public function __construct()'),
-        ));
+        ]);
 
         $this->assertExpectedCode($generatedCode);
     }

@@ -18,7 +18,7 @@ class ParameterTagCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroParameterTags()
     {
-        $parameterTags = array();
+        $parameterTags = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($parameterTags);
 
@@ -27,9 +27,9 @@ class ParameterTagCollectionTest extends PrettyPrinterTestCase
 
     public function testOneParameterTag()
     {
-        $parameterTags = array(
+        $parameterTags = [
             new ParameterTag('string', 'filename'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($parameterTags);
 
@@ -38,11 +38,11 @@ class ParameterTagCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeParameterTags()
     {
-        $parameterTags = array(
+        $parameterTags = [
             new ParameterTag('Symfony\Component\HttpFoundation\Request', 'request'),
             new ParameterTag('int', 'type'),
             new ParameterTag('bool', 'catch'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($parameterTags);
 

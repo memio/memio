@@ -28,8 +28,8 @@ class PropertyTest extends PrettyPrinterTestCase
 
     public function testWithPhpdoc()
     {
-        $property = Property::make('myClass')
-            ->setPhpdoc(PropertyPhpdoc::make()
+        $property = (new Property('myClass'))
+            ->setPhpdoc((new PropertyPhpdoc())
                 ->setVariableTag(new VariableTag('Memio\Memio\MyClass'))
             )
         ;
@@ -41,7 +41,7 @@ class PropertyTest extends PrettyPrinterTestCase
 
     public function testPublicVisibility()
     {
-        $property = Property::make('dto')
+        $property = (new Property('dto'))
             ->makePublic()
         ;
 
@@ -52,7 +52,7 @@ class PropertyTest extends PrettyPrinterTestCase
 
     public function testProtectedVisibility()
     {
-        $property = Property::make('inheritanceIsBad')
+        $property = (new Property('inheritanceIsBad'))
             ->makeProtected()
         ;
 
@@ -63,7 +63,7 @@ class PropertyTest extends PrettyPrinterTestCase
 
     public function testStatic()
     {
-        $property = Property::make('property')
+        $property = (new Property('property'))
             ->makeStatic()
         ;
 
@@ -74,7 +74,7 @@ class PropertyTest extends PrettyPrinterTestCase
 
     public function testDefaultValue()
     {
-        $property = Property::make('property')
+        $property = (new Property('property'))
             ->setDefaultValue("'default'")
         ;
 

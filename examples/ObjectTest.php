@@ -15,7 +15,7 @@ use Memio\Model\Argument;
 use Memio\Model\Constant;
 use Memio\Model\Contract;
 use Memio\Model\Method;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 use Memio\Model\Phpdoc\ApiTag;
 use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
@@ -28,7 +28,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $object = new Object(self::NAME);
+        $object = new Objekt(self::NAME);
 
         $generatedCode = $this->prettyPrinter->generateCode($object);
 
@@ -37,9 +37,9 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testWithPhpdoc()
     {
-        $object = Object::make(self::NAME)
-            ->setPhpdoc(StructurePhpdoc::make()
-                ->setDescription(Description::make('Short description')
+        $object = (new Objekt(self::NAME))
+            ->setPhpdoc((new StructurePhpdoc())
+                ->setDescription((new Description('Short description'))
                     ->addEmptyLine()
                     ->addLine('Longer description')
                 )
@@ -55,7 +55,7 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFinal()
     {
-        $object = Object::make(self::NAME)
+        $object = (new Objekt(self::NAME))
             ->makeFinal()
         ;
 
@@ -66,8 +66,8 @@ class ObjectTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $object = Object::make(self::NAME)
-            ->extend(new Object('MyParent'))
+        $object = (new Objekt(self::NAME))
+            ->extend(new Objekt('MyParent'))
 
             ->implement(new Contract('FirstContract'))
             ->implement(new Contract('SecondContract'))
@@ -78,7 +78,7 @@ class ObjectTest extends PrettyPrinterTestCase
             ->addProperty(new Property('firstProperty'))
             ->addProperty(new Property('secondProperty'))
 
-            ->addMethod(Method::make('firstMethod')
+            ->addMethod((new Method('firstMethod'))
                 ->addArgument(new Argument('DateTime', 'firstArgument'))
                 ->addArgument(new Argument('array', 'secondArgument'))
                 ->addArgument(new Argument('string', 'thirdArgument'))

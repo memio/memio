@@ -18,7 +18,7 @@ class ContractCollectionTest extends PrettyPrinterTestCase
 {
     public function testZeroContracts()
     {
-        $contracts = array();
+        $contracts = [];
 
         $generatedCode = $this->prettyPrinter->generateCode($contracts);
 
@@ -27,9 +27,9 @@ class ContractCollectionTest extends PrettyPrinterTestCase
 
     public function testOneContract()
     {
-        $contracts = array(
+        $contracts = [
             new Contract('Memio\\Memio\\MyContract'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($contracts);
 
@@ -38,11 +38,11 @@ class ContractCollectionTest extends PrettyPrinterTestCase
 
     public function testThreeContracts()
     {
-        $contracts = array(
+        $contracts = [
             new Contract('Memio\\Memio\\MyFirstContract'),
             new Contract('Memio\\Memio\\MySecondContract'),
             new Contract('Memio\\Memio\\MyThirdContract'),
-        );
+        ];
 
         $generatedCode = $this->prettyPrinter->generateCode($contracts);
 

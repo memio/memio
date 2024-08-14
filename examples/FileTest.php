@@ -16,7 +16,7 @@ use Memio\Model\Constant;
 use Memio\Model\File;
 use Memio\Model\FullyQualifiedName;
 use Memio\Model\Method;
-use Memio\Model\Object;
+use Memio\Model\Objekt;
 use Memio\Model\Phpdoc\LicensePhpdoc;
 use Memio\Model\Property;
 
@@ -31,8 +31,8 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testEmpty()
     {
-        $file = File::make(self::FILENAME)
-            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+        $file = (new File(self::FILENAME))
+            ->setStructure(new Objekt(self::FULLY_QUALIFIED_NAME))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
@@ -42,10 +42,10 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testWithLicense()
     {
-        $file = File::make(self::FILENAME)
+        $file = (new File(self::FILENAME))
             ->setLicensePhpdoc(new LicensePhpdoc(self::PROJECT_NAME, self::AUTHOR_NAME, self::AUTHOR_EMAIL))
 
-            ->setStructure(new Object(self::FULLY_QUALIFIED_NAME))
+            ->setStructure(new Objekt(self::FULLY_QUALIFIED_NAME))
         ;
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
@@ -55,20 +55,20 @@ class FileTest extends PrettyPrinterTestCase
 
     public function testFull()
     {
-        $file = File::make(self::FILENAME)
+        $file = (new File(self::FILENAME))
             ->addFullyQualifiedName(new FullyQualifiedName('DateTime'))
 
-            ->setStructure(Object::make(self::FULLY_QUALIFIED_NAME)
+            ->setStructure((new Objekt(self::FULLY_QUALIFIED_NAME))
                 ->addConstant(new Constant('FIRST_CONSTANT', '0'))
                 ->addConstant(new Constant('SECOND_CONSTANT', "'meh'"))
 
                 ->addProperty(new Property('firstProperty'))
                 ->addProperty(new Property('secondProperty'))
 
-                ->addMethod(Method::make('firstMethod')
+                ->addMethod((new Method('firstMethod'))
                     ->addArgument(new Argument('DateTime', 'firstArgument'))
                     ->addArgument(new Argument('array', 'secondArgument'))
-                    ->addArgument(new Argument('string', 'thirdArgument'))
+                    ->addArgument(new Argument('mixed', 'thirdArgument'))
                 )
                 ->addMethod(new Method('secondMethod'))
         );

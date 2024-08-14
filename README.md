@@ -10,7 +10,7 @@ Memio is a library, it allows you to describe PHP code by building "Model" class
 
 Install using [Composer](https://getcomposer.org/download):
 
-    composer require memio/memio:^1.0
+    composer require memio/memio:^2.0@alpha
 
 ## Full example
 
@@ -29,13 +29,13 @@ use Memio\Model\Method;
 use Memio\Model\Argument;
 
 // Describe the code you want to generate using "Models"
-$file = File::make('src/Vendor/Project/MyService.php')
+$file = (new File('src/Vendor/Project/MyService.php'))
     ->setStructure(
-        Object::make('Vendor\Project\MyService')
+        (new Object('Vendor\Project\MyService'))
             ->addProperty(new Property('createdAt'))
             ->addProperty(new Property('filename'))
             ->addMethod(
-                Method::make('__construct')
+                (new Method('__construct'))
                     ->addArgument(new Argument('DateTime', 'createdAt'))
                     ->addArgument(new Argument('string', 'filename'))
             )
@@ -61,10 +61,9 @@ namespace Vendor\Project;
 class MyService
 {
     private $createdAt;
-
     private $filename;
 
-    public function __construct(DateTime $createdAt, $filename)
+    public function __construct(DateTime $createdAt, string $filename)
     {
     }
 }
