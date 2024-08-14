@@ -11,7 +11,7 @@ Memio is a library, it allows you to describe PHP code by building "Model" class
 Install using [Composer](https://getcomposer.org/download):
 
 ```console
-$ composer require memio/memio:^2.0
+$ composer require memio/memio:^3.0
 ```
 
 ## Full example

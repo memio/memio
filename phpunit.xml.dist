@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- http://phpunit.de/manual/current/en/appendixes.configuration.html -->
-<phpunit
-    backupGlobals="false"
-    colors="true"
-    syntaxCheck="false"
-    bootstrap="vendor/autoload.php"
-    >
-
+<phpunit backupGlobals="false" colors="true" bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="Memio Test Suite">
+        <testsuite name="Tests">
             <directory>./examples</directory>
         </testsuite>
     </testsuites>

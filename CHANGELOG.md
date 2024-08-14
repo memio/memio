@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 3.0.0: PHP 7.2 requirement, PHP 8 and phpspec 7 support
+
+* dropped support for PHP < 7.2
+* added support for PHP 8
+
+Also:
+
+* upgraded PHP-CS-Fixer from 1.6 to 3.0 
+* upgraded PHPUnit from 5.4 to 8.5
+
 # 2.0.1: Fixed Objekt
 
 * Renamed Object references to Objeckt (Thanks Maciej Kobus)
