@@ -1,4 +1,4 @@
-# Memio [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf/mini.png)](https://insight.sensiolabs.com/projects/a2b24423-9840-45ab-a011-598aa3ba26bf) [![Travis CI](https://travis-ci.org/memio/memio.png)](https://travis-ci.org/memio/memio)
+# Memio
 
 Memio is a library, it allows you to describe PHP code by building "Model" classes
 (e.g. `new Method('__construct')`) and then to generate it using a `PrettyPrinter`!
@@ -10,7 +10,9 @@ Memio is a library, it allows you to describe PHP code by building "Model" class
 
 Install using [Composer](https://getcomposer.org/download):
 
-    composer require memio/memio:^2.0@alpha
+```console
+$ composer require memio/memio:^3.0
+```
 
 ## Full example
 

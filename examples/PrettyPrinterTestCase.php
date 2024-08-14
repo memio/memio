@@ -18,7 +18,7 @@ class PrettyPrinterTestCase extends TestCase
 {
     protected $prettyPrinter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->prettyPrinter = Build::prettyPrinter();
     }
