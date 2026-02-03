@@ -1,0 +1,10 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+  level: 0
+  phpVersion: 70200
+  bootstrapFiles:
+    - vendor/autoload.php
+  paths:
+    - config/
