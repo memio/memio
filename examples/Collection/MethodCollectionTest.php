@@ -42,8 +42,7 @@ class MethodCollectionTest extends PrettyPrinterTestCase
         $methods = [
             (new Method('__construct'))
                 ->addArgument(new Argument('DateTime', 'dateTime'))
-                ->addArgument(new Argument('ArrayObject', 'arrayObject'))
-            ,
+                ->addArgument(new Argument('ArrayObject', 'arrayObject')),
             new Method('getDateTime'),
             new Method('getArrayObject'),
         ];
