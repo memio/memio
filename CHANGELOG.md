@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 3.0.1: Dockerised dev environment
+
+* setup Github Actions
+* changed tooling from scripts to Makefile
+* installed phpstan as a dev dependency
+* installed swiss-knife as a dev dependency
+* installed rector as a dev dependency
+* added PHP CS Fixer configuration
+* dockerized for local development
+
 ## 3.0.0: PHP 7.2 requirement, PHP 8 and phpspec 7 support
 
 * dropped support for PHP < 7.2
