@@ -22,12 +22,12 @@ use Memio\Model\Property;
 
 class FileTest extends PrettyPrinterTestCase
 {
-    const FILENAME = 'src/Vendor/Project/MyClass.php';
-    const FULLY_QUALIFIED_NAME = 'Vendor\\Project\\MyClass';
+    public const FILENAME = 'src/Vendor/Project/MyClass.php';
+    public const FULLY_QUALIFIED_NAME = 'Vendor\\Project\\MyClass';
 
-    const PROJECT_NAME = 'vendor/project';
-    const AUTHOR_NAME = 'Loïc Chardonnet';
-    const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
+    public const PROJECT_NAME = 'vendor/project';
+    public const AUTHOR_NAME = 'Loïc Chardonnet';
+    public const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
 
     public function testEmpty()
     {
@@ -71,7 +71,7 @@ class FileTest extends PrettyPrinterTestCase
                     ->addArgument(new Argument('mixed', 'thirdArgument'))
                 )
                 ->addMethod(new Method('secondMethod'))
-        );
+            );
 
         $generatedCode = $this->prettyPrinter->generateCode($file);
 

@@ -52,7 +52,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     public function testTooManyArgumentsToBeOnOneLine()
     {
         $arguments = [];
-        for ($i = 1; $i < 12; $i++) {
+        for ($i = 1; $i < 12; ++$i) {
             $arguments[] = new Argument('mixed', 'argument'.$i);
         }
 
@@ -64,7 +64,7 @@ class ArgumentCollectionTest extends PrettyPrinterTestCase
     public function testRestrictInlineLength()
     {
         $arguments = [];
-        for ($i = 1; $i < 9; $i++) {
+        for ($i = 1; $i < 9; ++$i) {
             $arguments[] = new Argument('mixed', 'argument'.$i);
         }
         $generatedCode = $this->prettyPrinter->generateCode($arguments, [

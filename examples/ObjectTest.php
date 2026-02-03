@@ -17,14 +17,14 @@ use Memio\Model\Contract;
 use Memio\Model\Method;
 use Memio\Model\Objekt;
 use Memio\Model\Phpdoc\ApiTag;
-use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\StructurePhpdoc;
 use Memio\Model\Property;
 
 class ObjectTest extends PrettyPrinterTestCase
 {
-    const NAME = 'MyClass';
+    public const NAME = 'MyClass';
 
     public function testEmpty()
     {

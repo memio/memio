@@ -83,11 +83,11 @@ EOT;
 
     public function testWithPhpdoc()
     {
-        $arguments = array(
+        $arguments = [
             'Symfony\Component\HttpFoundation\Request' => 'request',
             'int' => 'type',
             'bool' => 'catch',
-        );
+        ];
         $phpdoc = new MethodPhpdoc();
         $method = (new Method('handle'))
             ->setPhpdoc($phpdoc)

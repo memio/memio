@@ -16,9 +16,9 @@ use Memio\Model\Phpdoc\LicensePhpdoc;
 
 class LicensePhpdocTest extends PrettyPrinterTestCase
 {
-    const PROJECT_NAME = 'gnugat/medio';
-    const AUTHOR_NAME = 'Loïc Chardonnet';
-    const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
+    public const PROJECT_NAME = 'gnugat/medio';
+    public const AUTHOR_NAME = 'Loïc Chardonnet';
+    public const AUTHOR_EMAIL = 'loic.chardonnet@gmail.com';
 
     public function testSimpleOne()
     {

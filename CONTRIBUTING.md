@@ -12,9 +12,21 @@ changes, improvements or alternatives may be given).
 
 Here's some tips to make you the best contributor ever:
 
+* [Getting started](#getting-started)
 * [Standard code](#standard-code)
-* [Specifications](#specifications)
+* [Tests](#tests)
+* [Full QA check](#full-qa-check)
 * [Keeping your fork up-to-date](#keeping-your-fork-up-to-date)
+
+## Getting started
+
+First, set up your local environment:
+
+```console
+make lib-init
+```
+
+> **Note**: Run `make` or `make help` to see all available commands.
 
 ## Standard code
 
@@ -22,44 +34,28 @@ Use [PHP CS fixer](http://cs.sensiolabs.org/) to make your code compliant with
 Memio's coding standards:
 
 ```console
-$ ./vendor/bin/php-cs-fixer fix .
+make cs-fix
 ```
 
-## Specifications
+## Tests
 
-Memio drives its development using [phpspec](http://www.phpspec.net/).
+Memio uses [PHPUnit](https://phpunit.de/) for testing.
 
-First bootstrap the code for the Specification:
-
-```console
-$ phpspec describe 'Memio\Memio\MyNewUseCase'
-```
-
-Next, write the actual code of the Specification:
+Run the tests:
 
 ```console
-$ $EDITOR spec/Memio/Memio/MyNewUseCase.php
-```
-
-Then bootstrap the code for the corresponding Use Case:
-
-```console
-$ phpspec run
-```
-
-Follow that by writing the actual code of the Use Case:
-
-```console
-$ $EDITOR src/Memio/Memio/MyNewUseCase.php
-```
-
-Finally run the specification:
-
-```console
-$ phpspec run
+make phpunit
 ```
 
 Results should be green!
+
+## Full QA check
+
+Before submitting your pull request, run the full QA pipeline:
+
+```console
+make lib-qa
+```
 
 ## Keeping your fork up-to-date
 

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Prevent pushing tags that don't have a 'v' prefix
+# This ensures consistent tag naming (e.g., v1.0.0 instead of 1.0.0)
+
+while read local_ref local_sha remote_ref remote_sha; do
+    # Check if this is a tag push
+    if [[ "$local_ref" == refs/tags/* ]]; then
+        tag_name="${local_ref#refs/tags/}"
+
+        # Check if the tag starts with 'v'
+        if [[ "$tag_name" != v* ]]; then
+            echo "ERROR: Tag '$tag_name' does not have a 'v' prefix."
+            echo "Please use the format: v1.0.0, v2.1.3, etc."
+            exit 1
+        fi
+    fi
+done
+
+exit 0

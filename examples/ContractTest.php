@@ -16,13 +16,13 @@ use Memio\Model\Constant;
 use Memio\Model\Contract;
 use Memio\Model\Method;
 use Memio\Model\Phpdoc\ApiTag;
-use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\DeprecationTag;
+use Memio\Model\Phpdoc\Description;
 use Memio\Model\Phpdoc\StructurePhpdoc;
 
 class ContractTest extends PrettyPrinterTestCase
 {
-    const NAME = 'MyInterface';
+    public const NAME = 'MyInterface';
 
     public function testEmpty()
     {
