@@ -22,25 +22,24 @@ class Build
     public static function linter()
     {
         $argumentValidator = new \Memio\Validator\ModelValidator\ArgumentValidator();
-        $argumentValidator->add(new \Memio\Linter\ArgumentCannotBeScalar());
 
         $collectionValidator = new \Memio\Validator\ModelValidator\CollectionValidator();
         $collectionValidator->add(new \Memio\Linter\CollectionCannotHaveNameDuplicates());
 
         $methodValidator = new \Memio\Validator\ModelValidator\MethodValidator($argumentValidator, $collectionValidator);
-        $methodValidator->add(new \Memio\Linter\MethodCannotBeAbstractAndHaveBody());
+        $methodValidator->add(new \Memio\Linter\AbstractMethodCannotHaveBody());
         $methodValidator->add(new \Memio\Linter\MethodCannotBeBothAbstractAndFinal());
         $methodValidator->add(new \Memio\Linter\MethodCannotBeBothAbstractAndPrivate());
         $methodValidator->add(new \Memio\Linter\MethodCannotBeBothAbstractAndStatic());
 
         $contractValidator = new \Memio\Validator\ModelValidator\ContractValidator($collectionValidator, $methodValidator);
-        $contractValidator->add(new \Memio\Linter\ContractMethodsCanOnlyBePublic());
-        $contractValidator->add(new \Memio\Linter\ContractMethodsCannotBeFinal());
-        $contractValidator->add(new \Memio\Linter\ContractMethodsCannotBeStatic());
-        $contractValidator->add(new \Memio\Linter\ContractMethodsCannotHaveBody());
+        $contractValidator->add(new \Memio\Linter\InterfaceMethodsCanOnlyBePublic());
+        $contractValidator->add(new \Memio\Linter\InterfaceMethodsCannotBeFinal());
+        $contractValidator->add(new \Memio\Linter\InterfaceMethodsCannotBeStatic());
+        $contractValidator->add(new \Memio\Linter\InterfaceMethodsCannotHaveBody());
 
         $objectValidator = new \Memio\Validator\ModelValidator\ObjectValidator($collectionValidator, $methodValidator);
-        $objectValidator->add(new \Memio\Linter\ConcreteObjectMethodsCannotBeAbstract());
+        $objectValidator->add(new \Memio\Linter\ConcreteClassMethodsCannotBeAbstract());
         $objectValidator->add(new \Memio\Linter\ObjectArgumentCanOnlyDefaultToNull());
 
         $fileValidator = new \Memio\Validator\ModelValidator\FileValidator($contractValidator, $objectValidator);
