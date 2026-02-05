@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v3.0.2: Fixed Model v3 usage
+
+Replace static `make()` factory methods with constructor calls:
+* `FullyQualifiedNameTest`: `new FullyQualifiedName()` instead of `::make()`
+* `MethodTest`: `new Method()` instead of `::make()`
+
 ## 3.0.1: Dockerised dev environment
 
 * setup Github Actions
