@@ -1,7 +1,7 @@
 template:
     url: https://github.com/CouscousPHP/Template-Light.git
 
-baseUrl: http://memio.github.io/memio
+baseUrl: https://memio.github.io/memio
 
 title: Memio
 subTitle: A highly opinionated PHP code generator library
