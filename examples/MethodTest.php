@@ -104,7 +104,7 @@ EOT;
 
     public function testNoVisibility()
     {
-        $method = Method::make('it_has_phpspec_style')
+        $method = (new Method('it_has_phpspec_style'))
             ->removeVisibility()
         ;
 
@@ -115,7 +115,7 @@ EOT;
 
     public function testPrivateVisibility()
     {
-        $method = Method::make('extractMe')
+        $method = (new Method('extractMe'))
             ->makePrivate()
         ;
 
@@ -126,7 +126,7 @@ EOT;
 
     public function testProtectedVisibility()
     {
-        $method = Method::make('inheritanceIsBad')
+        $method = (new Method('inheritanceIsBad'))
             ->makeProtected()
         ;
 
@@ -137,7 +137,7 @@ EOT;
 
     public function testStatic()
     {
-        $method = Method::make('method')
+        $method = (new Method('method'))
             ->makeStatic()
         ;
 
@@ -152,7 +152,7 @@ EOT;
         $length = strlen('Nobody expects the spanish inquisition');
 EOT;
 
-        $method = Method::make('method')
+        $method = (new Method('method'))
             ->setBody($body)
         ;
 
@@ -163,7 +163,7 @@ EOT;
 
     public function testAbstract()
     {
-        $method = Method::make('method')->makeAbstract();
+        $method = (new Method('method'))->makeAbstract();
 
         $generatedCode = $this->prettyPrinter->generateCode($method);
 

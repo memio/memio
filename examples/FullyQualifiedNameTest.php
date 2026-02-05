@@ -26,7 +26,7 @@ class FullyQualifiedNameTest extends PrettyPrinterTestCase
 
     public function testWithAlias()
     {
-        $fullyQualifiedName = FullyQualifiedName::make('\\ArrayObject')
+        $fullyQualifiedName = (new FullyQualifiedName('\\ArrayObject'))
             ->setAlias('StdArray')
         ;
 
