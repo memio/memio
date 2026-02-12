@@ -23,11 +23,11 @@
         "psr-4": { "Memio\\Memio\\Examples\\": "examples" }
     },
     "require": {
-        "memio/linter": "^3.0",
-        "memio/model": "^3.0.1",
-        "memio/pretty-printer": "^3.0",
-        "memio/twig-template-engine": "^3.0",
-        "memio/validator": "^3.0.1",
+        "memio/linter": "^4.0@alpha",
+        "memio/model": "^4.0@alpha",
+        "memio/pretty-printer": "^4.0@alpha",
+        "memio/twig-template-engine": "^4.0@alpha",
+        "memio/validator": "^4.0@alpha",
         "php": "^7.4 || ^8.0"
     },
     "require-dev": {

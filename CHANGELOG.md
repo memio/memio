@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 4.0.0-alpha1: PHP 7.4 requirement, nullable and return typehints
+
+* dropped support for PHP < 7.4
+* added support for nullable typehints (via memio/model v4)
+* added support for return typehints (via memio/model v4)
+
 ## v3.0.2: Fixed Model v3 usage
 
 Replace static `make()` factory methods with constructor calls:
